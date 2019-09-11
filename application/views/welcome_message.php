@@ -7,12 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login | Kiaalap - Kiaalap Admin Template</title>
+    <title>Login | SMA Islamic Centre</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/admin/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/admin/img/logo/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
@@ -70,31 +70,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<![endif]-->
 	<div class="error-pagewrap">
 		<div class="error-page-int">
-			<div class="text-center m-b-md custom-login">
-				<h3>PLEASE LOGIN TO APP</h3>
-				<p>This is the best app ever!</p>
-			</div>
 			<div class="content-error">
 				<div class="hpanel">
                     <div class="panel-body">
+						<div class="text-center m-b-md custom-login">
+							<h3>WELCOME TO</h3>
+							<p>SMA Islamic Centre</p>
+						</div>
                         <form action="#" id="loginForm">
                             <div class="form-group">
-                                <label class="control-label" for="username">Username</label>
-                                <input type="text" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
-                                <span class="help-block small">Your unique username to app</span>
+                                <label class="control-label" for="username">User ID</label>
+                                <input type="text" title="Please enter you username" required="" value="" name="username" id="username" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="password">Password</label>
-                                <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
-                                <span class="help-block small">Yur strong password</span>
-                            </div>
-                            <div class="checkbox login-checkbox">
-                                <label>
-										<input type="checkbox" class="i-checks"> Remember me </label>
-                                <p class="help-block small">(if this is a private computer)</p>
+                                <input type="password" title="Please enter your password" required="" value="" name="password" id="password" class="form-control">
                             </div>
                             <button class="btn btn-success btn-block loginbtn">Login</button>
-                            <a class="btn btn-default btn-block" href="#">Register</a>
                         </form>
                     </div>
                 </div>
@@ -149,9 +141,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- main JS
 		============================================ -->
     <script src="<?php echo base_url();?>assets/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="<?php echo base_url();?>assets/admin/js/tawk-chat.js"></script>
 </body>
 
 </html>
