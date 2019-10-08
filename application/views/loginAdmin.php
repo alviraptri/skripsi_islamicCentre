@@ -77,16 +77,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="content-error">
                 <div class="hpanel">
                     <div class="panel-body">
-                        <form action="#" id="loginForm">
+                        <form action="<?php echo base_url('c_login/staffLogin');?>" id="loginForm" method="post">
                             <div class="form-group">
                                 <label class="control-label" for="username">Uname</label>
-                                <input type="text" name="uname" class="form-control">
+                                <input type="text" name="username" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="password">Password</label>
-                                <input type="password" name="pass" class="form-control">
+                                <input type="password" name="password" class="form-control">
                             </div>
-                            <button class="btn btn-success btn-block loginbtn">Login</button>
+                            <button class="btn btn-success btn-block loginbtn" type="submit">Login</button>
                         </form>
                     </div>
                 </div>
