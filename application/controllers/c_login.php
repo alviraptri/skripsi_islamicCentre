@@ -30,8 +30,9 @@ class c_login extends CI_Controller{
             'passUser' => md5($pass)
         );
 
-        $cek = $this->m_login->selectLogin("user", $where)->num_rows();
+        $cek = $this->m_login->cek("user", $where)->num_rows();
         $a = $this->m_login->Select($where, 'user')->result();
+
         if($cek>0){
             foreach($a as $list){
                 $nama = $list->namaUser;
@@ -44,52 +45,21 @@ class c_login extends CI_Controller{
                 'userRole' => $role
             );
             $this->session->set_userdata($data_Session);
-            if(strcmp($role, 'Wali Murid')){
-                redirect('c_siswa/index');                
+            if($role == 'Admin'){
+                redirect('c_admin/index');
             }
-            else{
-                redirect('c_waliMurid/index');
-            }
-        }
-        else{
-            echo "Nomor Induk dan Password yang anda masukkan salah!";
-        }
-    }
-
-    //login sekolah staff
-    function staffLogin()
-    {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-        $where = array(
-            'nomorInduk' => $username,
-            'passUser' => md5($password)
-        );
-
-        $cek = $this->m_login->selectLogin("user", $where)->num_rows();
-        $a = $this->m_login->Select($where, 'user')->result();
-        if($cek>0){
-            foreach($a as $list){
-                $nama = $list->namaUser;
-                $nip = $list->nomorInduk;
-                $role = $list->userRole;
-            };
-            $data_Session = array(
-                'namaUser' => $nama,
-                'nomorInduk' => $nip,
-                'userRole' => $role
-            );
-            $this->session->set_userdata($data_Session);
-            redirect('c_admin/index');
-            /*if(strcmp($role, 'Wali Kelas')){
-                redirect('c_waliKelas/index');            
-            }
-            else if(strcmp($role, 'Guru')){
+            elseif ($role == 'Guru') {
                 redirect('c_guru/index');
             }
-            else{
+            elseif ($role == 'Siswa') {
+                redirect('c_siswa/index');
+            }
+            elseif ($role == 'Wali Kelas') {
                 redirect('c_waliKelas/index');
-            }*/
+            }
+            elseif ($role == 'Wali Murid') {
+                redirect('c_waliMurid/index');
+            }
         }
         else{
             echo "Nomor Induk dan Password yang anda masukkan salah!";

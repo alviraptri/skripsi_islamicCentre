@@ -2,7 +2,7 @@
 
 class m_login extends CI_Model
 {
-    function selectLogin($table, $where)
+    function cek($table, $where)
     {
         return $this->db->get_where($table, $where);
     }

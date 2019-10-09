@@ -1,61 +1,85 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
-?>
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Information Academic Islamic Centre | Login</title>
 
-  <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/admin/img/favicon.ico">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <!-- Font Icon -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/login/fonts/material-icon/css/material-design-iconic-font.min.css">
+  <title>LogIn | Information Academic Islamic Centre</title>
 
-  <!-- Main css -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/login/css/style.css">
+  <!-- Custom fonts for this template-->
+  <link href="<?php echo base_url(); ?>assets/login/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="<?php echo base_url(); ?>assets/login/css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
 
-<body>
+<body class="bg-gradient-primary">
 
-  <div class="main">
+  <div class="container">
 
-    <!-- Sign up form -->
-    <section class="signup">
-      <div class="container">
-        <div class="signup-content">
-          <div class="signup-form">
-            <h2 class="form-title">Welcome,<br> Information Academic Islamic Centre</h2>
-            <form method="post" class="register-form" action="<?php echo base_url('c_login/login');?>">
-              <div class="form-group">
-                <label for="uname"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" name="uname" placeholder="Uname" />
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block">
+              <figure><img src="<?php echo base_url(); ?>assets/login/img/ic_logo.jpg" alt="" style="width:75%; display: block; margin-left: auto; margin-right:auto;" /></figure>
+              
+              <div class="text-center">
+                    <a class="small" href="<?php echo base_url('c_login/admin')?>">LogIn sebagai Admin</a>
+                  </div>
               </div>
-              <div class="form-group">
-                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                <input type="password" name="pass" placeholder="Password" />
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Selamat Datang <br> SMA Islamic Centre</h1>
+                  </div>
+                  <form class="user" method="post" action="<?php echo base_url('c_login/login'); ?>">
+                    <div class="form-group">
+                      <input type="text" name="uname" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukkan Nomor Induk">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="pass" class="form-control form-control-user" id="exampleInputPassword" placeholder="Kata Sandi">
+                    </div>
+                    <button href="<?php echo base_url('c_login/admin') ?>" class="btn btn-primary btn-user btn-block" type="submit"> LogIn</button>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="small" href="forgot-password.html">Lupa Kata Sandi?</a>
+                  </div>
+                </div>
               </div>
-              <div class="form-group form-button">
-                <button type="submit" class="form-submit"> Login</button>
-              </div>
-            </form>
-          </div>
-          <div class="signup-image">
-            <figure><img src="<?php echo base_url(); ?>assets/login/images/logo.jpg" alt="sing up image"></figure>
-            <a href="<?php echo base_url('c_login/admin');?>" class="signup-image-link">login as admin</a>
+            </div>
           </div>
         </div>
+
       </div>
-    </section>
+
+    </div>
 
   </div>
 
-  <!-- JS -->
+  <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url(); ?>assets/login/vendor/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/login/js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+  <script src="<?php echo base_url(); ?>assets/login/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="<?php echo base_url(); ?>assets/login/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="<?php echo base_url(); ?>assets/login/js/sb-admin-2.min.js"></script>
+
+</body>
 
 </html>

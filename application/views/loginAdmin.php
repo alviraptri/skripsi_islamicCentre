@@ -71,20 +71,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="error-pagewrap">
         <div class="error-page-int">
             <div class="text-center m-b-md custom-login">
-                <h3>WELCOME</h3>
+                <h3>Selamat Datang</h3>
                 <p>Information Academic Islamic Centre</p>
             </div>
             <div class="content-error">
                 <div class="hpanel">
                     <div class="panel-body">
-                        <form action="<?php echo base_url('c_login/staffLogin');?>" id="loginForm" method="post">
+                        <form action="<?php echo base_url('c_login/login');?>" id="loginForm" method="post">
                             <div class="form-group">
-                                <label class="control-label" for="username">Uname</label>
-                                <input type="text" name="username" class="form-control">
+                                <label class="control-label" for="username">Nomor Induk</label>
+                                <input type="text" name="uname" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="password">Password</label>
-                                <input type="password" name="password" class="form-control">
+                                <label class="control-label" for="password">Kata Sandi</label>
+                                <input type="password" name="pass" class="form-control">
                             </div>
                             <button class="btn btn-success btn-block loginbtn" type="submit">Login</button>
                         </form>
