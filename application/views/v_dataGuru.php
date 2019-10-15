@@ -127,7 +127,6 @@
                     <th>No. Telepon</th>
                     <th>Alamat</th>
                     <th>Jenis Kelamin</th>
-                    <th>Profesi</th>
                     <th>Status</th>
                     <th>Setting</th>
                   </tr>
@@ -147,7 +146,6 @@
                               echo "Perempuan";
                             }
                             ?></td>
-                      <td><?php echo $listGuru->userRole ?></td>
                       <td><?php
                             if ($listGuru->statusUser == 1) { ?>
                           <button class="pd-setting">Aktif</button>

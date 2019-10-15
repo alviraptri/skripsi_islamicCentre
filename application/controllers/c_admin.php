@@ -98,7 +98,8 @@ class c_admin extends CI_Controller
 	//siswa
 	function siswa()
 	{
-		
+		$data['dataSiswa'] = $this->m_admin->tampilkanDataSiswa()->result();
+		$this->load->view('v_dataSiswa', $data);
 	}
 
 	//mata pelajaran
