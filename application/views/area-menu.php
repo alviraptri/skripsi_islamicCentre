@@ -24,7 +24,7 @@
                     <li>
                         <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
-                            <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">All Students</span></a></li>
+                            <li><a title="All Students" href="<?php echo base_url('c_admin/siswa'); ?>"><span class="mini-sub-pro">All Students</span></a></li>
                             <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li>
                         </ul>
                     </li>
