@@ -80,9 +80,9 @@
                     <ul class="metismenu" id="menu1">
                         <li class="active">
                             <a class="has-arrow" href="index.html">
-								   <span class="educate-icon educate-home icon-wrap"></span>
-								   <span class="mini-click-non">Education</span>
-								</a>
+                                <span class="educate-icon educate-home icon-wrap"></span>
+                                <span class="mini-click-non">Education</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="true">
                                 <li><a title="Dashboard v.1" href="index.html"><span class="mini-sub-pro">Dashboard v.1</span></a></li>
                                 <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
@@ -238,8 +238,8 @@
                                     <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
                                             <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-													<i class="educate-icon educate-nav"></i>
-												</button>
+                                                <i class="educate-icon educate-nav"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
@@ -391,10 +391,10 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-															<img src="img/product/pro4.jpg" alt="" />
-															<span class="admin-name">Prof.Anderson</span>
-															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-														</a>
+                                                        <img src="img/product/pro4.jpg" alt="" />
+                                                        <span class="admin-name">Prof.Anderson</span>
+                                                        <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+                                                    </a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                         <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
                                                         </li>
@@ -734,9 +734,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example">
                                                                                             <label class="onoffswitch-label" for="example">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -750,9 +750,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example3">
                                                                                             <label class="onoffswitch-label" for="example3">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -766,9 +766,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example4">
                                                                                             <label class="onoffswitch-label" for="example4">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -782,9 +782,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="example7">
                                                                                             <label class="onoffswitch-label" for="example7">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -798,9 +798,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" checked="" class="onoffswitch-checkbox" id="example2">
                                                                                             <label class="onoffswitch-label" for="example2">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -814,9 +814,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" checked="" class="onoffswitch-checkbox" id="example6">
                                                                                             <label class="onoffswitch-label" for="example6">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -830,9 +830,9 @@
                                                                                         <div class="onoffswitch">
                                                                                             <input type="checkbox" name="collapsemenu" checked="" class="onoffswitch-checkbox" id="example5">
                                                                                             <label class="onoffswitch-label" for="example5">
-																									<span class="onoffswitch-inner"></span>
-																									<span class="onoffswitch-switch"></span>
-																								</label>
+                                                                                                <span class="onoffswitch-inner"></span>
+                                                                                                <span class="onoffswitch-switch"></span>
+                                                                                            </label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1427,11 +1427,11 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="actions graph-rp actions-graph-rp">
                                             <a href="#" class="btn btn-dark btn-circle active tip-top" data-toggle="tooltip" title="Refresh">
-													<i class="fa fa-reply" aria-hidden="true"></i>
-												</a>
+                                                <i class="fa fa-reply" aria-hidden="true"></i>
+                                            </a>
                                             <a href="#" class="btn btn-blue-grey btn-circle active tip-top" data-toggle="tooltip" title="Delete">
-													<i class="fa fa-trash-o" aria-hidden="true"></i>
-												</a>
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

@@ -65,5 +65,12 @@ class c_login extends CI_Controller{
             echo "Nomor Induk dan Password yang anda masukkan salah!";
         }
     }
+
+    //keluar
+    function keluarAdmin()
+    {
+        $this->session->sess_destroy();
+        redirect('c_login/admin');
+    }
 }
 ?>

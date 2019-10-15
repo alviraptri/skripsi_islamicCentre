@@ -3,31 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class c_admin extends CI_Controller 
 {
+	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('m_admin');	
 	}
-
     function index() 
 	{
 		$this->load->view('v_hadmin');
 	}
 
+	//Guru
 	function guru()
 	{
 		$where = array('userRole' => 'Guru' );
 		$data['dataGuru'] = $this->m_admin->tampilkanDataGuru($where)->result();
 		$this->load->view("v_dataGuru", $data);
 	}
-
 	function editGuru($idGuru)
 	{
 		$where = array('nomorInduk' => $idGuru);
 		$data['editGuru'] = $this->m_admin->editGuru($where,'user')->result();
 		$this->load->view('v_editGuru', $data);
 	}
-
 	function updateGuru()
 	{
 		$noInduk = $this->input->post('nomorInduk');
@@ -55,7 +54,6 @@ class c_admin extends CI_Controller
 		$this->m_admin->updateGuru($where, $data, 'user');
 		redirect('c_admin/guru');
 	}
-
 	function statusGuru($nomorInduk)
 	{
 		$data = array('statusUser' => 0);
@@ -63,12 +61,10 @@ class c_admin extends CI_Controller
 		$this->m_admin->statusGuru($where, $data, 'user');
 		redirect('c_admin/guru');
 	}
-
 	function tambahGuru()
 	{
 		$this->load->view("v_tambahGuru");
 	}
-
 	function simpanGuru()
 	{
 		$noInduk = $this->input->post('nomorInduk');
@@ -98,6 +94,20 @@ class c_admin extends CI_Controller
 		$this->m_admin->simpanGuru($data, 'user');
 		redirect('c_admin/guru');
 	}
+
+	//siswa
+	function siswa()
+	{
+		
+	}
+
+	//mata pelajaran
+
+	//jadwal
+
+	//tahun ajaran
+
+	//kelas
 
 
 

@@ -34,11 +34,11 @@
             <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block">
-              <figure><img src="<?php echo base_url(); ?>assets/login/img/ic_logo.jpg" alt="" style="width:75%; display: block; margin-left: auto; margin-right:auto;" /></figure>
-              
-              <div class="text-center">
-                    <a class="small" href="<?php echo base_url('c_login/admin')?>">LogIn sebagai Admin</a>
-                  </div>
+                <figure><img src="<?php echo base_url(); ?>assets/login/img/ic_logo.jpg" alt="" style="width:75%; display: block; margin-left: auto; margin-right:auto;" /></figure>
+
+                <div class="text-center">
+                  <a class="small" href="<?php echo base_url('c_login/admin') ?>">LogIn sebagai Admin</a>
+                </div>
               </div>
               <div class="col-lg-6">
                 <div class="p-5">

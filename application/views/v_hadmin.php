@@ -70,267 +70,14 @@
 	<![endif]-->
     <!-- copy dari sini -->
     <!-- Start Left menu area -->
-    <div class="left-sidebar-pro">
-        <nav id="sidebar" class="">
-            <div class="sidebar-header">
-                <a href="<?php echo base_url('c_admin/index');?>"><img class="main-logo" src="<?php echo base_url(); ?>assets/admin/img/logo/logo.png" alt="" /></a>
-                <strong><a href="<?php echo base_url('c_admin/index');?>"><img src="<?php echo base_url(); ?>assets/admin/img/logo/logosn.png" alt="" /></a></strong>
-            </div>
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
-                <nav class="sidebar-nav left-sidebar-menu-pro">
-                    <ul class="metismenu" id="menu1">
-                        <li class="active">
-                            <a href="<?php echo base_url('c_admin/index');?>">
-                                <span class="educate-icon educate-home icon-wrap"></span>
-                                <span class="mini-click-non">Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Teachers</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Teachers" href="<?php echo base_url('c_admin/guru');?>"><span class="mini-sub-pro">All Teachers</span></a></li>
-                                <li><a title="Add Teachers" href="add-professor.html"><span class="mini-sub-pro">Add Teachers</span></a></li>
-                                <li><a title="Edit Teachers" href="edit-professor.html"><span class="mini-sub-pro">Edit Teachers</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">All Students</span></a></li>
-                                <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li>
-                                <li><a title="Edit Students" href="edit-student.html"><span class="mini-sub-pro">Edit Student</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Courses</span></a></li>
-                                <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">Add Course</span></a></li>
-                                <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Course</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap"></span> <span class="mini-click-non">Schedule</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Schedule</span></a></li>
-                                <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">Add Schedule</span></a></li>
-                                <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Schedule</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Batch</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Batch</span></a></li>
-                                <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">Add Batch</span></a></li>
-                                <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Batch</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Class</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Class</span></a></li>
-                                <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">Add Class</span></a></li>
-                                <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Class</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </nav>
-    </div>
+    <?php include("area-menu.php") ?>
     <!-- End Left menu area -->
     <!-- Start Welcome area -->
+
     <div class="all-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="<?php echo base_url('c_admin/index');?>"><img class="main-logo" src="<?php echo base_url(); ?>assets/admin/img/logo/logo.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php include("logo.php") ?>
         <div class="header-advance-area">
-            <div class="header-top-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="header-top-wraper">
-                                <div class="row">
-                                    <!-- menu yang garis2 -->
-                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
-                                        <div class="menu-switcher-pro">
-                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-                                                <i class="educate-icon educate-nav"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- space -->
-                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
-                                        <div class="header-top-menu tabl-d-n">
-                                        </div>
-                                    </div>
-                                    <!-- ujung kanan -->
-                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                                        <div class="header-right-info">
-                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
-                                                <!-- notification -->
-                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
-                                                    <div role="menu" class="notification-author dropdown-menu animated zoomIn">
-                                                        <div class="notification-single-top">
-                                                            <h1>Notifications</h1>
-                                                        </div>
-                                                        <ul class="notification-menu">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="educate-icon educate-checked edu-checked-pro admin-check-pro" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="fa fa-cloud edu-cloud-computing-down" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Sulaiman din</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="fa fa-eraser edu-shield" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Victor Jara</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="notification-icon">
-                                                                        <i class="fa fa-line-chart edu-analytics-arrow" aria-hidden="true"></i>
-                                                                    </div>
-                                                                    <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Victor Jara</h2>
-                                                                        <p>Please done this project as soon possible.</p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="notification-view">
-                                                            <a href="#">View All Notification</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <!-- nama session -->
-                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img src="img/product/pro4.jpg" alt="" />
-                                                        <span class="admin-name"><?php echo $this->session->namaUser; ?></span>
-                                                        <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-                                                    </a>
-                                                    <!-- drop down nama session -->
-                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
-                                                        </li>
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu start -->
-            <div class="mobile-menu-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="mobile-menu">
-                                <nav id="dropdown">
-                                    <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="<?php echo base_url('c_admin/index');?>">Home <span class="admin-project-icon edu-icon"></span></a></li>
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Teachers<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="<?php echo base_url('c_admin/guru');?>">All Teachers</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Add Teachers</a>
-                                                </li>
-                                                <li><a href="edit-professor.html">Edit Teachers</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Students <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demopro" class="collapse dropdown-header-top">
-                                                <li><a href="all-students.html">All Students</a>
-                                                </li>
-                                                <li><a href="add-student.html">Add Student</a>
-                                                </li>
-                                                <li><a href="edit-student.html">Edit Student</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">All Courses</a>
-                                                </li>
-                                                <li><a href="add-course.html">Add Course</a>
-                                                </li>
-                                                <li><a href="edit-course.html">Edit Course</a>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Schedule <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">All Schedule</a>
-                                                </li>
-                                                <li><a href="add-course.html">Add Schedule</a>
-                                                </li>
-                                                <li><a href="edit-course.html">Edit Schedule</a>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Batch <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">All Batch</a>
-                                                </li>
-                                                <li><a href="add-course.html">Add Batch</a>
-                                                </li>
-                                                <li><a href="edit-course.html">Edit Batch</a>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Class <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">All Class</a>
-                                                </li>
-                                                <li><a href="add-course.html">Add Class</a>
-                                                </li>
-                                                <li><a href="edit-course.html">Edit Class</a>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include("mobile-menu.php") ?>
             <!-- Mobile Menu end -->
             <!-- copy sampe sini -->
             <div class="breadcome-area">
@@ -343,7 +90,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="<?php echo base_url('c_admin/index');?>">Home</a> <span class="bread-slash">/</span>
+                                            <li><a href="<?php echo base_url('c_admin/index'); ?>">Home</a> <span class="bread-slash">/</span>
                                             </li>
                                             <li><span class="bread-blod">Dashboard</span>
                                             </li>
@@ -849,17 +596,7 @@
             </div>
         </div>
         <!-- ini copy juga karna footer -->
-        <div class="footer-copyright-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-copy-right">
-                            <p>Copyright © 2018. All rights reserved. Information Academic Islamic Centre</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php include("footer.php") ?>
         <!-- ini copy juga karna footer -->
     </div>
 
