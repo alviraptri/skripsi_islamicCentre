@@ -140,8 +140,7 @@
                                     <input name="email" type="text" class="form-control" placeholder="Email" value="<?= $edit->emailUser ?>">
                                   </div>
                                   <div class="form-group">
-                                    <input name="noTelp" type="tel" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" class="form-control" placeholder="No. Telepone" value="<?= $edit->noTelp ?>">
-                                    <small>Format no.telp 0897-4110-896</small>
+                                    <input name="noTelp" type="text" class="form-control" placeholder="No. Telepone" value="<?= $edit->noTelp ?>">
                                   </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

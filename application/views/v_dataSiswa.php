@@ -62,6 +62,11 @@
   <!-- modernizr JS
 		============================================ -->
   <script src="<?php echo base_url(); ?>assets/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+  <!-- Bootstrap CSS CDN -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ <!-- DataTables CSS CDN -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 </head>
 
 <body>
@@ -125,6 +130,7 @@
                     <th>Kelas</th>
                     <th>Tahun Ajaran</th>
                     <th>Status</th>
+                    <th>Detail</th>
                     <th>Setting</th>
                   </tr>
                   <?php
@@ -141,20 +147,22 @@
                           <button class="ds-setting">Tidak Aktif</button>
                         <?php }
                           ?></td>
-                      <td>
-                        <a href="<?php echo base_url('c_admin/editGuru/') . $listSiswa->nomorInduk; ?>">
-                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
+                          <td>
+                          <a href="#myModal" id='siswaId' data-toggle="modal" data-id="<?php echo $listSiswa->nomorInduk?>">
+                          <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button>
-                        </a>
+                          </a>
+                          </td>
+                      <td>
                         <?php
                           if ($listSiswa->statusSiswa == 1) { ?>
-                          <a href="<?php echo base_url('c_admin/editGuru/') . $listSiswa->nomorInduk; ?>">
+                          <a href="<?php echo base_url('c_admin/editSiswa/') . $listSiswa->nomorInduk; ?>">
                             <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button>
                           </a>
-                          <a href="<?php echo base_url('c_admin/statusGuru/') . $listSiswa->nomorInduk; ?>">
+                          <a href="<?php echo base_url('c_admin/statusSiswa/') . $listSiswa->nomorInduk; ?>">
                             <button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
                               <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
@@ -193,6 +201,41 @@
     </div>
     <?php include("footer.php") ?>
   </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"> Detail Siswa</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="fetched-data"></div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myModal').on('show.bs.modal', function(e){
+            var rowid = $(e.relatedTarget).data('nomorInduk');
+            $.ajax({
+                type: 'post',
+                url : "<?php echo base_url()?>'c_admin/getData'",
+                data : 'rowid='+ rowid,
+                success :function(data){
+                    $('.fetched-data').html(data);
+                }
+            })
+        })
+    });
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <!-- jquery
 		============================================ -->

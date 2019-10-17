@@ -17,7 +17,7 @@ class c_login extends CI_Controller{
     //nampilin view login admin
     function admin()
     {
-        $this->load->view('loginAdmin');
+        $this->load->view('v_masukAdmin');
     }
 
     //login siswa dan wali murid
