@@ -30,24 +30,12 @@ class m_admin extends CI_Model
     {
         $this->db->select('user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, user.alamatUser, 
         user.jenisKelamin, dataSiswa.nomorInduk, dataSiswa.idKelas, dataSiswa.idTahunAjaran,
-        dataSiswa.statusSiswa, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, tahunAjaran.idTahunAjaran, tahunAjaran.tahunAjaran')
+        dataSiswa.statusSiswa, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, tahunAjaran.idTahunAjaran, 
+        tahunAjaran.tahunAjaran, user.gambar')
         ->from('dataSiswa')
         ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
         ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner' )
         ->join('tahunAjaran', 'tahunAjaran.idTahunAjaran = dataSiswa.idTahunAjaran');
-
-        return $this->db->get();
-    }
-    function getData($siswaId)
-    {
-        $this->db->select('user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, user.alamatUser, 
-        user.jenisKelamin, dataSiswa.nomorInduk, dataSiswa.idKelas, dataSiswa.idTahunAjaran,
-        dataSiswa.statusSiswa, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, tahunAjaran.idTahunAjaran, tahunAjaran.tahunAjaran')
-        ->from('dataSiswa')
-        ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
-        ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner' )
-        ->join('tahunAjaran', 'tahunAjaran.idTahunAjaran = dataSiswa.idTahunAjaran')
-        ->where('dataSiswa.nomorInduk', $siswaId);
 
         return $this->db->get();
     }
@@ -68,6 +56,10 @@ class m_admin extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($table,$data);
+    }
+    function simpanSiswa($data, $table)
+    {
+        $this->db->insert($table, $data);
     }
 }
 

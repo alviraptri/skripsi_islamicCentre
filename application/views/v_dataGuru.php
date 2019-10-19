@@ -1,264 +1,220 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Teachers | Information Academic Islamic Centre</title>
-  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- favicon
-		============================================ -->
-  <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/admin/img/favicon.ico">
-  <!-- Google Fonts
-		============================================ -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-  <!-- Bootstrap CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/bootstrap.min.css">
-  <!-- Bootstrap CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/font-awesome.min.css">
-  <!-- owl.carousel CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/owl.carousel.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/owl.theme.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/owl.transitions.css">
-  <!-- animate CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/animate.css">
-  <!-- normalize CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/normalize.css">
-  <!-- meanmenu icon CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/meanmenu.min.css">
-  <!-- main CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/main.css">
-  <!-- educate icon CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/educate-custon-icon.css">
-  <!-- morrisjs CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/morrisjs/morris.css">
-  <!-- mCustomScrollbar CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/scrollbar/jquery.mCustomScrollbar.min.css">
-  <!-- metisMenu CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/metisMenu/metisMenu.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/metisMenu/metisMenu-vertical.css">
-  <!-- calendar CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/calendar/fullcalendar.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/calendar/fullcalendar.print.min.css">
-  <!-- style CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/style.css">
-  <!-- responsive CSS
-		============================================ -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/responsive.css">
-  <!-- modernizr JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+  <title>Guru | Information Academic Islamic Centre</title>
+
+  <!-- Bootstrap -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+  <!-- bootstrap-progressbar -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+  <!-- JQVMap -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+  <!-- bootstrap-daterangepicker -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+  <!-- Custom Theme Style -->
+  <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
 </head>
 
-<body>
-  <!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-  <!-- copy dari sini -->
-  <!-- Start Left menu area -->
-  <?php include("area-menu.php") ?>
-  <!-- End Left menu area -->
-  <!-- Start Welcome area -->
-  <div class="all-content-wrapper">
-    <?php include("logo.php") ?>
-    <div class="header-advance-area">
-      <?php include("mobile-menu.php") ?>
-      <!-- Mobile Menu end -->
-      <!-- copy sampe sini -->
-      <div class="breadcome-area">
-        <div class="container-fluid">
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <?php include("view-sidebar.php") ?>
+      </div>
+
+      <!-- top navigation -->
+      <?php include("view-topNavigation.php") ?>
+      <!-- /top navigation -->
+
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Guru</h3>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
           <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="breadcome-list single-page-breadcome">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="breadcome-heading">
-                      <form role="search" class="sr-input-func">
-                        <input type="text" placeholder="Search..." class="search-int form-control">
-                        <a href="#"><i class="fa fa-search"></i></a>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <ul class="breadcome-menu">
-                      <li><a href="#">Home</a> <span class="bread-slash">/</span>
-                      </li>
-                      <li><span class="bread-blod">Teachers</span>
-                      </li>
-                    </ul>
-                  </div>
+
+            <!--responsive-->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Data Guru</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li> <a href="<?php echo base_url('c_admin/tambahGuru'); ?>"><button type="submit" class="btn btn-primary">Tambah Guru</button></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                      <tr>
+                        <th>Foto Profil</th>
+                        <th>Nomor Induk</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>No. Telepon</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($dataGuru as $listGuru) { ?>
+                        <tr>
+                          <td><img src="<?php echo base_url(); ?>assets/inter/images/<?php echo $listGuru->gambar ?>" alt=""></td>
+                          <td><?php echo $listGuru->nomorInduk ?></td>
+                          <td><?php echo $listGuru->namaUser ?></td>
+                          <td><?php echo $listGuru->emailUser ?></td>
+                          <td><?php echo $listGuru->noTelp ?></td>
+                          <td><?php
+                                if ($listGuru->statusUser == 1) { ?>
+                              <button class="btn btn-success btn-xs">Aktif</button>
+                            <?php } else { ?>
+                              <button class="btn btn-danger btn-xs">Tidak Aktif</button>
+                            <?php }
+                              ?></td>
+                          <td>
+                            <?php
+                              if ($listGuru->statusUser == 1) { ?>
+                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listGuru->nomorInduk ?>">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                              </button>
+                              <?php
+                                  $data = array(
+                                    'gambar' => $listGuru->gambar,
+                                    'nomorInduk' => $listGuru->nomorInduk,
+                                    'namaUser' => $listGuru->namaUser,
+                                    'ttlUser' => $listGuru->ttlUser,
+                                    'emailUser' => $listGuru->emailUser,
+                                    'noTelp' => $listGuru->noTelp,
+                                    'alamatUser' => $listGuru->alamatUser,
+                                    'jenisKelamin' => $listGuru->jenisKelamin,
+                                    'statusUser' => $listGuru->statusUser
+                                  );
+                                  $this->load->view("v_modalGuru", $data);
+                                  ?>
+
+                              <a href="<?php echo base_url('c_admin/editGuru/') . $listGuru->nomorInduk; ?>">
+                                <button data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
+                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                              </a>
+                              <a href="<?php echo base_url('c_admin/statusGuru/') . $listGuru->nomorInduk; ?>">
+                                <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                              </a>
+                            <?php } else { ?>
+                              <button data-toggle="tooltip" title="Edit" class="pd-setting-ed" disabled>
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                              </button>
+                              <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" disabled>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </button>
+                            <?php } ?>
+                          </td>
+                        </tr>
+                      <?php } ?>
+
+                    </tbody>
+                  </table>
+
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="product-status mg-b-15">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="product-status-wrap drp-lst">
-              <h4>Teachers List</h4>
-              <div class="add-product">
-                <a href="<?php echo base_url('c_admin/tambahGuru'); ?>">Add Teachers</a>
-              </div>
-              <div class="asset-inner">
-                <table>
-                  <tr>
-                    <th>Nomor Induk</th>
-                    <th>Nama</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Email</th>
-                    <th>No. Telepon</th>
-                    <th>Alamat</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Status</th>
-                    <th>Setting</th>
-                  </tr>
-                  <?php
-                  foreach ($dataGuru as $listGuru) { ?>
-                    <tr>
-                      <td><?php echo $listGuru->nomorInduk ?></td>
-                      <td><?php echo $listGuru->namaUser ?></td>
-                      <td><?php echo $listGuru->ttlUser ?></td>
-                      <td><?php echo $listGuru->emailUser ?></td>
-                      <td><?php echo $listGuru->noTelp ?></td>
-                      <td><?php echo $listGuru->alamatUser ?></td>
-                      <td><?php
-                            if ($listGuru->jenisKelamin == 0) {
-                              echo "Laki-Laki";
-                            } else {
-                              echo "Perempuan";
-                            }
-                            ?></td>
-                      <td><?php
-                            if ($listGuru->statusUser == 1) { ?>
-                          <button class="pd-setting">Aktif</button>
-                        <?php } else { ?>
-                          <button class="ds-setting">Tidak Aktif</button>
-                        <?php }
-                          ?></td>
-                      <td>
-                        <?php
-                          if ($listGuru->statusUser == 1) { ?>
-                          <a href="<?php echo base_url('c_admin/editGuru/') . $listGuru->nomorInduk; ?>">
-                            <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
-                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                          </a>
-                          <a href="<?php echo base_url('c_admin/statusGuru/') . $listGuru->nomorInduk; ?>">
-                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
-                              <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                          </a>
-                        <?php } else { ?>
-                          <button data-toggle="tooltip" title="Edit" class="pd-setting-ed" disabled>
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                          </button>
-                          <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" disabled>
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                          </button>
-                        <?php } ?>
-                      </td>
-                    </tr>
-                  <?php
-                  }
-                  ?>
+      <!-- /page content -->
 
-                </table>
-              </div>
-              <div class="custom-pagination">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- footer content -->
+      <footer>
+        <?php include("v-Footer.php") ?>
+      </footer>
+      <!-- /footer content -->
     </div>
-    <?php include("footer.php") ?>
   </div>
 
-  <!-- jquery
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/vendor/jquery-1.12.4.min.js"></script>
-  <!-- bootstrap JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/bootstrap.min.js"></script>
-  <!-- wow JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/wow.min.js"></script>
-  <!-- price-slider JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/jquery-price-slider.js"></script>
-  <!-- meanmenu JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/jquery.meanmenu.js"></script>
-  <!-- owl.carousel JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/owl.carousel.min.js"></script>
-  <!-- sticky JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/jquery.sticky.js"></script>
-  <!-- scrollUp JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/jquery.scrollUp.min.js"></script>
-  <!-- counterup JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/counterup/jquery.counterup.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/counterup/waypoints.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/counterup/counterup-active.js"></script>
-  <!-- mCustomScrollbar JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/scrollbar/mCustomScrollbar-active.js"></script>
-  <!-- metisMenu JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/metisMenu/metisMenu.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/metisMenu/metisMenu-active.js"></script>
-  <!-- morrisjs JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/morrisjs/raphael-min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/morrisjs/morris.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/morrisjs/morris-active.js"></script>
-  <!-- morrisjs JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/sparkline/jquery.sparkline.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/sparkline/jquery.charts-sparkline.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/sparkline/sparkline-active.js"></script>
-  <!-- calendar JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/calendar/moment.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/calendar/fullcalendar.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/admin/js/calendar/fullcalendar-active.js"></script>
-  <!-- plugins JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/plugins.js"></script>
-  <!-- main JS
-		============================================ -->
-  <script src="<?php echo base_url(); ?>assets/admin/js/main.js"></script>
+  <!-- jQuery -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
+  <!-- Chart.js -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/Chart.js/dist/Chart.min.js"></script>
+  <!-- gauge.js -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/gauge.js/dist/gauge.min.js"></script>
+  <!-- bootstrap-progressbar -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <!-- iCheck -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
+  <!-- Skycons -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/skycons/skycons.js"></script>
+  <!-- Flot -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.pie.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.time.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.stack.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.resize.js"></script>
+  <!-- Flot plugins -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.curvedlines/curvedLines.js"></script>
+  <!-- DateJS -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/DateJS/build/date.js"></script>
+  <!-- JQVMap -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jquery.vmap.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+  <!-- bootstrap-daterangepicker -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/moment/min/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
+
+  <!-- Datatables -->
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
+
 </body>
 
 </html>

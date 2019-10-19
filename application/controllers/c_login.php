@@ -38,11 +38,13 @@ class c_login extends CI_Controller{
                 $nama = $list->namaUser;
                 $nip = $list->nomorInduk;
                 $role = $list->userRole;
+                $gambar = $list->gambar;
             };
             $data_Session = array(
                 'namaUser' => $nama,
                 'nomorInduk' => $nip,
-                'userRole' => $role
+                'userRole' => $role,
+                'gambar' => $gambar
             );
             $this->session->set_userdata($data_Session);
             if($role == 'Admin'){
