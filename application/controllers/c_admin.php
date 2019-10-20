@@ -15,10 +15,11 @@ class c_admin extends CI_Controller
 	}
 
 	/* Menu:
-	- Guru: 20-99
-	- Siswa: 102-204
-	- Gambar: 207-224
-	- Mata Pelajaran:  */
+	- Guru: 23-110
+	- Siswa: 112-213
+	- Gambar: 215-232
+	- Mata Pelajaran: 234-288
+	- Jadwal:  */
 
 	//Guru
 	function guru()
@@ -288,10 +289,75 @@ class c_admin extends CI_Controller
 	}
 
 	//jadwal
+	function tambahJadwal()
+	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$data['mapel'] = $this->m_admin->mapel()->result();
+		$data['guru'] = $this->m_admin->guru()->result();
+		$this->load->view('v_tambahJadwal', $data);
+	}
 
 	//tahun ajaran
 
 	//kelas
+	function tambahKelas()
+	{
+		$this->load->view('v_tambahKelas');
+	}
+	function simpanKelas()
+	{
+		$ketKelas = $this->input->post('ketKelas');
+		$jurusanKelas = $this->input->post('jurusanKelas');
+		$noKelas = $this->input->post('noKelas');
+
+		$data = array(
+			'idKelas' => "",
+			'ketKelas' => $ketKelas,
+			'jurusanKelas' => $jurusanKelas,
+			'nomorKelas' => $noKelas,
+			'statusKelas' => 1 
+		);
+
+		$this->m_admin->simpanKelas($data, 'kelas');
+		redirect('c_admin/kelas');
+	}
+	function kelas()
+	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$this->load->view('v_dataKelas', $data);
+	}
+	function statusKelas($idKelas)
+	{
+		$data = array('statusKelas' => 0, );
+		$where = array('idKelas' => $idKelas, );
+
+		$this->m_admin->statusKelas($where, $data, 'kelas');
+		redirect('c_admin/kelas');
+	}
+	function editKelas($idKelas)
+	{
+		$data['editKelas'] = $this->m_admin->editKelas($idKelas)->result();
+		$this->load->view('v_editKelas', $data);
+	}
+	function updateKelas()
+	{
+		$idKelas = $this->input->post('idKelas');
+		$ketKelas = $this->input->post('ketKelas');
+		$jurusanKelas = $this->input->post('jurusanKelas');
+		$noKelas = $this->input->post('noKelas');
+		$where = array('idKelas' => $idKelas, );
+
+		$data = array(
+			'ketKelas' => $ketKelas,
+			'jurusanKelas' => $jurusanKelas,
+			'nomorKelas' => $noKelas,
+			'statusKelas' => 1 
+		);
+
+		$this->m_admin->updateKelas($where, $data, 'kelas');
+		redirect('c_admin/kelas');
+	}
+	
 
 
 

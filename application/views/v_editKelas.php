@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Siswa | Information Academic Islamic Centre</title>
+    <title>Kelas | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Siswa</h3>
+                            <h3>Kelas</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -56,103 +56,58 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tambah Siswa</h2>
+                                    <h2>Edit Kelas</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
 
-                                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/simpanSiswa'; ?>">
-
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomorInduk">Nomor Induk <span class="required">*</span>
+                                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/updateKelas'; ?>">
+                                    <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama"># <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nomorInduk" required="required" type="text">
+                                    <?php foreach($editKelas as $kelas){?>
+                                                <input type="text" id="email" name="idKelas" required="required" class="form-control col-md-7 col-xs-12" value="<?= $kelas->idKelas?>" readonly>
+                                                <?php }?>
                                             </div>
-                                        </div>
+                                    </div>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Keterangan Kelas <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="email" name="nama" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ttl">Tanggal Lahir <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="date" id="email" name="ttl" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="noTelp">Nomor Telephone <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="email2" name="noTelp" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Alamat <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <textarea id="textarea" required="required" name="alamat" class="form-control col-md-7 col-xs-12"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jk">Jenis Kelamin<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="jk" class="select2_single form-control">
-                                                    <option></option>
-                                                    <option value="1">Laki-Laki</option>
-                                                    <option value="0">Perempuan</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <?php foreach ($siswa as $data) {?>
-                                            <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kelas">Status <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="status" class="select2_single form-control">
-                                                    <option value="Siswa">Siswa</option>
-                                                </select>
-                                            </div>
-                                        </div>    
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kelas">Kelas <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="kelas" class="select2_single form-control">
-                                                    <option value="<?= $data->idKelas ?>"><?= $data->ketKelas ?> <?= $data->jurusanKelas ?> <?= $data->nomorKelas ?></option>
+                                            <select name="ketKelas" class="select2_single form-control">
+                                                <?php foreach($editKelas as $kelas){?>
+                                                    <option value="<?= $kelas->ketKelas?>"> <?= $kelas->ketKelas?> </option>
+                                                <?php }?>
+                                                    <option value="X"> X </option>
+                                                    <option value="XI"> XI </option>
+                                                    <option value="XII"> XII </option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Jurusan Kelas <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="tahunAjaran" class="select2_single form-control">
-                                                    <option value="<?= $data->idTahunAjaran ?>"><?= $data->tahunAjaran ?></option>
+                                            <select name="jurusanKelas" class="select2_single form-control">
+                                            <?php foreach($editKelas as $kelas){?>
+                                                    <option value="<?= $kelas->jurusanKelas?>"> <?= $kelas->jurusanKelas?> </option>
+                                                <?php }?>
+                                                    <option value="IPA"> IPA </option>
+                                                    <option value="IPS"> IPS </option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <?php }?>
+                                        
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pass">Password <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nomor Kelas <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="password" id="email2" name="pass" required="required" class="form-control col-md-7 col-xs-12">
+                                            <?php foreach($editKelas as $kelas){?>
+                                                <input type="text" id="email" name="noKelas" required="required" class="form-control col-md-7 col-xs-12" value="<?= $kelas->nomorKelas?>">
+                                                <?php }?>
                                             </div>
                                         </div>
-
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">

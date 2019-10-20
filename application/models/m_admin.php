@@ -6,14 +6,6 @@ class m_admin extends CI_Model
     {
         return $this->db->get('tahunajaran');
     }
-    function mapel()
-    {
-        return $this->db->get('matapelajara');
-    }
-    function kelas()
-    {
-        return $this->db->get('kelas');
-    }
     
     //Guru
     function tampilkanDataGuru($where)
@@ -38,6 +30,10 @@ class m_admin extends CI_Model
     {
         $this->db->insert($table, $data);
     }
+    function guru()
+    {
+        return $this->db->get('user');
+    }
 
     //Siswa
     function tampilkanDataSiswa()
@@ -45,7 +41,7 @@ class m_admin extends CI_Model
         $this->db->select('user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, user.alamatUser, 
         user.jenisKelamin, dataSiswa.nomorInduk, dataSiswa.idKelas, dataSiswa.idTahunAjaran,
         dataSiswa.statusSiswa, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, tahunAjaran.idTahunAjaran, 
-        tahunAjaran.tahunAjaran, user.gambar')
+        tahunAjaran.tahunAjaran, user.gambar, kelas.nomorKelas')
         ->from('dataSiswa')
         ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
         ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner' )
@@ -58,7 +54,7 @@ class m_admin extends CI_Model
         $query = $this->db->query('SELECT user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, 
         user.alamatUser, user.jenisKelamin, datasiswa.nomorInduk, datasiswa.idKelas, datasiswa.idTahunAjaran, 
         datasiswa.statusSiswa, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, tahunajaran.idTahunAjaran, 
-        tahunajaran.tahunAjaran 
+        tahunajaran.tahunAjaran, kelas.nomorKelas 
         FROM `dataSiswa` 
         INNER JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
         INNER JOIN kelas ON kelas.idKelas = datasiswa.idKelas 
@@ -113,6 +109,35 @@ class m_admin extends CI_Model
     {
         $this->db->where($where);
         $this->db->update($table, $data);
+    }
+    function mapel()
+    {
+        return $this->db->get('matapelajaran');
+    }
+
+    //kelas
+    function kelas()
+    {
+        return $this->db->get('kelas');
+    }
+    function simpanKelas($data, $table)
+    {
+        $this->db->insert($table, $data);
+    }
+    function statusKelas($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
+    function editKelas($idKelas)
+    {
+        $query = $this->db->query('SELECT * FROM `kelas` WHERE idKelas = "'.$idKelas.'"');
+        return $query;
+    }
+    function updateKelas($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table,$data);
     }
 }
 

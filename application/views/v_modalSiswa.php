@@ -42,7 +42,7 @@
                   <td>Nomor Telepon</td>
                   <td><?php echo $noTelp ?></td>
                   <td>Kelas</td>
-                  <td><?php echo $ketKelas?> <?php echo $jurusanKelas?></td>
+                  <td><?php echo $ketKelas?> <?php echo $jurusanKelas?> <?php echo $nomorKelas?></td>
               </tr>
               <tr>
                   <td>Alamat</td>

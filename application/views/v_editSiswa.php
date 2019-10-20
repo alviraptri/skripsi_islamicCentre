@@ -126,7 +126,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="kelas" class="select2_single form-control">
-                          <option value="<?= $edit->idKelas ?>"><?= $edit->ketKelas?> <?= $edit->jurusanKelas?></option>
+                          <option value="<?= $edit->idKelas ?>"><?= $edit->ketKelas?> <?= $edit->jurusanKelas?> <?= $edit->nomorKelas?></option>
                           </select>
                         </div>
                       </div>
