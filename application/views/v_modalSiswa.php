@@ -17,7 +17,7 @@
               <tr>
                   <td>Nama Lengkap</td>
                   <td><?php echo $namaUser ?></td>
-                  <td rowspan="3"><img src="<?php echo base_url(); ?>assets/inter/images/<?php echo $gambar ?>" alt=""></td>
+                  <td rowspan="3"><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $gambar ?>" alt=""></td>
               </tr>
               <tr>
                   <td>Tanggal Lahir</td>

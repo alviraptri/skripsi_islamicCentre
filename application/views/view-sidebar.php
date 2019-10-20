@@ -10,7 +10,7 @@
   <div class="profile clearfix">
     <div class="profile_pic">
       <?php $rows = $this->db->query("SELECT * FROM user where nomorInduk='" . $this->session->nomorInduk . "'")->row_array(); ?>
-      <img src="<?php echo base_url(); ?>assets/inter/images/<?php echo $rows['gambar'] ?>" alt="..." class="img-circle profile_img">
+      <img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $rows['gambar'] ?>" alt="..." class="img-circle profile_img">
     </div>
     <div class="profile_info">
       <span>Selamat Datang,</span>
@@ -36,33 +36,33 @@
           <ul class="nav child_menu">
             <li><a href="<?php echo base_url('c_admin/siswa'); ?>">Data Siswa</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahSiswa'); ?>">Tambah Siswa</a></li>
-                    </ul>
-				  </li>
-				  <li><a><i class=" fa fa-bookmark-o"></i> Mata Pelajaran <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="<a href="">Data Mata Pelajaran</a></li>
-                      <li><a href=" <a href="">Tambah Mata Pelajaran</a></li>
-              </ul>
-            </li>
-            <li><a><i class="fa fa-calendar"></i> Jadwal <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="<a href="">Data Jadwal</a></li>
-                      <li><a href=" <a href="">Tambah Jadwal</a></li>
-              </ul>
-            </li>
-            <li><a><i class="fa fa-list-alt"></i> Tahun Ajaran <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="<a href="">Data Tahun Ajaran</a></li>
-                      <li><a href=" <a href="">Tambah Tahun Ajaran</a></li>
-              </ul>
-            </li>
-            <li><a><i class="fa fa-institution"></i> Kelas <span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu">
-                <li><a href="<a href="">Data Kelas</a></li>
-                      <li><a href=" <a href="">Tambah Kelas</a></li>
-              </ul>
-            </li>
           </ul>
+        </li>
+        <li><a><i class=" fa fa-bookmark-o"></i> Mata Pelajaran <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/mapel'); ?>">Data Mata Pelajaran</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahMapel'); ?>">Tambah Mata Pelajaran</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-calendar"></i> Jadwal <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<a href="">Data Jadwal</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahJadwal'); ?>">Tambah Jadwal</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-list-alt"></i> Tahun Ajaran <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<a href="">Data Tahun Ajaran</a></li>
+            <li><a href=" <a href="">Tambah Tahun Ajaran</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-institution"></i> Kelas <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<a href="">Data Kelas</a></li>
+            <li><a href=" <a href="">Tambah Kelas</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
   <!-- /sidebar menu -->

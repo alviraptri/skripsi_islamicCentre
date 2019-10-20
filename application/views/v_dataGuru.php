@@ -82,7 +82,7 @@
                     <tbody>
                       <?php foreach ($dataGuru as $listGuru) { ?>
                         <tr>
-                          <td><img src="<?php echo base_url(); ?>assets/inter/images/<?php echo $listGuru->gambar ?>" alt=""></td>
+                          <td><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $listGuru->gambar ?>" alt=""></td>
                           <td><?php echo $listGuru->nomorInduk ?></td>
                           <td><?php echo $listGuru->namaUser ?></td>
                           <td><?php echo $listGuru->emailUser ?></td>

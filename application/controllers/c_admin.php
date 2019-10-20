@@ -16,7 +16,9 @@ class c_admin extends CI_Controller
 
 	/* Menu:
 	- Guru: 20-99
-	- Siswa: 102- */
+	- Siswa: 102-204
+	- Gambar: 207-224
+	- Mata Pelajaran:  */
 
 	//Guru
 	function guru()
@@ -78,7 +80,9 @@ class c_admin extends CI_Controller
 		$noTelp = $this->input->post('noTelp');
 		$alamat = $this->input->post('alamat');
 		$jk = $this->input->post('jk');
+		$pass = $this->input->post('pass');
 		$userRole = $this->input->post('role');
+		$photo = $this->input->post('photo');
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
@@ -91,9 +95,15 @@ class c_admin extends CI_Controller
 			'noTelp' => $noTelp,
 			'alamatUser' => $alamat,
 			'jenisKelamin' => $jk,
-			'passUser' => "",
+			'passUser' => $pass,
+			'gambar' => $photo,
 			'statusUser' => 1 
 		);
+
+		if(!empty($_FILES['photo']['name'])){
+			$upload = $this->uploadFoto();
+			$data['photo'] = $upload;
+		}
 
 		$this->m_admin->simpanGuru($data, 'user');
 		redirect('c_admin/guru');
@@ -103,9 +113,6 @@ class c_admin extends CI_Controller
 	function siswa()
 	{
 		$data['siswa'] = $this->m_admin->tampilkanDataSiswa()->result();
-		// foreach($data as $list){
-		// 	echo $list->nomorInduk;
-		// }
 		$this->load->view('v_dataSiswa', $data);
 	}
 	function editSiswa($idSiswa)
@@ -147,11 +154,13 @@ class c_admin extends CI_Controller
 		$this->m_admin->updateSiswa($where, $dataSiswa, 'datasiswa');
 		redirect('c_admin/siswa');
 	}
-	function tambahSiswa(){
+	function tambahSiswa()
+	{
 		$data['siswa'] = $this->m_admin->tampilkanDataSiswa()->result();
 		$this->load->view("v_tambahSiswa", $data);
 	}
-	function simpanSiswa(){
+	function simpanSiswa()
+	{
 		$noInduk = $this->input->post('nomorInduk');
 		$nama = $this->input->post('nama');
 		$ttl = $this->input->post('ttl');
@@ -192,8 +201,91 @@ class c_admin extends CI_Controller
 		$this->m_admin->simpanSiswa($dataSiswa, 'datasiswa');
 		redirect('c_admin/siswa');
 	}
+	function statusSiswa($nomorInduk)
+	{
+		$dataSiswa = array('statusSiswa' => 0, );
+		$dataUser = array('statusUser' => 0, );
+		$where = array('nomorInduk' => $nomorInduk, );
+
+		$this->m_admin->statusSiswa($where, $dataSiswa, 'dataSiswa');
+		$this->m_admin->statusSiswa($where, $dataUser, 'user');
+		redirect ('c_admin/siswa');
+	}
+
+	//gambar
+	private function uploadFoto()
+	{
+		$config['upload_path'] = 'assets/inter/images/profil/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['file_name'] = round(microtime(true)*1000);
+		$config['overwrite'] = true;
+		$config['max_size'] = 2048;
+
+		$this->load->library('upload', $config);
+
+		if(!$this->upload->do_upload('photo')){
+			$this->session->set_flashdata('msg', $this->upload->display_errors('',''));
+			redirect('c_admin/index');
+		}
+
+		return $this->upload->data('file_name');
+	}
 
 	//mata pelajaran
+	function tambahMapel()
+	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_tambahMapel', $data);
+	}
+	function simpanMapel()
+	{
+		$mapel = $this->input->post('mapel');
+		$thnajaran = $this->input->post('tahunAjaran');
+
+		$data = array(
+			'idMapel' => '',
+			'idTahunAjaran' => $thnajaran,
+			'namaMapel' => $mapel,
+			'statusMapel' => '1'
+		);
+
+		$this->m_admin->simpanMapel($data, 'matapelajaran');
+		redirect('c_admin/mapel');
+	}
+	function mapel()
+	{
+		$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
+		$this->load->view('v_dataMapel', $data);
+	}
+	function editMapel($idMapel)
+	{
+		$data['editMapel'] = $this->m_admin->editMapel($idMapel)->result();
+		$this->load->view('v_editMapel', $data);
+	}
+	function updateMapel()
+	{
+		$idMapel = $this->input->post('idMapel');
+		$mapel = $this->input->post('mapel');
+		$tahunAjaran = $this->input->post('tahunAjaran');
+		$where = array('idMapel' => $idMapel );
+
+		$data = array(
+			'idMapel' => $idMapel,
+			'namaMapel' => $mapel,
+			'idTahunAjaran' => $tahunAjaran,
+		);
+
+		$this->m_admin->updateMapel($where, $data, 'matapelajaran');
+		redirect('c_admin/mapel');
+	}
+	function statusMapel($idMapel)
+	{
+		$data = array('statusMapel' => 0, );
+		$where = array('idMapel' => $idMapel, );
+
+		$this->m_admin->statusMapel($where, $data, 'matapelajaran');
+		redirect ('c_admin/mapel');
+	}
 
 	//jadwal
 

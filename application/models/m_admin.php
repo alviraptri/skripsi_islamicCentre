@@ -1,6 +1,20 @@
 <?php
 class m_admin extends CI_Model
 {
+
+    function thnAjaran()
+    {
+        return $this->db->get('tahunajaran');
+    }
+    function mapel()
+    {
+        return $this->db->get('matapelajara');
+    }
+    function kelas()
+    {
+        return $this->db->get('kelas');
+    }
+    
     //Guru
     function tampilkanDataGuru($where)
     {
@@ -60,6 +74,45 @@ class m_admin extends CI_Model
     function simpanSiswa($data, $table)
     {
         $this->db->insert($table, $data);
+    }
+    function statusSiswa($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
+
+    //Mata Pelajaran
+    function tampilkanDataMapel()
+    {
+        $this->db->select('matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.statusMapel, tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran')
+        ->from('matapelajaran')
+        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = matapelajaran.idTahunAjaran');
+
+        return $this->db->get();
+    }
+    function simpanMapel($data, $table)
+    {
+        $this->db->insert($table, $data);
+    }
+    function editMapel($idMapel)
+    {
+        $query = $this->db->query('SELECT matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.statusMapel, 
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran 
+        FROM matapelajaran 
+        INNER JOIN tahunajaran ON tahunajaran.idTahunAjaran = matapelajaran.idTahunAjaran 
+        WHERE matapelajaran.idMapel="'.$idMapel.'"');
+
+        return $query;
+    }
+    function updateMapel($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table,$data);
+    }
+    function statusMapel($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
     }
 }
 

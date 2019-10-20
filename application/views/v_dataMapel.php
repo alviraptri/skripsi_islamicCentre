@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-  <title>Siswa | Information Academic Islamic Centre</title>
+  <title>Mata Pelajaran | Information Academic Islamic Centre</title>
 
   <!-- Bootstrap -->
   <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -59,9 +59,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Data Siswa</h2>
+                  <h2>Data Mata Pelajaran</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li> <a href="<?php echo base_url('c_admin/tambahSiswa'); ?>"><button type="submit" class="btn btn-primary">Tambah Siswa</button></a>
+                    <li> <a href="<?php echo base_url('c_admin/tambahMapel'); ?>"><button type="submit" class="btn btn-primary">Tambah Mata Pelajaran</button></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -70,25 +70,21 @@
                   <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                       <tr>
-                        <th>Foto Profil</th>
-                        <th>Nomor Induk</th>
-                        <th>Nama</th>
-                        <th>Kelas</th>
+                        <th>#</th>
+                        <th>Mata Pelajaran</th>
                         <th>Tahun Ajaran</th>
                         <th>Status</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($siswa as $listSiswa) {?>
+                      <?php foreach ($mapel as$listMapel) {?>
                         <tr>
-                          <td><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $listSiswa->gambar ?>" alt=""></td>
-                          <td><?php echo $listSiswa->nomorInduk ?></td>
-                          <td><?php echo $listSiswa->namaUser ?></td>
-                          <td><?php echo $listSiswa->ketKelas?> <?php echo $listSiswa->jurusanKelas?></td>
-                          <td><?php echo $listSiswa->tahunAjaran ?></td>
+                        <td><?php echo$listMapel->idMapel ?></td>
+                          <td><?php echo$listMapel->namaMapel ?></td>
+                          <td><?php echo$listMapel->tahunAjaran ?></td>
                           <td><?php
-                                if ($listSiswa->statusSiswa == 1) { ?>
+                                if ($listMapel->statusMapel == 1) { ?>
                               <button class="btn btn-success btn-xs">Aktif</button>
                             <?php } else { ?>
                               <button class="btn btn-danger btn-xs">Tidak Aktif</button>
@@ -96,34 +92,13 @@
                               ?></td>
                           <td>
                             <?php
-                              if ($listSiswa->statusSiswa == 1) { ?>
-                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listSiswa->nomorInduk ?>">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                              </button>
-                              <?php
-                                  $data = array(
-                                    'gambar' => $listSiswa->gambar,
-                                    'nomorInduk' => $listSiswa->nomorInduk,
-                                    'namaUser' => $listSiswa->namaUser,
-                                    'ttlUser' => $listSiswa->ttlUser,
-                                    'emailUser' => $listSiswa->emailUser,
-                                    'noTelp' => $listSiswa->noTelp,
-                                    'alamatUser' => $listSiswa->alamatUser,
-                                    'jenisKelamin' => $listSiswa->jenisKelamin,
-                                    'statusSiswa' => $listSiswa->statusSiswa,
-                                    'ketKelas' => $listSiswa->ketKelas,
-                                    'jurusanKelas' => $listSiswa->jurusanKelas,
-                                    'tahunAjaran' => $listSiswa->tahunAjaran
-                                  );
-                                  $this->load->view("v_modalSiswa", $data);
-                                  ?>
-
-                              <a href="<?php echo base_url('c_admin/editSiswa/') . $listSiswa->nomorInduk; ?>">
+                              if ($listMapel->statusMapel == 1) { ?>
+                              <a href="<?php echo base_url('c_admin/editMapel/') .$listMapel->idMapel; ?>">
                                 <button data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
                                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                               </a>
-                              <a href="<?php echo base_url('c_admin/statusSiswa/') . $listSiswa->nomorInduk; ?>">
+                              <a href="<?php echo base_url('c_admin/statusMapel/') .$listMapel->idMapel; ?>">
                                 <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </button>

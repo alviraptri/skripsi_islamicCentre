@@ -35,7 +35,7 @@
             <td><?php echo "Perempuan";?></td> 
             <?php }
           ?>
-                  <td rowspan="2"><img src="<?php echo base_url(); ?>assets/inter/images/<?php echo $gambar ?>" alt=""></td>
+                  <td rowspan="2"><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $gambar ?>" alt=""></td>
           </tr>
           <tr>
             <td>Email</td>

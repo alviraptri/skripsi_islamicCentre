@@ -10,7 +10,7 @@
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <?php $rows = $this->db->query("SELECT * FROM user where nomorInduk='" . $this->session->nomorInduk . "'")->row_array(); ?>
-            <img src="<?php echo base_url(); ?>assets/inter/images/<?php echo $rows['gambar'] ?>" alt=""><?php echo $this->session->namaUser; ?>
+            <img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $rows['gambar'] ?>" alt=""><?php echo $this->session->namaUser; ?>
             <span class=" fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
