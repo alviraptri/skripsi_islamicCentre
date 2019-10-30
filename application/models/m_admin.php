@@ -139,6 +139,40 @@ class m_admin extends CI_Model
         $this->db->where($where);
         $this->db->update($table,$data);
     }
+
+    //jadwal
+    function simpanJadwal($data, $table)
+    {
+        $this->db->insert($table, $data);
+    }
+    function tampilkanDataJadwal()
+    {
+        $this->db->select('jadwal.idJadwal, jadwal.idKelas, jadwal.nomorInduk, jadwal.idMapel, jadwal.hari, jadwal.jamMulai, 
+        jadwal.jamSelesai, jadwal.statusJadwal, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, 
+        user.nomorInduk, user.userRole, user.namaUser, matapelajaran.idMapel, matapelajaran.namaMapel, 
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran')
+        ->from('jadwal')
+        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
+        ->join('user', 'user.nomorInduk = jadwal.nomorInduk', 'inner' )
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
+        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = jadwal.idTahunAjaran');
+
+        return $this->db->get();
+    }
+    function editJadwal($idJadwal)
+    {
+        $query = $this->db->query('SELECT jadwal.idJadwal, jadwal.idKelas, jadwal.nomorInduk, jadwal.idMapel, jadwal.hari, 
+        jadwal.jamMulai, jadwal.jamSelesai, jadwal.statusJadwal, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, 
+        kelas.nomorKelas, user.nomorInduk, user.userRole, user.namaUser, matapelajaran.idMapel, matapelajaran.namaMapel, 
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran 
+        FROM `jadwal` 
+        INNER JOIN kelas ON kelas.idKelas = jadwal.idKelas 
+        INNER JOIN user ON user.nomorInduk = jadwal.nomorInduk 
+        INNER JOIN matapelajaran ON matapelajaran.idMapel = jadwal.idMapel 
+        INNER JOIN tahunajaran ON tahunajaran.idTahunAjaran = jadwal.idTahunAjaran
+        WHERE jadwal.idMapel="'.$idJadwal.'"');
+        return $query;
+    }
 }
 
 ?>

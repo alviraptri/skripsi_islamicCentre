@@ -46,7 +46,7 @@
         </li>
         <li><a><i class="fa fa-calendar"></i> Jadwal <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="<a href="">Data Jadwal</a></li>
+            <li><a href="<?php echo base_url('c_admin/jadwal'); ?>">Data Jadwal</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahJadwal'); ?>">Tambah Jadwal</a></li>
           </ul>
         </li>
@@ -58,7 +58,7 @@
         </li>
         <li><a><i class="fa fa-institution"></i> Kelas <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="<a href="">Data Kelas</a></li>
+            <li><a href="<?php echo base_url('c_admin/kelas'); ?>">Data Kelas</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahKelas'); ?>">Tambah Kelas</a></li>
           </ul>
         </li>

@@ -294,7 +294,83 @@ class c_admin extends CI_Controller
 		$data['kls'] = $this->m_admin->kelas()->result();
 		$data['mapel'] = $this->m_admin->mapel()->result();
 		$data['guru'] = $this->m_admin->guru()->result();
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
 		$this->load->view('v_tambahJadwal', $data);
+	}
+	function simpanJadwal()
+	{
+		$idkelas = $this->input->post('kelas');
+		$tahunAjaran = $this->input->post('tahunAjaran');
+		$nomorInduk = $this->input->post('guru');
+		$idMapel = $this->input->post('mapel');
+		$hari = $this->input->post('hari');
+		$jamMulai = $this->input->post('jamMulai');
+		$jamSelesai = $this->input->post('jamSelesai');
+
+		$data = array(
+			'idJadwal' => "",
+			'idKelas' => $idkelas,
+			'idTahunAjaran' => $tahunAjaran,
+			'nomorInduk' => $nomorInduk, 
+			'idMapel' => $idMapel,
+			'hari' => $hari,
+			'jamMulai' => $jamMulai,
+			'jamSelesai' => $jamSelesai,
+			'statusJadwal' => 1
+		);
+
+		$this->m_admin->simpanJadwal($data, 'jadwal');
+		redirect('c_admin/jadwal');
+	}
+	function jadwal()
+	{
+		$data['jadwal'] = $this->m_admin->tampilkanDataJadwal()->result();
+		$this->load->view('v_dataJadwal', $data);
+	}
+	function editJadwal($idJadwal)
+	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$data['mapel'] = $this->m_admin->mapel()->result();
+		$data['guru'] = $this->m_admin->guru()->result();
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$data['editJadwal'] = $this->m_admin->editJadwal($idJadwal)->result();
+		$this->load->view('v_editJadwal', $data);
+	}
+	function updateJadwal()
+	{
+		$idJadwal = $this->input->post('idJadwal');
+		$idkelas = $this->input->post('kelas');
+		$tahunAjaran = $this->input->post('tahunAjaran');
+		$nomorInduk = $this->input->post('guru');
+		$idMapel = $this->input->post('mapel');
+		$hari = $this->input->post('hari');
+		$jamMulai = $this->input->post('jamMulai');
+		$jamSelesai = $this->input->post('jamSelesai');
+
+		$where = array('idJadwal' => $idJadwal );
+
+		$data = array(
+			'idJadwal' => "",
+			'idKelas' => $idkelas,
+			'idTahunAjaran' => $tahunAjaran,
+			'nomorInduk' => $nomorInduk, 
+			'idMapel' => $idMapel,
+			'hari' => $hari,
+			'jamMulai' => $jamMulai,
+			'jamSelesai' => $jamSelesai,
+			'statusJadwal' => 1
+		);
+
+		$this->m_admin->updateSiswa($where, $data, 'jadwal');
+		redirect('c_admin/jadwal');
+	}
+	function statusJadwal($idJadwal)
+	{
+		$data = array('statusJadwal' => 0, );
+		$where = array('idJadwal' => $idJadwal, );
+
+		$this->m_admin->statusMapel($where, $data, 'jadwal');
+		redirect ('c_admin/jadwal');
 	}
 
 	//tahun ajaran

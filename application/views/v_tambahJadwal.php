@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Jadwa | Information Academic Islamic Centre</title>
+    <title>Jadwal | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -88,7 +88,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Jam Selesai <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="time" id="email" name="jamSelesai" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="time" id="time" name="jamSelesai" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         
@@ -96,7 +96,7 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Mata Pelajaran <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="tahunAjaran" class="select2_single form-control">
+                                                <select name="mapel" class="select2_single form-control">
                                                 <?php foreach ($mapel as $dmapel) {?>
                                                     <option value="<?= $dmapel->idMapel ?>"><?= $dmapel->namaMapel ?></option>
                                                 <?php } ?>
@@ -111,7 +111,8 @@
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select name="guru" class="select2_single form-control">
                                                 <?php foreach ($guru as $dguru) {
-                                                    if ($dguru->userRole == 'Guru') {?>
+                                                    if ($dguru->userRole == 'Guru') {
+                                                        echo $dguru->nomorInduk;?>
                                                         <option value="<?= $dguru->nomorInduk ?>"><?= $dguru->namaUser ?></option>
                                                         <?php }
                                                     }?>
@@ -124,9 +125,21 @@
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Kelas <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="guru" class="select2_single form-control">
+                                                <select name="kelas" class="select2_single form-control">
                                                 <?php foreach ($kls as $dkelas) {?>
-                                                    <option value="<?= $dkelas->idKelas ?>"><?= $dkelas->ketKelas ?> <?= $dkelas->jurusanKelas ?></option>
+                                                    <option value="<?= $dkelas->idKelas ?>"><?= $dkelas->ketKelas ?> <?= $dkelas->jurusanKelas ?> <?= $dkelas->nomorKelas?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="tahunAjaran" class="select2_single form-control">
+                                                <?php foreach ($ta as $dta) {?>
+                                                    <option value="<?= $dta->idTahunAjaran ?>"><?= $dta->tahunAjaran ?></option>
                                                     <?php }?>
                                                 </select>
                                             </div>

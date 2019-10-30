@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Mata Pelajaran | Information Academic Islamic Centre</title>
+    <title>Jadwal | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Mata Pelajaran</h3>
+                            <h3>Jadwal</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -56,33 +56,122 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tambah Siswa</h2>
+                                    <h2>Edit Jadwal</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
 
-                                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/simpanMapel'; ?>">
-
+                                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/updateJadwal'; ?>">
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Mata Pelajaran <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomorInduk"># <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" id="email" name="mapel" required="required" class="form-control col-md-7 col-xs-12">
+                                            <?php foreach ($editJadwal as $jadwal) { ?>
+                                                <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="idJadwal" required="required" type="text" value="<?= $jadwal->idJadwal ?>" readonly>
+                                                    <?php } ?>
+                                                
                                             </div>
                                         </div>
-                                        
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Hari<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="hari" class="select2_single form-control">
+                                                    <?php foreach ($editJadwal as $jadwal) { ?>
+                                                        <option value="<?= $jadwal->hari ?>"> <?= $jadwal->hari ?> </option>
+                                                    <?php } ?>
+                                                    <option value="Senin"> Senin </option>
+                                                    <option value="Selasa"> Selas </option>
+                                                    <option value="Rabu"> Rabu </option>
+                                                    <option value="Kamis"> Kamis </option>
+                                                    <option value="Jumat"> Jum'at </option>
+                                                    <option value="Sabtu"> Sabtu </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Jam Mulai <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="time" id="email" name="jamMulai" required="required" class="form-control col-md-7 col-xs-12" value="<?= $jadwal->jamMulai ?>">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Jam Selesai <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="time" id="time" name="jamSelesai" required="required" class="form-control col-md-7 col-xs-12" value="<?= $jadwal->jamSelesai ?>">
+                                            </div>
+                                        </div>
+
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Mata Pelajaran <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="mapel" class="select2_single form-control">
+                                                    <?php foreach ($editJadwal as $jadwal) { ?>
+                                                        <option value="<?= $jadwal->idMapel ?>"> <?= $jadwal->namaMapel ?> </option>
+                                                    <?php } ?>
+                                                    <?php foreach ($mapel as $dmapel) { ?>
+                                                        <option value="<?= $dmapel->idMapel ?>"><?= $dmapel->namaMapel ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Guru <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="guru" class="select2_single form-control">
+                                                    <?php foreach ($editJadwal as $jadwal) {
+                                                        if ($jadwal->userRole == 'Guru') {
+                                                            echo $jadwal->nomorInduk; ?>
+                                                            <option value="<?= $jadwal->nomorInduk ?>"> <?= $jadwal->namaUser ?> </option>
+                                                            <?php }
+                                                            } ?>?>
+                                                            <?php foreach ($guru as $dguru) {
+                                                                if ($dguru->userRole == 'Guru') {
+                                                                    echo $dguru->nomorInduk; ?>
+                                                                    <option value="<?= $dguru->nomorInduk ?>"><?= $dguru->namaUser ?></option>
+                                                            <?php }
+                                                            } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Kelas <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="kelas" class="select2_single form-control">
+                                                    <?php foreach ($editJadwal as $jadwal) { ?>
+                                                        <option value="<?= $jadwal->idKelas ?>"><?= $jadwal->ketKelas ?> <?= $jadwal->jurusanKelas ?> <?= $jadwal->nomorKelas ?></option>
+                                                    <?php } ?>
+                                                    <?php foreach ($kls as $dkelas) { ?>
+                                                        <option value="<?= $dkelas->idKelas ?>"><?= $dkelas->ketKelas ?> <?= $dkelas->jurusanKelas ?> <?= $dkelas->nomorKelas ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <select name="tahunAjaran" class="select2_single form-control">
-                                                <?php foreach ($ta as $data) {?>
-                                                    <option value="<?= $data->idTahunAjaran ?>"><?= $data->tahunAjaran ?></option>
-                                                    <?php }?>
+                                                    <?php foreach ($editJadwal as $jadwal) { ?>
+                                                        <option value="<?= $jadwal->idTahunAjaran ?>"><?= $jadwal->tahunAjaran ?></option>
+                                                    <?php } ?>
+                                                    <?php foreach ($ta as $dta) { ?>
+                                                        <option value="<?= $dta->idTahunAjaran ?>"><?= $dta->tahunAjaran ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
