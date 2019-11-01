@@ -26,28 +26,18 @@
     <div class="menu_section">
       <ul class="nav side-menu">
         <li><a href="<?php echo base_url('c_admin/index'); ?>"><i class="fa fa-home"></i> Beranda</a></li>
-        <li><a><i class="fa fa-user"></i> Guru <span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-user"></i> Pegawai <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/admin'); ?>">Data Admin</a></li>
             <li><a href="<?php echo base_url('c_admin/guru'); ?>">Data Guru</a></li>
-            <li><a href="<?php echo base_url('c_admin/tambahGuru'); ?>">Tambah Guru</a></li>
+            <li><a href="<?php echo base_url('c_admin/guru'); ?>">Data Wali Kelas</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahGuru'); ?>">Tambah Pegawai</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-graduation-cap"></i> Siswa <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="<?php echo base_url('c_admin/siswa'); ?>">Data Siswa</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahSiswa'); ?>">Tambah Siswa</a></li>
-          </ul>
-        </li>
-        <li><a><i class=" fa fa-bookmark-o"></i> Mata Pelajaran <span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="<?php echo base_url('c_admin/mapel'); ?>">Data Mata Pelajaran</a></li>
-            <li><a href="<?php echo base_url('c_admin/tambahMapel'); ?>">Tambah Mata Pelajaran</a></li>
-          </ul>
-        </li>
-        <li><a><i class="fa fa-calendar"></i> Jadwal <span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="<?php echo base_url('c_admin/jadwal'); ?>">Data Jadwal</a></li>
-            <li><a href="<?php echo base_url('c_admin/tambahJadwal'); ?>">Tambah Jadwal</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-list-alt"></i> Tahun Ajaran <span class="fa fa-chevron-down"></span></a>
@@ -60,6 +50,18 @@
           <ul class="nav child_menu">
             <li><a href="<?php echo base_url('c_admin/kelas'); ?>">Data Kelas</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahKelas'); ?>">Tambah Kelas</a></li>
+          </ul>
+        </li>
+        <li><a><i class=" fa fa-bookmark-o"></i> Mata Pelajaran <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/mapel'); ?>">Data Mata Pelajaran</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahMapel'); ?>">Tambah Mata Pelajaran</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-calendar"></i> Jadwal <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/jadwal'); ?>">Data Jadwal</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahJadwal'); ?>">Tambah Jadwal</a></li>
           </ul>
         </li>
       </ul>

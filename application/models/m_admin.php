@@ -6,6 +6,9 @@ class m_admin extends CI_Model
     {
         return $this->db->get('tahunajaran');
     }
+
+    
+
     
     //Guru
     function tampilkanDataGuru($where)
@@ -33,6 +36,10 @@ class m_admin extends CI_Model
     function guru()
     {
         return $this->db->get('user');
+    }
+    function getKelas()
+    {
+        return $this->db->get('kelas');
     }
 
     //Siswa

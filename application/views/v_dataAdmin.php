@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-  <title>Guru | Information Academic Islamic Centre</title>
+  <title>Admin | Information Academic Islamic Centre</title>
 
   <!-- Bootstrap -->
   <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Guru</h3>
+              <h3>Admin</h3>
             </div>
           </div>
 
@@ -59,7 +59,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Data Guru</h2>
+                  <h2>Data Admin</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li> <a href="<?php echo base_url('c_admin/tambahGuru'); ?>"><button type="submit" class="btn btn-primary">Tambah Data</button></a>
                     </li>
@@ -80,15 +80,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($dataGuru as $listGuru) { ?>
+                      <?php foreach ($dataAdmin as $listAdmin) { ?>
                         <tr>
-                          <td><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $listGuru->gambar ?>" alt=""></td>
-                          <td><?php echo $listGuru->nomorInduk ?></td>
-                          <td><?php echo $listGuru->namaUser ?></td>
-                          <td><?php echo $listGuru->emailUser ?></td>
-                          <td><?php echo $listGuru->noTelp ?></td>
+                          <td><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $listAdmin->gambar ?>" alt=""></td>
+                          <td><?php echo $listAdmin->nomorInduk ?></td>
+                          <td><?php echo $listAdmin->namaUser ?></td>
+                          <td><?php echo $listAdmin->emailUser ?></td>
+                          <td><?php echo $listAdmin->noTelp ?></td>
                           <td><?php
-                                if ($listGuru->statusUser == 1) { ?>
+                                if ($listAdmin->statusUser == 1) { ?>
                               <button class="btn btn-success btn-xs">Aktif</button>
                             <?php } else { ?>
                               <button class="btn btn-danger btn-xs">Tidak Aktif</button>
@@ -96,35 +96,42 @@
                               ?></td>
                           <td>
                             <?php
-                              if ($listGuru->statusUser == 1) { ?>
-                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listGuru->nomorInduk ?>">
+                              if ($listAdmin->statusUser == 1) { ?>
+                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listAdmin->nomorInduk ?>">
                                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                               </button>
                               <?php
                                   $data = array(
-                                    'gambar' => $listGuru->gambar,
-                                    'nomorInduk' => $listGuru->nomorInduk,
-                                    'namaUser' => $listGuru->namaUser,
-                                    'ttlUser' => $listGuru->ttlUser,
-                                    'emailUser' => $listGuru->emailUser,
-                                    'noTelp' => $listGuru->noTelp,
-                                    'alamatUser' => $listGuru->alamatUser,
-                                    'jenisKelamin' => $listGuru->jenisKelamin,
-                                    'statusUser' => $listGuru->statusUser
+                                    'gambar' => $listAdmin->gambar,
+                                    'nomorInduk' => $listAdmin->nomorInduk,
+                                    'namaUser' => $listAdmin->namaUser,
+                                    'ttlUser' => $listAdmin->ttlUser,
+                                    'emailUser' => $listAdmin->emailUser,
+                                    'noTelp' => $listAdmin->noTelp,
+                                    'alamatUser' => $listAdmin->alamatUser,
+                                    'jenisKelamin' => $listAdmin->jenisKelamin,
+                                    'statusUser' => $listAdmin->statusUser
                                   );
-                                  $this->load->view("v_modalGuru", $data);
+                                  $this->load->view("v_modalAdmin", $data);
                                   ?>
 
-                              <a href="<?php echo base_url('c_admin/editGuru/') . $listGuru->nomorInduk; ?>">
+                              <a href="<?php echo base_url('c_admin/editAdmin/') . $listAdmin->nomorInduk; ?>">
                                 <button data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
                                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                               </a>
-                              <a href="<?php echo base_url('c_admin/statusGuru/') . $listGuru->nomorInduk; ?>">
+                              <?php if($listAdmin->nomorInduk == $this->session->nomorInduk){?>
+                                <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" disabled>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </button>
+                              <?php }
+                               else{?>
+                              <a href="<?php echo base_url('c_admin/statusAdmin/') . $listAdmin->nomorInduk; ?>">
                                 <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </button>
                               </a>
+                                <?php }?>
                             <?php } else { ?>
                               <button data-toggle="tooltip" title="Edit" class="pd-setting-ed" disabled>
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

@@ -21,6 +21,47 @@ class c_admin extends CI_Controller
 	- Mata Pelajaran: 234-288
 	- Jadwal:  */
 
+	//admin
+	function admin()
+	{
+		$where = array('userRole' => 'Admin' );
+		$data['dataAdmin'] = $this->m_admin->tampilkanDataGuru($where)->result();
+		$this->load->view("v_dataAdmin", $data);
+	}
+	function editAdmin($idAdmin)
+	{
+		$where = array('nomorInduk' => $idAdmin);
+		$data['editAdmin'] = $this->m_admin->editGuru($where,'user')->result();
+		$this->load->view('v_editAdmin', $data);
+	}
+	function updateAdmin()
+	{
+		$noInduk = $this->input->post('nomorInduk');
+		$nama = $this->input->post('nama');
+		$ttl = $this->input->post('ttl');
+		$email = $this->input->post('email');
+		$noTelp = $this->input->post('noTelp');
+		$alamat = $this->input->post('alamat');
+		$jk = $this->input->post('jk');
+		$userRole = $this->input->post('role');
+
+		$tgl = date('Y-m-d', strtotime($ttl));
+
+		$data = array(
+			'nomorInduk' => $noInduk,
+			'userRole' => $userRole,
+			'namaUser' => $nama,
+			'ttlUser' => $tgl,
+			'emailUser' => $email,
+			'noTelp' => $noTelp,
+			'alamatUser' => $alamat,
+			'jenisKelamin' => $jk 
+		);
+		$where = array('nomorInduk' => $noInduk);
+		$this->m_admin->updateGuru($where, $data, 'user');
+		redirect('c_admin/admin');
+	}
+
 	//Guru
 	function guru()
 	{
@@ -83,7 +124,8 @@ class c_admin extends CI_Controller
 		$jk = $this->input->post('jk');
 		$pass = $this->input->post('pass');
 		$userRole = $this->input->post('role');
-		$photo = $this->input->post('photo');
+		$photo = $this->input->post('image');
+		$photo = $this->_uploadImage();
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
@@ -101,13 +143,34 @@ class c_admin extends CI_Controller
 			'statusUser' => 1 
 		);
 
-		if(!empty($_FILES['photo']['name'])){
-			$upload = $this->uploadFoto();
-			$data['photo'] = $upload;
-		}
-
 		$this->m_admin->simpanGuru($data, 'user');
 		redirect('c_admin/guru');
+	}
+	function getKelas()
+	{
+		$data = $this->m_admin->getKelas()->result();
+		echo json_encode($data);
+	}
+
+	//gambar
+	function _uploadImage()
+	{
+		$config = array(
+			'upload_path' => 'assets/inter/images/profil/',
+			'allowed_types' => "gif|jpg|png|jpeg|pdf",
+			'overwrite' => TRUE,
+			'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+			'max_height' => "768",
+			'max_width' => "1024"
+		);
+		
+		$this->load->library('upload', $config);
+
+		if($this->upload->do_upload('image')){
+			return $this->upload->data('file_name');
+        }
+        
+        return "default.jpg";
 	}
 
 	//siswa
@@ -211,25 +274,6 @@ class c_admin extends CI_Controller
 		$this->m_admin->statusSiswa($where, $dataSiswa, 'dataSiswa');
 		$this->m_admin->statusSiswa($where, $dataUser, 'user');
 		redirect ('c_admin/siswa');
-	}
-
-	//gambar
-	private function uploadFoto()
-	{
-		$config['upload_path'] = 'assets/inter/images/profil/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['file_name'] = round(microtime(true)*1000);
-		$config['overwrite'] = true;
-		$config['max_size'] = 2048;
-
-		$this->load->library('upload', $config);
-
-		if(!$this->upload->do_upload('photo')){
-			$this->session->set_flashdata('msg', $this->upload->display_errors('',''));
-			redirect('c_admin/index');
-		}
-
-		return $this->upload->data('file_name');
 	}
 
 	//mata pelajaran

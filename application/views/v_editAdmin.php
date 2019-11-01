@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Guru | Information Academic Islamic Centre</title>
+    <title>Admin | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Guru</h3>
+                <h3>Admin</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -55,70 +55,69 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Tambah Guru</h2>
+                    <h2>Edit Admin</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
 
-                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/simpanGuru'; ?>">
+                  <?php foreach ($editAdmin as $edit) { ?>
+                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/updateAdmin'; ?>">
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomorInduk">Nomor Induk <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nomorInduk" required="required" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomorInduk">Kata Sandi <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pass" required="required" type="text">
+                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nomorInduk" required="required" type="text" value="<?= $edit->nomorInduk ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="email" name="nama" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="email" name="nama" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->namaUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ttl">Tanggal Lahir <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="email" name="ttl" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="date" id="email" name="ttl" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->ttlUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->emailUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="noTelp">Nomor Telephone <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="email2" name="noTelp" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="email2" name="noTelp" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->noTelp ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Alamat <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="textarea" required="required" name="alamat" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea id="textarea" required="required" name="alamat" class="form-control col-md-7 col-xs-12"><?= $edit->alamatUser ?></textarea>
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jk">Jenis Kelamin <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jk">Jenis Kelamin<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="jk" class="select2_single form-control">
-                            <option></option>
-                            <option value="0"> Perempuan </option>
-                            <option value="1"> Laki-Laki</option>
+                          <?php
+                            if ($edit->jenisKelamin == 1) { ?>
+                            <option value="1">Laki-Laki</option>
+                            <?php } else { ?>
+                              <option value="0">Perempuan</option>
+                              <?php } ?>
+                              <option value="1">Laki-Laki</option>
+                              <option value="0">Perempuan</option>
                           </select>
                         </div>
                       </div>
@@ -126,28 +125,12 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userRole">Profesi <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="role" id="role" class="select2_single form-control">
-                            <option></option>
-                            <option value="Guru"> Admin </option>
-                            <option value="Guru"> Guru </option>
-                            <option value="Guru"> Wali Kelas </option>
+                          <select name="role" class="select2_single form-control">
+                          <?php
+                          if ($edit->userRole == Admin) { ?>
+                          <option value="Admin">Admin</option>
+                          <?php } ?>
                           </select>
-                        </div>
-                      </div>
-                      <!-- <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userRole">Kelas <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="kelas" id="kelas" class="select2_single form-control">
-                            <option></option>
-                          </select>
-                        </div>
-                      </div> -->
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userRole">Foto Profil <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" name="image">
                         </div>
                       </div>
                       
@@ -158,6 +141,7 @@
                         </div>
                       </div>
                     </form>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
@@ -174,29 +158,6 @@
       </div>
     </div>
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $('#role').change(function(){
-        var id=$(this).val();
-        $.ajax({
-          url : "<?php echo site_url('c_admin/getKelas');?>",
-          method : "POST",
-          data : {id: id},
-          async : true,
-          dataType : 'json',
-          success : function(data){
-            var html = "";
-            var i;
-            for(i=0 ; i<data.length; i++){
-              html += '<option value='+data[i].idKelas+'>'+data[i].ketKelas+' '+data[i].jurusanKelas+' '+data[i].nomorKelas+'</option>';
-            }
-            $('#kelas').html(html);
-          }
-        });
-        return false;
-      });
-    });
-    </script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
