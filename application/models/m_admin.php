@@ -4,42 +4,51 @@ class m_admin extends CI_Model
 
     function thnAjaran()
     {
-        return $this->db->get('tahunajaran');
+        $this->db->select('idTahunAjaran, tahunAjaran, statusTahunAjaran')
+        ->from('tahunajaran')
+        ->where('statusTahunAjaran = 1');
+        return $this->db->get();
     }
 
-    
+    function profil()
+    {
+        $this->db->select('nomorInduk, userRole, namaUser, ttlUser, emailUser, noTelp, alamatUser, 
+        jenisKelamin, gambar, statusUser')
+        ->from('user')
+        ->where('userRole = "Admin"')
+        ->where('nomorInduk = "'.$this->session->nomorInduk.'"');
+        return $this->db->get();
+    }
 
-    
-    //Guru
-    function tampilkanDataGuru($where)
+    function simpanData($data, $table)
     {
-        return $this->db->get_where('user', $where);
+        $this->db->insert($table, $data);
     }
-    function editGuru($where, $table)
-    {
-        return $this->db->get_where($table, $where);
-    }
-    function updateGuru($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table,$data);
-    }
-    function statusGuru($where, $data, $table)
+    function statusData($where, $data, $table)
     {
         $this->db->where($where);
         $this->db->update($table, $data);
     }
-    function simpanGuru($data, $table)
+    function updateData($where, $data, $table)
     {
-        $this->db->insert($table, $data);
+        $this->db->where($where);
+        $this->db->update($table,$data);
+    }
+    function editData($where, $table)
+    {
+        return $this->db->get_where($table, $where);
+    }
+    
+
+    
+    //Guru
+    function tampilkanDataPegawai($where)
+    {
+        return $this->db->get_where('user', $where);
     }
     function guru()
     {
         return $this->db->get('user');
-    }
-    function getKelas()
-    {
-        return $this->db->get('kelas');
     }
 
     //Siswa
@@ -52,7 +61,8 @@ class m_admin extends CI_Model
         ->from('dataSiswa')
         ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
         ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner' )
-        ->join('tahunAjaran', 'tahunAjaran.idTahunAjaran = dataSiswa.idTahunAjaran');
+        ->join('tahunAjaran', 'tahunAjaran.idTahunAjaran = dataSiswa.idTahunAjaran')
+        ->where('dataSiswa.statusSiswa = 1');
 
         return $this->db->get();
     }
@@ -61,7 +71,7 @@ class m_admin extends CI_Model
         $query = $this->db->query('SELECT user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, 
         user.alamatUser, user.jenisKelamin, datasiswa.nomorInduk, datasiswa.idKelas, datasiswa.idTahunAjaran, 
         datasiswa.statusSiswa, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, tahunajaran.idTahunAjaran, 
-        tahunajaran.tahunAjaran, kelas.nomorKelas 
+        tahunajaran.tahunAjaran, kelas.nomorKelas, user.gambar
         FROM `dataSiswa` 
         INNER JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
         INNER JOIN kelas ON kelas.idKelas = datasiswa.idKelas 
@@ -69,19 +79,9 @@ class m_admin extends CI_Model
         WHERE datasiswa.nomorInduk="'.$idSiswa.'"');
         return $query;
     }
-    function updateSiswa($where, $data, $table)
+    function selectSiswa($where, $table)
     {
-        $this->db->where($where);
-        $this->db->update($table,$data);
-    }
-    function simpanSiswa($data, $table)
-    {
-        $this->db->insert($table, $data);
-    }
-    function statusSiswa($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table, $data);
+        return $this->db->get_where($table, $where);
     }
 
     //Mata Pelajaran

@@ -1,4 +1,3 @@
-<html>
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
     <a href="<?php echo base_url('c_admin/index'); ?>" class="site_title"><span style="font-size:18px">SMA ISLAMIC CENTRE</span></a>
@@ -30,8 +29,8 @@
           <ul class="nav child_menu">
             <li><a href="<?php echo base_url('c_admin/admin'); ?>">Data Admin</a></li>
             <li><a href="<?php echo base_url('c_admin/guru'); ?>">Data Guru</a></li>
-            <li><a href="<?php echo base_url('c_admin/guru'); ?>">Data Wali Kelas</a></li>
-            <li><a href="<?php echo base_url('c_admin/tambahGuru'); ?>">Tambah Pegawai</a></li>
+            <li><a href="<?php echo base_url('c_admin/waliKelas'); ?>">Data Wali Kelas</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahPegawai'); ?>">Tambah Pegawai</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-graduation-cap"></i> Siswa <span class="fa fa-chevron-down"></span></a>
@@ -42,8 +41,8 @@
         </li>
         <li><a><i class="fa fa-list-alt"></i> Tahun Ajaran <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="<a href="">Data Tahun Ajaran</a></li>
-            <li><a href=" <a href="">Tambah Tahun Ajaran</a></li>
+            <li><a href="<?php echo base_url('c_admin/tahunAjaran'); ?>">Data Tahun Ajaran</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahThnAjaran'); ?>">Tambah Tahun Ajaran</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-institution"></i> Kelas <span class="fa fa-chevron-down"></span></a>
@@ -64,10 +63,14 @@
             <li><a href="<?php echo base_url('c_admin/tambahJadwal'); ?>">Tambah Jadwal</a></li>
           </ul>
         </li>
+        <li><a><i class="fa fa-calendar"></i> Informasi SPP <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="">Data Informasi</a></li>
+            <li><a href="">Tambah Informasi</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
   <!-- /sidebar menu -->
 </div>
-
-</html>

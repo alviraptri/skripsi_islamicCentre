@@ -1,88 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <title>Admin | Information Academic Islamic Centre</title>
 
-  <title>Admin | Information Academic Islamic Centre</title>
+    <!-- Bootstrap -->
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
-  <!-- Bootstrap -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- NProgress -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
-  <!-- iCheck -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+  </head>
 
-  <!-- bootstrap-progressbar -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-  <!-- JQVMap -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-  <!-- bootstrap-daterangepicker -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-  <!-- Custom Theme Style -->
-  <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
-</head>
-
-<body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col">
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
         <?php include("view-sidebar.php") ?>
-      </div>
+        </div>
 
-      <!-- top navigation -->
-      <?php include("view-topNavigation.php") ?>
-      <!-- /top navigation -->
+        <!-- top navigation -->
+        <?php include("view-topNavigation.php") ?>
+        <!-- /top navigation -->
 
-      <!-- page content -->
-      <div class="right_col" role="main">
-        <div class="">
-          <div class="page-title">
-            <div class="title_left">
-              <h3>Admin</h3>
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Admin</h3>
+              </div>
             </div>
-          </div>
 
-          <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-          <div class="row">
-
-            <!--responsive-->
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Data Admin</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li> <a href="<?php echo base_url('c_admin/tambahGuru'); ?>"><button type="submit" class="btn btn-primary">Tambah Data</button></a>
+            <div class="row">
+              <!-- button -->
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Data Admin</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                    <li> <a href="<?php echo base_url('c_admin/tambahPegawai'); ?>"><button type="submit" class="btn btn-primary">Tambah Pegawai</button></a>
                     </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                    <thead>
-                      <tr>
-                        <th>Foto Profil</th>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+                        <tr>
                         <th>Nomor Induk</th>
                         <th>Nama</th>
                         <th>Email</th>
                         <th>No. Telepon</th>
                         <th>Status</th>
                         <th>Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+                        </tr>
+                      </thead>
+
+                      <tbody>
                       <?php foreach ($dataAdmin as $listAdmin) { ?>
                         <tr>
-                          <td><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $listAdmin->gambar ?>" alt=""></td>
                           <td><?php echo $listAdmin->nomorInduk ?></td>
                           <td><?php echo $listAdmin->namaUser ?></td>
                           <td><?php echo $listAdmin->emailUser ?></td>
@@ -98,7 +93,7 @@
                             <?php
                               if ($listAdmin->statusUser == 1) { ?>
                               <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listAdmin->nomorInduk ?>">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
                               </button>
                               <?php
                                   $data = array(
@@ -120,18 +115,17 @@
                                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                               </a>
-                              <?php if($listAdmin->nomorInduk == $this->session->nomorInduk){?>
-                                <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" disabled>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </button>
-                              <?php }
-                               else{?>
+                              <?php if($this->session->nomorInduk == $listAdmin->nomorInduk){?>
+                                <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs" disabled>
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                              <?php } else{?>
                               <a href="<?php echo base_url('c_admin/statusAdmin/') . $listAdmin->nomorInduk; ?>">
                                 <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </button>
                               </a>
-                                <?php }?>
+                              <?php }?>
                             <?php } else { ?>
                               <button data-toggle="tooltip" title="Edit" class="pd-setting-ed" disabled>
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -143,85 +137,57 @@
                           </td>
                         </tr>
                       <?php } ?>
-
-                    </tbody>
-                  </table>
-
-
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-        <?php include("v-Footer.php") ?>
-      </footer>
-      <!-- /footer content -->
     </div>
-  </div>
 
-  <!-- jQuery -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
-  <!-- Chart.js -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Chart.js/dist/Chart.min.js"></script>
-  <!-- gauge.js -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/gauge.js/dist/gauge.min.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-  <!-- iCheck -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
-  <!-- Skycons -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/skycons/skycons.js"></script>
-  <!-- Flot -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.pie.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.time.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.stack.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.resize.js"></script>
-  <!-- Flot plugins -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.curvedlines/curvedLines.js"></script>
-  <!-- DateJS -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/DateJS/build/date.js"></script>
-  <!-- JQVMap -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jquery.vmap.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/moment/min/moment.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- jQuery -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+   <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
 
-  <!-- Custom Theme Scripts -->
-  <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
 
-  <!-- Datatables -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
-
-</body>
-
+  </body>
 </html>

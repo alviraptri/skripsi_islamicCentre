@@ -4,9 +4,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Data Guru</h4>
+      <h4 class="modal-title" id="myModalLabel">Data Admin</h4>
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
       </div>
       <div class="modal-body">
         <table width="100%" class="table table-striped dt-responsive nowrap">
@@ -23,7 +23,8 @@
           </tr>
           <tr>
             <td>Tanggal Lahir</td>
-            <td><?php echo $ttlUser ?></td>
+            <?php $tgl = date('d F Y', strtotime($ttlUser))?>
+            <td><?php echo $tgl ?></td>
             <th colspan="2"> Foto Profil</th>
           </tr>
           <tr>
@@ -44,7 +45,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
       </div>
 
     </div>

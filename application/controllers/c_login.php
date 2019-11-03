@@ -20,6 +20,12 @@ class c_login extends CI_Controller{
         $this->load->view('v_masukAdmin');
     }
 
+    //nampilin view lupa kata sandi
+    function lupaKataSandi()
+    {
+        $this->load->view('v_lupaKataSandi');
+    }
+
     //login siswa dan wali murid
     function login()
     {
@@ -64,8 +70,67 @@ class c_login extends CI_Controller{
             }
         }
         else{
+            echo '<script language="javascript">';
+            echo 'alert("Nomor Induk dan Kata Sandi yang anda masukkan salah1")';
+            echo '</script>';
+        }
+    }
+
+    //minta permintaan nomor induk
+    function kirim()
+    {
+        $nomorInduk = $this->input->post('uname');
+        $where = array(
+            'nomorInduk' => $nomorInduk
+        );
+
+        $cek = $this->m_login->cek("user", $where)->num_rows();
+        $a = $this->m_login->Select($where, 'user')->result();
+
+        if($cek>0){
+            foreach($a as $list){
+                $nama = $list->namaUser;
+                $nip = $list->nomorInduk;
+            };
+            $data_Session = array(
+                'namaUser' => $nama,
+                'nomorInduk' => $nip
+            );
+            $this->session->set_userdata($data_Session);
+            redirect('c_login/konfirmasi');
+        }
+        else{
             echo "Nomor Induk dan Password yang anda masukkan salah!";
         }
+    }
+
+    //update kata sandi
+    function kataSandiBaru()
+    {
+        $passConf = $this->input->post('passConf');
+        $passBaru = $this->input->post('passBaru');
+
+        if ($passBaru == $passConf) {
+            $data = array(
+                'passUser' => md5($passConf)
+            );
+            $where = array('nomorInduk' => $this->session->nomorInduk);
+            $this->m_login->updatePass($where, $data, 'user');
+            $this->session->sess_destroy();
+            redirect('c_login/admin');
+        }
+        else {
+            echo '<script language="javascript">';
+            echo 'alert("Password yang anda masukkan tidak sama")';
+            echo '</script>';
+        }
+        
+    }
+
+    //konfirmasi password
+    function konfirmasi()
+    {
+        $this->load->view('v_konfirmasiKataSandi');
     }
 
     //keluar

@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>Guru | Information Academic Islamic Centre</title>
 
@@ -16,16 +15,7 @@
     <link href="<?php echo base_url(); ?>assets/inter/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	
-    <!-- bootstrap-progressbar -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -34,7 +24,7 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-		<?php include("view-sidebar.php") ?>
+        <?php include("view-sidebar.php") ?>
         </div>
 
         <!-- top navigation -->
@@ -52,7 +42,7 @@
             <div class="clearfix"></div>
 
             <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Edit Guru</h2>
@@ -61,52 +51,51 @@
                   <div class="x_content">
 
                   <?php foreach ($editGuru as $edit) { ?>
-                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/updateGuru'; ?>">
-
+                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateGuru'; ?>" novalidate>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nomorInduk">Nomor Induk <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nomor Induk <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nomorInduk" required="required" type="text" value="<?= $edit->nomorInduk ?>">
+                        <div class="col-md-6 col-sm-6">
+                          <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="<?= $edit->nomorInduk ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Nama <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="email" name="nama" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->namaUser ?>">
+                        <div class="col-md-6 col-sm-6">
+                          <input type="text" id="email2" name="nama" required="required" class="form-control" value="<?= $edit->namaUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ttl">Tanggal Lahir <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="ttl">Tanggal Lahir <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="email" name="ttl" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->ttlUser ?>">
+                        <div class="col-md-6 col-sm-6">
+                          <input type="date" id="email" name="ttl" required="required" class="form-control" value="<?= $edit->ttlUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->emailUser ?>">
+                        <div class="col-md-6 col-sm-6">
+                          <input type="email" id="email" name="email" required="required" class="form-control" value="<?= $edit->emailUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="noTelp">Nomor Telephone <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="noTelp">Nomor Telephone <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="email2" name="noTelp" required="required" class="form-control col-md-7 col-xs-12" value="<?= $edit->noTelp ?>">
+                        <div class="col-md-6 col-sm-6">
+                          <input type="text" id="email2" name="noTelp" data-validate-length-range="11" required="required" class="form-control" value="<?= $edit->noTelp ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Alamat <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="textarea">Alamat <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="textarea" required="required" name="alamat" class="form-control col-md-7 col-xs-12"><?= $edit->alamatUser ?></textarea>
+                          <textarea id="textarea" required="required" name="alamat" class="form-control"><?= $edit->alamatUser ?></textarea>
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jk">Jenis Kelamin<span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="jk">Jenis Kelamin <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="jk" class="select2_single form-control">
@@ -116,28 +105,51 @@
                             <?php } else { ?>
                               <option value="0">Perempuan</option>
                               <?php } ?>
-                              <option value="1">Laki-Laki</option>
-                              <option value="0">Perempuan</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userRole">Profesi <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="role" class="select2_single form-control">
-                          <?php
-                          if ($edit->userRole == Guru) { ?>
-                          <option value="Guru">Guru</option>
-                          <?php } ?>
+                            <option value="0"> Perempuan </option>
+                            <option value="1"> Laki-Laki</option>
                           </select>
                         </div>
                       </div>
                       
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Profesi <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="role" id="profesi" onchange = "ShowHideDiv()" class="select2_single form-control">
+                          <?php
+                          if ($edit->userRole == Guru) { ?>
+                          <option value="Guru">Guru</option>
+                          <?php } ?>
+                            <option value="Admin"> Admin </option>
+                            <option value="Guru"> Guru </option>
+                            <option value="Wali Kelas"> Wali Kelas </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="item form-group" style="display:none;" id="tampilKelas"> 
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Kelas <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="kelas" id="kelas" class="select2_single form-control">
+                            <option value="">Pilih Kelas</option>
+                          <?php foreach ($kls as $listKelas) {?>
+                            <option value="<?php echo $listKelas->idKelas ?>"><?php echo$listKelas->ketKelas ?> <?php echo$listKelas->jurusanKelas ?> <?php echo$listKelas->nomorKelas ?></option>
+                          <?php } ?>
+                          </select>
+                        </div>
+                      </div> 
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Foto Profil <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" name="berkas" value="<?= $edit->gambar ?>">
+                        </div>
+                      </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                        <div class="col-md-6 offset-md-3">
+                          <button id="send" type="submit" class="btn btn-success">Simpan</button>
+                          <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
                         </div>
                       </div>
                     </form>
@@ -152,69 +164,39 @@
 
         <!-- footer content -->
         <footer>
-		<?php include("v-Footer.php") ?>
+        <?php include("v-Footer.php") ?>
         </footer>
         <!-- /footer content -->
       </div>
     </div>
 
+    
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#profesi").change(function () {
+            if ($(this).val() == "Wali Kelas") {
+                $("#tampilKelas").show();
+            } else {
+                $("#tampilKelas").hide();
+            }
+        });
+    });
+</script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.time.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/moment/min/moment.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- validator -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/validator/validator.js"></script>
 
     <!-- Custom Theme Scripts -->
-	<script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
-	
-	<!-- Datatables -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
 	
   </body>
 </html>

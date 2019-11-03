@@ -126,7 +126,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<div class="col">
 										</div>
 										<div class="col kt-align-right">
-											<a href="javascript:;" id="kt_login_forgot" class="kt-login__link">Lupa Kata Sandi ?</a>
+											<a href="<?php echo base_url('c_login/lupaKataSandi'); ?>" class="kt-login__link">Lupa Kata Sandi ?</a>
 										</div>
 									</div>
 									<div class="kt-login__actions">

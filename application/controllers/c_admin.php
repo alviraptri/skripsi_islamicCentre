@@ -24,14 +24,14 @@ class c_admin extends CI_Controller
 	//admin
 	function admin()
 	{
-		$where = array('userRole' => 'Admin' );
-		$data['dataAdmin'] = $this->m_admin->tampilkanDataGuru($where)->result();
+		$where = array('userRole' => 'Admin', 'statusUser' => '1');
+		$data['dataAdmin'] = $this->m_admin->tampilkanDataPegawai($where)->result();
 		$this->load->view("v_dataAdmin", $data);
 	}
 	function editAdmin($idAdmin)
 	{
 		$where = array('nomorInduk' => $idAdmin);
-		$data['editAdmin'] = $this->m_admin->editGuru($where,'user')->result();
+		$data['editAdmin'] = $this->m_admin->editData($where,'user')->result();
 		$this->load->view('v_editAdmin', $data);
 	}
 	function updateAdmin()
@@ -58,21 +58,28 @@ class c_admin extends CI_Controller
 			'jenisKelamin' => $jk 
 		);
 		$where = array('nomorInduk' => $noInduk);
-		$this->m_admin->updateGuru($where, $data, 'user');
+		$this->m_admin->updateData($where, $data, 'user');
+		redirect('c_admin/admin');
+	}
+	function statusAdmin($nomorInduk)
+	{
+		$data = array('statusUser' => 0);
+		$where = array('nomorInduk' => $nomorInduk);
+		$this->m_admin->statusData($where, $data, 'user');
 		redirect('c_admin/admin');
 	}
 
 	//Guru
 	function guru()
 	{
-		$where = array('userRole' => 'Guru' );
-		$data['dataGuru'] = $this->m_admin->tampilkanDataGuru($where)->result();
+		$where = array('userRole' => 'Guru', 'statusUser' => '1');
+		$data['dataGuru'] = $this->m_admin->tampilkanDataPegawai($where)->result();
 		$this->load->view("v_dataGuru", $data);
 	}
 	function editGuru($idGuru)
 	{
 		$where = array('nomorInduk' => $idGuru);
-		$data['editGuru'] = $this->m_admin->editGuru($where,'user')->result();
+		$data['editGuru'] = $this->m_admin->editData($where,'user')->result();
 		$this->load->view('v_editGuru', $data);
 	}
 	function updateGuru()
@@ -99,21 +106,77 @@ class c_admin extends CI_Controller
 			'jenisKelamin' => $jk 
 		);
 		$where = array('nomorInduk' => $noInduk);
-		$this->m_admin->updateGuru($where, $data, 'user');
+		$this->m_admin->updateData($where, $data, 'user');
 		redirect('c_admin/guru');
 	}
 	function statusGuru($nomorInduk)
 	{
 		$data = array('statusUser' => 0);
 		$where = array('nomorInduk' => $nomorInduk);
-		$this->m_admin->statusGuru($where, $data, 'user');
+		$this->m_admin->statusData($where, $data, 'user');
 		redirect('c_admin/guru');
 	}
-	function tambahGuru()
+	
+	//wali kelas
+	function waliKelas()
 	{
-		$this->load->view("v_tambahGuru");
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$this->load->view("v_dataWaliKelas", $data);
 	}
-	function simpanGuru()
+	function editWaliKelas($idWaliKelas)
+	{
+		$where = array('nomorInduk' => $idWaliKelas);
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$data['editWk'] = $this->m_admin->editData($where,'user')->result();
+		$this->load->view('v_editWaliKelas', $data);
+	}
+	function updateWaliKelas()
+	{
+		$noInduk = $this->input->post('nomorInduk');
+		$nama = $this->input->post('nama');
+		$ttl = $this->input->post('ttl');
+		$email = $this->input->post('email');
+		$noTelp = $this->input->post('noTelp');
+		$alamat = $this->input->post('alamat');
+		$jk = $this->input->post('jk');
+		$kelas = $this->input->post('kelas');
+		$userRole = $this->input->post('role');
+
+		$tgl = date('Y-m-d', strtotime($ttl));
+
+		$dataUser = array(
+			'nomorInduk' => $noInduk,
+			'userRole' => $userRole,
+			'namaUser' => $nama,
+			'ttlUser' => $tgl,
+			'emailUser' => $email,
+			'noTelp' => $noTelp,
+			'alamatUser' => $alamat,
+			'jenisKelamin' => $jk 
+		);
+
+		$dataWaliKelas = array(
+			'idWaliKelas' => "",
+			'nomorInduk' => $noInduk,
+			'idKelas' => $kelas,
+			'statusWaliKelas' => 1 
+		);
+
+		$where = array('nomorInduk' => $noInduk);
+		$this->m_admin->updateData($where, $dataUser, 'user');
+		$this->m_admin->updateData($where, $dataWaliKelas, 'walikelas');
+		redirect('c_admin/waliKelas');
+	}
+
+	//pegawai
+	function tambahPegawai()
+	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$this->load->view("v_tambahPegawai", $data);
+	}
+	function simpanPegawai()
 	{
 		$noInduk = $this->input->post('nomorInduk');
 		$nama = $this->input->post('nama');
@@ -124,10 +187,26 @@ class c_admin extends CI_Controller
 		$jk = $this->input->post('jk');
 		$pass = $this->input->post('pass');
 		$userRole = $this->input->post('role');
-		$photo = $this->input->post('image');
-		$photo = $this->_uploadImage();
+		$photo = $this->input->post('berkas');
+		$kelas = $this->input->post('kelas');
 
 		$tgl = date('Y-m-d', strtotime($ttl));
+
+		$config['upload_path'] = 'assets/inter/images/profil/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = 100;
+		$config['max_width'] = 1024;
+		$config['max_height'] = 768;
+ 
+		$this->load->library('upload', $config);
+ 
+		if ( ! $this->upload->do_upload('berkas')){
+			$error = array('error' => $this->upload->display_errors());
+			$this->load->view('v_tambahPegawai', $error);
+		}else{
+			$data = array('upload_data' => $this->upload->data());
+			$this->load->view('v_upload_sukses', $data);
+		}
 
 		$data = array(
 			'nomorInduk' => $noInduk,
@@ -143,13 +222,18 @@ class c_admin extends CI_Controller
 			'statusUser' => 1 
 		);
 
-		$this->m_admin->simpanGuru($data, 'user');
+		$this->m_admin->simpanData($data, 'user');
+		if($userRole == 'Wali Kelas'){
+			$data = array(
+				'idWaliKelas' => "",
+				'nomorInduk' => $noInduk,
+				'idKelas' => $kelas,
+				'statusWaliKelas' => 1 
+			);
+
+			$this->m_admin->simpanData($data, 'walikelas');
+		}
 		redirect('c_admin/guru');
-	}
-	function getKelas()
-	{
-		$data = $this->m_admin->getKelas()->result();
-		echo json_encode($data);
 	}
 
 	//gambar
@@ -182,6 +266,8 @@ class c_admin extends CI_Controller
 	function editSiswa($idSiswa)
 	{
 		//$where = array('nomorInduk' => $idSiswa);
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$data['kls'] = $this->m_admin->kelas()->result();
 		$data['editSiswa'] = $this->m_admin->editSiswa($idSiswa)->result();
 		$this->load->view('v_editSiswa', $data);
 	}
@@ -214,12 +300,14 @@ class c_admin extends CI_Controller
 			'idKelas' => $kelas,
 			'idTahunAjaran' => $tahunAjaran
 		);
-		$this->m_admin->updateSiswa($where, $dataUser, 'user');
-		$this->m_admin->updateSiswa($where, $dataSiswa, 'datasiswa');
+		$this->m_admin->updateData($where, $dataUser, 'user');
+		$this->m_admin->updateData($where, $dataSiswa, 'datasiswa');
 		redirect('c_admin/siswa');
 	}
 	function tambahSiswa()
 	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$data['kls'] = $this->m_admin->kelas()->result();
 		$data['siswa'] = $this->m_admin->tampilkanDataSiswa()->result();
 		$this->load->view("v_tambahSiswa", $data);
 	}
@@ -236,6 +324,7 @@ class c_admin extends CI_Controller
 		$tahunAjaran = $this->input->post('tahunAjaran');
 		$status = $this->input->post('status');
 		$pass = $this->input->post('pass');
+		$photo = $this->input->post('berkas');
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
@@ -249,7 +338,7 @@ class c_admin extends CI_Controller
 			'alamatUser' => $alamat,
 			'jenisKelamin' => $jk,
 			'passUser' => md5($pass),
-			'gambar' => "blabla.jpg",
+			'gambar' => $photo,
 			'statusUser' => '1' 
 		);
 
@@ -261,9 +350,19 @@ class c_admin extends CI_Controller
 			'statusSiswa' => '1'
 		);
 
-		$this->m_admin->simpanSiswa($dataUser, 'user');
-		$this->m_admin->simpanSiswa($dataSiswa, 'datasiswa');
-		redirect('c_admin/siswa');
+		$this->m_admin->simpanData($dataUser, 'user');
+		$this->m_admin->simpanData($dataSiswa, 'datasiswa');
+
+		$where = array(
+            'nomorInduk' => $noInduk
+        );
+		$a = $this->m_admin->selectSiswa($where, 'datasiswa')->result();
+		foreach ($a as $data) {
+			$idSiswa = $data->idSiswa;
+		};
+		$data_session = array('idSiswa' => $idSiswa);
+		$this->session->set_userdata($data_session);
+		redirect('c_admin/tambahWaliMurid');
 	}
 	function statusSiswa($nomorInduk)
 	{
@@ -271,9 +370,59 @@ class c_admin extends CI_Controller
 		$dataUser = array('statusUser' => 0, );
 		$where = array('nomorInduk' => $nomorInduk, );
 
-		$this->m_admin->statusSiswa($where, $dataSiswa, 'dataSiswa');
-		$this->m_admin->statusSiswa($where, $dataUser, 'user');
+		$this->m_admin->statusData($where, $dataSiswa, 'dataSiswa');
+		$this->m_admin->statusData($where, $dataUser, 'user');
 		redirect ('c_admin/siswa');
+	}
+
+	//wali murid
+	function tambahWaliMurid()
+	{
+		$this->load->view("v_tambahWaliMurid");
+	}
+	function simpanWaliMurid()
+	{
+		$noInduk = $this->input->post('nomorInduk');
+		$nama = $this->input->post('nama');
+		$ttl = $this->input->post('ttl');
+		$email = $this->input->post('email');
+		$noTelp = $this->input->post('noTelp');
+		$alamat = $this->input->post('alamat');
+		$jk = $this->input->post('jk');
+		$status = $this->input->post('status');
+		$pass = $this->input->post('pass');
+		$idSiswa = $this->input->post('idSiswa');
+		$photo = $this->input->post('berkas');
+		$keterangan = $this->input->post('keterangan');
+
+		$tgl = date('Y-m-d', strtotime($ttl));
+
+		$dataUser = array(
+			'nomorInduk' => $noInduk,
+			'userRole' => $status,
+			'namaUser' => $nama,
+			'ttlUser' => $tgl,
+			'emailUser' => $email,
+			'noTelp' => $noTelp,
+			'alamatUser' => $alamat,
+			'jenisKelamin' => $jk,
+			'passUser' => md5($pass),
+			'gambar' => $photo,
+			'statusUser' => '1' 
+		);
+
+		$dataWM= array(
+			'idWaliMurid' => "",
+			'nomorInduk' => $noInduk,
+			'keterangan' => $keterangan,
+			'idSiswa' => $idSiswa,
+			'statusWaliMurid' => '1'
+		);
+
+		$this->m_admin->simpanData($dataUser, 'user');
+		$this->m_admin->simpanData($dataWM, 'walimurid');
+
+		redirect('c_admin/siswa');
 	}
 
 	//mata pelajaran
@@ -418,6 +567,42 @@ class c_admin extends CI_Controller
 	}
 
 	//tahun ajaran
+	function tambahThnAjaran()
+	{
+		$this->load->view('v_tambahThnAjaran');
+	}
+	function simpanThnAjaran()
+	{
+		$thnajaran = $this->input->post('thnAjaran');
+
+		$data = array(
+			'idTahunAjaran' => "",
+			'tahunAjaran' => $thnajaran,
+			'statusTahunAjaran' => 1 
+		);
+
+		$this->m_admin->simpanData($data, 'tahunajaran');
+		redirect('c_admin/tahunAjaran');
+	}
+	function tahunAjaran()
+	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_dataThnAjaran', $data);
+	}
+	function statusThnAjaran($idThnAjaran)
+	{
+		$data = array('statusTahunAjaran' => 0, );
+		$where = array('idTahunAjaran' => $idThnAjaran, );
+
+		$this->m_admin->statusData($where, $data, 'tahunajaran');
+		redirect('c_admin/tahunAjaran');
+	}
+
+	function profil()
+	{
+		$data['profil'] = $this->m_admin->profil()->result();
+		$this->load->view('v_adminProfil', $data);
+	}
 
 	//kelas
 	function tambahKelas()
