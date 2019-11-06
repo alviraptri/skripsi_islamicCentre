@@ -43,12 +43,14 @@ class c_login extends CI_Controller{
             foreach($a as $list){
                 $nama = $list->namaUser;
                 $nip = $list->nomorInduk;
+                $password = $list->passUser;
                 $role = $list->userRole;
                 $gambar = $list->gambar;
             };
             $data_Session = array(
                 'namaUser' => $nama,
                 'nomorInduk' => $nip,
+                'passUser' => $password,
                 'userRole' => $role,
                 'gambar' => $gambar
             );
@@ -70,9 +72,37 @@ class c_login extends CI_Controller{
             }
         }
         else{
-            echo '<script language="javascript">';
-            echo 'alert("Nomor Induk dan Kata Sandi yang anda masukkan salah1")';
-            echo '</script>';
+            // if(strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0)
+            // {
+            //     echo "<script> alert('Nomor Induk yang anda masukkan salah!');";
+            //     echo "window.location='".site_url('c_login/admin')."';</script>";
+            // }
+            // else if(strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0)
+            // {
+            //     echo "<script> alert('Kata Sandi yang anda masukkan salah!');";
+            //     echo "window.location='".site_url('c_login/admin')."';</script>";
+            // }
+            // else if (strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0 && strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0) {
+            //     echo "<script> alert('Nomor Induk dan Kata Sandi yang anda masukkan salah!');";
+            //     echo "window.location='".site_url('c_login/admin')."';</script>";
+            // }
+            // else 
+            if($nomorInduk == "")
+            {
+                echo "<script> alert('Silahkan isi nomor induk terlebih dahulu!');";
+                echo "window.location='".site_url('c_login/admin')."';</script>";
+            }
+            else if($pass == "")
+            {
+                echo "<script> alert('Silahkan isi kata sandi terlebih dahulu!');";
+                echo "window.location='".site_url('c_login/admin')."';</script>";
+            }
+            else
+            {
+                echo "<script> alert('Silahkan isi nomor induk dan kata sandi terlebih dahulu!');";
+                echo "window.location='".site_url('c_login/admin')."';</script>";
+            }
+            
         }
     }
 

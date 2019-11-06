@@ -7,7 +7,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
   <title>Mata Pelajaran | Information Academic Islamic Centre</title>
 
@@ -19,13 +18,12 @@
   <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-  <!-- bootstrap-progressbar -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-  <!-- JQVMap -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-  <!-- bootstrap-daterangepicker -->
-  <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
@@ -47,15 +45,14 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Siswa</h3>
+              <h3>Mata Pelajaran</h3>
             </div>
           </div>
 
           <div class="clearfix"></div>
 
           <div class="row">
-
-            <!--responsive-->
+            <!-- button -->
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
@@ -67,18 +64,19 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
-                        <th>#</th>
+                      <th>#</th>
                         <th>Mata Pelajaran</th>
                         <th>Tahun Ajaran</th>
                         <th>Status</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
+
                     <tbody>
-                      <?php foreach ($mapel as$listMapel) {?>
+                    <?php foreach ($mapel as$listMapel) {?>
                         <tr>
                         <td><?php echo$listMapel->idMapel ?></td>
                           <td><?php echo$listMapel->namaMapel ?></td>
@@ -114,14 +112,12 @@
                           </td>
                         </tr>
                       <?php } ?>
-
                     </tbody>
                   </table>
-
-
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -129,7 +125,7 @@
 
       <!-- footer content -->
       <footer>
-        <?php include("v-Footer.php") ?>
+      <?php include("v-Footer.php") ?>
       </footer>
       <!-- /footer content -->
     </div>
@@ -138,44 +134,13 @@
   <!-- jQuery -->
   <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- FastClick -->
   <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
   <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
-  <!-- Chart.js -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Chart.js/dist/Chart.min.js"></script>
-  <!-- gauge.js -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/gauge.js/dist/gauge.min.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
   <!-- iCheck -->
   <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
-  <!-- Skycons -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/skycons/skycons.js"></script>
-  <!-- Flot -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.pie.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.time.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.stack.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.resize.js"></script>
-  <!-- Flot plugins -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.curvedlines/curvedLines.js"></script>
-  <!-- DateJS -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/DateJS/build/date.js"></script>
-  <!-- JQVMap -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jquery.vmap.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/moment/min/moment.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-  <!-- Custom Theme Scripts -->
-  <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
-
   <!-- Datatables -->
   <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -192,6 +157,9 @@
   <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
 
 </body>
 

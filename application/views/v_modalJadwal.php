@@ -4,23 +4,37 @@
     <div class="modal-content">
 
       <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><b>Jadwal Kelas <?= $ketKelas?> <?= $jurusanKelas?> <?= $nomorKelas?></b></h4>
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Jadwal Kelas <?php echo $ketKelas ?> <?php echo $jurusanKelas ?> <?php echo $nomorKelas ?></h4>
       </div>
       <div class="modal-body">
         <table width="100%" class="table table-striped dt-responsive nowrap">
           <tr>
-            <td>Hari: <?php echo $hari ?></td>  
-            <td>Mata Pelajaran: <?php echo $namaMapel ?></td>
+            <th>Hari</th>
+            <td><?php echo $hari ?></td>
+            <th>Mata Pelajaran</th>
+            <td><?= $namaMapel?></td>
           </tr>
           <tr>
-            <td>Jam: <?php echo $jamMulai ?> - <?php echo $jamSelesai ?></td>
-            <td>Guru: <?php echo $namaUser ?></td>
+            <th>Jam</th>
+            <?php $mulai = date('H:i', strtotime($jamMulai));
+            $selesai = date('H:i', strtotime($jamSelesai));?>
+            <td><?php echo $mulai ?> - <?= $selesai?></td>
+            <th>Guru</th>
+            <td><?= $namaUser?></td>
           </tr>
           <tr>
-            <td>Durasi: </td>
-            <td>Tahun Ajaran: <?php echo $tahunAjaran ?></td>
+            <th>Durasi</th>
+            <?php 
+            $awal = strtotime($jamMulai);
+            $akhir = strtotime($jamSelesai);
+            $diff = $akhir - $awal;
+            $jam = floor($diff/(60*60));
+            $menit = $diff - $jam*(60*60);?>
+            <td><?= floor($menit/60)?> Menit</td>
+            <th>Tahun Ajaran</th>
+            <td><?= $tahunAjaran?></td>
           </tr>
         </table>
       </div>

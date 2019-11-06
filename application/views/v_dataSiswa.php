@@ -93,8 +93,8 @@
                           <td>
                             <?php
                               if ($listSiswa->statusSiswa == 1) { ?>
-                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listSiswa->nomorInduk ?>">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm <?php echo $listSiswa->nomorInduk ?>">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
                               </button>
                               <?php
                                   $data = array(
@@ -149,10 +149,7 @@
 
       <!-- footer content -->
       <footer>
-        <div class="pull-right">
-          Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-        </div>
-        <div class="clearfix"></div>
+      <?php include("v-Footer.php") ?>
       </footer>
       <!-- /footer content -->
     </div>

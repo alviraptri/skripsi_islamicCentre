@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Jadwal | Information Academic Islamic Centre</title>
+  <title>Wali Murid | Information Academic Islamic Centre</title>
 
   <!-- Bootstrap -->
   <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Jadwal</h3>
+              <h3>Wali Murid</h3>
             </div>
           </div>
 
@@ -56,37 +56,29 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Data Jadwal</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li> <a href="<?php echo base_url('c_admin/tambahJadwal'); ?>"><button type="submit" class="btn btn-primary">Tambah Jadwal</button></a>
-                    </li>
-                  </ul>
+                  <h2>Data Wali Murid</h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
-                        <th>Hari</th>
-                        <th>Jam</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Kelas</th>
+                        <th>Nomor Induk</th>
+                        <th>Nama</th>
+                        <th>Orang Tua Wali</th>
                         <th>Status</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <?php foreach ($jadwal as $list) { ?>
+                      <?php foreach ($waliMurid as $list) { ?>
                         <tr>
-                          <td><?php echo $list->hari ?></td>
-                          <?php $mulai = date('H:i', strtotime($list->jamMulai));
-                          $selesai = date('H:i', strtotime($list->jamSelesai));?>
-                          <td><?php echo $mulai ?> - <?= $selesai?></td>
-                          <td><?= $list->namaMapel?></td>
-                          <td><?php echo $list->ketKelas ?> <?php echo $list->jurusanKelas ?> <?php echo $list->nomorKelas ?></td>
+                          <td><?php echo $list->nomorInduk ?></td>
+                          <td><?php echo $list->namaUser ?></td>
+                          <td><?php echo $list->keterangan ?></td>
                           <td><?php
-                                if ($list->statusJadwal == 1) { ?>
+                                if ($list->statusWaliMurid == 1) { ?>
                               <button class="btn btn-success btn-xs">Aktif</button>
                             <?php } else { ?>
                               <button class="btn btn-danger btn-xs">Tidak Aktif</button>
@@ -94,44 +86,30 @@
                               ?></td>
                           <td>
                             <?php
-                              if ($list->statusJadwal == 1) { ?>
-                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $list->idJadwal ?>">
+                              if ($list->statusWaliMurid == 1) { ?>
+                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $list->nomorInduk ?>">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                               </button>
                               <?php
                                   $data = array(
-                                    'ketKelas' => $list->ketKelas,
-                                    'idJadwal' => $list->idJadwal,
-                                    'jurusanKelas' => $list->jurusanKelas,
-                                    'nomorKelas' => $list->nomorKelas,
-                                    'tahunAjaran' => $list->tahunAjaran,
+                                    'gambar' => $list->gambar,
+                                    'nomorInduk' => $list->nomorInduk,
                                     'namaUser' => $list->namaUser,
-                                    'namaMapel' => $list->namaMapel,
-                                    'hari' => $list->hari,
-                                    'jamMulai' => $list->jamMulai,
-                                    'jamSelesai' => $list->jamSelesai,
+                                    'ttlUser' => $list->ttlUser,
+                                    'emailUser' => $list->emailUser,
+                                    'noTelp' => $list->noTelp,
+                                    'alamatUser' => $list->alamatUser,
+                                    'jenisKelamin' => $list->jenisKelamin,
+                                    'statusWaliMurid' => $list->statusWaliMurid
                                   );
-                                  $this->load->view("v_modalJadwal", $data);
+                                  $this->load->view("v_modalWaliMurid", $data);
                                   ?>
-
-                              <a href="<?php echo base_url('c_admin/editJadwal/') . $list->idJadwal; ?>">
+                                  <a href="<?php echo base_url('c_admin/editWaliMurid/') . $list->nomorInduk; ?>">
                                 <button data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
                                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                               </a>
-                              <a href="<?php echo base_url('c_admin/statusJadwal/') . $list->idJadwal; ?>">
-                                <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
-                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </button>
-                              </a>
-                            <?php } else { ?>
-                              <button data-toggle="tooltip" title="Edit" class="pd-setting-ed" disabled>
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                              </button>
-                              <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" disabled>
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </button>
-                            <?php } ?>
+                            <?php }?>
                           </td>
                         </tr>
                       <?php } ?>

@@ -38,8 +38,84 @@ class m_admin extends CI_Model
     {
         return $this->db->get_where($table, $where);
     }
-    
 
+    function kodePegawai()
+	{
+        $this->db->select('RIGHT(user.nomorInduk,4) as kode',false);
+        $this->db->not_like('user.userRole', 'Siswa');
+        $this->db->not_like('user.userRole', 'Wali Murid');
+		$this->db->order_by('nomorInduk','DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('user');
+		if($query->num_rows()<>0){
+			$data = $query->row();
+			$kode = intval($data->kode)+1;
+		}
+		else{
+			$kode=1;
+		}
+		$kodeMax = str_pad($kode,4,'0',STR_PAD_LEFT);
+		$kodeJadi = "NIP".$kodeMax;
+		return $kodeJadi;
+	}
+    
+    function kodeMurid()
+	{
+        $this->db->select('RIGHT(user.nomorInduk,10) as kode',false)
+        ->where('user.userRole = "Siswa"');
+		$this->db->order_by('nomorInduk','DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('user');
+		if($query->num_rows()<>0){
+			$data = $query->row();
+			$kode = intval($data->kode)+1;
+		}
+		else{
+			$kode=1;
+		}
+		$kodeMax = str_pad($kode,10,'0',STR_PAD_LEFT);
+		$kodeJadi = $kodeMax;
+		return $kodeJadi;
+    }
+
+    //jadwal
+    function jadwalGuru()
+    {
+        $query = $this->db->query("SELECT nomorInduk, namaUser FROM user WHERE userRole NOT LIKE '%Admin%' AND userRole NOT LIKE '%Wali Murid%' AND 
+        userRole NOT LIKE '%Siswa%' AND statusUser = 1");
+
+        return $query;
+    }
+    function tampilkanDataJadwal()
+    {
+        $this->db->select('jadwal.idJadwal, jadwal.idKelas, jadwal.idTahunAjaran, jadwal.nomorInduk, jadwal.idMapel, jadwal.hari, jadwal.jamMulai, 
+        jadwal.jamSelesai, jadwal.statusJadwal, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, 
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran, user.nomorInduk, user.namaUser, matapelajaran.idMapel, 
+        matapelajaran.namaMapel')
+        ->from('jadwal')
+        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
+        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = jadwal.idTahunAjaran', 'inner')
+        ->join('user', 'user.nomorInduk = jadwal.nomorInduk', 'inner')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel')
+        ->where('jadwal.statusJadwal = 1');
+
+        return $this->db->get();
+    }
+    function editJadwal($idJadwal)
+    {
+        $this->db->select('jadwal.idJadwal, jadwal.idKelas, jadwal.idTahunAjaran, jadwal.nomorInduk, jadwal.idMapel, jadwal.hari, jadwal.jamMulai, 
+        jadwal.jamSelesai, jadwal.statusJadwal, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, 
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran, user.nomorInduk, user.namaUser, matapelajaran.idMapel, 
+        matapelajaran.namaMapel')
+        ->from('jadwal')
+        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
+        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = jadwal.idTahunAjaran', 'inner')
+        ->join('user', 'user.nomorInduk = jadwal.nomorInduk', 'inner')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel')
+        ->where('jadwal.idJadwal = "'.$idJadwal.'"');
+
+        return $this->db->get();
+    }
     
     //Guru
     function tampilkanDataPegawai($where)
@@ -49,6 +125,30 @@ class m_admin extends CI_Model
     function guru()
     {
         return $this->db->get('user');
+    }
+
+    //wali murid
+    function tampilkanDataWaliMurid()
+    {
+        $this->db->select('user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, 
+        user.alamatUser, user.jenisKelamin, walimurid.nomorInduk, walimurid.statusWaliMurid,
+        walimurid.keterangan, user.gambar')
+        ->from('walimurid')
+        ->join('user', 'user.nomorInduk = walimurid.nomorInduk')
+        ->where('walimurid.statusWaliMurid = 1');
+
+        return $this->db->get();
+    }
+    function editWaliMurid($idWaliMurid)
+    {
+        $this->db->select('user.nomorInduk, user.namaUser, user.ttlUser, user.emailUser, user.noTelp, 
+        user.alamatUser, user.jenisKelamin, walimurid.nomorInduk, walimurid.statusWaliMurid,
+        walimurid.keterangan, user.gambar')
+        ->from('walimurid')
+        ->join('user', 'user.nomorInduk = walimurid.nomorInduk')
+        ->where('walimurid.nomorInduk = "'.$idWaliMurid.'"');
+
+        return $this->db->get_where();
     }
 
     //Siswa
@@ -83,19 +183,27 @@ class m_admin extends CI_Model
     {
         return $this->db->get_where($table, $where);
     }
+    function getId($nomorInduk)
+    {
+        $query = $this->db->query('SELECT walimurid.idWaliMurid, walimurid.idSiswa, walimurid.nomorInduk, 
+        walimurid.statusWaliMurid, datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, 
+        user.statusUser 
+        FROM walimurid 
+        INNER JOIN datasiswa ON datasiswa.idSiswa = walimurid.idSiswa 
+        INNER JOIN user ON user.nomorInduk = walimurid.nomorInduk 
+        WHERE datasiswa.nomorInduk = "'.$nomorInduk.'"');
+        return $query;
+    }
 
     //Mata Pelajaran
     function tampilkanDataMapel()
     {
         $this->db->select('matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.statusMapel, tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran')
         ->from('matapelajaran')
-        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = matapelajaran.idTahunAjaran');
+        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = matapelajaran.idTahunAjaran')
+        ->where('matapelajaran.statusMapel = 1');
 
         return $this->db->get();
-    }
-    function simpanMapel($data, $table)
-    {
-        $this->db->insert($table, $data);
     }
     function editMapel($idMapel)
     {
@@ -107,16 +215,6 @@ class m_admin extends CI_Model
 
         return $query;
     }
-    function updateMapel($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table,$data);
-    }
-    function statusMapel($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table, $data);
-    }
     function mapel()
     {
         return $this->db->get('matapelajaran');
@@ -125,60 +223,46 @@ class m_admin extends CI_Model
     //kelas
     function kelas()
     {
-        return $this->db->get('kelas');
-    }
-    function simpanKelas($data, $table)
-    {
-        $this->db->insert($table, $data);
-    }
-    function statusKelas($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table, $data);
+        $this->db->select('idKelas, ketKelas, jurusanKelas, nomorKelas, statusKelas')
+        ->from('kelas')
+        ->where('statusKelas = 1');
+
+        return $this->db->get();
     }
     function editKelas($idKelas)
     {
         $query = $this->db->query('SELECT * FROM `kelas` WHERE idKelas = "'.$idKelas.'"');
         return $query;
     }
-    function updateKelas($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table,$data);
-    }
 
-    //jadwal
-    function simpanJadwal($data, $table)
-    {
-        $this->db->insert($table, $data);
-    }
-    function tampilkanDataJadwal()
-    {
-        $this->db->select('jadwal.idJadwal, jadwal.idKelas, jadwal.nomorInduk, jadwal.idMapel, jadwal.hari, jadwal.jamMulai, 
-        jadwal.jamSelesai, jadwal.statusJadwal, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, 
-        user.nomorInduk, user.userRole, user.namaUser, matapelajaran.idMapel, matapelajaran.namaMapel, 
-        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran')
-        ->from('jadwal')
-        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
-        ->join('user', 'user.nomorInduk = jadwal.nomorInduk', 'inner' )
-        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
-        ->join('tahunajaran', 'tahunajaran.idTahunAjaran = jadwal.idTahunAjaran');
+    //ajax
+    // function getSiswa($idKelas)
+    // {
+    //     $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, datasiswa.statusSiswa, kelas.idKelas,user.nomorInduk, user.namaUser')
+    //     ->from('datasiswa')
+    //     ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner')
+    //     ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
+    //     ->where('datasiswa.idKelas = "'.$idKelas.'"');
+    //     $query = $this->db->get();
+    //     $output = '<option value="">Pilih Siswa</option>';
+    //     foreach ($query->result() as $row) {
+    //         $output .= '<option value="'.$row->nomorInduk.'">'.$row->namaUser.'</option>';
+    //     }
+    //     return $output;
+    // }
 
+    function getSiswa($idKelas)
+    {
+        $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, datasiswa.statusSiswa, kelas.idKelas,user.nomorInduk, user.namaUser')
+        ->from('datasiswa')
+        ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner')
+        ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
+        ->where('datasiswa.idKelas = "'.$idKelas.'"');
         return $this->db->get();
     }
-    function editJadwal($idJadwal)
+    function simpanMulti($data, $table)
     {
-        $query = $this->db->query('SELECT jadwal.idJadwal, jadwal.idKelas, jadwal.nomorInduk, jadwal.idMapel, jadwal.hari, 
-        jadwal.jamMulai, jadwal.jamSelesai, jadwal.statusJadwal, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, 
-        kelas.nomorKelas, user.nomorInduk, user.userRole, user.namaUser, matapelajaran.idMapel, matapelajaran.namaMapel, 
-        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran 
-        FROM `jadwal` 
-        INNER JOIN kelas ON kelas.idKelas = jadwal.idKelas 
-        INNER JOIN user ON user.nomorInduk = jadwal.nomorInduk 
-        INNER JOIN matapelajaran ON matapelajaran.idMapel = jadwal.idMapel 
-        INNER JOIN tahunajaran ON tahunajaran.idTahunAjaran = jadwal.idTahunAjaran
-        WHERE jadwal.idMapel="'.$idJadwal.'"');
-        return $query;
+            $this->db->insert_batch($table, $data);
     }
 }
 

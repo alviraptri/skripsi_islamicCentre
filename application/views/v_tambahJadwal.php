@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
     <title>Jadwal | Information Academic Islamic Centre</title>
 
@@ -17,215 +15,164 @@
     <link href="<?php echo base_url(); ?>assets/inter/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-    <!-- bootstrap-progressbar -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-    <!-- bootstrap-daterangepicker -->
-    <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
-</head>
+  </head>
 
-<body class="nav-md">
+  <body class="nav-md">
     <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <?php include("view-sidebar.php") ?>
-            </div>
-
-            <!-- top navigation -->
-            <?php include("view-topNavigation.php") ?>
-            <!-- /top navigation -->
-
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Jadwal</h3>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Tambah Jadwal</h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-
-                                    <form class="form-horizontal form-label-left" novalidate method="post" action="<?php echo base_url() . 'c_admin/simpanJadwal'; ?>">
-
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Hari<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="hari" class="select2_single form-control">
-                                                    <option value="Senin"> Senin </option>
-                                                    <option value="Selasa"> Selas </option>
-                                                    <option value="Rabu"> Rabu </option>
-                                                    <option value="Kamis"> Kamis </option>
-                                                    <option value="Jumat"> Jum'at </option>
-                                                    <option value="Sabtu"> Sabtu </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Jam Mulai <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="time" id="email" name="jamMulai" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Jam Selesai <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="time" id="time" name="jamSelesai" required="required" class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Mata Pelajaran <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="mapel" class="select2_single form-control">
-                                                <?php foreach ($mapel as $dmapel) {?>
-                                                    <option value="<?= $dmapel->idMapel ?>"><?= $dmapel->namaMapel ?></option>
-                                                <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Guru <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="guru" class="select2_single form-control">
-                                                <?php foreach ($guru as $dguru) {
-                                                    if ($dguru->userRole == 'Guru') {
-                                                        echo $dguru->nomorInduk;?>
-                                                        <option value="<?= $dguru->nomorInduk ?>"><?= $dguru->namaUser ?></option>
-                                                        <?php }
-                                                    }?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Kelas <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="kelas" class="select2_single form-control">
-                                                <?php foreach ($kls as $dkelas) {?>
-                                                    <option value="<?= $dkelas->idKelas ?>"><?= $dkelas->ketKelas ?> <?= $dkelas->jurusanKelas ?> <?= $dkelas->nomorKelas?></option>
-                                                    <?php }?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select name="tahunAjaran" class="select2_single form-control">
-                                                <?php foreach ($ta as $dta) {?>
-                                                    <option value="<?= $dta->idTahunAjaran ?>"><?= $dta->tahunAjaran ?></option>
-                                                    <?php }?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-md-offset-3">
-                                                <button id="send" type="submit" class="btn btn-success">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /page content -->
-
-            <!-- footer content -->
-            <footer>
-                <?php include("v-Footer.php") ?>
-            </footer>
-            <!-- /footer content -->
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+        <?php include("view-sidebar.php") ?>
         </div>
+
+        <!-- top navigation -->
+        <?php include("view-topNavigation.php") ?>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Jadwal</h3>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Tambah Jadwal</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanJadwal'; ?>" novalidate>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <select name="hari" id="#" required="required" class="form-control">
+                              <option value="">Pilih Hari</option>
+                              <option value="Senin"> Senin</option>
+                              <option value="Selasa">Selasa</option>
+                              <option value="Rabu">Rabu</option>
+                              <option value="Kamis">Kamis</option>
+                              <option value="Jum'at">Jum'at</option>
+                              <option value="Sabtu">Sabtu</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Mulai <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <input type="time" id="email" name="jamMulai" required="required" class="form-control">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Selesai <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <input type="time" id="email" name="jamSelesai" required="required" class="form-control">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <select name="mapel" id="#" required="required" class="form-control">
+                              <option value="">Pilih Mapel</option>
+                              <?php 
+                              foreach ($mapel as $list) { ?>
+                                  <option value="<?php echo $list->idMapel?>"><?php echo $list->namaMapel?> </option>
+                              <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <select name="guru" id="#" required="required" class="form-control">
+                              <option value="">Pilih Guru</option>
+                              <?php 
+                              foreach ($guru as $list) { ?>
+                                  <option value="<?php echo $list->nomorInduk?>"><?php echo $list->namaUser?> </option>
+                              <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <select name="kls" id="#" required="required" class="form-control">
+                              <option value="">Pilih Kelas</option>
+                              <?php 
+                              foreach ($kls as $list) { ?>
+                                  <option value="<?php echo $list->idKelas?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas?></option>
+                              <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <select name="ta" id="#" required="required" class="form-control">
+                              <option value="">Pilih Tahun Ajaran</option>
+                              <?php 
+                              foreach ($ta as $list) { ?>
+                                  <option value="<?php echo $list->idTahunAjaran?>"><?php echo $list->tahunAjaran?></option>
+                              <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 offset-md-3">
+                          <button id="send" type="submit" class="btn btn-success">Simpan</button>
+                          <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+        <?php include("v-Footer.php") ?>
+        </footer>
+        <!-- /footer content -->
+      </div>
     </div>
 
+    
+
+    
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.time.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/moment/min/moment.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- validator -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/validator/validator.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
-
-    <!-- Datatables -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
-
-</body>
-
+	
+  </body>
 </html>

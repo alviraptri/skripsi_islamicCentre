@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Jadwal | Information Academic Islamic Centre</title>
+    <title>Wali Murid | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Jadwal</h3>
+                <h3>Wali Murid</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -45,96 +45,94 @@
               <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Edit Jadwal</h2>
+                    <h2>Edit Wali Murid</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
 
-                  <?php foreach ($editJadwal as $edit) { ?>
-                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateJadwal'; ?>" novalidate>
-                    <input type="text" id="email" name="idJadwal" required="required" class="form-control" value="<?= $edit->idJadwal ?>" hidden>  
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required">*</span>
+                  <?php foreach ($editWM as $edit) { ?>
+                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateWM'; ?>" novalidate>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nomor Induk <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <select name="hari" id="#" required="required" class="form-control">
-                              <option value="<?= $edit->hari ?>"><?= $edit->hari ?></option>
-                              <option value="Senin"> Senin</option>
-                              <option value="Selasa">Selasa</option>
-                              <option value="Rabu">Rabu</option>
-                              <option value="Kamis">Kamis</option>
-                              <option value="Jum'at">Jum'at</option>
-                              <option value="Sabtu">Sabtu</option>
-                          </select>
+                          <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="<?= $edit->nomorInduk ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Mulai <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Nama <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <input type="time" id="email" name="jamMulai" required="required" class="form-control" value="<?= $edit->jamMulai ?>">
+                          <input type="text" id="email2" name="nama" required="required" class="form-control" value="<?= $edit->namaUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Selesai <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="ttl">Tanggal Lahir <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <input type="time" id="email" name="jamSelesai" required="required" class="form-control" value="<?= $edit->jamSelesai ?>">
+                          <input type="date" id="email" name="ttl" required="required" class="form-control" value="<?= $edit->ttlUser ?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <select name="mapel" id="#" required="required" class="form-control">
-                              <option value="<?= $edit->idMapel ?>"><?= $edit->namaMapel ?></option>
-                              <?php 
-                              foreach ($mapel as $list) { ?>
-                                  <option value="<?php echo $list->idMapel?>"><?php echo $list->namaMapel?> </option>
+                          <input type="email" id="email" name="email" required="required" class="form-control" value="<?= $edit->emailUser ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="noTelp">Nomor Telephone <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                          <input type="text" id="email2" name="noTelp" data-validate-length-range="11" required="required" class="form-control" value="<?= $edit->noTelp ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="textarea">Alamat <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea id="textarea" required="required" name="alamat" class="form-control"><?= $edit->alamatUser ?></textarea>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="jk">Jenis Kelamin <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="jk" class="select2_single form-control">
+                          <?php
+                            if ($edit->jenisKelamin == 1) { ?>
+                            <option value="1">Laki-Laki</option>
+                            <?php } else { ?>
+                              <option value="0">Perempuan</option>
                               <?php } ?>
+                            <option value="0"> Perempuan </option>
+                            <option value="1"> Laki-Laki</option>
                           </select>
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="jk">Orang Tua <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6">
-                          <select name="guru" id="#" required="required" class="form-control">
-                              <option value="<?= $edit->nomorInduk ?>"><?= $edit->namaUser ?></option>
-                              <?php 
-                              foreach ($guru as $list) { ?>
-                                  <option value="<?php echo $list->nomorInduk?>"><?php echo $list->namaUser?> </option>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="ket" class="select2_single form-control">
+                          <?php
+                            if ($edit->keterangan == 'Ibu') { ?>
+                            <option value="Ibu">Ibu</option>
+                            <?php } else { ?>
+                              <option value="Ayah">Ayah</option>
                               <?php } ?>
+                            <option value="Ibu"> Ibu </option>
+                            <option value="Ayah"> Ayah</option>
                           </select>
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Foto Profil <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6">
-                          <select name="kls" id="#" required="required" class="form-control">
-                              <option value="<?= $edit->idKelas ?>"><?= $edit->ketKelas ?> <?= $edit->jurusanKelas ?> <?= $edit->nomorKelas ?></option>
-                              <?php 
-                              foreach ($kls as $list) { ?>
-                                  <option value="<?php echo $list->idKelas?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas?></option>
-                              <?php } ?>
-                          </select>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" name="berkas" value="<?= $edit->gambar ?>">
                         </div>
                       </div>
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6">
-                          <select name="ta" id="#" required="required" class="form-control">
-                              <option value="<?= $edit->idTahunAjaran ?>"><?= $edit->tahunAjaran ?></option>
-                              <?php 
-                              foreach ($ta as $list) { ?>
-                                  <option value="<?php echo $list->idTahunAjaran?>"><?php echo $list->tahunAjaran?></option>
-                              <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-                      
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 offset-md-3">
@@ -143,7 +141,7 @@
                         </div>
                       </div>
                     </form>
-                    <?php }?>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
@@ -162,7 +160,18 @@
 
     
 
-    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#profesi").change(function () {
+            if ($(this).val() == "Wali Kelas") {
+                $("#tampilKelas").show();
+            } else {
+                $("#tampilKelas").hide();
+            }
+        });
+    });
+</script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

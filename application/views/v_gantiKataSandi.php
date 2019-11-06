@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Mata Pelajaran | Information Academic Islamic Centre</title>
+    <title>Ganti Kata Sandi | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Mata Pelajaran</h3>
+                            <h3>Kata Sandi</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -46,31 +46,31 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tambah Mata Pelajaran</h2>
+                                    <h2>Ganti Kata Sandi</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
 
-                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanMapel'; ?>" novalidate>
-
-
+                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanKataSandi'; ?>" novalidate>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Mata Pelajaran <span class="required">*</span>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Kata Sandi Lama<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input type="text" id="email" name="mapel" required="required" class="form-control">
+                                                <input type="password" id="email" name="ksLama" required="required" class="form-control">
                                             </div>
                                         </div>
-
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Kata Sandi Baru<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <select name="tahunAjaran" class="select2_single form-control">
-                                                    <?php foreach ($ta as $data) { ?>
-                                                        <option value="<?= $data->idTahunAjaran ?>"><?= $data->tahunAjaran ?></option>
-                                                    <?php } ?>
-                                                </select>
+                                                <input type="password" id="email" name="ksBaru" required="required" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Validasi Kata Sandi Baru<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input type="password" id="email" name="validasiKS" required="required" class="form-control">
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
