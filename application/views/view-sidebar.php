@@ -66,8 +66,14 @@
         </li>
         <li><a><i class="fa fa-info-circle"></i> Informasi SPP <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="<?php echo base_url('c_admin/informasi'); ?>">Data Informasi</a></li>
+            <li><a href="<?php echo base_url('c_admin/info'); ?>">Data Informasi</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahInfo'); ?>">Tambah Informasi</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-columns"></i> Keterangan Nilai <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/ketNilai'); ?>">Data Keterangan Nilai</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahKetNilai'); ?>">Tambah Keterangan Nilai</a></li>
           </ul>
         </li>
       </ul>

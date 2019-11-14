@@ -51,7 +51,7 @@
                 </div>
                 <div class="x_content">
 
-                  <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanSiswa'; ?>" novalidate>
+                  <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanSiswa'; ?>" enctype="multipart/form-data" novalidate>
                     <div class="item form-group">
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nomor Induk <span class="required">*</span>
                       </label>
@@ -149,7 +149,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Foto Profil <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" name="berkas">
+                        <input type="file" name="filefoto">
                       </div>
                     </div>
                     <div class="ln_solid"></div>

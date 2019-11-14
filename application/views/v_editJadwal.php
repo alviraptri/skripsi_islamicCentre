@@ -52,7 +52,14 @@
 
                   <?php foreach ($editJadwal as $edit) { ?>
                     <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateJadwal'; ?>" novalidate>
-                    <input type="text" id="email" name="idJadwal" required="required" class="form-control" value="<?= $edit->idJadwal ?>" hidden>  
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">ID Jadwal <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                        <input type="text" id="email" name="idJadwal" required="required" class="form-control" value="<?= $edit->idJadwal ?>" readonly>
+                        </div>
+                      </div>
+                      
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required">*</span>
                         </label>

@@ -260,9 +260,50 @@ class m_admin extends CI_Model
         ->where('datasiswa.idKelas = "'.$idKelas.'"');
         return $this->db->get();
     }
-    function simpanMulti($data, $table)
+    function simpanMulti($data)
     {
-            $this->db->insert_batch($table, $data);
+            $result = array();
+            foreach ($data as $key => $value) {
+                $result[] = array(
+                    'idInfo' => "",
+                    'idSiswa' => $_POST['idSiswa'][$key],
+                    'jumlah' => $_POST['jumlah'][$key],
+                    'statusInfo' => "1",
+                );
+            }
+            $this->db->insert_batch('informasispp', $result);
+    }
+    function getDataInfo($idKelas)
+    {
+        $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, datasiswa.statusSiswa, 
+        kelas.idKelas,user.nomorInduk, user.namaUser, informasispp.idSiswa, informasispp.jumlah, informasispp.idInfo')
+        ->from('datasiswa')
+        ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner')
+        ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
+        ->join('informasispp', 'informasispp.idSiswa = datasiswa.idSiswa')
+        ->where('datasiswa.idKelas = "'.$idKelas.'"');
+        return $this->db->get();
+    }
+    function statusInfo($idInfo){
+        $hasil = $this->db->query("UPDATE informasispp SET statusInfo = '0' WHERE idInfo = '".$idInfo."'");
+        return $hasil;
+        // $idInfo = $this->input->post('idInfo');
+
+        // $this->db->set('statusInfo', 0);
+        // $this->db->where('idInfo', $idInfo);
+        // $result = $this->db->update('informasispp');
+        // return $result;
+    }
+
+    function getMapel($nomorInduk)
+    {
+        $this->db->select('jadwal.nomorInduk, jadwal.idMapel, ketnilai.nomorInduk, ketnilai.idMapel, matapelajaran.idMapel, 
+        matapelajaran.namaMapel')
+        ->from('ketnilai')
+        ->join('matapelajaran', 'matapelajaran.idMapel = ketnilai.idMapel', 'inner')
+        ->join('jadwal', 'jadwal.nomorInduk = ketnilai.nomorInduk', 'inner')
+        ->where('ketnilai.nomorInduk = "'.$nomorInduk.'"');
+        return $this->db->get();
     }
 }
 

@@ -15,8 +15,12 @@ class c_admin extends CI_Controller
 	}
 
 	/* Menu:
-	- Guru: 23-110
-	- Siswa: 112-213
+	- Admin: 25-71
+	- Guru: 73-119
+	- Wali Kelas: 122-173
+	- Pegawai: 175-260
+	- Siswa: 262-418
+	- Wali Murid: 420-509
 	- Gambar: 215-232
 	- Mata Pelajaran: 234-288
 	- Jadwal:  */
@@ -193,37 +197,48 @@ class c_admin extends CI_Controller
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
-		$config['upload_path'] = 'assets/inter/images/profil/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = 100;
-		$config['max_width'] = 1024;
-		$config['max_height'] = 768;
+		$config['upload_path'] = './assets/inter/images/profil';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+		$config['encrypt_name'] = TRUE;
+
+		$this->upload->initialize($config);
+		if(!empty($_FILES['filefoto']['name'])){
+			if ($this->upload->do_upload('filefoto')){
+				$gbr = $this->upload->data();
+				$config['image_library']='gd2';
+                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$gambar=$gbr['file_name'];
  
-		$this->load->library('upload', $config);
- 
-		if ( ! $this->upload->do_upload('berkas')){
-			$error = array('error' => $this->upload->display_errors());
-			$this->load->view('v_tambahPegawai', $error);
-		}else{
-			$data = array('upload_data' => $this->upload->data());
-			$this->load->view('v_upload_sukses', $data);
+				$data = array(
+					'nomorInduk' => $noInduk,
+					'userRole' => $userRole,
+					'namaUser' => $nama,
+					'ttlUser' => $tgl,
+					'emailUser' => $email,
+					'noTelp' => $noTelp,
+					'alamatUser' => $alamat,
+					'jenisKelamin' => $jk,
+					'passUser' => md5($pass),
+					'gambar' => $gambar,
+					'statusUser' => 1 
+				);
+				
+				$this->m_admin->simpanData($data, 'user');
+				echo "Image berhasil diupload";
+			}
 		}
+		else{
+            echo "Image yang diupload kosong";
+        }
 
-		$data = array(
-			'nomorInduk' => $noInduk,
-			'userRole' => $userRole,
-			'namaUser' => $nama,
-			'ttlUser' => $tgl,
-			'emailUser' => $email,
-			'noTelp' => $noTelp,
-			'alamatUser' => $alamat,
-			'jenisKelamin' => $jk,
-			'passUser' => md5($pass),
-			'gambar' => $photo,
-			'statusUser' => 1 
-		);
-
-		$this->m_admin->simpanData($data, 'user');
 		if($userRole == 'Wali Kelas'){
 			$data = array(
 				'idWaliKelas' => "",
@@ -243,27 +258,6 @@ class c_admin extends CI_Controller
 		elseif ($userRole == 'Wali Kelas') {
 			redirect('c_admin/waliKelas');
 		}
-	}
-
-	//gambar
-	function _uploadImage()
-	{
-		$config = array(
-			'upload_path' => 'assets/inter/images/profil/',
-			'allowed_types' => "gif|jpg|png|jpeg|pdf",
-			'overwrite' => TRUE,
-			'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-			'max_height' => "768",
-			'max_width' => "1024"
-		);
-		
-		$this->load->library('upload', $config);
-
-		if($this->upload->do_upload('image')){
-			return $this->upload->data('file_name');
-        }
-        
-        return "default.jpg";
 	}
 
 	//siswa
@@ -338,19 +332,47 @@ class c_admin extends CI_Controller
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
-		$dataUser = array(
-			'nomorInduk' => $noInduk,
-			'userRole' => $status,
-			'namaUser' => $nama,
-			'ttlUser' => $tgl,
-			'emailUser' => $email,
-			'noTelp' => $noTelp,
-			'alamatUser' => $alamat,
-			'jenisKelamin' => $jk,
-			'passUser' => md5($pass),
-			'gambar' => $photo,
-			'statusUser' => '1' 
-		);
+		$config['upload_path'] = './assets/inter/images/profil';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+		$config['encrypt_name'] = TRUE;
+
+		$this->upload->initialize($config);
+		if(!empty($_FILES['filefoto']['name'])){
+			if ($this->upload->do_upload('filefoto')){
+				$gbr = $this->upload->data();
+				$config['image_library']='gd2';
+                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$gambar=$gbr['file_name'];
+
+				$dataUser = array(
+					'nomorInduk' => $noInduk,
+					'userRole' => $status,
+					'namaUser' => $nama,
+					'ttlUser' => $tgl,
+					'emailUser' => $email,
+					'noTelp' => $noTelp,
+					'alamatUser' => $alamat,
+					'jenisKelamin' => $jk,
+					'passUser' => md5($pass),
+					'gambar' => $gambar,
+					'statusUser' => '1' 
+				);
+
+				$this->m_admin->simpanData($dataUser, 'user');
+				echo "Image berhasil diupload";
+			}
+		}
+		else{
+            echo "Image yang diupload kosong";
+        }
 
 		$dataSiswa = array(
 			'idSiswa' => "",
@@ -360,7 +382,6 @@ class c_admin extends CI_Controller
 			'statusSiswa' => '1'
 		);
 
-		$this->m_admin->simpanData($dataUser, 'user');
 		$this->m_admin->simpanData($dataSiswa, 'datasiswa');
 
 		$where = array(
@@ -761,6 +782,7 @@ class c_admin extends CI_Controller
 		redirect('c_admin/jadwal');
 	}
 	
+	//informasi spp
 	function tambahInfo()
 	{
 		$data['kls'] = $this->m_admin->kelas()->result();
@@ -781,22 +803,74 @@ class c_admin extends CI_Controller
 	}
 	function simpanInfo()
 	{
-		$idSiswa = $this->input->post('idKelas');
+		$idSiswa = $this->input->post('idSiswa');
 		$jumlah =$this->input->post('jumlah');
-		$jSiswa = count($idSiswa);
-		for($i = 0 ; $i < $jSiswa ; $i++){
-			$data = array(
-				'idInfo' => "",
-				'idSiswa' => $idSiswa,
-				'jumlah' => $jumlah,
-				'statusInfo' => "1",
-			);
-		}
 
-		$this->m_admin->simpanMulti($data, 'informasispp');
-		redirect('c_admin/jadwal');
+		$data = array($idSiswa, $jumlah);
+
+		$this->m_admin->simpanMulti($data);
+		redirect('c_admin/info');
+	}
+	function info()
+	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$this->load->view('v_dataInfo', $data);
+	}
+	function getDataInfo()
+	{
+		$idKelas = $this->input->post('idKelas', TRUE);
+		$data = $this->m_admin->getDataInfo($idKelas)->result();
+		echo json_encode($data);
+	}
+	function statusInfo()
+	{
+		$idInfo = $this->input->post('idInfo');
+		$data=$this->m_admin->statusInfo($idInfo);
+	
+		echo json_encode($data);
 	}
 
+	//keterangan nilai
+	function tambahKetNilai()
+	{
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
+		$this->load->view('v_tambahKetNilai', $data);
+	}
+	function simpanKetNilai()
+	{
+		$bobotKat1 = $this->input->post("bobotKat1");
+		$bobotKat2 = $this->input->post("bobotKat2");
+		$bobotUts = $this->input->post("bobotUts");
+		$bobotUas = $this->input->post("bobotUas");
+		$nomorInduk = $this->input->post("guru");
+		$idMapel = $this->input->post("mapel");
 
+		$data = array(
+			'idKetNilai' => "",
+			'nomorInduk' => $nomorInduk,
+			'idMapel' => $idMapel,
+			'nilaiSatu' => $bobotKat1,
+			'nilaiDua' => $bobotKat2,
+			'nilaiUts' => $bobotUts,
+			'nilaiUas' => $bobotUas,
+			'statusKetNilai' => '1'
+		);
+
+		$this->m_admin->simpanData($data, 'ketnilai');
+		redirect('c_admin/ketNilai');
+	}
+	function ketNilai()
+	{
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
+		$this->load->view('v_dataKetNilai', $data);
+	}
+	function getMapel()
+	{
+		$nomorInduk = $this->input->post('nomorInduk', TRUE);
+		$data = $this->m_admin->getMapel($nomorInduk)->result();
+		echo json_encode($data);
+	}
 }
 ?>

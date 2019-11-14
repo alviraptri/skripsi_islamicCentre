@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Informasi SPP | Information Academic Islamic Centre</title>
+    <title>Keterangan Nilai | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Informasi SPP</h3>
+                            <h3>Keterangan Nilai</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -46,22 +46,35 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tambah Informasi SPP</h2>
+                                    <h2>Data Keterangan Nilai</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
 
-                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanInfo'; ?>" novalidate>
+                                    <form class="form-horizontal form-label-left" method="post" action="" novalidate>
+                                    <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="guru" id="guru" required="required" class="form-control">
+                                                    <option value="">Pilih Guru</option>
+                                                    <?php
+                                                    foreach ($guru as $list) { ?>
+                                                        <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Kelas<span class="required">*</span>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Mata Pelajaran<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6   ">
-                                                <select name="idKelas" id="kelas" class="form-control">
-                                                    <option value=""> Pilih Kelas</option>
-                                                    <?php
-                                                    foreach ($kls as $kelas) { ?>
-                                                        <option value="<?= $kelas->idKelas ?>"><?= $kelas->ketKelas ?> <?= $kelas->jurusanKelas ?> <?= $kelas->nomorKelas ?></option>
-                                                    <?php } ?>
+                                                <select name="idKelas" id="mapel" class="form-control">
+                                                    <option value=""> Pilih Mata Pelajaran</option>
+                                                    <!-- <?php
+                                                    foreach ($mapel as $list) { ?>
+                                                        <option value="<?= $list->idMapel ?>"><?= $list->namaMapel ?></option>
+                                                    <?php } ?> -->
                                                 </select>
                                             </div>
                                         </div>
@@ -75,22 +88,17 @@
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Nama Siswa</th>
-                                                    <th>Jumlah Biaya</th>
+                                                    <th>Keterangan Nilai</th>
+                                                    <th>Bobot Nilai</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody name="siswa" id="siswa">
-                                                
+                                            <tbody name="show_data" id="show_data">
+
                                             </tbody>
-                                        </table> 
+                                        </table>
                                         <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 offset-md-3">
-                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
-                                            </div>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -112,22 +120,30 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#kelas').change(function() {
-                var idKelas = $(this).val();
-                // if(idKelas != '')
-                // {
-                //     $.ajax({
-                //         url:"<?php //echo site_url('c_admin/getSiswa'); ?>",
-                //         method:"POST",
-                //         data:{idKelas:idKelas},
-                //         success:function(data)
-                //         {
-                //             $('#siswa').html(data);
-                //         }
-                //     })
-                // }
+            //view
+            $('#guru').change(function() {
+                var nomorInduk = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getSiswa'); ?>",
+                    url: "<?php echo site_url('c_admin/getMapel');?>",
+                    method: "POST",
+                    data: {
+                        nomorInduk:nomorInduk
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data){
+                        var html = '';
+                        var i;
+                        for(i = 0; i<data/.length; i++){
+                            html += '<option value="'+ data[i].idMapel +'">'+data[i].namaMapel+'</option>'
+                        }
+                        $('#mapel').html(html);
+                    }
+                });
+                return false;
+
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getDataInfo'); ?>",
                     method: "POST",
                     data: {
                         idKelas: idKelas
@@ -138,12 +154,13 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<tr>'+
-                            '<td>' + data[i].namaUser + '</td>'+
-                            '<td><input type="text" name="idSiswa[]" id="biaya" value="'+data[i].idSiswa+'" hidden><input type="text" name="jumlah[]" id="biaya" class="form-control"></td>'+
-                            '</tr>';
+                            html += '<tr>' +
+                                '<td>' + data[i].namaUser + '</td>' +
+                                '<td><input type="text" name="idSiswa[]" id="biaya" value="' + data[i].idInfo + '" hidden>' + data[i].jumlah + '</td>' +
+                                '<td><a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].idInfo+'">Hapus</a></td>' +
+                                '</tr>';
                         }
-                        $('#siswa').html(html);
+                        $('#show_data').html(html);
 
                     }
                 });
@@ -151,7 +168,7 @@
             });
 
         });
-        </script>
+    </script>
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>

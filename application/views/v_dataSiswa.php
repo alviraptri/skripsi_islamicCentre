@@ -93,7 +93,7 @@
                           <td>
                             <?php
                               if ($listSiswa->statusSiswa == 1) { ?>
-                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm <?php echo $listSiswa->nomorInduk ?>">
+                              <button data-toggle="modal" title="Lihat Lebih" class="btn btn-primary btn-xs" data-target="#bs-example-modal-sm<?php echo $listSiswa->nomorInduk ?>">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                               </button>
                               <?php
@@ -149,7 +149,7 @@
 
       <!-- footer content -->
       <footer>
-      <?php include("v-Footer.php") ?>
+        <?php include("v-Footer.php") ?>
       </footer>
       <!-- /footer content -->
     </div>

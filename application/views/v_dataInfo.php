@@ -46,12 +46,12 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tambah Informasi SPP</h2>
+                                    <h2>Data Informasi SPP</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
 
-                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanInfo'; ?>" novalidate>
+                                    <form class="form-horizontal form-label-left" method="post" action="" novalidate>
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Kelas<span class="required">*</span>
                                             </label>
@@ -77,25 +77,47 @@
                                                 <tr>
                                                     <th>Nama Siswa</th>
                                                     <th>Jumlah Biaya</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody name="siswa" id="siswa">
-                                                
+                                            <tbody name="siswa" id="show_data">
+
                                             </tbody>
-                                        </table> 
+                                        </table>
                                         <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 offset-md-3">
-                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
-                                            </div>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!--MODAL HAPUS-->
+                    <div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Hapus Barang</h4>
+                                </div>
+                                <form class="form-horizontal">
+                                    <div class="modal-body">
+
+                                        <input type="hidden" name="kode" id="textkode" value="">
+                                        <div class="alert alert-warning">
+                                            <p>Apakah Anda yakin mau memhapus barang ini?</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                                        <button class="btn_hapus btn btn-danger" id="btn_hapus">Ya</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END MODAL HAPUS-->
                 </div>
             </div>
             <!-- /page content -->
@@ -112,12 +134,14 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+            //view
             $('#kelas').change(function() {
                 var idKelas = $(this).val();
                 // if(idKelas != '')
                 // {
                 //     $.ajax({
-                //         url:"<?php //echo site_url('c_admin/getSiswa'); ?>",
+                //         url:"<?php //echo site_url('c_admin/getSiswa'); 
+                                ?>",
                 //         method:"POST",
                 //         data:{idKelas:idKelas},
                 //         success:function(data)
@@ -127,7 +151,7 @@
                 //     })
                 // }
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getSiswa'); ?>",
+                    url: "<?php echo site_url('c_admin/getDataInfo'); ?>",
                     method: "POST",
                     data: {
                         idKelas: idKelas
@@ -138,20 +162,42 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<tr>'+
-                            '<td>' + data[i].namaUser + '</td>'+
-                            '<td><input type="text" name="idSiswa[]" id="biaya" value="'+data[i].idSiswa+'" hidden><input type="text" name="jumlah[]" id="biaya" class="form-control"></td>'+
-                            '</tr>';
+                            html += '<tr>' +
+                                '<td>' + data[i].namaUser + '</td>' +
+                                '<td><input type="text" name="idSiswa[]" id="biaya" value="' + data[i].idInfo + '" hidden>' + data[i].jumlah + '</td>' +
+                                '<td><a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].idInfo+'">Hapus</a></td>' +
+                                '</tr>';
                         }
-                        $('#siswa').html(html);
+                        $('#show_data').html(html);
 
                     }
                 });
                 return false;
             });
 
+            //GET HAPUS
+        $('#show_data').on('click','.item_hapus',function(){
+            var idInfo=$(this).attr('data');
+            $('#ModalHapus').modal('show');
+            $('[name="kode"]').val(idInfo);
         });
-        </script>
+
+            //Hapus Barang
+        $('#btn_hapus').on('click',function(){
+            var kode=$('#textkode').val();
+            $.ajax({
+            type : "POST",
+            url  : "<?php echo base_url('c_admin/statusInfo')?>",
+            dataType : "JSON",
+                    data : {kode: kode},
+                    success: function(data){
+                            $('#ModalHapus').modal('hide');
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>

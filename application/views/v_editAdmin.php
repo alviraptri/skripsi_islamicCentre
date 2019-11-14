@@ -56,7 +56,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nomor Induk <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="<?= $edit->nomorInduk ?>">
+                          <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="<?= $edit->nomorInduk ?>" readonly>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -149,11 +149,11 @@
                       <div class="form-group">
                         <div class="col-md-6 offset-md-3">
                           <button id="send" type="submit" class="btn btn-success">Simpan</button>
+                          <?php } ?>
                           <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
                         </div>
                       </div>
                     </form>
-                    <?php } ?>
                   </div>
                 </div>
               </div>
