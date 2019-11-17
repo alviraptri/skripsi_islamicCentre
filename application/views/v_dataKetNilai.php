@@ -202,8 +202,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value=""> Pilih Mata Pelajaran</option>' +
-                                '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
+                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
                         }
                         $('#mapel').html(html);
                     }

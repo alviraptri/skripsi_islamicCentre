@@ -76,6 +76,12 @@
             <li><a href="<?php echo base_url('c_admin/tambahKetNilai'); ?>">Tambah Keterangan Nilai</a></li>
           </ul>
         </li>
+        <li><a><i class="fa fa-columns"></i> Absensi <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/absensi'); ?>">Data Absensi</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahAbsensi'); ?>">Tambah Absensi</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

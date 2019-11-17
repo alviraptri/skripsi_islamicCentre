@@ -788,13 +788,6 @@ class c_admin extends CI_Controller
 		$data['kls'] = $this->m_admin->kelas()->result();
 		$this->load->view('v_tambahInfo', $data);
 	}
-	// function getSiswa()
-	// {
-	// 	if($this->input->post('idKelas'))
-	// 	{
-	// 		echo $this->m_admin->getSiswa($this->input->post('idKelas'));
-	// 	}
-	// }
 	function getSiswa()
 	{
 		$idKelas = $this->input->post('idKelas', TRUE);
@@ -902,6 +895,19 @@ class c_admin extends CI_Controller
 		);
         $data=$this->m_admin->updateData($where, $data, 'ketnilai');
         echo json_encode($data);
+	}
+
+	//absensi
+	function tambahAbsensi()
+	{
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$this->load->view('v_tambahAbsensi', $data);
+	}
+	function getNama()
+	{
+		$idKelas = $this->input->post('idKelas', TRUE);
+		$data = $this->m_admin->getNama($idKelas)->result();
+		echo json_encode($data);
 	}
 }
 ?>

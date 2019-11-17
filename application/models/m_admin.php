@@ -236,21 +236,8 @@ class m_admin extends CI_Model
     }
 
     //ajax
-    // function getSiswa($idKelas)
-    // {
-    //     $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, datasiswa.statusSiswa, kelas.idKelas,user.nomorInduk, user.namaUser')
-    //     ->from('datasiswa')
-    //     ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner')
-    //     ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
-    //     ->where('datasiswa.idKelas = "'.$idKelas.'"');
-    //     $query = $this->db->get();
-    //     $output = '<option value="">Pilih Siswa</option>';
-    //     foreach ($query->result() as $row) {
-    //         $output .= '<option value="'.$row->nomorInduk.'">'.$row->namaUser.'</option>';
-    //     }
-    //     return $output;
-    // }
-
+    
+    //info
     function getSiswa($idKelas)
     {
         $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, datasiswa.statusSiswa, kelas.idKelas,user.nomorInduk, user.namaUser')
@@ -295,11 +282,14 @@ class m_admin extends CI_Model
         // return $result;
     }
 
+    //ketnilai
     function getMapel($nomorInduk)
     {
-        $this->db->select('jadwal.nomorInduk, jadwal.idMapel, matapelajaran.idMapel, matapelajaran.namaMapel')
+        $this->db->select('jadwal.idJadwal, jadwal.nomorInduk, jadwal.idMapel,jadwal.idKelas ,matapelajaran.idMapel, matapelajaran.namaMapel, kelas.idKelas, kelas.ketKelas, 
+        kelas.jurusanKelas, kelas.nomorKelas')
         ->from('jadwal')
         ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
+        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
         ->where('jadwal.nomorInduk = "'.$nomorInduk.'"');
 
         return $this->db->get();
@@ -334,9 +324,15 @@ class m_admin extends CI_Model
         }
         return $hasil;
     }
-    function updateKetNilai()
+
+    //absensi
+    function getNama($idKelas)
     {
-        
+        $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, user.nomorInduk, user.namaUser')
+        ->from('datasiswa')
+        ->join('user', 'user.nomorInduk = datasiswa.nomorInduk', 'inner')
+        ->where('datasiswa.idKelas = "'.$idKelas.'"');
+        return $this->db->get();
     }
 }
 
