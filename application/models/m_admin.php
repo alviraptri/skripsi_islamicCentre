@@ -263,11 +263,11 @@ class m_admin extends CI_Model
     function simpanMulti($data)
     {
             $result = array();
-            foreach ($data as $key => $value) {
+            for($i = 0; $i <= count($data); $i++) {
                 $result[] = array(
                     'idInfo' => "",
-                    'idSiswa' => $_POST['idSiswa'][$key],
-                    'jumlah' => $_POST['jumlah'][$key],
+                    'idSiswa' => $_POST['idSiswa'][$i],
+                    'jumlah' => $_POST['jumlah'][$i],
                     'statusInfo' => "1",
                 );
             }
@@ -276,12 +276,12 @@ class m_admin extends CI_Model
     function getDataInfo($idKelas)
     {
         $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, datasiswa.statusSiswa, 
-        kelas.idKelas,user.nomorInduk, user.namaUser, informasispp.idSiswa, informasispp.jumlah, informasispp.idInfo')
+        kelas.idKelas,user.nomorInduk, user.namaUser, informasispp.idSiswa, informasispp.jumlah, informasispp.idInfo, informasispp.statusInfo')
         ->from('datasiswa')
         ->join('kelas', 'kelas.idKelas = dataSiswa.idKelas', 'inner')
         ->join('user', 'user.nomorInduk = dataSiswa.nomorInduk', 'inner')
         ->join('informasispp', 'informasispp.idSiswa = datasiswa.idSiswa')
-        ->where('datasiswa.idKelas = "'.$idKelas.'"');
+        ->where('datasiswa.idKelas = "'.$idKelas.'" AND informasispp.statusInfo = 1');
         return $this->db->get();
     }
     function statusInfo($idInfo){
@@ -297,13 +297,46 @@ class m_admin extends CI_Model
 
     function getMapel($nomorInduk)
     {
-        $this->db->select('jadwal.nomorInduk, jadwal.idMapel, ketnilai.nomorInduk, ketnilai.idMapel, matapelajaran.idMapel, 
-        matapelajaran.namaMapel')
-        ->from('ketnilai')
-        ->join('matapelajaran', 'matapelajaran.idMapel = ketnilai.idMapel', 'inner')
-        ->join('jadwal', 'jadwal.nomorInduk = ketnilai.nomorInduk', 'inner')
-        ->where('ketnilai.nomorInduk = "'.$nomorInduk.'"');
+        $this->db->select('jadwal.nomorInduk, jadwal.idMapel, matapelajaran.idMapel, matapelajaran.namaMapel')
+        ->from('jadwal')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
+        ->where('jadwal.nomorInduk = "'.$nomorInduk.'"');
+
         return $this->db->get();
+    }
+    function getKetNilai($where)
+    {
+        $this->db->select('idKetNilai, idMapel, nilaiSatu, nilaiDua, nilaiUts, nilaiUas')
+        ->from('ketnilai')
+        ->where($where);
+        return $this->db->get();
+    }
+    function editKetNilai($id)
+    {
+        $hasil = $this->db->query('SELECT ketnilai.idKetNilai, ketnilai.nomorInduk, ketnilai.idMapel, ketnilai.nilaiSatu, ketnilai.nilaiDua, ketnilai.nilaiUts, ketnilai.nilaiUas, 
+        matapelajaran.idMapel, matapelajaran.namaMapel, user.nomorInduk, user.namaUser 
+        FROM ketnilai 
+        INNER JOIN matapelajaran ON matapelajaran.idMapel = ketnilai.idMapel 
+        INNER JOIN user on user.nomorInduk = ketnilai.nomorInduk 
+        WHERE ketnilai.idKetNilai = "'.$id.'"');
+        if($hasil->num_rows()>0){
+            foreach ($hasil->result() as $data) {
+                $hasil=array(
+                    'idKetNilai' => $data->idKetNilai,
+                    'namaUser' => $data->namaUser,
+                    'namaMapel' => $data->namaMapel,
+                    'nilaiSatu' => $data->nilaiSatu,
+                    'nilaiDua' => $data->nilaiDua,
+                    'nilaiUts' => $data->nilaiUts,
+                    'nilaiUas' => $data->nilaiUas,
+                );
+            }
+        }
+        return $hasil;
+    }
+    function updateKetNilai()
+    {
+        
     }
 }
 

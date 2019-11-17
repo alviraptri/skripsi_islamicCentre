@@ -105,7 +105,7 @@
 
                                         <input type="hidden" name="kode" id="textkode" value="">
                                         <div class="alert alert-warning">
-                                            <p>Apakah Anda yakin mau memhapus barang ini?</p>
+                                            <p>Apakah Anda yakin mau menghapus barang ini?</p>
                                         </div>
 
                                     </div>

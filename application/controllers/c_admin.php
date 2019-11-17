@@ -824,7 +824,7 @@ class c_admin extends CI_Controller
 	}
 	function statusInfo()
 	{
-		$idInfo = $this->input->post('idInfo');
+		$idInfo = $this->input->post('kode');
 		$data=$this->m_admin->statusInfo($idInfo);
 	
 		echo json_encode($data);
@@ -863,7 +863,6 @@ class c_admin extends CI_Controller
 	function ketNilai()
 	{
 		$data['guru'] = $this->m_admin->jadwalGuru()->result();
-		$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
 		$this->load->view('v_dataKetNilai', $data);
 	}
 	function getMapel()
@@ -871,6 +870,38 @@ class c_admin extends CI_Controller
 		$nomorInduk = $this->input->post('nomorInduk', TRUE);
 		$data = $this->m_admin->getMapel($nomorInduk)->result();
 		echo json_encode($data);
+	}
+	function getKetNilai()
+	{
+		$idMapel = $this->input->post('idMapel', TRUE);
+		$where = array('idMapel' => $idMapel);
+		$data = $this->m_admin->getKetNilai($where)->result();
+		echo json_encode($data);
+	}
+	function editKetNilai()
+	{
+		$id = $this->input->get('id');
+		$data = $this->m_admin->editKetNilai($id);
+		echo json_encode($data);
+	}
+	function updateKetNilai()
+	{
+		$id=$this->input->post('id');
+        $nsatu=$this->input->post('nsatu');
+		$ndua=$this->input->post('ndua');
+		$nuts=$this->input->post('nuts');
+		$nuas=$this->input->post('nuas');
+
+		$where = array('idKetNilai' => $id,);
+
+		$data = array(
+			'nilaiSatu' => $nsatu,
+			'nilaiDua' => $ndua,
+			'nilaiUts' => $nuts,
+			'nilaiUas' => $nuas,
+		);
+        $data=$this->m_admin->updateData($where, $data, 'ketnilai');
+        echo json_encode($data);
 	}
 }
 ?>
