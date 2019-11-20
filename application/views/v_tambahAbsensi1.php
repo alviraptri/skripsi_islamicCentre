@@ -68,12 +68,20 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6" id="jadwalGuru">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
                                                 <select name="mapel" id="mapel" required="required" class="form-control">
                                                     <option value="">Pilih Mata Pelajaran</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6" id="jadwalMapel">
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -90,10 +98,6 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6" id="jadwal1">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
@@ -101,6 +105,16 @@
                                                 $tgl = date('d F Y');
                                                 ?>
                                                 <input type="text" id="tanggal" name="tanggal[] " required="required" class="form-control" value="<?php echo $tgl?>" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <?php 
+                                                $format = date('Y-m-d');
+                                                ?>
+                                                <input type="text" id="tgl" name="tgl[] " required="required" class="form-control" value="<?php echo $format?>" hidden>
                                             </div>
                                         </div>
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
@@ -155,18 +169,18 @@
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        var html = '';
+                        var html ='';
                         var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
+                        for(i = 0; i < data.length; i++){
+                            html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="'+data[i].idJadwal+'">';
                         }
-                        $('#mapel').html(html);
+                        $('#jadwalGuru').html(html);
                     }
                 });
                 return false;
             });
 
-            //view kelas
+            //view id jadwal setelah select guru
             $('#guru').change(function() {
                 var nomorInduk = $(this).val();
                 $.ajax({
@@ -181,6 +195,29 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
+                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
+                        }
+                        $('#mapel').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view kelas
+            $('#mapel').change(function() {
+                var idMapel = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getKelas'); ?>",
+                    method: "POST",
+                    data: {
+                        idMapel: idMapel
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        for (i = 0; i < data.length; i++) {
                             html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' '+ data[i].jurusanKelas +' '+ data[i].nomorKelas +'</option>'
                         }
                         $('#kelas').html(html);
@@ -188,6 +225,52 @@
                 });
                 return false;
             });
+
+            //view id jadwal setelah select mapel
+            $('#mapel').change(function() {
+                var idMapel = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getKelas'); ?>",
+                    method: "POST",
+                    data: {
+                        idMapel: idMapel
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="'+data[i].idMapel+'">'
+                        }
+                        $('#jadwalMapel').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view kelas
+            // $('#guru').change(function() {
+            //     var nomorInduk = $(this).val();
+            //     $.ajax({
+            //         url: "<?php echo site_url('c_admin/getMapel'); ?>",
+            //         method: "POST",
+            //         data: {
+            //             nomorInduk: nomorInduk
+            //         },
+            //         async: true,
+            //         dataType: 'JSON',
+            //         success: function(data) {
+            //             var html = '';
+            //             var i;
+            //             for (i = 0; i < data.length; i++) {
+            //                 html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' '+ data[i].jurusanKelas +' '+ data[i].nomorKelas +'</option>'
+            //             }
+            //             $('#kelas').html(html);
+            //         }
+            //     });
+            //     return false;
+            // });
 
             //view nama siswa
             $('#kelas').change(function(){
@@ -219,14 +302,14 @@
                 return false;
             });
 
-            //ambil id jadwal
-            $('#mapel').change(function(){
-                var idMapel = $(this).val();
+            //ambil id jadwal setelah pilih kelas
+            $('#kelas').change(function(){
+                var idKelas = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getJadwal'); ?>",
+                    url: "<?php echo site_url('c_admin/getNama'); ?>",
                     method: "POST",
                     data: {
-                        idMapel: idMapel
+                        idKelas: idKelas
                     },
                     async: true,
                     dataType: 'JSON',
@@ -234,35 +317,13 @@
                         var html ='';
                         var i;
                         for(i = 0; i < data.length; i++){
-                            html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="'+data[i].idJadwal+'">';
+                            html += '<input type="text" id="idKelas" name="idKelas[]" required="required" class="form-control" value="'+data[i].idKelas+'">';
                         }
                         $('#jadwal').html(html);
                     }
                 });
                 return false;
             });
-
-            // $('#kelas').change(function(){
-            //     var idKelas = $(this).val();
-            //     $.ajax({
-            //         url: "<?php echo site_url('c_admin/getJadwal'); ?>",
-            //         method: "POST",
-            //         data: {
-            //             idKelas: idKelas
-            //         },
-            //         async: true,
-            //         dataType: 'JSON',
-            //         success: function(data){
-            //             var html ='';
-            //             var i;
-            //             for(i = 0; i < data.length; i++){
-            //                 html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="'+data[i].idJadwal+'">';
-            //             }
-            //             $('#jadwal1').html(html);
-            //         }
-            //     });
-            //     return false;
-            // });
         });
     </script>
 

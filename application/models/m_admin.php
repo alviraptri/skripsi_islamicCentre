@@ -1,4 +1,4 @@
-<?php
+<?php  
 class m_admin extends CI_Model
 {
 
@@ -325,6 +325,18 @@ class m_admin extends CI_Model
         return $hasil;
     }
 
+    function getKelas($idMapel)
+    {
+        $this->db->select('jadwal.idJadwal, jadwal.nomorInduk, jadwal.idMapel,jadwal.idKelas ,matapelajaran.idMapel, matapelajaran.namaMapel, kelas.idKelas, kelas.ketKelas, 
+        kelas.jurusanKelas, kelas.nomorKelas')
+        ->from('jadwal')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
+        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
+        ->where('jadwal.idMapel = "'.$idMapel.'"');
+
+        return $this->db->get();
+    }
+
     //absensi
     function getNama($idKelas)
     {
@@ -332,6 +344,29 @@ class m_admin extends CI_Model
         ->from('datasiswa')
         ->join('user', 'user.nomorInduk = datasiswa.nomorInduk', 'inner')
         ->where('datasiswa.idKelas = "'.$idKelas.'"');
+        return $this->db->get();
+    }
+    function simpanAbsen($data)
+    {
+        $result = array();
+        for($i=0 ; $i<=count($data); $i++){
+            $result[] = array(
+                'idAbsen' => ""   ,
+                'idSiswa' => $_POST['idSiswa'][$i],
+                'idJadwal' => $_POST['idJadwal'][$i],
+                'tanggal' => $_POST['tgl'][$i],
+                'absen' => $_POST['cek'][$i],
+                'statusAbsen' => '1',
+            );
+        }
+        $this->db->insert_batch('absensi', $result);
+    }
+
+    function getJadwal($idKelas)
+    {
+        $this->db->select('jadwal.idJadwal, jadwal.idKelas, jadwal.idMapel')
+        ->from('jadwal')
+        ->where('jadwal.idKelas = "'.$idKelas.'"');
         return $this->db->get();
     }
 }

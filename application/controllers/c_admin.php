@@ -1,4 +1,4 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class c_admin extends CI_Controller 
@@ -897,17 +897,58 @@ class c_admin extends CI_Controller
         echo json_encode($data);
 	}
 
+	function getKelas()
+	{
+		$idMapel = $this->input->post('idMapel');
+		$data = $this->m_admin->getKelas($idMapel)->result();
+		echo json_encode($data);
+	}
+
 	//absensi
 	function tambahAbsensi()
 	{
 		$data['guru'] = $this->m_admin->jadwalGuru()->result();
-		$this->load->view('v_tambahAbsensi', $data);
+		$this->load->view('v_tambahAbsensi1', $data);
 	}
 	function getNama()
 	{
 		$idKelas = $this->input->post('idKelas', TRUE);
 		$data = $this->m_admin->getNama($idKelas)->result();
 		echo json_encode($data);
+	}
+	function simpanAbsen()
+	{
+		$idSiswa = $this->input->post('idSiswa');
+		$cek = $this->input->post('cek');
+		$tanggal = $this->input->post('tanggal');
+		$idKelas = $this->input->post('kelas');
+		$idMapel = $this->input->post('mapel');
+
+		$jadwal = $this->db->query("SELECT idJadwal 
+		FROM jadwal 
+		WHERE idKelas = '".$idKelas."' AND idMapel = '".$idMapel."'");
+		foreach ($jadwal->result_array() as $hasil) {
+			$idJadwal[] = $hasil['idJadwal'];
+		}
+
+		$data = array($idSiswa, $cek, $idJadwal, $tanggal);
+
+		$this->m_admin->simpanAbsen($data);
+		redirect('c_admin/absensi');
+	}
+
+	function getJadwal()
+	{
+		$idKelas = $this->input->post('idKelas');
+		$data = $this->m_admin->getJadwal($idKelas)->result();
+		echo json_encode($data);
+	}
+
+	//jadwal ujian
+	function tambahJadwalUjian()
+	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_tambahJadwalUjian', $data);
 	}
 }
 ?>

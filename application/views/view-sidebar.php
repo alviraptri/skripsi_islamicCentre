@@ -76,10 +76,41 @@
             <li><a href="<?php echo base_url('c_admin/tambahKetNilai'); ?>">Tambah Keterangan Nilai</a></li>
           </ul>
         </li>
-        <li><a><i class="fa fa-columns"></i> Absensi <span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-check-square-o"></i> Absensi <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="<?php echo base_url('c_admin/absensi'); ?>">Data Absensi</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahAbsensi'); ?>">Tambah Absensi</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-calendar-o"></i> Jadwal Ujian <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="<?php echo base_url('c_admin/jadwalUjian'); ?>">Jadwal Ujian Siswa</a></li>
+            <li><a href="<?php echo base_url('c_admin/jadwalNgawas'); ?>">Jadwal Mengawas Guru</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahJadwalUjian'); ?>">Tambah Jadwal Ujian</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-book"></i> Buku Nilai Guru<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="#">Data Buku Nilai</a></li>
+            <li><a href="#">Tambah Nilai</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-file-text"></i> Nilai Pengembangan Diri<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="#">Data Nilai Pengembangan Diri</a></li>
+            <li><a href="#">Tambah Nilai Pengembangan Diri</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-bar-chart"></i> Rekomendasi <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="#">Data Rekomendasi Siswa</a></li>
+            <li><a href="#">Data Rekomendasi Jurusan Kuliah</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-clipboard"></i> Rapor <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="#">Data Rapor</a></li>
+            <li><a href="#">Tambah Rapor</a></li>
           </ul>
         </li>
       </ul>
