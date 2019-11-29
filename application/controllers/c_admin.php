@@ -977,14 +977,14 @@ class c_admin extends CI_Controller
 		$jamMulai = $this->input->post('jamMulai');
 		$jamSelesai = $this->input->post('jamSelesai');
 		$mapel = $this->input->post('mapel');
-		$guru = $this->input->post('guru');
-		$kelas = $this->input->post('kls');
+		// $guru = $this->input->post('guru');
+		// $kelas = $this->input->post('kls');
 
 		$data = array(
 			'idJadwalUjian' => "",
 			'idTahunAjaran' => $tahunAjaran,
-			'nomorInduk' => $guru,
-			'idKelas' => $kelas,
+			// 'nomorInduk' => $guru,
+			// 'idKelas' => $kelas,
 			'idMapel' => $mapel,
 			'hari' => $hari,
 			'jamMulai' => $jamMulai,
@@ -992,7 +992,24 @@ class c_admin extends CI_Controller
 		);
 
 		$this->m_admin->simpanData($data, 'jadwalujian');
-		redirect('c_admin/jadwal');
+		redirect('c_admin/jadwalUjian');
+	}
+	function jadwalUjian()
+	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_dataJadwalUjian', $data);
+	}
+	function getJadwalUjian()
+	{
+		$idTA = $this->input->post('idTA', TRUE);
+		$data = $this->m_admin->getJadwalUjian($idTA)->result();
+		echo json_encode($data);
+	}
+	function editJadwalUjian()
+	{
+		$id = $this->input->get('id');
+		$data = $this->m_admin->editJadwalUjian($id);
+		echo json_encode($data);
 	}
 }
 ?>

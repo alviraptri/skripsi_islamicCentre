@@ -198,7 +198,7 @@ class m_admin extends CI_Model
     //Mata Pelajaran
     function tampilkanDataMapel()
     {
-        $this->db->select('matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.statusMapel, tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran')
+        $this->db->select('matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel, matapelajaran.statusMapel, tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran')
         ->from('matapelajaran')
         ->join('tahunajaran', 'tahunajaran.idTahunAjaran = matapelajaran.idTahunAjaran')
         ->where('matapelajaran.statusMapel = 1');
@@ -366,6 +366,39 @@ class m_admin extends CI_Model
     {
         $query = $this->db->query('SELECT matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.idTahunAjaran FROM matapelajaran WHERE matapelajaran.idTahunAjaran = "'.$tahunAjaran.'"');
         return $query;
+    }
+    function getJadwalUjian($idTA)
+    {
+        $this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        ->from('jadwalujian')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
+        ->where('jadwalujian.idTahunAjaran = "'.$idTA.'"');
+        return $this->db->get();
+    }
+    function editJadwalUjian($id)
+    {
+        $hasil = $this->db->query('SELECT jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel 
+        FROM jadwalujian 
+        JOIN matapelajaran ON matapelajaran.idMapel = jadwalujian.idMapel 
+        WHERE jadwalujian.idJadwalUjian = "'.$id.'"');
+        if($hasil->num_rows()>0){
+            foreach ($hasil->result() as $data) {
+                $hasil=array(
+                    'idJadwalUjian' => $data->idJadwalUjian,
+                    'hari' => $data->hari,
+                    'jamMulai' => $data->jamMulai,
+                    'jamSelesai' => $data->jamSelesai,
+                    'namaMapel' => $data->jenisMapel,
+                    'tahunAjaran' => $data->tahunAjaran,
+                    'idMapel' => $data->idMapel,
+                    'idTahunAjaran' => $data->idTahunAjaran,
+                    'jenisMapel' => $data->jenisMapel,
+                );
+            }
+        }
+        return $hasil;
     }
 }
 

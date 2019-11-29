@@ -69,6 +69,7 @@
                       <tr>
                       <th>#</th>
                         <th>Mata Pelajaran</th>
+                        <th>Jenis Mata Pelajaran</th>
                         <th>Tahun Ajaran</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -80,6 +81,7 @@
                         <tr>
                         <td><?php echo$listMapel->idMapel ?></td>
                           <td><?php echo$listMapel->namaMapel ?></td>
+                          <td><?php echo $listMapel->jenisMapel?></td>
                           <td><?php echo$listMapel->tahunAjaran ?></td>
                           <td><?php
                                 if ($listMapel->statusMapel == 1) { ?>

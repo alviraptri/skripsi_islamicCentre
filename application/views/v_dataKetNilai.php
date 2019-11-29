@@ -227,9 +227,9 @@
                             html += '<tr>' +
                                 '<td> Nilai Satu </td>' +
                                 '<td>' + data[i].nilaiSatu + '</td>' +
-                                '<td rowspan="4"><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idKetNilai + '">' +
+                                '<td rowspan="4"><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idJadwalUjian + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' +
-                                '</button></td>' +
+                                '</td>' +
                                 '</tr><tr>' +
                                 '<td> Nilai Dua </td>' +
                                 '<td>' + data[i].nilaiDua + '</td>' +
