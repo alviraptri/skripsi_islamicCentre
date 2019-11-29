@@ -518,11 +518,13 @@ class c_admin extends CI_Controller
 	{
 		$mapel = $this->input->post('mapel');
 		$thnajaran = $this->input->post('tahunAjaran');
+		$jenisMapel = $this->input->post('jenisMapel');
 
 		$data = array(
 			'idMapel' => '',
 			'idTahunAjaran' => $thnajaran,
 			'namaMapel' => $mapel,
+			'jenisMapel' => $jenisMapel,
 			'statusMapel' => '1'
 		);
 
@@ -913,27 +915,37 @@ class c_admin extends CI_Controller
 	function getNama()
 	{
 		$idKelas = $this->input->post('idKelas', TRUE);
-		$data = $this->m_admin->getNama($idKelas)->result();
+		$idMapel = $this->input->post('idMapel', TRUE);
+		$nama = $this->m_admin->getNama($idKelas)->result();
+		$jadwal = $this->m_admin->getJadwal($idKelas, $idMapel)->result();
+		$data = array(
+			'nama' => $nama,
+			'jadwal' => $jadwal
+		);
 		echo json_encode($data);
 	}
 	function simpanAbsen()
 	{
 		$idSiswa = $this->input->post('idSiswa');
 		$cek = $this->input->post('cek');
-		$tanggal = $this->input->post('tanggal');
-		$idKelas = $this->input->post('kelas');
-		$idMapel = $this->input->post('mapel');
+		$tanggal = $this->input->post('tgl');
+		$idJadwal = $this->input->post('idJadwal');
 
-		$jadwal = $this->db->query("SELECT idJadwal 
-		FROM jadwal 
-		WHERE idKelas = '".$idKelas."' AND idMapel = '".$idMapel."'");
-		foreach ($jadwal->result_array() as $hasil) {
-			$idJadwal[] = $hasil['idJadwal'];
-		}
+		$data = array($idSiswa, $cek, $tanggal, $idJadwal);
+		//$this->m_admin->simpanAbsen($data);
 
-		$data = array($idSiswa, $cek, $idJadwal, $tanggal);
-
-		$this->m_admin->simpanAbsen($data);
+		for($i=0 ; $i < count($data); $i++){
+            $result = array(
+                'idAbsen' => "",
+                'idSiswa' => $idSiswa[$i],
+                'idJadwal' => $idJadwal,
+                'tanggal' => $tanggal,
+                'absen' => $cek[$i],
+                'statusAbsen' => '1',
+			);
+			$this->m_admin->simpanAbsen($result, 'absensi');
+        }
+		
 		redirect('c_admin/absensi');
 	}
 
@@ -947,8 +959,40 @@ class c_admin extends CI_Controller
 	//jadwal ujian
 	function tambahJadwalUjian()
 	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
 		$data['ta'] = $this->m_admin->thnAjaran()->result();
 		$this->load->view('v_tambahJadwalUjian', $data);
+	}
+	function jadwalMapel()
+	{
+		$tahunAjaran = $this->input->post('tahunAjaran', TRUE);
+		$data = $this->m_admin->jadwalMapel($tahunAjaran)->result();
+		echo json_encode($data);
+	}
+	function simpanJadwalUjian()
+	{
+		$tahunAjaran = $this->input->post('idTahunAjaran');
+		$hari = $this->input->post('hari');
+		$jamMulai = $this->input->post('jamMulai');
+		$jamSelesai = $this->input->post('jamSelesai');
+		$mapel = $this->input->post('mapel');
+		$guru = $this->input->post('guru');
+		$kelas = $this->input->post('kls');
+
+		$data = array(
+			'idJadwalUjian' => "",
+			'idTahunAjaran' => $tahunAjaran,
+			'nomorInduk' => $guru,
+			'idKelas' => $kelas,
+			'idMapel' => $mapel,
+			'hari' => $hari,
+			'jamMulai' => $jamMulai,
+			'jamSelesai' => $jamSelesai
+		);
+
+		$this->m_admin->simpanData($data, 'jadwalujian');
+		redirect('c_admin/jadwal');
 	}
 }
 ?>

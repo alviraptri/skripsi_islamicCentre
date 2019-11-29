@@ -68,10 +68,6 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6" id="jadwalGuru">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
@@ -81,20 +77,12 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6" id="jadwalMapel">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
                                                 <select name="kelas" id="kelas" required="required" class="form-control">
                                                     <option value="">Pilih Kelas</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6" id="jadwal">
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -108,13 +96,17 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6">
+                                            <div class="col-md-6 col-sm-6" id="tanggalDb">
                                                 <?php 
                                                 $format = date('Y-m-d');
                                                 ?>
-                                                <input type="text" id="tgl" name="tgl[] " required="required" class="form-control" value="<?php echo $format?>" hidden>
+                                                <input type="text" id="tgl" name="tgl[] " required="required" class="form-control" value="<?php echo $format?>">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6" id="jadwal">
                                             </div>
                                         </div>
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
@@ -249,75 +241,37 @@
                 return false;
             });
 
-            //view kelas
-            // $('#guru').change(function() {
-            //     var nomorInduk = $(this).val();
-            //     $.ajax({
-            //         url: "<?php echo site_url('c_admin/getMapel'); ?>",
-            //         method: "POST",
-            //         data: {
-            //             nomorInduk: nomorInduk
-            //         },
-            //         async: true,
-            //         dataType: 'JSON',
-            //         success: function(data) {
-            //             var html = '';
-            //             var i;
-            //             for (i = 0; i < data.length; i++) {
-            //                 html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' '+ data[i].jurusanKelas +' '+ data[i].nomorKelas +'</option>'
-            //             }
-            //             $('#kelas').html(html);
-            //         }
-            //     });
-            //     return false;
-            // });
-
             //view nama siswa
             $('#kelas').change(function(){
                 var idKelas = $(this).val();
+                var idMapel = $('#mapel').val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getNama'); ?>",
                     method: "POST",
                     data: {
-                        idKelas: idKelas
+                        idKelas: idKelas,
+                        idMapel: idMapel
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data){
+                        console.log(data);
                         var html ='';
-                        var i;
-                        for(i = 0; i < data.length; i++){
+                        for(var i = 0; i < data.nama.length; i++){
                             html += '<tr>'+
-                            '<td> '+ data[i].namaUser +' </td>'+
+                            '<td> '+ data.nama[i].namaUser +' </td>'+
                             '<td> <div class="checkbox">'+
                             '<label>'+
-                              '<input type="text" name="idSiswa[]" id="biaya" value="'+data[i].idSiswa+'" hidden><input type="checkbox" name="cek[]" class="flat" value="1">'+
+                              '<input type="text" name="idSiswa[]" id="biaya" value="'+data.nama[i].idSiswa+'" hidden><input type="checkbox" name="cek[]" class="flat" value="1">'+
                             '</label>'+
                           '</div> </td>'+
                             '</tr>';
                         }
                         $('#show_data').html(html);
-                    }
-                });
-                return false;
-            });
+                        html = '';
 
-            //ambil id jadwal setelah pilih kelas
-            $('#kelas').change(function(){
-                var idKelas = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getNama'); ?>",
-                    method: "POST",
-                    data: {
-                        idKelas: idKelas
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data){
-                        var html ='';
-                        var i;
-                        for(i = 0; i < data.length; i++){
-                            html += '<input type="text" id="idKelas" name="idKelas[]" required="required" class="form-control" value="'+data[i].idKelas+'">';
+                        for(var j = 0; j < data.jadwal.length; j++){
+                            html += '<input type="text" name="idJadwal[]" id="idJadwal" value="'+data.jadwal[j].idJadwal+'">';
                         }
                         $('#jadwal').html(html);
                     }

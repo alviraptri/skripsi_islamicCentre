@@ -346,28 +346,26 @@ class m_admin extends CI_Model
         ->where('datasiswa.idKelas = "'.$idKelas.'"');
         return $this->db->get();
     }
-    function simpanAbsen($data)
+    function simpanAbsen($result, $table)
     {
-        $result = array();
-        for($i=0 ; $i<=count($data); $i++){
-            $result[] = array(
-                'idAbsen' => ""   ,
-                'idSiswa' => $_POST['idSiswa'][$i],
-                'idJadwal' => $_POST['idJadwal'][$i],
-                'tanggal' => $_POST['tgl'][$i],
-                'absen' => $_POST['cek'][$i],
-                'statusAbsen' => '1',
-            );
-        }
-        $this->db->insert_batch('absensi', $result);
+        
+        $this->db->insert($table, $result);
+    
+        
     }
 
-    function getJadwal($idKelas)
+    //jadwal ujian
+    function getJadwal($idKelas, $idMapel)
     {
         $this->db->select('jadwal.idJadwal, jadwal.idKelas, jadwal.idMapel')
         ->from('jadwal')
-        ->where('jadwal.idKelas = "'.$idKelas.'"');
+        ->where('jadwal.idKelas = "'.$idKelas.'" AND jadwal.idMapel = "'.$idMapel.'"');
         return $this->db->get();
+    }
+    function jadwalMapel($tahunAjaran)
+    {
+        $query = $this->db->query('SELECT matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.idTahunAjaran FROM matapelajaran WHERE matapelajaran.idTahunAjaran = "'.$tahunAjaran.'"');
+        return $query;
     }
 }
 

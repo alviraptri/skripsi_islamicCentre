@@ -61,6 +61,17 @@
                                                 <input type="text" id="email" name="mapel" required="required" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Jenis Mata Pelajaran<span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                            <select name="jenisMapel" class="select2_single form-control">
+                                                        <option value="IPA">IPA</option>
+                                                        <option value="IPS">IPS</option>
+                                                        <option value="Umum">UMUM</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>

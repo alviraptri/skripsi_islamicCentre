@@ -95,10 +95,10 @@
             <li><a href="#">Tambah Nilai</a></li>
           </ul>
         </li>
-        <li><a><i class="fa fa-file-text"></i> Nilai Pengembangan Diri<span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-file-text"></i> Pengembangan Diri<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="#">Data Nilai Pengembangan Diri</a></li>
-            <li><a href="#">Tambah Nilai Pengembangan Diri</a></li>
+            <li><a href="#">Data Pengembangan Diri</a></li>
+            <li><a href="#">Tambah Pengembangan Diri</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-bar-chart"></i> Rekomendasi <span class="fa fa-chevron-down"></span></a>

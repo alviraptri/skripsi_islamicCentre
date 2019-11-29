@@ -114,18 +114,6 @@
 
             $('#kelas').change(function() {
                 var idKelas = $(this).val();
-                // if(idKelas != '')
-                // {
-                //     $.ajax({
-                //         url:"<?php //echo site_url('c_admin/getSiswa'); ?>",
-                //         method:"POST",
-                //         data:{idKelas:idKelas},
-                //         success:function(data)
-                //         {
-                //             $('#siswa').html(data);
-                //         }
-                //     })
-                // }
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getSiswa'); ?>",
                     method: "POST",
