@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Jadwal | Information Academic Islamic Centre</title>
+    <title>Jadwal Ujian| Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Jadwal</h3>
+                            <h3>Jadwal Ujian</h3>
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Data Jadwal</h2>
+                                    <h2>Data Jadwal Ujian</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li> <a href="<?php echo base_url('c_admin/tambahJadwalUjian'); ?>"><button type="submit" class="btn btn-primary">Tambah Jadwal</button></a>
                                         </li>
@@ -105,11 +105,11 @@
             <!-- /page content -->
 
             <!-- MODAL EDIT -->
-            <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Edit Keterangan Nilai</h3>
+                            <h3 class="modal-title" id="myModalLabel">Edit Jadwal Ujian</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <form class="form-horizontal form-label-left">
@@ -124,7 +124,7 @@
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Tahun Ajaran</label>
                                     <div class="col-md-6 col-sm-6">
-                                    <input name="thnA_edit" id="thnA_edit" class="form-control" type="text" placeholder="ID TA" readonly>
+                                    <input name="thnA_edit" id="thnA_edit" class="form-control" type="text" placeholder="ID TA" hidden>
                                         <input name="ta_edit" id="ta_edit" class="form-control" type="text" placeholder="Tahun Ajaran" readonly>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Mata Pelajaran</label>
                                     <div class="col-xs-9">
-                                    <input name="idM_edit" id="idM_edit" class="form-control" type="text" placeholder="ID" readonly>
+                                    <input name="idM_edit" id="idM_edit" class="form-control" type="text" placeholder="ID" hidden>
                                         <input name="mapel_edit" id="mapel_edit" class="form-control" type="text" placeholder="Mata Pelajaran" required>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Jenis Mata Pelajaran</label>
                                     <div class="col-xs-9">
-                                        <input name="jenis_edit" id="jenis_edit" class="form-control" type="text" placeholder="Jenis" required>
+                                        <input name="jenis_edit" id="jenis_edit" class="form-control" type="text" placeholder="Jenis" readonly>
                                     </div>
                                 </div>
 
@@ -207,7 +207,7 @@
                             '<td> '+ data[i].jamMulai+' - '+data[i].jamSelesai+' </td>'+
                             '<td> '+data[i].namaMapel+' </td>'+
                             '<td>'+data[i].jenisMapel+'</td>'+
-                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idKetNilai + '">' +
+                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idJadwalUjian + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
                             '</tr>';
                         }
@@ -228,18 +228,52 @@
                         id: id
                     },
                     success: function(data) {
-                        $.each(data, function(idJadwalUjian, idMapel, idTahunAjaran, hari, jamMulai, jamSelesai, namaMapel, tahunAjaran, jenisMapel) {
-                            $('#ModalaEdit').modal('show');
-                            $('[name="idJ_edit"]').val(data.idKetNilai);
-                            $('[name="idM_edit"]').val(data.idMapel);
+                        $.each(data, function(idJadwalUjian, hari, jamMulai, jamSelesai, namaMapel, idMapel, tahunAjaran, idTahunAjaran, jenisMapel) {
+                            $('#ModalEdit').modal('show');
+                            $('[name="id_edit"]').val(data.idJadwalUjian);
                             $('[name="thnA_edit"]').val(data.idTahunAjaran);
+                            $('[name="ta_edit"]').val(data.tahunAjaran);
                             $('[name="hari_edit"]').val(data.hari);
                             $('[name="jamM_edit"]').val(data.jamMulai);
                             $('[name="jamS_edit"]').val(data.jamSelesai);
+                            $('[name="idM_edit"]').val(data.idMapel);
                             $('[name="mapel_edit"]').val(data.namaMapel);
-                            $('[name="ta_edit"]').val(data.tahunAjaran);
-                            $('[name="jenis_edit]').val(data.jenisMapel);
+                            $('[name="jenis_edit"]').val(data.jenisMapel);
                         });
+                    }
+                });
+                return false;
+            });
+
+            //Update Barang
+            $('#btn_update').on('click', function() {
+                var id = $('#id_edit').val();
+                var hari = $('#hari_edit').val();
+                var jamMulai = $('#jamM_edit').val();
+                var jamSelesai = $('#jamS_edit').val();
+                var mapel = $('#idM_edit').val();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('c_admin/updateJadwalUjian') ?>",
+                    dataType: "JSON",
+                    data: {
+                        id: id,
+                        hari: hari,
+                        jamMulai: jamMulai,
+                        jamSelesai: jamSelesai,
+                        mapel: mapel,
+                    },
+                    success: function(data) {
+                        $('[name="id_edit"]').val("");
+                            $('[name="thnA_edit"]').val("");
+                            $('[name="ta_edit"]').val("");
+                            $('[name="hari_edit"]').val("");
+                            $('[name="jamM_edit"]').val("");
+                            $('[name="jamS_edit"]').val("");
+                            $('[name="idM_edit"]').val("");
+                            $('[name="mapel_edit"]').val("");
+                            $('[name="jenis_edit"]').val("");
+                        $('#ModalaEdit').modal('hide');
                     }
                 });
                 return false;

@@ -89,23 +89,26 @@
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <?php 
+                                                <?php
                                                 $tgl = date('d F Y');
                                                 ?>
-                                                <input type="text" id="tanggal" name="tanggal[] " required="required" class="form-control" value="<?php echo $tgl?>" readonly>
+                                                <input type="text" id="tanggal" name="tanggal[] " required="required" class="form-control" value="<?php echo $tgl ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6" id="tanggalDb">
-                                                <?php 
+                                                <?php
                                                 $format = date('Y-m-d');
                                                 ?>
-                                                <input type="text" id="tgl" name="tgl[] " required="required" class="form-control" value="<?php echo $format?>">
+                                                <input type="text" id="tgl" name="tgl " required="required" class="form-control" value="<?php echo $format?>">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
+                                            </label>
                                             <div class="col-md-6 col-sm-6" id="jadwal">
                                             </div>
                                         </div>
@@ -161,10 +164,10 @@
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        var html ='';
+                        var html = '';
                         var i;
-                        for(i = 0; i < data.length; i++){
-                            html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="'+data[i].idJadwal+'">';
+                        for (i = 0; i < data.length; i++) {
+                            html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="' + data[i].idJadwal + '">';
                         }
                         $('#jadwalGuru').html(html);
                     }
@@ -210,7 +213,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' '+ data[i].jurusanKelas +' '+ data[i].nomorKelas +'</option>'
+                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
                         }
                         $('#kelas').html(html);
                     }
@@ -233,7 +236,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="'+data[i].idMapel+'">'
+                            html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="' + data[i].idMapel + '">'
                         }
                         $('#jadwalMapel').html(html);
                     }
@@ -242,7 +245,7 @@
             });
 
             //view nama siswa
-            $('#kelas').change(function(){
+            $('#kelas').change(function() {
                 var idKelas = $(this).val();
                 var idMapel = $('#mapel').val();
                 $.ajax({
@@ -254,24 +257,24 @@
                     },
                     async: true,
                     dataType: 'JSON',
-                    success: function(data){
+                    success: function(data) {
                         console.log(data);
-                        var html ='';
-                        for(var i = 0; i < data.nama.length; i++){
-                            html += '<tr>'+
-                            '<td> '+ data.nama[i].namaUser +' </td>'+
-                            '<td> <div class="checkbox">'+
-                            '<label>'+
-                              '<input type="text" name="idSiswa[]" id="biaya" value="'+data.nama[i].idSiswa+'" hidden><input type="checkbox" name="cek[]" class="flat" value="1">'+
-                            '</label>'+
-                          '</div> </td>'+
-                            '</tr>';
+                        var html = '';
+                        for (var i = 0; i < data.nama.length; i++) {
+                            html += '<tr>' +
+                                '<td> ' + data.nama[i].namaUser + ' </td>' +
+                                '<td> <div class="checkbox">' +
+                                '<label>' +
+                                '<input type="text" name="idSiswa[]" id="biaya" value="' + data.nama[i].idSiswa + '" hidden><input type="checkbox" name="cek[]" class="flat" value="1">' +
+                                '</label>' +
+                                '</div> </td>' +
+                                '</tr>';
                         }
                         $('#show_data').html(html);
                         html = '';
 
-                        for(var j = 0; j < data.jadwal.length; j++){
-                            html += '<input type="text" name="idJadwal[]" id="idJadwal" value="'+data.jadwal[j].idJadwal+'">';
+                        for (var j = 0; j < data.jadwal.length; j++) {
+                            html += '<input type="text" name="idJadwal" id="idJadwal" value="' + data.jadwal[j].idJadwal + '">';
                         }
                         $('#jadwal').html(html);
                     }

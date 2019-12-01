@@ -13,7 +13,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="<?php echo base_url('c_admin/profil'); ?>"> Profil Saya</a>
-                    <a class="dropdown-item"  href="<?php echo base_url('c_admin/gantiPass'); ?>"> Rubah Kata Sandi</a>
+                    <a class="dropdown-item"  href="<?php echo base_url('c_admin/gantiPass'); ?>"> Ubah Kata Sandi</a>
                     <a class="dropdown-item"  href="<?php echo base_url('c_login/keluarAdmin'); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>

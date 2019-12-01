@@ -928,8 +928,9 @@ class c_admin extends CI_Controller
 	{
 		$idSiswa = $this->input->post('idSiswa');
 		$cek = $this->input->post('cek');
-		$tanggal = $this->input->post('tgl');
 		$idJadwal = $this->input->post('idJadwal');
+
+		$tanggal = date('Y-m-d');
 
 		$data = array($idSiswa, $cek, $tanggal, $idJadwal);
 		//$this->m_admin->simpanAbsen($data);
@@ -1010,6 +1011,83 @@ class c_admin extends CI_Controller
 		$id = $this->input->get('id');
 		$data = $this->m_admin->editJadwalUjian($id);
 		echo json_encode($data);
+	}
+	function updateJadwalUjian()
+	{
+		$id=$this->input->post('id');
+        $hari=$this->input->post('hari');
+		$jamMulai=$this->input->post('jamMulai');
+		$jamSelesai=$this->input->post('jamSelesai');
+		$mapel=$this->input->post('mapel');
+
+		$where = array('idJadwalUjian' => $id,);
+
+		$data = array(
+			'hari' => $hari,
+			'jamMulai' => $jamMulai,
+			'jamSelesai' => $jamSelesai,
+			'idMapel' => $mapel,
+		);
+        $data=$this->m_admin->updateData($where, $data, 'jadwalUjian');
+        echo json_encode($data);
+	}
+	function jadwalUjianSiswa()
+	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_dataJadwalSiswa', $data);
+	}
+	function getKls()
+	{
+		$idTA = $this->input->post('idTA', TRUE);
+		$data = $this->m_admin->getKls($idTA)->result();
+		echo json_encode($data);
+	}
+	function dataSiswa()
+	{
+		$id = $this->input->post('id', TRUE);
+		$data = $this->m_admin->dataSiswa($id)->result();
+		echo json_encode($data);
+	}
+	function infoSiswa()
+	{
+		$id = $this->input->post('id', TRUE);
+		$data = $this->m_admin->infoSiswa($id)->result();
+		echo json_encode($data);
+	}
+	function jadwalNgawas()
+	{
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_dataJadwalMengawas', $data);
+	}
+	function tambahJadwalNgawas()
+	{
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$this->load->view('v_dataTambahPengawas', $data);
+	}
+	function getJadwalNgawas()
+	{
+		$idTA = $this->input->post('idTA', TRUE);
+		$jadwal = $this->m_admin->getJadwalNgawas($idTA)->result();
+		$guru = $this->m_admin->jadwalGuru()->result();
+		$kelas = $this->m_admin->kelas()->result();
+		$data = array(
+			'jadwal' => $jadwal,
+			'kelas' => $kelas,
+			'guru' => $guru,
+		);
+		echo json_encode($data);
+	}
+	function simpanPengawas()
+	{
+		$jadwal= $this->input->post('idJU');
+		$guru =$this->input->post('idGuru');
+		$kelas =$this->input->post('idKelas');
+
+		$data = array($jadwal, $guru, $kelas);
+		$this->m_admin->simpanJP($data);
+		redirect('c_admin/jadwalNgawas');
 	}
 }
 ?>

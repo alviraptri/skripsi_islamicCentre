@@ -379,9 +379,11 @@ class m_admin extends CI_Model
     function editJadwalUjian($id)
     {
         $hasil = $this->db->query('SELECT jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
-        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel 
+        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel,
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran 
         FROM jadwalujian 
         JOIN matapelajaran ON matapelajaran.idMapel = jadwalujian.idMapel 
+        JOIN tahunajaran ON tahunajaran.idTahunAjaran = jadwalujian.idTahunAjaran
         WHERE jadwalujian.idJadwalUjian = "'.$id.'"');
         if($hasil->num_rows()>0){
             foreach ($hasil->result() as $data) {
@@ -390,7 +392,7 @@ class m_admin extends CI_Model
                     'hari' => $data->hari,
                     'jamMulai' => $data->jamMulai,
                     'jamSelesai' => $data->jamSelesai,
-                    'namaMapel' => $data->jenisMapel,
+                    'namaMapel' => $data->namaMapel,
                     'tahunAjaran' => $data->tahunAjaran,
                     'idMapel' => $data->idMapel,
                     'idTahunAjaran' => $data->idTahunAjaran,
@@ -399,6 +401,54 @@ class m_admin extends CI_Model
             }
         }
         return $hasil;
+    }
+    function getKls($idTA)
+    {
+        $this->db->select('kelas.idKelas, kelas.idTahunAjaran, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, kelas.statusKelas')
+        ->from('kelas')
+        ->where('kelas.idTahunAjaran = "'.$idTA.'" AND kelas.statusKelas = "1"');
+        return $this->db->get();
+    }
+    function dataSiswa($id)
+    {
+        $this->db->select('datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, datasiswa.idTahunAjaran, user.nomorInduk, 
+        user.namaUser')
+        ->from('datasiswa')
+        ->join('user', 'user.nomorInduk = datasiswa.nomorInduk', 'inner')
+        ->where('datasiswa.idKelas = "'.$id.'"');
+        return $this->db->get();
+    }
+    function infoSiswa($id)
+    {
+        $this->db->select('datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, datasiswa.idTahunAjaran, kelas.idKelas, 
+        kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, user.nomorInduk, user.namaUser, user.gambar')
+        ->from('datasiswa')
+        ->join('kelas', 'datasiswa.idKelas = kelas.idKelas', 'inner')
+        ->join('user', 'user.nomorInduk = datasiswa.nomorInduk', 'inner')
+        ->where('datasiswa.nomorInduk = "'.$id.'"');
+        return $this->db->get();
+    }
+    function getJadwalNgawas($idTA)
+    {
+        $this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        ->from('jadwalujian')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
+        ->where('jadwalujian.idTahunAjaran = "'.$idTA.'"');
+        return $this->db->get();
+    }
+    function simpanJP($data)
+    {
+            $result = array();
+            for($i = 0; $i <= count($data); $i++) {
+                $result[] = array(
+                    'idJadwalPengawas' => "",
+                    'idJadwalUjian' => $_POST['jadwal'][$i],
+                    'idKelas' => $_POST['guru'][$i],
+                    'nomorInduk' => $_POST['kelas'][$i],
+                );
+            }
+            $this->db->insert_batch('jadwalpengawas', $result);
     }
 }
 
