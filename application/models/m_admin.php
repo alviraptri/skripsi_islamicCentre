@@ -294,31 +294,42 @@ class m_admin extends CI_Model
 
         return $this->db->get();
     }
+    function getTanggal($id)
+    {
+        $query = $this->db->query('SELECT DISTINCT tanggal FROM absensi WHERE idJadwal = "'.$id.'"');
+        return $query;
+    }
+    function getAbsensi($id)
+    {
+        $query = $this->db->query('SELECT absensi.tanggal, absensi.idAbsen, absensi.idSiswa, absensi.ketAbsen, datasiswa.idSiswa, datasiswa.nomorInduk, 
+        user.namaUser, user.nomorInduk 
+        FROM datasiswa 
+        JOIN absensi ON absensi.idSiswa = datasiswa.idSiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        WHERE absensi.tanggal = "'.$id.'"');
+        return $query;
+    }
     function getKetNilai($where)
     {
-        $this->db->select('idKetNilai, idMapel, nilaiSatu, nilaiDua, nilaiUts, nilaiUas')
+        $this->db->select('idKetNilai, idTahunAjaran, bobotSekolah, bobotGuru')
         ->from('ketnilai')
         ->where($where);
         return $this->db->get();
     }
     function editKetNilai($id)
     {
-        $hasil = $this->db->query('SELECT ketnilai.idKetNilai, ketnilai.nomorInduk, ketnilai.idMapel, ketnilai.nilaiSatu, ketnilai.nilaiDua, ketnilai.nilaiUts, ketnilai.nilaiUas, 
-        matapelajaran.idMapel, matapelajaran.namaMapel, user.nomorInduk, user.namaUser 
+        $hasil = $this->db->query('SELECT ketnilai.idKetNilai, ketnilai.idTahunAjaran, ketnilai.bobotSekolah, ketnilai.bobotGuru, 
+        tahunajaran.idTahunAjaran, tahunajaran.tahunAjaran 
         FROM ketnilai 
-        INNER JOIN matapelajaran ON matapelajaran.idMapel = ketnilai.idMapel 
-        INNER JOIN user on user.nomorInduk = ketnilai.nomorInduk 
+        JOIN tahunajaran ON tahunajaran.idTahunAjaran = ketnilai.idTahunAjaran 
         WHERE ketnilai.idKetNilai = "'.$id.'"');
         if($hasil->num_rows()>0){
             foreach ($hasil->result() as $data) {
                 $hasil=array(
                     'idKetNilai' => $data->idKetNilai,
-                    'namaUser' => $data->namaUser,
-                    'namaMapel' => $data->namaMapel,
-                    'nilaiSatu' => $data->nilaiSatu,
-                    'nilaiDua' => $data->nilaiDua,
-                    'nilaiUts' => $data->nilaiUts,
-                    'nilaiUas' => $data->nilaiUas,
+                    'tahunAjaran' => $data->tahunAjaran,
+                    'bobotSekolah' => $data->bobotSekolah,
+                    'bobotGuru' => $data->bobotGuru,
                 );
             }
         }
@@ -374,6 +385,34 @@ class m_admin extends CI_Model
         ->from('jadwalujian')
         ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
         ->where('jadwalujian.idTahunAjaran = "'.$idTA.'"');
+        return $this->db->get();
+    }
+    function getIPA($idTA)
+    {
+        $this->db->select('matapelajaran.idMapel, matapelajaran.idTahunAjaran, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        ->from('matapelajaran')
+        ->where('idTahunAjaran = "'.$idTA.'" AND jenisMapel = "IPA"');
+        return $this->db->get();
+    }
+    function getIPS($idTA)
+    {
+        $this->db->select('matapelajaran.idMapel, matapelajaran.idTahunAjaran, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        ->from('matapelajaran')
+        ->where('idTahunAjaran = "'.$idTA.'" AND jenisMapel = "IPS"');
+        return $this->db->get();
+    }
+    function getdataMapel()
+    {
+        $query = $this->db->query('SELECT DISTINCT hari, jamMulai, jamSelesai FROM jadwalujian');
+        return $query;
+    }
+    function dataMapel($where)
+    {
+        $this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        ->from('jadwalujian')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
+        ->where($where);
         return $this->db->get();
     }
     function editJadwalUjian($id)

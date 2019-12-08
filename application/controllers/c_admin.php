@@ -828,27 +828,20 @@ class c_admin extends CI_Controller
 	//keterangan nilai
 	function tambahKetNilai()
 	{
-		$data['guru'] = $this->m_admin->jadwalGuru()->result();
-		$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
 		$this->load->view('v_tambahKetNilai', $data);
 	}
 	function simpanKetNilai()
 	{
-		$bobotKat1 = $this->input->post("bobotKat1");
-		$bobotKat2 = $this->input->post("bobotKat2");
-		$bobotUts = $this->input->post("bobotUts");
-		$bobotUas = $this->input->post("bobotUas");
-		$nomorInduk = $this->input->post("guru");
-		$idMapel = $this->input->post("mapel");
+		$bobotSekolah = $this->input->post("bobotSekolah");
+		$bobotGuru = $this->input->post("bobotGuru");
+		$idTA = $this->input->post("TA");
 
 		$data = array(
 			'idKetNilai' => "",
-			'nomorInduk' => $nomorInduk,
-			'idMapel' => $idMapel,
-			'nilaiSatu' => $bobotKat1,
-			'nilaiDua' => $bobotKat2,
-			'nilaiUts' => $bobotUts,
-			'nilaiUas' => $bobotUas,
+			'idTahunAjaran' => $idTA,
+			'bobotSekolah' => $bobotSekolah,
+			'bobotGuru' => $bobotGuru,
 			'statusKetNilai' => '1'
 		);
 
@@ -857,7 +850,7 @@ class c_admin extends CI_Controller
 	}
 	function ketNilai()
 	{
-		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
 		$this->load->view('v_dataKetNilai', $data);
 	}
 	function getMapel()
@@ -866,10 +859,22 @@ class c_admin extends CI_Controller
 		$data = $this->m_admin->getMapel($nomorInduk)->result();
 		echo json_encode($data);
 	}
+	function getTanggal()
+	{
+		$id = $this->input->post('id');
+		$data = $this->m_admin->getTanggal($id)->result();
+		echo json_encode($data);
+	}
+	function getAbsensi()
+	{
+		$id=$this->input->post('id');
+		$data=$this->m_admin->getAbsensi($id)->result();
+		echo json_encode($data);
+	}
 	function getKetNilai()
 	{
-		$idMapel = $this->input->post('idMapel', TRUE);
-		$where = array('idMapel' => $idMapel);
+		$idTA = $this->input->post('idTA', TRUE);
+		$where = array('idTahunAjaran' => $idTA);
 		$data = $this->m_admin->getKetNilai($where)->result();
 		echo json_encode($data);
 	}
@@ -882,18 +887,14 @@ class c_admin extends CI_Controller
 	function updateKetNilai()
 	{
 		$id=$this->input->post('id');
-        $nsatu=$this->input->post('nsatu');
-		$ndua=$this->input->post('ndua');
-		$nuts=$this->input->post('nuts');
-		$nuas=$this->input->post('nuas');
+        $sklh=$this->input->post('sklh');
+		$guru=$this->input->post('guru');
 
 		$where = array('idKetNilai' => $id,);
 
 		$data = array(
-			'nilaiSatu' => $nsatu,
-			'nilaiDua' => $ndua,
-			'nilaiUts' => $nuts,
-			'nilaiUas' => $nuas,
+			'bobotSekolah' => $sklh,
+			'bobotGuru' => $guru,
 		);
         $data=$this->m_admin->updateData($where, $data, 'ketnilai');
         echo json_encode($data);
@@ -929,25 +930,49 @@ class c_admin extends CI_Controller
 		$idSiswa = $this->input->post('idSiswa');
 		$cek = $this->input->post('cek');
 		$idJadwal = $this->input->post('idJadwal');
+		$guru = $this->input->post('guru');
+		$ket = $this->input->post('ket');
 
 		$tanggal = date('Y-m-d');
 
-		$data = array($idSiswa, $cek, $tanggal, $idJadwal);
+		$data = array($idSiswa, $cek, $tanggal, $idJadwal, $guru);
+
 		//$this->m_admin->simpanAbsen($data);
 
-		for($i=0 ; $i < count($data); $i++){
+		for($i=0 ; $i < count($idSiswa); $i++){
+			$flag = false;
+			for($j = 0; $j < count($cek); $j++) {
+				if($idSiswa[$i] == $cek[$j]) {
+					$flag = true;
+				}
+			}
+			if($flag == true) {
+				$absen = 1;
+				$keterangan = 'H';
+			}
+			else {
+				$absen = 0;
+				$keterangan = $ket;
+			}
             $result = array(
                 'idAbsen' => "",
                 'idSiswa' => $idSiswa[$i],
-                'idJadwal' => $idJadwal,
+				'idJadwal' => $idJadwal,
+				'nomorInduk' => $guru,
                 'tanggal' => $tanggal,
-                'absen' => $cek[$i],
+				'absen' => $absen,
+				'ketAbsen' => 'H',
                 'statusAbsen' => '1',
 			);
 			$this->m_admin->simpanAbsen($result, 'absensi');
         }
 		
 		redirect('c_admin/absensi');
+	}
+	function absensi()
+	{
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$this->load->view('v_dataAbsensi', $data);	
 	}
 
 	function getJadwal()
@@ -1003,7 +1028,24 @@ class c_admin extends CI_Controller
 	function getJadwalUjian()
 	{
 		$idTA = $this->input->post('idTA', TRUE);
-		$data = $this->m_admin->getJadwalUjian($idTA)->result();
+		$jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
+		$ipa = $this->m_admin->getIPA($idTA)->result();
+		$ips = $this->m_admin->getIPS($idTA)->result();
+		$data = array(
+			'jadwal' => $jadwal,
+		);
+		echo json_encode($data);
+	}
+	function getdataMapel(){
+		$data = $this->m_admin->getdataMapel()->result();
+		for($i = 0; $i < count($data); $i++) {
+			$where = array(
+				'hari' => $data[$i]->hari,
+				'jamMulai' => $data[$i]->jamMulai,
+				'jamSelesai' => $data[$i]->jamSelesai,
+			);
+			$data = (object)array_merge((array)$data[$i], (array)$this->m_admin->dataMapel($where)->result());
+		}
 		echo json_encode($data);
 	}
 	function editJadwalUjian()
@@ -1064,7 +1106,7 @@ class c_admin extends CI_Controller
 	function tambahJadwalNgawas()
 	{
 		$data['ta'] = $this->m_admin->thnAjaran()->result();
-		$this->load->view('v_dataTambahPengawas', $data);
+		$this->load->view('v_tambahPengawas', $data);
 	}
 	function getJadwalNgawas()
 	{
@@ -1088,6 +1130,20 @@ class c_admin extends CI_Controller
 		$data = array($jadwal, $guru, $kelas);
 		$this->m_admin->simpanJP($data);
 		redirect('c_admin/jadwalNgawas');
+	}
+
+	//pengembangan diri
+	function tambahPengembanganDIri()
+	{
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$this->load->view('v_tambahNilaiPD', $data);
+	}
+	function dataPengembanganDiri()
+	{
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$this->load->view('v_dataNilaiPD', $data);
 	}
 }
 ?>

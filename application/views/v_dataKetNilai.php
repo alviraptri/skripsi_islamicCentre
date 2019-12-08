@@ -52,35 +52,19 @@
                                 <div class="x_content">
 
                                     <form class="form-horizontal form-label-left" method="post" action="" novalidate>
-                                        <div class="item item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
+                                    <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <select name="guru" id="guru" required="required" class="form-control">
-                                                    <option value="">Pilih Guru</option>
+                                                <select name="TA" id="TA" required="required" class="form-control">
+                                                    <option value="">Pilih Tahun Ajaran</option>
                                                     <?php
-                                                    foreach ($guru as $list) { ?>
-                                                        <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
+                                                    foreach ($ta as $list) { ?>
+                                                        <option value="<?php echo $list->idTahunAjaran ?>"><?php echo $list->tahunAjaran ?> </option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="item item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Mata Pelajaran<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6   ">
-                                                <select name="mapel" id="mapel" class="form-control">
-                                                    <option value=""> Pilih Mata Pelajaran</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="item form-group">
-                                            <label>Nama Siswa</label>
-                                            <select class="form-control" id="siswa" name="siswa" required>
-                                                <option value="">Pilih Siswa</option>
-
-                                            </select>
-                                        </div> -->
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
@@ -122,44 +106,23 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Guru</label>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Tahun Ajaran</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="guru_edit" id="guru_edit" class="form-control" type="text" placeholder="Nama Guru" readonly>
+                                        <input name="TA_edit" id="TA_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
                                     </div>
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Mata Pelajaran</label>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Persen Sekolah</label>
                                     <div class="col-xs-9">
-                                        <input name="mapel_edit" id="mapel_edit" class="form-control" type="text" placeholder="Mata Pelajaran" readonly>
+                                        <input name="sklh_edit" id="sklh_edit" class="form-control" type="text" placeholder="Nilai Satu" required>
                                     </div>
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nilai Satu</label>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Persen Guru</label>
                                     <div class="col-xs-9">
-                                        <input name="nsatu_edit" id="nsatu_edit" class="form-control" type="text" placeholder="Nilai Satu" required>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nilai Dua</label>
-                                    <div class="col-xs-9">
-                                        <input name="ndua_edit" id="ndua_edit" class="form-control" type="text" placeholder="Nilai Dua" required>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nilai UTS</label>
-                                    <div class="col-xs-9">
-                                        <input name="nuts_edit" id="nuts_edit" class="form-control" type="text" placeholder="Nilai UTS" required>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nilai UAS</label>
-                                    <div class="col-xs-9">
-                                        <input name="nuas_edit" id="nuas_edit" class="form-control" type="text" placeholder="Nilai UAS" required>
+                                        <input name="guru_edit" id="guru_edit" class="form-control" type="text" placeholder="Nilai Dua" required>
                                     </div>
                                 </div>
 
@@ -187,36 +150,13 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            //view
-            $('#guru').change(function() {
-                var nomorInduk = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
-                    method: "POST",
-                    data: {
-                        nomorInduk: nomorInduk
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
-                        }
-                        $('#mapel').html(html);
-                    }
-                });
-                return false;
-            });
-
-            $('#mapel').change(function() {
-                var idMapel = $(this).val();
+            $('#TA').change(function() {
+                var idTA = $(this).val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getKetNilai'); ?>",
                     method: "POST",
                     data: {
-                        idMapel: idMapel
+                        idTA: idTA
                     },
                     async: true,
                     dataType: 'JSON',
@@ -225,20 +165,14 @@
                         var i;
                         for (i = 0; i < data.length; i++) {
                             html += '<tr>' +
-                                '<td> Nilai Satu </td>' +
-                                '<td>' + data[i].nilaiSatu + '</td>' +
-                                '<td rowspan="4"><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idJadwalUjian + '">' +
+                                '<td> Persen Sekolah </td>' +
+                                '<td>' + data[i].bobotSekolah + '%</td>' +
+                                '<td rowspan="4"><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idKetNilai + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' +
                                 '</td>' +
                                 '</tr><tr>' +
-                                '<td> Nilai Dua </td>' +
-                                '<td>' + data[i].nilaiDua + '</td>' +
-                                '</tr><tr>' +
-                                '<td> Nilai UTS </td>' +
-                                '<td>' + data[i].nilaiUts + '</td>' +
-                                '</tr><tr>' +
-                                '<td> Nilai UAS </td>' +
-                                '<td>' + data[i].nilaiUas + '</td>' +
+                                '<td> Persen Guru </td>' +
+                                '<td>' + data[i].bobotGuru + '%</td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);
@@ -258,15 +192,12 @@
                         id: id
                     },
                     success: function(data) {
-                        $.each(data, function(idKetNilai, namaUser, namaMapel, nilaiSatu, nilaiDua, nilaiUts, nilaiUas) {
+                        $.each(data, function(idKetNilai, tahunAjaran, bobotSekolah, bobotGuru) {
                             $('#ModalaEdit').modal('show');
                             $('[name="id_edit"]').val(data.idKetNilai);
-                            $('[name="guru_edit"]').val(data.namaUser);
-                            $('[name="mapel_edit"]').val(data.namaMapel);
-                            $('[name="nsatu_edit"]').val(data.nilaiSatu);
-                            $('[name="ndua_edit"]').val(data.nilaiDua);
-                            $('[name="nuts_edit"]').val(data.nilaiUts);
-                            $('[name="nuas_edit"]').val(data.nilaiUas);
+                            $('[name="TA_edit"]').val(data.tahunAjaran);
+                            $('[name="sklh_edit"]').val(data.bobotSekolah);
+                            $('[name="guru_edit"]').val(data.bobotGuru);
                         });
                     }
                 });
@@ -276,29 +207,21 @@
             //Update Barang
             $('#btn_update').on('click', function() {
                 var id = $('#id_edit').val();
-                var nsatu = $('#nsatu_edit').val();
-                var ndua = $('#ndua_edit').val();
-                var nuts = $('#nuts_edit').val();
-                var nuas = $('#nuas_edit').val();
+                var sklh = $('#sklh_edit').val();
+                var guru = $('#guru_edit').val();
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url('c_admin/updateKetNilai') ?>",
                     dataType: "JSON",
                     data: {
                         id: id,
-                        nsatu: nsatu,
-                        ndua: ndua,
-                        nuts: nuts,
-                        nuas: nuas
+                        sklh: sklh,
+                        guru: guru
                     },
                     success: function(data) {
                         $('[name="id_edit"]').val("");
+                        $('[name="sklh_edit"]').val("");
                         $('[name="guru_edit"]').val("");
-                        $('[name="mapel_edit"]').val("");
-                        $('[name="nsatu_edit"]').val("");
-                        $('[name="ndua_edit"]').val("");
-                        $('[name="nuts_edit"]').val("");
-                        $('[name="nuas_edit"]').val("");
                         $('#ModalaEdit').modal('hide');
                     }
                 });

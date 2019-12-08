@@ -53,71 +53,34 @@
 
                                     <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanKetNilai'; ?>" novalidate>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <select name="guru" id="#" required="required" class="form-control">
-                                                    <option value="">Pilih Guru</option>
+                                                <select name="TA" id="#" required="required" class="form-control">
+                                                    <option value="">Pilih Tahun Ajaran</option>
                                                     <?php
-                                                    foreach ($guru as $list) { ?>
-                                                        <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
+                                                    foreach ($ta as $list) { ?>
+                                                        <option value="<?php echo $list->idTahunAjaran ?>"><?php echo $list->tahunAjaran ?> </option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <select name="mapel" id="#" required="required" class="form-control">
-                                                    <option value="">Pilih Mata Pelajaran</option>
-                                                    <?php
-                                                    foreach ($mapel as $list) { ?>
-                                                        <option value="<?php echo $list->idMapel ?>"><?php echo $list->namaMapel ?> </option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6">
-                                                <label for="name">Keterangan Nilai<span class="required">*</span>
+                                            <div class="col-form-label col-md-3 col-sm-3 label-align">
+                                                <label for="name">Persen Sekolah<span class="required">*</span>
                                                 </label>
                                             </div>
                                             <div class="col-md-6 col-sm-6">
-                                                <label for="name">Bobot Nilai<span class="required">*</span>
+                                                <input type="number" id="email" name="bobotSekolah" required="required" class="form-control" placeholder="Bobot Nilai">
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-form-label col-md-3 col-sm-3 label-align">
+                                                <label for="name">Persen Guru<span class="required">*</span>
                                                 </label>
                                             </div>
-                                        </div>
-                                        <div class="item form-group">
                                             <div class="col-md-6 col-sm-6">
-                                            <input type="text" id="email" name="kat1" required="required" class="form-control" value="Kat 1" readonly>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="number" id="email" name="bobotKat1" required="required" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="text" id="email" name="kat2" required="required" class="form-control" value="Kat 2" readonly>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="number" id="email" name="bobotKat2" required="required" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="text" id="email" name="uts" required="required" class="form-control" value="UTS" readonly>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="number" id="email" name="bobotUts" required="required" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="text" id="email" name="uas" required="required" class="form-control" value="UAS" readonly>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                            <input type="number" id="email" name="bobotUas" required="required" class="form-control">
+                                                <input type="number" id="email" name="bobotGuru" required="required" class="form-control" placeholder="Bobot Nilai">
                                             </div>
                                         </div>
 

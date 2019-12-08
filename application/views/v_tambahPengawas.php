@@ -56,7 +56,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                
+
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required"></span>
                                         </label>
@@ -73,29 +73,29 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanPengawas'; ?>" novalidate>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: center;">Hari</th>
-                                                <th style="text-align: center;">Jam</th>
-                                                <th style="text-align: center;">Mata Pelajaran</th>
-                                                <th style="text-align: center;">Guru</th>
-                                                <th style="text-align: center;">Kelas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody name="show_data" id="show_data">
-                                        </tbody>
-                                    </table>
+                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanPengawas'; ?>" novalidate>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center;">Hari</th>
+                                                    <th style="text-align: center;">Jam</th>
+                                                    <th style="text-align: center;">Mata Pelajaran</th>
+                                                    <th style="text-align: center;">Guru</th>
+                                                    <th style="text-align: center;">Kelas</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody name="show_data" id="show_data">
+                                            </tbody>
+                                        </table>
                                 </div>
                                 <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 offset-md-3">
-                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
-                                            </div>
-                                        </div>
-                                                </form>
+                                <div class="form-group">
+                                    <div class="col-md-6 offset-md-3">
+                                        <button id="send" type="submit" class="btn btn-success">Simpan</button>
+                                        <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                                    </div>
+                                </div>
+                                </form>
                             </div>
                         </div>
 
@@ -126,13 +126,13 @@
                     },
                     async: true,
                     dataType: 'JSON',
-                    success: 
-                    function(data) {
+                    success: function(data) {
+                        console.log(data);
                         var html = '';
                         var i;
                         for (i = 0; i < data.jadwal.length; i++) {
                             html += '<tr>' +
-                                '<td> ' +'<input type="text" id="idJU" name="idJU[]" required="required" class="form-control" value="'+data.jadwal[i].idJadwalUjian+'" hidden>'+data.jadwal[i].hari + ' </td>' +
+                                '<td> ' + '<input type="text" id="idJU" name="idJU[]" required="required" class="form-control" value="' + data.jadwal[i].idJadwalUjian + '" hidden>' + data.jadwal[i].hari + ' </td>' +
                                 '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                 '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
                                 '<td><select name="idGuru[]" id="guru" required="required" class="form-control"></select></td>' +
@@ -144,24 +144,16 @@
                         html = '';
                         var j;
                         for (j = 0; j < data.kelas.length; j++) {
-                            html += '<option value="' + data.kelas[j].idKelas + '">' + data.kelas[j].ketKelas + ' '+ data.kelas[j].jurusanKelas +' '+ data.kelas[j].nomorKelas +'</option>'
+                            html += '<option value="' + data.kelas[j].idKelas + '">' + data.kelas[j].ketKelas + ' ' + data.kelas[j].jurusanKelas + ' ' + data.kelas[j].nomorKelas + '</option>'
                         }
-                        $('#kelas').html(html);   
+                        $('#kelas').html(html);
 
                         html = '';
-                                for (var k = 0; k < data.guru.length; k++) {
-                                    html += '<option value="' + data.guru[k].nomorInduk + '">' + data.guru[k].namaUser + '</option>'
-                                }
-                                $('#guru').html(html);         
+                        for (var k = 0; k < data.guru.length; k++) {
+                            html += '<option value="' + data.guru[k].nomorInduk + '">' + data.guru[k].namaUser + '</option>'
+                        }
+                        $('#guru').html(html);
                     }
-                    // function(kelas) {
-                    //     var html = '';
-                    //     var i;
-                    //     for (i = 0; i < kelas.length; i++) {
-                    //         html += '<option value="' + kelas[i].idKelas + '">' + kelas[i].ketKelas + ' '+ kelas[i].jurusanKelas +' '+ kelas[i].nomorKelas +'</option>';
-                    //     }
-                    //     $('#kelas').html(html);
-                    // }
                 });
                 return false;
             });

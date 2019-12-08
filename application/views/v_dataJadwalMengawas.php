@@ -169,11 +169,11 @@
                     success: function(data) {
                         var html = '';
                         var i;
-                        for (i = 0; i < data.length; i++) {
+                        for (i = 0; i < data.jadwal.length; i++) {
                             html += '<tr>' +
-                                '<td> ' + data[i].hari + ' </td>' +
-                                '<td> ' + data[i].jamMulai + ' - ' + data[i].jamSelesai + ' </td>' +
-                                '<td> ' + data[i].namaMapel + ' </td>' +
+                                '<td> ' + data.jadwal[i].hari + ' </td>' +
+                                '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
                                 '<td></td>' +
                                 '<td></td>' +
                                 '</tr>';

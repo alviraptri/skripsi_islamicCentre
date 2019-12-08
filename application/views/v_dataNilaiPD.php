@@ -61,7 +61,7 @@
                                                 <select name="guru" id="guru" required="required" class="form-control">
                                                     <option value="">Pilih Guru</option>
                                                     <?php
-                                                    foreach ($guru as $list) { ?>
+                                                    foreach ($dataWk as $list) { ?>
                                                         <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
                                                     <?php } ?>
                                                 </select>
@@ -85,16 +85,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <?php
-                                                $tgl = date('d F Y');
-                                                ?>
-                                                <input type="text" id="tanggal" name="tanggal[] " required="required" class="form-control" value="<?php echo $tgl ?>" readonly>
-                                            </div>
-                                        </div>
 
                                         <div class="item form-group">
                                         <!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
@@ -106,8 +96,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
-                                                    <th>Absen</th>
-                                                    <th>Keterangan</th>
+                                                    <th>Pengembangan Diri</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -254,19 +244,9 @@
                         for (var i = 0; i < data.nama.length; i++) {
                             html += '<tr>' +
                                 '<td> ' + data.nama[i].namaUser + ' </td>' +
-                                '<td> <div class="checkbox">' +
-                                '<label>' +
-                                '<input type="text" name="idSiswa[]" id="absen" value="' + data.nama[i].idSiswa + '" hidden><input type="checkbox" name="cek[]" id="absen" class="flat" value="'+data.nama[i].idSiswa+'">' +
-                                '</label>' +
-                                '</div> </td>' +
-                                '<td>'+
-                                '<select name="ket[]" id="ket" required="required" class="form-control">'+
-                                '<option value="H">Pilih Keterangan</option>'+
-                                '<option value="A">Alpa</option>'+
-                                '<option value="I">Izin</option>'+
-                                '<option value="S">Sakit</option>'+
-                                '</select>'+
-                                '</td>'+
+                                '<td></td>' +
+                                '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" title="tambah" data="">' +
+                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
                                 '</tr>';
                         }
                         $('#show_data').html(html);
@@ -280,15 +260,6 @@
                 });
                 return false;
             });
-        });
-
-        $(document).on('change', '#absen', function(){
-            if($(this).prop('checked')){
-                $('#ket').attr('disabled', 'disabled');
-            }
-            else{
-                $('#ket').removeAttr('disabled');
-            }
         });
     </script>
 

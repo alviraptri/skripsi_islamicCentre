@@ -48,12 +48,10 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Tambah Absensi</h2>
+                                    <h2>Data Absensi</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-
-                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanAbsen'; ?>" novalidate>
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
                                             </label>
@@ -77,30 +75,12 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <select name="kelas" id="kelas" required="required" class="form-control">
-                                                    <option value="">Pilih Kelas</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6" id="jadwal">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <div class="col-md-6 col-sm-6" id="jadwal1">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <?php 
-                                                $tgl = date('d F Y');
-                                                ?>
-                                                <input type="text" id="tanggal" name="tanggal[] " required="required" class="form-control" value="<?php echo $tgl?>" readonly>
+                                            <select name="tgl" id="tgl" required="required" class="form-control">
+                                                    <option value="">Pilih Tanggal</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
@@ -115,15 +95,6 @@
 
                                             </tbody>
                                         </table>
-
-                                        <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 offset-md-3">
-                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +114,7 @@
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //view mapel
+            //view mapel dan kelas dan id jadwal
             $('#guru').change(function() {
                 var nomorInduk = $(this).val();
                 $.ajax({
@@ -158,7 +129,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
+                            html += '<option value="' + data[i].idJadwal + '">' + data[i].namaMapel + '/'+data[i].ketKelas+data[i].jurusanKelas+data[i].nomorKelas+'</option>'
                         }
                         $('#mapel').html(html);
                     }
@@ -166,14 +137,14 @@
                 return false;
             });
 
-            //view kelas
-            $('#guru').change(function() {
-                var nomorInduk = $(this).val();
+            //view tanggal
+            $('#mapel').change(function() {
+                var id = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
+                    url: "<?php echo site_url('c_admin/getTanggal'); ?>",
                     method: "POST",
                     data: {
-                        nomorInduk: nomorInduk
+                        id: id
                     },
                     async: true,
                     dataType: 'JSON',
@@ -181,88 +152,39 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' '+ data[i].jurusanKelas +' '+ data[i].nomorKelas +'</option>'
+                            html += '<option value="' + data[i].tanggal + '">' + data[i].tanggal+'</option>'
                         }
-                        $('#kelas').html(html);
+                        $('#tgl').html(html);
                     }
                 });
                 return false;
             });
 
             //view nama siswa
-            $('#kelas').change(function(){
-                var idKelas = $(this).val();
+            $('#tgl').change(function() {
+                var id = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getNama'); ?>",
+                    url: "<?php echo site_url('c_admin/getAbsensi'); ?>",
                     method: "POST",
                     data: {
-                        idKelas: idKelas
+                        id: id
                     },
                     async: true,
                     dataType: 'JSON',
-                    success: function(data){
-                        var html ='';
-                        var i;
-                        for(i = 0; i < data.length; i++){
-                            html += '<tr>'+
-                            '<td> '+ data[i].namaUser +' </td>'+
-                            '<td> <div class="checkbox">'+
-                            '<label>'+
-                              '<input type="text" name="idSiswa[]" id="biaya" value="'+data[i].idSiswa+'" hidden><input type="checkbox" name="cek[]" class="flat" value="1">'+
-                            '</label>'+
-                          '</div> </td>'+
-                            '</tr>';
+                    success: function(data) {
+                        console.log(data);
+                        var html = '';
+                        for (var i = 0; i < data.length; i++) {
+                            html += '<tr>' +
+                                '<td> ' + data[i].namaUser + ' </td>' +
+                                '<td> '+ data[i].ketAbsen+' </td>' +
+                                '</tr>';
                         }
                         $('#show_data').html(html);
                     }
                 });
                 return false;
             });
-
-            //ambil id jadwal
-            $('#mapel').change(function(){
-                var idMapel = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getJadwal'); ?>",
-                    method: "POST",
-                    data: {
-                        idMapel: idMapel
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data){
-                        var html ='';
-                        var i;
-                        for(i = 0; i < data.length; i++){
-                            html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="'+data[i].idJadwal+'">';
-                        }
-                        $('#jadwal').html(html);
-                    }
-                });
-                return false;
-            });
-
-            // $('#kelas').change(function(){
-            //     var idKelas = $(this).val();
-            //     $.ajax({
-            //         url: "<?php echo site_url('c_admin/getJadwal'); ?>",
-            //         method: "POST",
-            //         data: {
-            //             idKelas: idKelas
-            //         },
-            //         async: true,
-            //         dataType: 'JSON',
-            //         success: function(data){
-            //             var html ='';
-            //             var i;
-            //             for(i = 0; i < data.length; i++){
-            //                 html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="'+data[i].idJadwal+'">';
-            //             }
-            //             $('#jadwal1').html(html);
-            //         }
-            //     });
-            //     return false;
-            // });
         });
     </script>
 

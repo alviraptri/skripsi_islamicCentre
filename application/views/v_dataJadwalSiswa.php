@@ -179,7 +179,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' '+ data[i].jurusanKelas +' '+ data[i].nomorKelas +'</option>'
+                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
                         }
                         $('#kelas').html(html);
                     }
@@ -223,11 +223,11 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<h2>'+
-                            ': '+data[i].namaUser+'<br>'+
-                            ': '+data[i].nomorInduk+'<br>'+
-                            ': '+data[i].ketKelas+' '+data[i].jurusanKelas+' '+data[i].nomorKelas+'<br>'+
-                            '</h2>'
+                            html += '<h2>' +
+                                ': ' + data[i].namaUser + '<br>' +
+                                ': ' + data[i].nomorInduk + '<br>' +
+                                ': ' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '<br>' +
+                                '</h2>'
                         }
                         $('#data').html(html);
                     }
@@ -248,7 +248,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<center><img src="<?php echo base_url(); ?>assets/inter/images/'+data[i].gambar+'" alt="" style="width:30%;"></center>'
+                            html += '<center><img src="<?php echo base_url(); ?>assets/inter/images/' + data[i].gambar + '" alt="" style="width:30%;"></center>'
                         }
                         $('#foto').html(html);
                     }
@@ -257,7 +257,7 @@
             });
 
             //Jadwal
-            $('#tahunAjaran').change(function(){
+            $('#tahunAjaran').change(function() {
                 var idTA = $(this).val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getJadwalUjian'); ?>",
@@ -267,17 +267,30 @@
                     },
                     async: true,
                     dataType: 'JSON',
-                    success: function(data){
-                        var html ='';
+                    success: function(data) {
+                        console.log(data);
+                        var html = '';
                         var i;
-                        for(i = 0; i < data.length; i++){
-                            html += '<tr>'+
-                            '<td> '+ data[i].hari +' </td>'+
-                            '<td> '+ data[i].jamMulai+' - '+data[i].jamSelesai+' </td>'+
-                            '<td> '+data[i].namaMapel+' </td>'+
-                            '<td></td>'+
-                            '<td>'+data[i].jenisMapel+'</td>'+
-                            '</tr>';
+                        for (i = 0; i < data.jadwal.length; i++) {
+                            var ipa = "";
+                            var ips = "";
+                            if (data.jadwal[i].hari == data.jadwal[i].hari) {
+                                if (data.jadwal[i].jenisMapel == "IPA") {
+                                    ipa = data.jadwal[i].namaMapel;
+                                } else if (data.jadwal[i].jenisMapel == "IPS") {
+                                    ips = data.jadwal[i].namaMapel;
+                                } else {
+                                    ipa = data.jadwal[i].namaMapel;
+                                    ips = data.jadwal[i].namaMapel;
+                                }
+                            }
+                            html += '<tr>' +
+                                '<td> ' + data.jadwal[i].hari + ' </td>' +
+                                '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                '<td>' + ipa + '</td>' +
+                                '<td>'+ ips +'</td>' +
+                                '<td>' + data.jadwal[i].jenisMapel + '</td>' +
+                                '</tr>';
                         }
                         $('#show_data').html(html);
                     }
