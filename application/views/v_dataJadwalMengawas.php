@@ -159,7 +159,7 @@
             $('#tahunAjaran').change(function() {
                 var idTA = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getJadwalUjian'); ?>",
+                    url: "<?php echo site_url('c_admin/pengawas'); ?>",
                     method: "POST",
                     data: {
                         idTA: idTA
@@ -174,11 +174,22 @@
                                 '<td> ' + data.jadwal[i].hari + ' </td>' +
                                 '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                 '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                '<td></td>' +
-                                '<td></td>' +
+                                '<td id = "nama"> </td>' +
+                                '<td id = "datakelas"> </td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);
+                        html = '';
+                        for (i = 0; i < data.jadwal1.length; i++) {
+                            html += data.jadwal1[i].namaUser
+                        }
+                        $('#nama').html(html);
+
+                        html = '';
+                        for (i = 0; i < data.jadwal1.length; i++) {
+                            html += data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas
+                        }
+                        $('#datakelas').html(html);
                     }
                 });
                 return false;

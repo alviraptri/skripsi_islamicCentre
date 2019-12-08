@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Absensi | Information Academic Islamic Centre</title>
+    <title>Pengembangan Diri | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,266 +17,217 @@
     <link href="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
-</head>
+  </head>
 
-<body class="nav-md">
+  <body class="nav-md">
     <div class="container body">
-        <div class="main_container">
-            <div class="col-md-3 left_col">
-                <?php include("view-sidebar.php") ?>
-            </div>
-
-            <!-- top navigation -->
-            <?php include("view-topNavigation.php") ?>
-            <!-- /top navigation -->
-
-            <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Absensi</h3>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Tambah Absensi</h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-
-                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanAbsen'; ?>" novalidate>
-                                        <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <select name="guru" id="guru" required="required" class="form-control">
-                                                    <option value="">Pilih Guru</option>
-                                                    <?php
-                                                    foreach ($dataWk as $list) { ?>
-                                                        <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <select name="mapel" id="mapel" required="required" class="form-control">
-                                                    <option value="">Pilih Mata Pelajaran</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <select name="kelas" id="kelas" required="required" class="form-control">
-                                                    <option value="">Pilih Kelas</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="item form-group">
-                                        <!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
-                                            </label> -->
-                                            <div class="col-md-6 col-sm-6" id="jadwal">
-                                            </div>
-                                        </div>
-                                        <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nama Siswa</th>
-                                                    <th>Pengembangan Diri</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody name="show_data" id="show_data">
-
-                                            </tbody>
-                                        </table>
-
-                                        <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 offset-md-3">
-                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /page content -->
-
-            <!-- footer content -->
-            <footer>
-                <?php include("v-Footer.php") ?>
-            </footer>
-            <!-- /footer content -->
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+        <?php include("view-sidebar.php") ?>
         </div>
+
+        <!-- top navigation -->
+        <?php include("view-topNavigation.php") ?>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Pengembangan Diri Siswa</h3>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <!-- button -->
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Catatan Hasil Belajar</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+                        <tr>
+                        <th>Sikap</th>
+                        <th>Predikat</th>
+                        <th>Deskripsi</th>
+                        <th>Aksi</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                      <?php foreach ($pd as $list) { ?>
+                        <tr>
+                          <td><?php echo $list->sikap ?></td>
+                          <td><?php echo $list->predikat ?></td>
+                          <td><?php echo $list->deskripsi ?></td>
+                          <td><a data-target="#modal_edit<?php echo $list->idKompetensi;?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
+                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                              </a> <?php echo $list->idKompetensi;?></td>
+                        </tr>
+                      <?php } ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- ============ MODAL EDIT BARANG =============== -->
+        <?php foreach ($pd as $list) { 
+            $id = $list->idKompetensi; 
+            } ?>
+        <div class="modal fade" id="modal_edit<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h3 class="modal-title" id="myModalLabel">Edit Barang</h3>
+            </div>
+            <!-- <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/barang/edit_barang'?>">
+                <div class="modal-body">
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Kode Barang</label>
+                        <div class="col-xs-8">
+                            <input name="kode_barang" value="<?php echo $barang_id;?>" class="form-control" type="text" placeholder="Kode Barang..." readonly>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Nama Barang</label>
+                        <div class="col-xs-8">
+                            <input name="nama_barang" value="<?php echo $barang_nama;?>" class="form-control" type="text" placeholder="Nama Barang..." required>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Satuan</label>
+                        <div class="col-xs-8">
+                             <select name="satuan" class="form-control" required>
+                                <option value="">-PILIH-</option>
+                                <?php if($barang_satuan=='Unit'):?>
+                                    <option value="Unit" selected>Unit</option>
+                                    <option value="Kotak">Kotak</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Sachet">Sachet</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Dus">Dus</option>
+                                <?php elseif($barang_satuan=='Kotak'):?>
+                                    <option value="Unit">Unit</option>
+                                    <option value="Kotak" selected>Kotak</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Sachet">Sachet</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Dus">Dus</option>
+                                <?php elseif($barang_satuan=='Botol'):?>
+                                    <option value="Unit">Unit</option>
+                                    <option value="Kotak">Kotak</option>
+                                    <option value="Botol" selected>Botol</option>
+                                    <option value="Sachet">Sachet</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Dus">Dus</option>
+                                <?php elseif($barang_satuan=='Sachet'):?>
+                                    <option value="Unit">Unit</option>
+                                    <option value="Kotak">Kotak</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Sachet" selected>Sachet</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Dus">Dus</option>
+                                <?php elseif($barang_satuan=='Sachet'):?>
+                                    <option value="Unit">Unit</option>
+                                    <option value="Kotak">Kotak</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Sachet">Sachet</option>
+                                    <option value="Pcs" selected>Pcs</option>
+                                    <option value="Dus">Dus</option>
+                                <?php else:?>
+                                    <option value="Unit">Unit</option>
+                                    <option value="Kotak">Kotak</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Sachet">Sachet</option>
+                                    <option value="Pcs">Pcs</option>
+                                    <option value="Dus" selected>Dus</option>
+                                <?php endif;?>
+                             </select>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" >Harga</label>
+                        <div class="col-xs-8">
+                            <input name="harga" value="<?php echo $barang_harga;?>" class="form-control" type="text" placeholder="Harga..." required>
+                        </div>
+                    </div>
+ 
+                </div>
+ 
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button class="btn btn-info">Update</button>
+                </div>
+            </form> -->
+            </div>
+            </div>
+        </div>
+        
+    <!--END MODAL ADD BARANG-->
+
+        <!-- footer content -->
+        <footer>
+        <?php include("v-Footer.php") ?>
+        </footer>
+        <!-- /footer content -->
+      </div>
     </div>
-
-    <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            //view mapel
-            $('#guru').change(function() {
-                var nomorInduk = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
-                    method: "POST",
-                    data: {
-                        nomorInduk: nomorInduk
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<input type="text" id="idKelas" name="idKelas" required="required" class="form-control" value="' + data[i].idJadwal + '">';
-                        }
-                        $('#jadwalGuru').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view id jadwal setelah select guru
-            $('#guru').change(function() {
-                var nomorInduk = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
-                    method: "POST",
-                    data: {
-                        nomorInduk: nomorInduk
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
-                        }
-                        $('#mapel').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view kelas
-            $('#mapel').change(function() {
-                var idMapel = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getKelas'); ?>",
-                    method: "POST",
-                    data: {
-                        idMapel: idMapel
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
-                        }
-                        $('#kelas').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view id jadwal setelah select mapel
-            $('#mapel').change(function() {
-                var idMapel = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getKelas'); ?>",
-                    method: "POST",
-                    data: {
-                        idMapel: idMapel
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="' + data[i].idMapel + '">'
-                        }
-                        $('#jadwalMapel').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view nama siswa
-            $('#kelas').change(function() {
-                var idKelas = $(this).val();
-                var idMapel = $('#mapel').val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getNama'); ?>",
-                    method: "POST",
-                    data: {
-                        idKelas: idKelas,
-                        idMapel: idMapel
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        console.log(data);
-                        var html = '';
-                        for (var i = 0; i < data.nama.length; i++) {
-                            html += '<tr>' +
-                                '<td> ' + data.nama[i].namaUser + ' </td>' +
-                                '<td></td>' +
-                                '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" title="tambah" data="">' +
-                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
-                                '</tr>';
-                        }
-                        $('#show_data').html(html);
-                        html = '';
-
-                        for (var j = 0; j < data.jadwal.length; j++) {
-                            html += '<input type="text" name="idJadwal" id="idJadwal" value="' + data.jadwal[j].idJadwal + '" hidden>';
-                        }
-                        $('#jadwal').html(html);
-                    }
-                });
-                return false;
-            });
-        });
-    </script>
-
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <script src="<?php echo base_url(); ?>assets/inter/vendors/validator/validator.js"></script>
+    <!-- iCheck -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inter/vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url(); ?>assets/inter/build/js/custom.min.js"></script>
 
-</body>
-
+  </body>
 </html>

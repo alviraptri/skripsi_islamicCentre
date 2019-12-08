@@ -126,6 +126,16 @@ class m_admin extends CI_Model
     {
         return $this->db->get('user');
     }
+    function tugasGuru()
+    {
+        $query = $this->db->query('SELECT DISTINCT jadwal.nomorInduk, jadwal.idMapel, user.nomorInduk, user.namaUser, 
+        matapelajaran.idMapel, matapelajaran.namaMapel 
+        FROM jadwal 
+        JOIN user ON user.nomorInduk = jadwal.nomorInduk 
+        JOIN matapelajaran ON matapelajaran.idMapel = jadwal.idMapel');
+        
+        return $query;
+    }
 
     //wali murid
     function tampilkanDataWaliMurid()
@@ -299,16 +309,19 @@ class m_admin extends CI_Model
         $query = $this->db->query('SELECT DISTINCT tanggal FROM absensi WHERE idJadwal = "'.$id.'"');
         return $query;
     }
+
     function getAbsensi($id)
     {
         $query = $this->db->query('SELECT absensi.tanggal, absensi.idAbsen, absensi.idSiswa, absensi.ketAbsen, datasiswa.idSiswa, datasiswa.nomorInduk, 
-        user.namaUser, user.nomorInduk 
+        user.namaUser, user.nomorInduk, datasiswa.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas 
         FROM datasiswa 
         JOIN absensi ON absensi.idSiswa = datasiswa.idSiswa 
         JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        JOIN kelas ON kelas.idKelas = datasiswa.idKelas
         WHERE absensi.tanggal = "'.$id.'"');
         return $query;
     }
+
     function getKetNilai($where)
     {
         $this->db->select('idKetNilai, idTahunAjaran, bobotSekolah, bobotGuru')
@@ -349,6 +362,17 @@ class m_admin extends CI_Model
     }
 
     //absensi
+    function editAbsensi($id)
+    {
+        $query = $this->db->query('SELECT absensi.tanggal, absensi.idAbsen, absensi.idSiswa, absensi.ketAbsen, datasiswa.idSiswa, datasiswa.nomorInduk, 
+        user.namaUser, user.nomorInduk, datasiswa.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, absensi.ketAbsen 
+        FROM datasiswa 
+        JOIN absensi ON absensi.idSiswa = datasiswa.idSiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        JOIN kelas ON kelas.idKelas = datasiswa.idKelas
+        WHERE absensi.idAbsen = "'.$id.'"');
+        return $query;
+    }
     function getNama($idKelas)
     {
         $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, user.nomorInduk, user.namaUser')
@@ -378,8 +402,26 @@ class m_admin extends CI_Model
         $query = $this->db->query('SELECT matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.idTahunAjaran FROM matapelajaran WHERE matapelajaran.idTahunAjaran = "'.$tahunAjaran.'"');
         return $query;
     }
+    function jamMulai()
+    {
+        $query = $this->db->query("SELECT DISTINCT jamMulai FROM jadwalujian");
+
+        return $query;
+    }
+    function jamSelesai()
+    {
+        $query = $this->db->query("SELECT DISTINCT jamSelesai FROM jadwalujian");
+
+        return $query;
+    }
     function getJadwalUjian($idTA)
     {
+        // $query = $this->db->query("SELECT jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        // jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel 
+        // FROM jadwalujian 
+        // JOIN matapelajaran ON matapelajaran.idMapel = jadwalujian.idMapel 
+        // WHERE jadwalujian.idTahunAjaran = '.$idTA.' AND jadwalujian.jamMulai = '.$jamMulai.' AND jadwalujian.jamSelesai = '.$jamSelesai.'");
+        // return $query;
         $this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
         jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
         ->from('jadwalujian')
@@ -488,6 +530,47 @@ class m_admin extends CI_Model
                 );
             }
             $this->db->insert_batch('jadwalpengawas', $result);
+    }
+    function ngawasMapel($jamMulai)
+    {
+        $query = $this->db->query("SELECT jadwalujian.idJadwalUjian, jadwalujian.idMapel, jadwalujian.jamMulai, matapelajaran.idMapel, 
+        matapelajaran.namaMapel 
+        FROM jadwalujian 
+        JOIN matapelajaran ON jadwalujian.idMapel = matapelajaran.idMapel 
+        WHERE jadwalujian.jamMulai = '".$jamMulai."'");
+        return $query;
+    }
+    function ngawasHari($idTA)
+    {
+        $query = $this->db->query("SELECT DISTINCT hari FROM jadwalujian WHERE idTahunAjaran = '".$idTA."'");
+        return $query;
+    }
+    function ngawasJam($hari)
+    {
+        $query = $this->db->query("SELECT DISTINCT jamMulai, jamSelesai FROM jadwalujian WHERE hari = '".$hari."'");
+        return $query;
+    }
+    function tambahNgawas($id)
+    {
+        $query = $this->db->query("SELECT * FROM jadwalpengawas WHERE idJadwalUjian = '".$id."'");
+        return $query;
+    }
+    function pengawas($idTA)
+    {
+        $query = $this->db->query("SELECT jadwalujian.idTahunAjaran, jadwalujian.idJadwalUjian, jadwalpengawas.idJadwalUjian, jadwalpengawas.idKelas, 
+        jadwalpengawas.nomorInduk, user.nomorInduk, user.namaUser, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, kelas.nomorKelas, 
+        kelas.nomorKelas 
+        FROM jadwalpengawas 
+        JOIN jadwalujian ON jadwalujian.idJadwalUjian = jadwalpengawas.idJadwalUjian 
+        JOIN user ON user.nomorInduk = jadwalpengawas.nomorInduk 
+        JOIN kelas ON kelas.idKelas = jadwalpengawas.idKelas 
+        WHERE jadwalujian.idTahunAjaran = '".$idTA."'");
+        return $query;
+    }
+    function pengembanganDiri()
+    {
+        $query = $this->db->query("SELECT * FROM `kompetensinilai`");
+        return $query;
     }
 }
 

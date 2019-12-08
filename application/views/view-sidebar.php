@@ -30,6 +30,7 @@
             <li><a href="<?php echo base_url('c_admin/admin'); ?>">Data Admin</a></li>
             <li><a href="<?php echo base_url('c_admin/guru'); ?>">Data Guru</a></li>
             <li><a href="<?php echo base_url('c_admin/waliKelas'); ?>">Data Wali Kelas</a></li>
+            <li><a href="<?php echo base_url('c_admin/tugasGuru'); ?>">Tugas Guru</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahPegawai'); ?>">Tambah Pegawai</a></li>
           </ul>
         </li>

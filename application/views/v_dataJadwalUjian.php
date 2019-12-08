@@ -201,13 +201,13 @@
                     success: function(data){
                         var html ='';
                         var i;
-                        for(i = 0; i < data.length; i++){
+                        for(i = 0; i < data.jadwal.length; i++){
                             html += '<tr>'+
-                            '<td> '+ data[i].hari +' </td>'+
-                            '<td> '+ data[i].jamMulai+' - '+data[i].jamSelesai+' </td>'+
-                            '<td> '+data[i].namaMapel+' </td>'+
-                            '<td>'+data[i].jenisMapel+'</td>'+
-                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idJadwalUjian + '">' +
+                            '<td> '+ data.jadwal[i].hari +' </td>'+
+                            '<td> '+ data.jadwal[i].jamMulai+' - '+data.jadwal[i].jamSelesai+' </td>'+
+                            '<td> '+data.jadwal[i].namaMapel+' </td>'+
+                            '<td>'+data.jadwal[i].jenisMapel+'</td>'+
+                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
                             '</tr>';
                         }

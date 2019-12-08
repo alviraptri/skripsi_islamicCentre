@@ -120,6 +120,11 @@ class c_admin extends CI_Controller
 		$this->m_admin->statusData($where, $data, 'user');
 		redirect('c_admin/guru');
 	}
+	function tugasGuru()
+	{
+		$data['tgs'] = $this->m_admin->tugasGuru()->result();
+		$this->load->view('v_dataTugas', $data);
+	}
 	
 	//wali kelas
 	function waliKelas()
@@ -853,24 +858,6 @@ class c_admin extends CI_Controller
 		$data['ta'] = $this->m_admin->thnAjaran()->result();
 		$this->load->view('v_dataKetNilai', $data);
 	}
-	function getMapel()
-	{
-		$nomorInduk = $this->input->post('nomorInduk', TRUE);
-		$data = $this->m_admin->getMapel($nomorInduk)->result();
-		echo json_encode($data);
-	}
-	function getTanggal()
-	{
-		$id = $this->input->post('id');
-		$data = $this->m_admin->getTanggal($id)->result();
-		echo json_encode($data);
-	}
-	function getAbsensi()
-	{
-		$id=$this->input->post('id');
-		$data=$this->m_admin->getAbsensi($id)->result();
-		echo json_encode($data);
-	}
 	function getKetNilai()
 	{
 		$idTA = $this->input->post('idTA', TRUE);
@@ -908,6 +895,30 @@ class c_admin extends CI_Controller
 	}
 
 	//absensi
+	function editAbsensi()
+	{
+		$id = $this->input->get('id');
+		$data = $this->m_admin->editAbsensi($id);
+		echo json_encode($data);
+	}
+	function getMapel()
+	{
+		$nomorInduk = $this->input->post('nomorInduk', TRUE);
+		$data = $this->m_admin->getMapel($nomorInduk)->result();
+		echo json_encode($data);
+	}
+	function getTanggal()
+	{
+		$id = $this->input->post('id');
+		$data = $this->m_admin->getTanggal($id)->result();
+		echo json_encode($data);
+	}
+	function getAbsensi()
+	{
+		$id=$this->input->post('id');
+		$data=$this->m_admin->getAbsensi($id)->result();
+		echo json_encode($data);
+	}
 	function tambahAbsensi()
 	{
 		$data['guru'] = $this->m_admin->jadwalGuru()->result();
@@ -1028,15 +1039,30 @@ class c_admin extends CI_Controller
 	function getJadwalUjian()
 	{
 		$idTA = $this->input->post('idTA', TRUE);
+		// $jamMulai = $this->m_admin->jamMulai()->result();
+		// $jamSelesai = $this->m_admin->jamSelesai()->result();
+		// $jadwal = $this->m_admin->getJadwalUjian($idTA, $jamMulai, $jamSelesai)->result();
 		$jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
-		$ipa = $this->m_admin->getIPA($idTA)->result();
-		$ips = $this->m_admin->getIPS($idTA)->result();
+		// $ipa = $this->m_admin->getIPA($idTA)->result();
+		// $ips = $this->m_admin->getIPS($idTA)->result();
 		$data = array(
 			'jadwal' => $jadwal,
 		);
 		echo json_encode($data);
 	}
-	function getdataMapel(){
+	function pengawas()
+	{
+		$idTA = $this->input->post('idTA', TRUE);
+		$jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
+		$jadwal1 = $this->m_admin->pengawas($idTA)->result();
+		$data = array(
+			'jadwal' => $jadwal,
+			'jadwal1' => $jadwal1,
+		);
+		echo json_encode($data);
+	}
+	function getdataMapel()
+	{
 		$data = $this->m_admin->getdataMapel()->result();
 		for($i = 0; $i < count($data); $i++) {
 			$where = array(
@@ -1065,10 +1091,10 @@ class c_admin extends CI_Controller
 		$where = array('idJadwalUjian' => $id,);
 
 		$data = array(
+			'idMapel' => $mapel,
 			'hari' => $hari,
 			'jamMulai' => $jamMulai,
 			'jamSelesai' => $jamSelesai,
-			'idMapel' => $mapel,
 		);
         $data=$this->m_admin->updateData($where, $data, 'jadwalUjian');
         echo json_encode($data);
@@ -1123,13 +1149,53 @@ class c_admin extends CI_Controller
 	}
 	function simpanPengawas()
 	{
-		$jadwal= $this->input->post('idJU');
-		$guru =$this->input->post('idGuru');
-		$kelas =$this->input->post('idKelas');
+		$idMapel = $this->input->post('idMapel');
+		$idKelas = $this->input->post('idKelas');
+		$nomorInduk = $this->input->post('nomorInduk');
 
-		$data = array($jadwal, $guru, $kelas);
-		$this->m_admin->simpanJP($data);
+		$data = array(
+			'idJadwalPengawas' => "",
+			'idJadwalUjian' => $idMapel,
+			'idKelas' => $idKelas,
+			'nomorInduk' => $nomorInduk,
+		);
+
+		$this->m_admin->simpanData($data, 'jadwalPengawas');
 		redirect('c_admin/jadwalNgawas');
+	}
+	function ngawasMapel()
+	{
+		$jamMulai = $this->input->post('jamMulai', TRUE);
+		$data = $this->m_admin->ngawasMapel($jamMulai)->result();
+		echo json_encode($data);
+	}
+	function ngawasHari()
+	{
+		$idTA = $this->input->post('idTA', TRUE);
+		$data = $this->m_admin->ngawasHari($idTA)->result();
+		echo json_encode($data);
+	}
+	function ngawasJam()
+	{
+		$hari = $this->input->post('hari', TRUE);
+		$data = $this->m_admin->ngawasJam($hari)->result();
+		echo json_encode($data);
+	}
+	function ngawasGuru()
+	{
+		$id = $this->input->post('id', TRUE);
+		$ngawas = $this->m_admin->tambahNgawas($id)->result();
+		$guru = $this->m_admin->jadwalGuru()->result();
+		$data = array('ngawas' => $ngawas, 'guru' => $guru,);
+		echo json_encode($data);
+	}
+	function ngawasKelas()
+	{
+		$id = $this->input->post('id', TRUE);
+		$ngawas = $this->m_admin->tambahNgawas($id)->result();
+		$kelas = $this->m_admin->kelas()->result();
+		$data = array('ngawas' => $ngawas, 'kelas' => $kelas,);
+		echo json_encode($data);
 	}
 
 	//pengembangan diri
@@ -1141,8 +1207,7 @@ class c_admin extends CI_Controller
 	}
 	function dataPengembanganDiri()
 	{
-		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
-		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$data['pd'] = $this->m_admin->pengembanganDiri()->result();
 		$this->load->view('v_dataNilaiPD', $data);
 	}
 }

@@ -87,7 +87,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
+                                                    <th>Kelas</th>
                                                     <th>Absen</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -102,6 +104,56 @@
                 </div>
             </div>
             <!-- /page content -->
+
+            <!-- MODAL EDIT -->
+            <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="myModalLabel">Edit Absen</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <form class="form-horizontal form-label-left">
+                            <div class="modal-body">
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">#</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="ID Ket Nilai" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Kelas</label>
+                                    <div class="col-xs-9">
+                                        <input name="kls_edit" id="kls_edit" class="form-control" type="text" placeholder="Nilai Satu" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Absen</label>
+                                    <div class="col-xs-9">
+                                        <input name="absen_edit" id="absen_edit" class="form-control" type="text" placeholder="Nilai Dua" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                                <button class="btn btn-info" id="btn_update">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--END MODAL EDIT-->
 
             <!-- footer content -->
             <footer>
@@ -129,7 +181,7 @@
                         var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idJadwal + '">' + data[i].namaMapel + '/'+data[i].ketKelas+data[i].jurusanKelas+data[i].nomorKelas+'</option>'
+                            html += '<option value="' + data[i].idJadwal + '">' + data[i].namaMapel + '</option>'
                         }
                         $('#mapel').html(html);
                     }
@@ -177,10 +229,37 @@
                         for (var i = 0; i < data.length; i++) {
                             html += '<tr>' +
                                 '<td> ' + data[i].namaUser + ' </td>' +
+                                '<td> '+ data[i].ketKelas+' '+ data[i].jurusanKelas+' '+ data[i].nomorKelas+'</td>' +
                                 '<td> '+ data[i].ketAbsen+' </td>' +
+                                '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idAbsen + '">' +
+                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' +
+                                '</td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //GET UPDATE
+            $('#show_data').on('click', '.item_edit', function() {
+                var id = $(this).attr('data');
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo base_url('c_admin/editAbsensi') ?>",
+                    dataType: "JSON",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $.each(data, function(idAbsen, ketKelas, nomorKelas, jurusanKelas, namaUser, ketAbsen) {
+                            $('#ModalaEdit').modal('show');
+                            $('[name="id_edit"]').val(data.idAbsen);
+                            $('[name="nama_edit"]').val(data.namaUser);
+                            $('[name="kelas_edit"]').val(data.ketKelas);
+                            $('[name="absen_edit"]').val(data.ketAbsen);
+                        });
                     }
                 });
                 return false;
