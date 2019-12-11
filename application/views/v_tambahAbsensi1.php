@@ -107,7 +107,6 @@
                                                 <tr>
                                                     <th>Nama Siswa</th>
                                                     <th>Absen</th>
-                                                    <th>Keterangan</th>
                                                 </tr>
                                             </thead>
 
@@ -180,6 +179,7 @@
                     success: function(data) {
                         var html = '';
                         var i;
+                        html += '<option value="">Pilih Mata Pelajaran</option>'
                         for (i = 0; i < data.length; i++) {
                             html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
                         }
@@ -203,6 +203,7 @@
                     success: function(data) {
                         var html = '';
                         var i;
+                        html += '<option value="">Pilih Kelas</option>'
                         for (i = 0; i < data.length; i++) {
                             html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
                         }
@@ -226,6 +227,7 @@
                     success: function(data) {
                         var html = '';
                         var i;
+                        '<option value="">Pilih Mata Pelajaran</option>'
                         for (i = 0; i < data.length; i++) {
                             html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="' + data[i].idMapel + '">'
                         }
@@ -253,15 +255,10 @@
                         var html = '';
                         for (var i = 0; i < data.nama.length; i++) {
                             html += '<tr>' +
-                                '<td> ' + data.nama[i].namaUser + ' </td>' +
-                                '<td> <div class="checkbox">' +
-                                '<label>' +
-                                '<input type="text" name="idSiswa[]" id="absen" value="' + data.nama[i].idSiswa + '" hidden><input type="checkbox" name="cek[]" id="absen" class="flat" value="'+data.nama[i].idSiswa+'">' +
-                                '</label>' +
-                                '</div> </td>' +
+                                '<td> <input type="text" name="idSiswa[]" value="'+data.nama[i].idSiswa+'" hidden> '+ data.nama[i].namaUser + ' </td>' +
                                 '<td>'+
                                 '<select name="ket[]" id="ket" required="required" class="form-control">'+
-                                '<option value="H">Pilih Keterangan</option>'+
+                                '<option value="H">Hadir</option>'+
                                 '<option value="A">Alpa</option>'+
                                 '<option value="I">Izin</option>'+
                                 '<option value="S">Sakit</option>'+
@@ -280,15 +277,6 @@
                 });
                 return false;
             });
-        });
-
-        $(document).on('change', '#absen', function(){
-            if($(this).prop('checked')){
-                $('#ket').attr('disabled', 'disabled');
-            }
-            else{
-                $('#ket').removeAttr('disabled');
-            }
         });
     </script>
 

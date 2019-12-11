@@ -75,9 +75,9 @@
                           <td><?php echo $list->sikap ?></td>
                           <td><?php echo $list->predikat ?></td>
                           <td><?php echo $list->deskripsi ?></td>
-                          <td><a data-target="#modal_edit<?php echo $list->idKompetensi;?>" data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
+                          <td><a data-target="#modal_edit<?php echo $list->idKompetensi;?>" data-toggle="modal" title="Edit" class="btn btn-info btn-xs">
                                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                              </a> <?php echo $list->idKompetensi;?></td>
+                              </a></td>
                         </tr>
                       <?php } ?>
                       </tbody>
@@ -92,102 +92,67 @@
         <!-- /page content -->
 
         <!-- ============ MODAL EDIT BARANG =============== -->
-        <?php foreach ($pd as $list) { 
-            $id = $list->idKompetensi; 
-            } ?>
-        <div class="modal fade" id="modal_edit<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h3 class="modal-title" id="myModalLabel">Edit Barang</h3>
-            </div>
-            <!-- <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/barang/edit_barang'?>">
-                <div class="modal-body">
- 
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Kode Barang</label>
-                        <div class="col-xs-8">
-                            <input name="kode_barang" value="<?php echo $barang_id;?>" class="form-control" type="text" placeholder="Kode Barang..." readonly>
+        <?php foreach ($pd as $list) {
+          $id = $list->idKompetensi;
+          $sikap = $list->sikap;
+          $predikat = $list->predikat;
+          $deskripsi = $list->deskripsi;
+        } ?>
+        <div class="modal fade bs-example-modal-lg" id="modal_edit<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="myModalLabel">Edit Jadwal Ujian</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
+                        <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateNilaiPD'; ?>">
+                            <div class="modal-body">
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">#</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="id_edit" id="id_edit" class="form-control" type="text" value="<?= $id?>" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Sikap</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <select name="sikap" id="" class="form-control">
+                                          <option value="<?= $sikap?>"><?= $sikap?></option>
+                                          <option value="Sikap Sosial">Sikap Sosial</option>
+                                          <option value="Sikap Spiritual">Sikap Spiritual</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Predikat</label>
+                                    <div class="col-md-6 col-sm-6" >
+                                    <select name="predikat" id="" class="form-control">
+                                          <option value="<?= $predikat?>"><?= $predikat?></option>
+                                          <option value="A">A</option>
+                                          <option value="B">B</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Deskripsi</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <textarea name="deskripsi" id="" cols="30" rows="10" class="form-control"><?= $deskripsi?></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                                <button class="btn btn-info" id="btn_update">Simpan</button>
+                            </div>
+                        </form>
                     </div>
- 
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Nama Barang</label>
-                        <div class="col-xs-8">
-                            <input name="nama_barang" value="<?php echo $barang_nama;?>" class="form-control" type="text" placeholder="Nama Barang..." required>
-                        </div>
-                    </div>
- 
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Satuan</label>
-                        <div class="col-xs-8">
-                             <select name="satuan" class="form-control" required>
-                                <option value="">-PILIH-</option>
-                                <?php if($barang_satuan=='Unit'):?>
-                                    <option value="Unit" selected>Unit</option>
-                                    <option value="Kotak">Kotak</option>
-                                    <option value="Botol">Botol</option>
-                                    <option value="Sachet">Sachet</option>
-                                    <option value="Pcs">Pcs</option>
-                                    <option value="Dus">Dus</option>
-                                <?php elseif($barang_satuan=='Kotak'):?>
-                                    <option value="Unit">Unit</option>
-                                    <option value="Kotak" selected>Kotak</option>
-                                    <option value="Botol">Botol</option>
-                                    <option value="Sachet">Sachet</option>
-                                    <option value="Pcs">Pcs</option>
-                                    <option value="Dus">Dus</option>
-                                <?php elseif($barang_satuan=='Botol'):?>
-                                    <option value="Unit">Unit</option>
-                                    <option value="Kotak">Kotak</option>
-                                    <option value="Botol" selected>Botol</option>
-                                    <option value="Sachet">Sachet</option>
-                                    <option value="Pcs">Pcs</option>
-                                    <option value="Dus">Dus</option>
-                                <?php elseif($barang_satuan=='Sachet'):?>
-                                    <option value="Unit">Unit</option>
-                                    <option value="Kotak">Kotak</option>
-                                    <option value="Botol">Botol</option>
-                                    <option value="Sachet" selected>Sachet</option>
-                                    <option value="Pcs">Pcs</option>
-                                    <option value="Dus">Dus</option>
-                                <?php elseif($barang_satuan=='Sachet'):?>
-                                    <option value="Unit">Unit</option>
-                                    <option value="Kotak">Kotak</option>
-                                    <option value="Botol">Botol</option>
-                                    <option value="Sachet">Sachet</option>
-                                    <option value="Pcs" selected>Pcs</option>
-                                    <option value="Dus">Dus</option>
-                                <?php else:?>
-                                    <option value="Unit">Unit</option>
-                                    <option value="Kotak">Kotak</option>
-                                    <option value="Botol">Botol</option>
-                                    <option value="Sachet">Sachet</option>
-                                    <option value="Pcs">Pcs</option>
-                                    <option value="Dus" selected>Dus</option>
-                                <?php endif;?>
-                             </select>
-                        </div>
-                    </div>
- 
-                    <div class="form-group">
-                        <label class="control-label col-xs-3" >Harga</label>
-                        <div class="col-xs-8">
-                            <input name="harga" value="<?php echo $barang_harga;?>" class="form-control" type="text" placeholder="Harga..." required>
-                        </div>
-                    </div>
- 
                 </div>
- 
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                    <button class="btn btn-info">Update</button>
-                </div>
-            </form> -->
             </div>
-            </div>
-        </div>
         
     <!--END MODAL ADD BARANG-->
 

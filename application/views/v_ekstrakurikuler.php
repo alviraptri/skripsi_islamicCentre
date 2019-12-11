@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Absensi | Information Academic Islamic Centre</title>
+    <title>Pengembangan Diri | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Absensi</h3>
+                            <h3>Pengembangan Diri</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -48,55 +48,64 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Data Absensi</h2>
+                                    <h2>Ekstrakurikuler</h2>
+                                    
                                     <div class="clearfix"></div>
                                 </div>
+                                <ul class="nav navbar-right panel_toolbox">
+                                            <li> <a href="<?php echo base_url('c_admin/tambahEkskul'); ?>"><button type="submit" class="btn btn-primary">Tambah Ekstrakulikuler</button></a>
+                                            </li>
+                                        </ul>
                                 <div class="x_content">
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="guru" id="guru" required="required" class="form-control">
-                                                <option value="">Pilih Guru</option>
-                                                <?php
-                                                foreach ($guru as $list) { ?>
-                                                    <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="mapel" id="mapel" required="required" class="form-control">
-                                                <option value="">Pilih Mata Pelajaran</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="tgl" id="tgl" required="required" class="form-control">
-                                                <option value="">Pilih Tanggal</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Siswa</th>
-                                                <th>Kelas</th>
-                                                <th>Absen</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
 
-                                        <tbody name="show_data" id="show_data">
+                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanEkskul'; ?>" novalidate>
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="guru" id="guru" class="form-control">
+                                                    <option value="">Pilih Guru</option>
+                                                    <?php
+                                                    foreach ($dataWk as $list) { ?>
+                                                        <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="kelas" id="kelas" class="form-control">
+                                                    <option value="">Pilih Kelas</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                        </tbody>
-                                    </table>
+                                        
+
+                                        <div class="item form-group">
+                                            <!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
+                                            </label> -->
+                                            <div class="col-md-6 col-sm-6" id="jadwal">
+                                            </div>
+                                        </div>
+                                        <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Siswa</th>
+                                                    <th>Nama Ekstrakurikuler</th>
+                                                    <th>Predikat</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody name="show_data" id="show_data">
+
+                                            </tbody>
+                                        </table>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -105,46 +114,28 @@
             </div>
             <!-- /page content -->
 
-            <!-- MODAL EDIT -->
+            <!-- MODAL Edit -->
             <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Edit Absen</h3>
+                            <h3 class="modal-title" id="myModalLabel">Edit Catatan</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <form class="form-horizontal form-label-left">
                             <div class="modal-body">
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">#</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="ID Ket Nilai" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
                                     <div class="col-md-6 col-sm-6">
+                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly hidden>
                                         <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
                                     </div>
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Kelas</label>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Catatan</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="kls_edit" id="kls_edit" class="form-control" type="text" placeholder="Nilai Satu" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Absen</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <select name="absen_edit" id="absen_edit" class="form-control">
-                                            <option value="H"> Hadir </option>
-                                            <option value="A"> Alpa </option>
-                                            <option value="I"> Izin </option>
-                                            <option value="S"> Sakit </option>
-                                        </select>
+                                        <textarea name="cttn_edit" id="cttn_edit" cols="30" rows="10" class="form-control"></textarea>
                                     </div>
                                 </div>
 
@@ -158,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <!--END MODAL EDIT-->
+            <!--END MODAL Edit-->
 
             <!-- footer content -->
             <footer>
@@ -171,11 +162,12 @@
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //view mapel dan kelas dan id jadwal
+
+            //view kelas
             $('#guru').change(function() {
                 var nomorInduk = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
+                    url: "<?php echo site_url('c_admin/getWKelas'); ?>",
                     method: "POST",
                     data: {
                         nomorInduk: nomorInduk
@@ -185,60 +177,38 @@
                     success: function(data) {
                         var html = '';
                         var i;
-                        html += '<option value="">Pilih Mata Pelajaran</option>'
+                        html += '<option value="">Pilih Kelas</option>'
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idJadwal + '">' + data[i].namaMapel + '</option>'
+                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
                         }
-                        $('#mapel').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view tanggal
-            $('#mapel').change(function() {
-                var id = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getTanggal'); ?>",
-                    method: "POST",
-                    data: {
-                        id: id
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        html += '<option value="">Pilih Tanggal</option>'
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].tanggal + '">' + data[i].tanggal + '</option>'
-                        }
-                        $('#tgl').html(html);
+                        $('#kelas').html(html);
                     }
                 });
                 return false;
             });
 
             //view nama siswa
-            $('#tgl').change(function() {
-                var id = $(this).val();
+            $('#kelas').change(function() {
+                var idKelas = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getAbsensi'); ?>",
+                    url: "<?php echo site_url('c_admin/getEkskul'); ?>",
                     method: "POST",
                     data: {
-                        id: id
+                        idKelas: idKelas,
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
                         console.log(data);
                         var html = '';
-                        for (var i = 0; i < data.length; i++) {
+                        for (var i = 0; i < data.eks.length; i++) {
                             html += '<tr>' +
-                                '<td> ' + data[i].namaUser + ' </td>' +
-                                '<td> ' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</td>' +
-                                '<td> ' + data[i].absen + ' </td>' +
-                                '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idAbsen + '">' +
+                                '<td> <input type="text" name="idSiswa[]" value="" hidden> ' + data.eks[i].namaUser + ' </td>' +
+                                '<td> ' + data.eks[i].namaEkskul + ' </td>' +
+                                '<td> ' + data.eks[i].predikat + ' </td>' +
+                                '<td> ' + data.eks[i].ketEkskul + ' </td>' +
+                                '<td>' +
+                                '<a href="javascript:;" title="Edit" class="btn btn-info btn-xs item_edit" data="' + data.eks[i].idSiswa + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' +
                                 '</td>' +
                                 '</tr>';
@@ -249,12 +219,12 @@
                 return false;
             });
 
-            //GET UPDATE
+            //GET EDIT
             $('#show_data').on('click', '.item_edit', function() {
                 var id = $(this).attr('data');
                 $.ajax({
                     type: "GET",
-                    url: "<?php echo base_url('c_admin/editAbsensi') ?>",
+                    url: "<?php echo base_url('c_admin/getEditSiswa') ?>",
                     dataType: "JSON",
                     data: {
                         id: id
@@ -262,36 +232,29 @@
                     success: function(data) {
                         console.log(data);
                         $('#ModalaEdit').modal('show');
-                        $('[name="id_edit"]').val(data[0].idAbsen);
+                        $('[name="id_edit"]').val(data[0].idSiswa);
                         $('[name="nama_edit"]').val(data[0].namaUser);
-                        $('[name="kls_edit"]').val(data[0].ketKelas + ' ' + data[0].jurusanKelas + ' ' + data[0].nomorKelas);
-                        selectElement('absen_edit', data[0].absen);
+                        $('[name="cttn_edit"]').val(data[0].catatan);
                     }
                 });
                 return false;
             });
 
-            function selectElement(id, valueToSelect) {
-                let element = document.getElementById(id);
-                element.value = valueToSelect;
-            }
-
-            //Update data
+            //update data
             $('#btn_update').on('click', function() {
                 var id = $('#id_edit').val();
-                var absen = $('#absen_edit').val();
+                var cttn = $('#cttn_edit').val();
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('c_admin/updateAbsen') ?>",
+                    url: "<?php echo base_url('c_admin/updateCatatan') ?>",
                     dataType: "JSON",
                     data: {
                         id: id,
-                        absen: absen,
+                        cttn: cttn,
                     },
                     success: function(data) {
-                        $('[name="id_edit"]').val("");
                         $('[name="nama_edit"]').val("");
-                        $('[name="kls_edit"]').val("");
+                        $('[name="cttn_edit"]').val("");
                         $('#ModalaEdit').modal('hide');
                     }
                 });

@@ -295,14 +295,13 @@ class m_admin extends CI_Model
     //ketnilai
     function getMapel($nomorInduk)
     {
-        $this->db->select('jadwal.idJadwal, jadwal.nomorInduk, jadwal.idMapel,jadwal.idKelas ,matapelajaran.idMapel, matapelajaran.namaMapel, kelas.idKelas, kelas.ketKelas, 
-        kelas.jurusanKelas, kelas.nomorKelas')
-        ->from('jadwal')
-        ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
-        ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
-        ->where('jadwal.nomorInduk = "'.$nomorInduk.'"');
-
-        return $this->db->get();
+        $query = $this->db->query('SELECT DISTINCT jadwal.idMapel,matapelajaran.idMapel, matapelajaran.namaMapel, jadwal.nomorInduk, jadwal.idJadwal, kelas.idKelas, 
+        jadwal.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas 
+        FROM jadwal 
+        JOIN matapelajaran ON matapelajaran.idMapel = jadwal.idMapel 
+        JOIN kelas ON kelas.idKelas = jadwal.idKelas 
+        WHERE jadwal.nomorInduk ="'.$nomorInduk.'"');
+        return $query;
     }
     function getTanggal($id)
     {
@@ -312,12 +311,12 @@ class m_admin extends CI_Model
 
     function getAbsensi($id)
     {
-        $query = $this->db->query('SELECT absensi.tanggal, absensi.idAbsen, absensi.idSiswa, absensi.ketAbsen, datasiswa.idSiswa, datasiswa.nomorInduk, 
-        user.namaUser, user.nomorInduk, datasiswa.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas 
+        $query = $this->db->query('SELECT absensi.idSiswa, absensi.idJadwal, absensi.absen, datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, user.namaUser, 
+        datasiswa.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, absensi.tanggal, absensi.idAbsen 
         FROM datasiswa 
         JOIN absensi ON absensi.idSiswa = datasiswa.idSiswa 
         JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
-        JOIN kelas ON kelas.idKelas = datasiswa.idKelas
+        JOIN kelas ON kelas.idKelas = datasiswa.idKelas 
         WHERE absensi.tanggal = "'.$id.'"');
         return $query;
     }
@@ -364,8 +363,8 @@ class m_admin extends CI_Model
     //absensi
     function editAbsensi($id)
     {
-        $query = $this->db->query('SELECT absensi.tanggal, absensi.idAbsen, absensi.idSiswa, absensi.ketAbsen, datasiswa.idSiswa, datasiswa.nomorInduk, 
-        user.namaUser, user.nomorInduk, datasiswa.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, absensi.ketAbsen 
+        $query = $this->db->query('SELECT absensi.tanggal, absensi.idAbsen, absensi.idSiswa, absensi.absen, datasiswa.idSiswa, datasiswa.nomorInduk, 
+        user.namaUser, user.nomorInduk, datasiswa.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas
         FROM datasiswa 
         JOIN absensi ON absensi.idSiswa = datasiswa.idSiswa 
         JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
@@ -414,21 +413,31 @@ class m_admin extends CI_Model
 
         return $query;
     }
-    function getJadwalUjian($idTA)
+    function getJadwalUjian($where)
     {
-        // $query = $this->db->query("SELECT jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
-        // jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel 
-        // FROM jadwalujian 
-        // JOIN matapelajaran ON matapelajaran.idMapel = jadwalujian.idMapel 
-        // WHERE jadwalujian.idTahunAjaran = '.$idTA.' AND jadwalujian.jamMulai = '.$jamMulai.' AND jadwalujian.jamSelesai = '.$jamSelesai.'");
-        // return $query;
         $this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        ->from('jadwalUjian')
+        ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel')
+        ->where($where);
+        return $this->db->get(); 
+
+        // $this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
+        // jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        // ->from('jadwalujian')
+        // ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
+        // ->where('jadwalujian.idTahunAjaran = "'.$idTA.'"');
+        // return $this->db->get();
+    }
+    function jadwalUjian($idTA)
+	{
+		$this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
         jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
         ->from('jadwalujian')
         ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
         ->where('jadwalujian.idTahunAjaran = "'.$idTA.'"');
         return $this->db->get();
-    }
+	}
     function getIPA($idTA)
     {
         $this->db->select('matapelajaran.idMapel, matapelajaran.idTahunAjaran, matapelajaran.namaMapel, matapelajaran.jenisMapel')
@@ -570,6 +579,66 @@ class m_admin extends CI_Model
     function pengembanganDiri()
     {
         $query = $this->db->query("SELECT * FROM `kompetensinilai`");
+        return $query;
+    }
+    function getWKelas($nomorInduk)
+    {
+        $query = $this->db->query("SELECT walikelas.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, 
+        walikelas.nomorInduk 
+        FROM walikelas 
+        JOIN kelas ON kelas.idKelas = walikelas.idKelas 
+        WHERE walikelas.nomorInduk = '".$nomorInduk."'");
+
+        return $query;
+    }
+    function viewNama($idKelas)
+    {
+        $query = $this->db->query("SELECT datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, user.nomorInduk, user.namaUser 
+        FROM datasiswa
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        WHERE datasiswa.idKelas = '".$idKelas."'");
+        return $query;
+    }
+    function viewCatatan($idKelas)
+    {
+        $query = $this->db->query("SELECT catatan_walikelas.idCatatan, catatan_walikelas.idSiswa, catatan_walikelas.catatan, 
+        datasiswa.idSiswa, datasiswa.idKelas 
+        FROM datasiswa 
+        JOIN catatan_walikelas ON catatan_walikelas.idSiswa = datasiswa.idSiswa 
+        WHERE datasiswa.idKelas = '".$idKelas."'");
+        return $query;
+    }
+    function addSiswa($id)
+    {
+        $query = $this->db->query("SELECT datasiswa.idSiswa, datasiswa.nomorInduk, user.namaUser, user.nomorInduk 
+        FROM datasiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        WHERE datasiswa.idSiswa = '".$id."'");
+        return $query;
+    }
+    function getEditSiswa($id)
+    {
+        $query = $this->db->query("SELECT catatan_walikelas.idSiswa, catatan_walikelas.catatan, datasiswa.idSiswa, datasiswa.nomorInduk, 
+        user.nomorInduk, user.namaUser 
+        FROM datasiswa 
+        JOIN catatan_walikelas ON catatan_walikelas.idSiswa = datasiswa.idSiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        WHERE catatan_walikelas.idSiswa = '".$id."'");
+        return $query;
+    }
+    function viewEkskul($idKelas)
+    {
+        $query = $this->db->query("SELECT ekskul_siswa.idEkskul, ekskul_siswa.idEkskul, ekskul_siswa.namaEkskul, ekskul_siswa.predikat, 
+        ekskul_siswa.ketEkskul, datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, user.namaUser, datasiswa.idKelas 
+        FROM datasiswa 
+        JOIN ekskul_siswa ON ekskul_siswa.idSiswa = datasiswa.idSiswa 
+        JOIN user ON datasiswa.nomorInduk = user.nomorInduk 
+        WHERE datasiswa.idKelas = '".$idKelas."'");
+        return $query;
+    }
+    function viewStatus($id)
+    {
+        $query = $this->db->query("SELECT * FROM `ekskul_siswa` WHERE idSiswa = '".$id."'");
         return $query;
     }
 }

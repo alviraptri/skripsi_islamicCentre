@@ -93,13 +93,15 @@
         </li>
         <li><a><i class="fa fa-book"></i> Buku Nilai Guru<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="#">Data Buku Nilai</a></li>
-            <li><a href="#">Tambah Nilai</a></li>
+            <li><a href="<?php echo base_url('c_admin/dataBukuNilai'); ?>">Data Buku Nilai</a></li>
+            <li><a href="<?php echo base_url('c_admin/tambahBukuNilai'); ?>">Tambah Nilai</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-file-text"></i> Pengembangan Diri<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="<?php echo base_url('c_admin/dataPengembanganDiri'); ?>">Data Pengembangan Diri</a></li>
+            <li><a href="<?php echo base_url('c_admin/catatanWaliKelas'); ?>">Catatan Wali Kelas</a></li>
+            <li><a href="<?php echo base_url('c_admin/ekstrak'); ?>">Ekstrakurikuler</a></li>
             <li><a href="<?php echo base_url('c_admin/tambahPengembanganDiri'); ?>">Tambah Pengembangan Diri</a></li>
           </ul>
         </li>

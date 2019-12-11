@@ -887,6 +887,20 @@ class c_admin extends CI_Controller
         echo json_encode($data);
 	}
 
+	function updateAbsen()
+	{
+		$id=$this->input->post('id');
+        $absen=$this->input->post('absen');
+
+		$where = array('idAbsen' => $id,);
+
+		$data = array(
+			'absen' => $absen,
+		);
+        $data=$this->m_admin->updateData($where, $data, 'absensi');
+        echo json_encode($data);
+	}
+
 	function getKelas()
 	{
 		$idMapel = $this->input->post('idMapel');
@@ -898,7 +912,7 @@ class c_admin extends CI_Controller
 	function editAbsensi()
 	{
 		$id = $this->input->get('id');
-		$data = $this->m_admin->editAbsensi($id);
+		$data = $this->m_admin->editAbsensi($id)->result();
 		echo json_encode($data);
 	}
 	function getMapel()
@@ -939,40 +953,24 @@ class c_admin extends CI_Controller
 	function simpanAbsen()
 	{
 		$idSiswa = $this->input->post('idSiswa');
-		$cek = $this->input->post('cek');
 		$idJadwal = $this->input->post('idJadwal');
 		$guru = $this->input->post('guru');
 		$ket = $this->input->post('ket');
 
 		$tanggal = date('Y-m-d');
 
-		$data = array($idSiswa, $cek, $tanggal, $idJadwal, $guru);
+		$data = array($idSiswa, $tanggal, $idJadwal, $guru);
 
 		//$this->m_admin->simpanAbsen($data);
 
 		for($i=0 ; $i < count($idSiswa); $i++){
-			$flag = false;
-			for($j = 0; $j < count($cek); $j++) {
-				if($idSiswa[$i] == $cek[$j]) {
-					$flag = true;
-				}
-			}
-			if($flag == true) {
-				$absen = 1;
-				$keterangan = 'H';
-			}
-			else {
-				$absen = 0;
-				$keterangan = $ket;
-			}
             $result = array(
                 'idAbsen' => "",
                 'idSiswa' => $idSiswa[$i],
 				'idJadwal' => $idJadwal,
 				'nomorInduk' => $guru,
                 'tanggal' => $tanggal,
-				'absen' => $absen,
-				'ketAbsen' => 'H',
+				'absen' => $ket[$i],
                 'statusAbsen' => '1',
 			);
 			$this->m_admin->simpanAbsen($result, 'absensi');
@@ -1039,10 +1037,21 @@ class c_admin extends CI_Controller
 	function getJadwalUjian()
 	{
 		$idTA = $this->input->post('idTA', TRUE);
-		// $jamMulai = $this->m_admin->jamMulai()->result();
-		// $jamSelesai = $this->m_admin->jamSelesai()->result();
-		// $jadwal = $this->m_admin->getJadwalUjian($idTA, $jamMulai, $jamSelesai)->result();
-		$jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
+		$jamMulai = $this->m_admin->jamMulai()->result();
+		foreach ($jamMulai as $jm) {
+			$mulai = $jm->jamMulai;
+		}
+		$jamSelesai = $this->m_admin->jamSelesai()->result();
+		foreach ($jamSelesai as $js) {
+			$selesai = $js->jamSelesai;
+		}
+		$where = array(
+			'jadwalUjian.idTahunAjaran' => $idTA,
+			'jadwalUjian.jamMulai' => $mulai,
+			'jadwalUjian.jamSelesai' => $selesai, 
+		);
+		$jadwal = $this->m_admin->getJadwalUjian($where)->result();
+		// $jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
 		// $ipa = $this->m_admin->getIPA($idTA)->result();
 		// $ips = $this->m_admin->getIPS($idTA)->result();
 		$data = array(
@@ -1053,7 +1062,7 @@ class c_admin extends CI_Controller
 	function pengawas()
 	{
 		$idTA = $this->input->post('idTA', TRUE);
-		$jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
+		$jadwal = $this->m_admin->jadwalUjian($idTA)->result();
 		$jadwal1 = $this->m_admin->pengawas($idTA)->result();
 		$data = array(
 			'jadwal' => $jadwal,
@@ -1201,14 +1210,167 @@ class c_admin extends CI_Controller
 	//pengembangan diri
 	function tambahPengembanganDIri()
 	{
-		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
-		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
-		$this->load->view('v_tambahNilaiPD', $data);
+		$this->load->view('v_tambahNilaiPD');
 	}
 	function dataPengembanganDiri()
 	{
 		$data['pd'] = $this->m_admin->pengembanganDiri()->result();
 		$this->load->view('v_dataNilaiPD', $data);
+	}
+	function updateNilaiPD()
+	{
+		$id = $this->input->post('id_edit');
+		$sikap = $this->input->post('sikap');
+		$predikat = $this->input->post('predikat');
+		$deskripsi = $this->input->post('deskripsi');
+
+		$data = array(
+			'predikat' => $predikat,
+			'sikap' => $sikap,
+			'deskripsi' => $deskripsi, 
+		);
+		$where = array('idKompetensi' => $id);
+		$this->m_admin->updateData($where, $data, 'kompetensiNilai');
+		redirect('c_admin/dataPengembanganDiri');
+	}
+	function simpanNilaiPD()
+	{
+		$sikap = $this->input->post('sikap');
+		$predikat = $this->input->post('predikat');
+		$deskripsi = $this->input->post('deskripsi');
+
+		$data = array(
+			'idKompetensi' => '',
+			'predikat' => $predikat,
+			'sikap' => $sikap,
+			'deskripsi' => $deskripsi,
+		);
+
+		$this->m_admin->simpanData($data, 'kompetensiNilai');
+		redirect('c_admin/dataPengembanganDiri');
+	}
+	function catatanWaliKelas()
+	{
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$this->load->view('v_catatanWaliKls', $data);
+	}
+	function getWKelas()
+	{
+		$nomorInduk = $this->input->post('nomorInduk', TRUE);
+		$data = $this->m_admin->getWKelas($nomorInduk)->result();
+		echo json_encode($data);
+	}
+	function getCatatan()
+	{
+		$idKelas = $this->input->post('idKelas', TRUE);
+		$nama = $this->m_admin->viewNama($idKelas)->result();
+		$catatan = $this->m_admin->viewCatatan($idKelas)->result();
+		$data = array(
+			'nama' => $nama,
+			'cttn' => $catatan,
+		);
+		echo json_encode($data);
+	}
+	function getAddSiswa()
+	{
+		$id = $this->input->get('id');
+		$data = $this->m_admin->addSiswa($id)->result();
+		echo json_encode($data);
+	}
+	function getEditSiswa()
+	{
+		$id = $this->input->get('id');
+		$data = $this->m_admin->getEditSiswa($id)->result();
+		echo json_encode($data);
+	}
+	function simpanCatatan()
+	{
+		$id=$this->input->post('id');
+        $cttn=$this->input->post('cttn');
+
+		$data = array(
+			'idCatatan' => "",
+			'idSiswa' => $id,
+			'catatan' => $cttn,
+		);
+        $data=$this->m_admin->simpanData($data, 'catatan_walikelas');
+        echo json_encode($data);
+	}
+	function updateCatatan()
+	{
+		$id=$this->input->post('id');
+		$cttn=$this->input->post('cttn');
+
+		$where = array('idSiswa' => $id,);
+
+		$data = array(
+			'catatan' => $cttn,
+		);
+        $data=$this->m_admin->updateData($where, $data, 'catatan_waliKelas');
+        echo json_encode($data);
+	}
+	function ekstrak()
+	{
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$this->load->view('v_ekstrakurikuler', $data);
+	}
+	function getEkskul()
+	{
+		$idKelas = $this->input->post('idKelas', TRUE);
+		$nama = $this->m_admin->viewNama($idKelas)->result();
+		$eks = $this->m_admin->viewEkskul($idKelas)->result();
+		for($i = 0 ; $i < count($nama); $i++) {
+			$id = $nama[$i]->idSiswa;
+			$status = $this->m_admin->viewStatus($id)->result();
+			$nama[$i]->status = (object) array_merge((array) $nama[$i],(array) $status);
+		}
+		$data = array(
+			'nama' => $nama,
+			'eks' => $eks,
+		);
+		echo json_encode($data);
+	}
+	function tambahEkskul()
+	{
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$this->load->view('v_tambahEkskul', $data);
+	}
+	function simpanEkskul()
+	{
+		$checks = $this->input->post("counter");
+		print_r($checks);
+
+		if($checks != "")
+		{
+			foreach ($checks as $list) {
+				$data = array(
+					'idEkskul' => "",
+					'idSiswa' => $this->input->post('id'),
+					'namaEkskul' => $this->input->post('eks'.$list),
+					'predikat' => $this->input->post('predikat'.$list),
+					'ketEkskul' => $this->input->post('ket'.$list)
+				 );
+				 $this->m_admin->simpanData($data, 'ekskul_siswa');
+			}
+			
+		}
+
+		redirect('c_admin/tambahEkskul');
+	}
+
+	//buku nilai
+	function dataBukuNilai()
+	{
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+
+		$this->load->view('v_dataBukuNilai', $data);
+	}
+	function tambahBukuNilai()
+	{
+		$this->load->view('v_tambahBukuNilai');
 	}
 }
 ?>

@@ -191,7 +191,7 @@
             $('#tahunAjaran').change(function(){
                 var idTA = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getJadwalUjian'); ?>",
+                    url: "<?php echo site_url('c_admin/pengawas'); ?>",
                     method: "POST",
                     data: {
                         idTA: idTA
