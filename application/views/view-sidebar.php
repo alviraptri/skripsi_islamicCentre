@@ -115,6 +115,7 @@
           <ul class="nav child_menu">
             <li><a href="#">Data Rapor</a></li>
             <li><a href="#">Tambah Rapor</a></li>
+            <li><a href="<?php echo base_url('c_admin/templateRapor'); ?>">Template Rapor</a></li>
           </ul>
         </li>
       </ul>

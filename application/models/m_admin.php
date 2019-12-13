@@ -641,6 +641,20 @@ class m_admin extends CI_Model
         $query = $this->db->query("SELECT * FROM `ekskul_siswa` WHERE idSiswa = '".$id."'");
         return $query;
     }
+
+    //buku nilai
+    function getMapelNilai($nomorInduk)
+    {
+        $query = $this->db->query("SELECT DISTINCT jadwal.nomorInduk, matapelajaran.idMapel, matapelajaran.namaMapel 
+        FROM jadwal 
+        JOIN matapelajaran ON matapelajaran.idMapel = jadwal.idMapel 
+        WHERE jadwal.nomorInduk = '".$nomorInduk."'");
+        return $query;
+    }
+    function simpanNilai($result, $table)
+    {
+        $this->db->insert($table, $result);   
+    }
 }
 
 ?>

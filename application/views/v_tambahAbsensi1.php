@@ -180,8 +180,8 @@
                         var html = '';
                         var i;
                         html += '<option value="">Pilih Mata Pelajaran</option>'
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
+                        for (i = 0; i < data.mapelAbsen.length; i++) {
+                            html += '<option value="' + data.mapelAbsen[i].idMapel + '">' + data.mapelAbsen[i].namaMapel + '</option>'
                         }
                         $('#mapel').html(html);
                     }

@@ -918,7 +918,12 @@ class c_admin extends CI_Controller
 	function getMapel()
 	{
 		$nomorInduk = $this->input->post('nomorInduk', TRUE);
-		$data = $this->m_admin->getMapel($nomorInduk)->result();
+		$MA = $this->m_admin->getMapel($nomorInduk)->result(); //getMapel untuk Absensi
+		$MN = $this->m_admin->getMapelNilai($nomorInduk)->result(); //getMapel untuk Nilai
+		$data = array(
+			'mapelAbsen' => $MA,
+			'mapelNilai' => $MN,
+		 );
 		echo json_encode($data);
 	}
 	function getTanggal()
@@ -1370,7 +1375,43 @@ class c_admin extends CI_Controller
 	}
 	function tambahBukuNilai()
 	{
-		$this->load->view('v_tambahBukuNilai');
+		$data['guru'] = $this->m_admin->jadwalGuru()->result();
+		$this->load->view('v_tambahBukuNilai', $data);
+	}
+	function simpanBukuNilai()
+	{
+		$guru = $this->input->post('guru');
+		$mapel = $this->input->post('mapel');
+		$kelas = $this->input->post('kelas');
+		$jenis = $this->input->post('jns');
+		$tgl = $this->input->post('tgl');
+		$siswa = $this->input->post('siswa');
+		$nilai = $this->input->post('nilai');
+
+		$tanggal = date('Y-m-d', strtotime($tgl));
+
+		for($i=0 ; $i<count($siswa); $i++){
+            $result = array(
+                'idBukuNilai' => "", 
+				'nomorInduk' => $guru,
+				'idMapel' => $mapel,
+				'idSiswa' => $siswa[$i],
+				'idKelas' => $kelas,
+				'jenisNilai' => $jenis,
+				'nilai' => $nilai[$i],
+				'tanggal' => $tanggal,
+				'statusBukuNilai' => "1",
+			);
+			$this->m_admin->simpanNilai($result, 'bukunilai');
+        }
+		
+		redirect('c_admin/dataBukuNilai');
+	}
+
+	//rapor
+	function templateRapor()
+	{
+		$this->load->view('v_rapor');
 	}
 }
 ?>
