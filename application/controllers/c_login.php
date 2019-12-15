@@ -59,16 +59,16 @@ class c_login extends CI_Controller{
                 redirect('c_admin/index');
             }
             elseif ($role == 'Guru') {
-                redirect('c_guru/index');
+                redirect('c_admin/index');
             }
             elseif ($role == 'Siswa') {
-                redirect('c_siswa/index');
+                redirect('c_admin/index');
             }
             elseif ($role == 'Wali Kelas') {
-                redirect('c_waliKelas/index');
+                redirect('c_admin/index');
             }
             elseif ($role == 'Wali Murid') {
-                redirect('c_waliMurid/index');
+                redirect('c_admin/index');
             }
         }
         else{

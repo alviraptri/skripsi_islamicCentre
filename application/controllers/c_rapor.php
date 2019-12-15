@@ -852,33 +852,46 @@ class c_rapor extends CI_Controller
         //garis
         $pdf->Cell(195, 1, '', 'B', 1, 'L');
 
-        //isi judul
-        $pdf->SetFont('Arial', 'B', 16); //setting jenis font yang akan digunakan
-        $pdf->Cell(0, 17, 'CAPAIAN HASIL BELAJAR', 0, 1, 'C');
-
         //isi
         $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
-        $pdf->Cell(35, 15, 'A. SIKAP', 0, 1, 'L');
-        $pdf->Cell(35, 1, '1. Sikap Spiritual', 0, 1, 'L');
+        $pdf->Cell(35, 10, 'D. EKSTRAKURIKULER', 0, 1, 'L');
 
-        //tabel
-        $pdf->Cell(10,7,'',0,1);
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(40,6,'Predikat',1,0, 'C');
-        $pdf->Cell(155,6,'Deskripsi',1,1, 'C');
-        $pdf->Cell(40,6,'',1,0, 'C');
-        $pdf->Cell(155,6,'',1,1, 'C');
-        $pdf->SetFont('Arial', '', 10);
-
-        $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(35, 17, '2. Sikap Sosial', 0, 1, 'L');
         //tabel
         $pdf->Cell(10,0,'',0,1);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(40,6,'Predikat',1,0, 'C');
-        $pdf->Cell(155,6,'Deskripsi',1,1, 'C');
-        $pdf->Cell(40,6,'',1,0, 'C');
-        $pdf->Cell(155,6,'',1,1, 'C');
+        $pdf->Cell(10,6,'No',1,0, 'C');
+        $pdf->Cell(50,6,'Kegiatan Ekstrakurikuler',1,0, 'C');
+        $pdf->Cell(30,6,'Predikat',1,0, 'C');
+        $pdf->Cell(105,6,'Keterangan',1,1, 'C');
+        $pdf->SetFont('Arial', '', 10);
+
+        //isi
+        $pdf->Cell(35, 5, '', 0, 1, 'L');
+        $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
+        $pdf->Cell(35, 10, 'E. PRESTASI', 0, 1, 'L');
+
+        //tabel
+        $pdf->Cell(10,0,'',0,1);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(10,6,'No',1,0, 'C');
+        $pdf->Cell(50,6,'Jenis Prestasi',1,0, 'C');
+        $pdf->Cell(135,6,'Keterangan',1,1, 'C');
+        $pdf->SetFont('Arial', '', 10);
+
+        //isi
+        $pdf->Cell(35, 5, '', 0, 1, 'L');
+        $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
+        $pdf->Cell(35, 10, 'F. KETIDAKHADIRAN', 0, 1, 'L');
+
+        //tabel
+        $pdf->Cell(10,0,'',0,1);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(60,6,'      Sakit',1,0, 'L');
+        $pdf->Cell(35,6,':              Hari     ',1,1, 'L');
+        $pdf->Cell(60,6,'      Izin',1,0, 'L');
+        $pdf->Cell(35,6,':              Hari     ',1,1, 'L');
+        $pdf->Cell(60,6,'      Tanpa Keterangan',1,0, 'L');
+        $pdf->Cell(35,6,':              Hari     ',1,1, 'L');
         $pdf->SetFont('Arial', '', 10);
 
         date_default_timezone_set('Asia/Jakarta');// change according timezone
@@ -892,16 +905,15 @@ class c_rapor extends CI_Controller
         //ttd
         $pdf->SetY(115);
         $pdf->SetFont('Arial', '', 10); //setting jenis font yang akan digunakan
-        $pdf->Cell(35, 5, '', 0, 0, 'L');
-        $pdf->Cell(95, 5, '', 0, 0, 'L');
-        //header kiri
+        $pdf->Cell(35, 10, 'Mengetahui', 0, 0, 'L');
+        $pdf->Cell(95, 0, '', 0, 0, 'L');
         $pdf->Cell(35, 10, 'Tangerang, '.$tgl.'', 0, 1, 'L');
-        $pdf->Cell(35, 0, '', 0, 0, 'L');
+        $pdf->Cell(35, 0, 'Orang Tua/Wali,', 0, 0, 'L');
         $pdf->Cell(95, 0, '', 0, 0, 'L');
         $pdf->Cell(35, 0, 'Wali Kelas', 0, 1, 'L');
-
+        $pdf->Cell(35, 0, '', 0, 0, 'L');
         $pdf->SetY(140);
-        $pdf->Cell(35, 5, '', 0, 0, 'L');
+        $pdf->Cell(35, 3, '..........................', 0, 0, 'L');
         $pdf->Cell(95, 5, '', 0, 0, 'L');
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(35, 3, $namaWK, 0, 1, 'L');
@@ -909,6 +921,24 @@ class c_rapor extends CI_Controller
         $pdf->Cell(95, 5, '', 0, 0, 'L');
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(35, 5, 'NIP. '.$niWK, 0, 1, 'L');
+
+        //tengah
+        $pdf->SetY(150);
+        $pdf->SetFont('Arial', '', 10); //setting jenis font yang akan digunakan
+        $pdf->Cell(70, 5, '', 0, 0, 'L');
+        //header kiri
+        $pdf->Cell(35, 10, 'Mengetahui,', 0, 1, 'L');
+        $pdf->Cell(70, 0, '', 0, 0, 'L');
+        $pdf->Cell(35, 0, 'Kepala Sekolah', 0, 1, 'L');
+
+        $pdf->SetY(175);
+        $pdf->Cell(70, 5, '', 0, 0, 'L');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(35, 3, 'Sumardi, S.Pd. , M.MM..', 0, 1, 'L');
+        $pdf->Cell(70, 5, '', 0, 0, 'L');
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(35, 5, 'NIP. 196804211998021002', 0, 1, 'L');
+
 
         //footer
         $pdf->SetY(265);
