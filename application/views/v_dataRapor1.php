@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Buku Nilai | Information Academic Islamic Centre</title>
+    <title>Rapor | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Buku Nilai Siswa</h3>
+                            <h3>Rapor Siswa</h3>
                         </div>
                     </div>
 
@@ -55,79 +55,31 @@
                         <!-- button -->
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                <div class="x_title">
-                                <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanBukuNilai'; ?>" novalidate>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                        <select name="guru" id="guru" required="required" class="form-control">
-                                                    <option value="">Pilih Guru</option>
-                                                    <?php
-                                                    foreach ($guru as $list) { ?>
-                                                        <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?> </option>
-                                                    <?php } ?>
-                                                </select>
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="mapel" id="mapel" required="required" class="form-control">
-                                                <option value="">Pilih Mata Pelajaran</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="x_content">
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select name="kelas" id="kelas" required="required" class="form-control">
                                                 <option value="">Pilih Kelas</option>
+                                                <?php
+                                                    foreach ($kls as $kelas) { ?>
+                                                        <option value="<?= $kelas->idKelas ?>"><?= $kelas->ketKelas ?> <?= $kelas->jurusanKelas ?> <?= $kelas->nomorKelas ?></option>
+                                                    <?php } ?>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Jenis Nilai <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="jns" id="jns" required="required" class="form-control">
-                                                <option value="">Pilih Jenis Nilai</option>
-                                                <option value="">Tugas</option>
-                                                <option value="">Ulangan Harian</option>
-                                                <option value="">UTS</option>
-                                                <option value="">UAS</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input type="date" name="tgl" id="tgl" required="required" class="form-control">
-                                        </div>
-                                    </div>
-                                        <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
+                                    <br>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center;">Nama Siswa</th>
-                                                <th style="text-align: center;">Nilai Siswa</th>
+                                                <th style="text-align: center;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody name="show_data" id="show_data">
                                         </tbody>
                                     </table>
-                                    <div class="form-group">
-                                        <div class="col-md-6 offset-md-3">
-                                            <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                            <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
-                                        </div>
-                                    </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -148,75 +100,26 @@
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //view mapel
-            $('#guru').change(function() {
-                var nomorInduk = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
-                    method: "POST",
-                    data: {
-                        nomorInduk: nomorInduk
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        html += '<option value="">Pilih Mata Pelajaran</option>'
-                        for (i = 0; i < data.mapelNilai.length; i++) {
-                            html += '<option value="' + data.mapelNilai[i].idMapel + '">' + data.mapelNilai[i].namaMapel + '</option>'
-                        }
-                        $('#mapel').html(html);
-                    }
-                });
-                return false;
-            });
 
-            //view kelas
-            $('#mapel').change(function() {
-                var idMapel = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getKelas'); ?>",
-                    method: "POST",
-                    data: {
-                        idMapel: idMapel
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        html += '<option value="">Pilih Kelas</option>'
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
-                        }
-                        $('#kelas').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view nama siswa
+            //view data
             $('#kelas').change(function() {
-                var idKelas = $(this).val();
-                var idMapel = $('#mapel').val();
+                var id = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getNama'); ?>",
+                    url: "<?php echo site_url('c_admin/getNamaSiswa'); ?>",
                     method: "POST",
                     data: {
-                        idKelas: idKelas,
-                        idMapel: idMapel
+                        id: id
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        console.log(data);
                         var html = '';
-                        for (var i = 0; i < data.nama.length; i++) {
-                            html += '<tr>' +
-                                '<td> <input type="text" name="siswa[]" value="'+data.nama[i].idSiswa+'" hidden> '+ data.nama[i].namaUser + ' </td>' +
-                                '<td> <input type="text" name="nilai[]" id="nilai" class="form-control"> </td>'+
-                                '</tr>';
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            html += '<tr>'+
+                            '<td>'+data[i].namaUser+'</td>'+
+                            '<td><a href="javascript:;" class="btn btn-success btn-xs item_hapus" data="'+data[i].idSiswa+'"><i class="fa fa-eye" aria-hidden="true"></i> Lihat Rapor</a></td>'+
+                            '</tr>';
                         }
                         $('#show_data').html(html);
                     }

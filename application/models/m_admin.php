@@ -655,6 +655,46 @@ class m_admin extends CI_Model
     {
         $this->db->insert($table, $result);   
     }
+    function getJnsNilai($id)
+    {
+        $query = $this->db->query("SELECT DISTINCT jenisNilai FROM bukunilai WHERE idKelas = '".$id."'");
+        return $query;
+    }
+    function getTglNilai($jenis)
+    {
+        $query = $this->db->query("SELECT DISTINCT tanggal FROM bukunilai WHERE jenisNilai = '".$jenis."'");
+        return $query;
+    }
+    function getNilaiSiswa($where)
+    {
+        $this->db->select('bukunilai.idSiswa,bukunilai.idKelas, bukunilai.tanggal, bukunilai.nilai, datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, 
+        user.namaUser')
+        ->from('datasiswa')
+        ->join('bukunilai', 'bukunilai.idSiswa = datasiswa.idSiswa')
+        ->join('user', 'user.nomorInduk = datasiswa.nomorInduk')
+        ->where($where);
+
+        return $this->db->get();
+    }
+    function getNamaSiswa($id)
+    {
+        $query = $this->db->query("SELECT datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, user.nomorInduk, user.namaUser 
+        FROM datasiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        WHERE idKelas = '".$id."'");
+
+        return $query;
+    }
+    function viewRapor()
+    {
+        $query = $this->db->query("SELECT datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, user.nomorInduk, user.namaUser, kelas.idKelas, kelas.nomorKelas, 
+        kelas.jurusanKelas, kelas.ketKelas 
+        FROM datasiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
+        JOIN kelas ON kelas.idKelas = datasiswa.idKelas");
+
+        return $query;
+    }
 }
 
 ?>

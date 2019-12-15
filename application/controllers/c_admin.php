@@ -1376,7 +1376,7 @@ class c_admin extends CI_Controller
 	function tambahBukuNilai()
 	{
 		$data['guru'] = $this->m_admin->jadwalGuru()->result();
-		$this->load->view('v_tambahBukuNilai', $data);
+		$this->load->view('v_tambahBukuNilai1', $data);
 	}
 	function simpanBukuNilai()
 	{
@@ -1385,12 +1385,12 @@ class c_admin extends CI_Controller
 		$kelas = $this->input->post('kelas');
 		$jenis = $this->input->post('jns');
 		$tgl = $this->input->post('tgl');
-		$siswa = $this->input->post('siswa');
+		$siswa = $this->input->post('idSiswa');
 		$nilai = $this->input->post('nilai');
 
 		$tanggal = date('Y-m-d', strtotime($tgl));
 
-		for($i=0 ; $i<count($siswa); $i++){
+		for($i=0 ; $i < count($siswa); $i++){
             $result = array(
                 'idBukuNilai' => "", 
 				'nomorInduk' => $guru,
@@ -1407,11 +1407,46 @@ class c_admin extends CI_Controller
 		
 		redirect('c_admin/dataBukuNilai');
 	}
+	function getJnsNilai()
+	{
+		$id = $this->input->post('id');
+		$data = $this->m_admin->getJnsNilai($id)->result();
+		echo json_encode($data);
+	}
+	function getTglNilai()
+	{
+		$jenis = $this->input->post('jns');
+		$data = $this->m_admin->getTglNilai($jenis)->result();
+		echo json_encode($data);
+	}
+	function getNilaiSiswa()
+	{
+		$tgl = $this->input->post('tgl');
+		$id = $this->input->post('id');
+		$where = array(
+			'bukunilai.tanggal' => $tgl,
+			'bukunilai.idKelas' => $id 
+		);
+		$data = $this->m_admin->getNilaiSiswa($where)->result();
+		echo json_encode($data);
+	}
 
 	//rapor
 	function templateRapor()
 	{
 		$this->load->view('v_rapor');
+	}
+	function dataRapor()
+	{
+		// $data['kls'] = $this->m_admin->kelas()->result();
+		$data['siswa'] = $this->m_admin->viewRapor()->result();
+		$this->load->view('v_dataRapor', $data);
+	}
+	function getNamaSiswa()
+	{
+		$id = $this->input->post('id');
+		$data = $this->m_admin->getNamaSiswa($id)->result();
+		echo json_encode($data);
 	}
 }
 ?>

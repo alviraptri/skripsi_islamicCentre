@@ -78,6 +78,15 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required"></span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="mapel" id="mapel" required="required" class="form-control">
+                                                    <option value="">Pilih Mata Pelajaran</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
@@ -87,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required"></span>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Jenis Nilai <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select name="jenis" id="jenis" required="required" class="form-control">
@@ -96,7 +105,7 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required"></span>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select name="tgl" id="tgl" required="required" class="form-control">
@@ -134,50 +143,136 @@
         </div>
     </div>
 
-    <!-- <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //Jadwal
-            $('#tahunAjaran').change(function() {
-                var idTA = $(this).val();
+            //view mapel
+            $('#guru').change(function() {
+                var nomorInduk = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/pengawas'); ?>",
+                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
                     method: "POST",
                     data: {
-                        idTA: idTA
+                        nomorInduk: nomorInduk
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
                         var html = '';
                         var i;
-                        for (i = 0; i < data.jadwal.length; i++) {
-                            html += '<tr>' +
-                                '<td> ' + data.jadwal[i].hari + ' </td>' +
-                                '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                '<td id = "nama"> </td>' +
-                                '<td id = "datakelas"> </td>' +
-                                '</tr>';
+                        html += '<option value="">Pilih Mata Pelajaran</option>'
+                        for (i = 0; i < data.mapelNilai.length; i++) {
+                            html += '<option value="' + data.mapelNilai[i].idMapel + '">' + data.mapelNilai[i].namaMapel + '</option>'
+                        }
+                        $('#mapel').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view kelas
+            $('#mapel').change(function() {
+                var idMapel = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getKelas'); ?>",
+                    method: "POST",
+                    data: {
+                        idMapel: idMapel
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        html += '<option value="">Pilih Kelas</option>'
+                        for (i = 0; i < data.length; i++) {
+                            html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
+                        }
+                        $('#kelas').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view jenis
+            $('#kelas').change(function() {
+                var id = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getJnsNilai'); ?>",
+                    method: "POST",
+                    data: {
+                        id: id
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        html += '<option value="">Pilih Jenis</option>'
+                        for (i = 0; i < data.length; i++) {
+                            html += '<option value="' + data[i].jenisNilai + '">' + data[i].jenisNilai +  '</option>'
+                        }
+                        $('#jenis').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view tanggal
+            $('#jenis').change(function() {
+                var jns = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getTglNilai'); ?>",
+                    method: "POST",
+                    data: {
+                        jns: jns
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        html += '<option value="">Pilih Tanggal</option>'
+                        for (i = 0; i < data.length; i++) {
+                            html += '<option value="' + data[i].tanggal + '">' + data[i].tanggal +  '</option>'
+                        }
+                        $('#tgl').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view data
+            $('#tgl').change(function() {
+                var tgl = $(this).val();
+                var id = $('#kelas').val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getNilaiSiswa'); ?>",
+                    method: "POST",
+                    data: {
+                        tgl: tgl,
+                        id: id
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            html += '<tr>'+
+                            '<td>'+data[i].namaUser+'</td>'+
+                            '<td>'+data[i].nilai+'</td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '</tr>';
                         }
                         $('#show_data').html(html);
-                        html = '';
-                        for (i = 0; i < data.jadwal1.length; i++) {
-                            html += data.jadwal1[i].namaUser
-                        }
-                        $('#nama').html(html);
-
-                        html = '';
-                        for (i = 0; i < data.jadwal1.length; i++) {
-                            html += data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas
-                        }
-                        $('#datakelas').html(html);
                     }
                 });
                 return false;
             });
         });
-    </script> -->
+    </script>
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
