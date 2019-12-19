@@ -6,6 +6,8 @@ class c_login extends CI_Controller{
     {
         parent:: __construct();
         $this->load->model(array('m_login'));
+        // $this->load->config('email');
+        // $this->load->library('email');
     }
 
     //nampilin view login siswa dan guru
@@ -24,6 +26,71 @@ class c_login extends CI_Controller{
     function lupaKataSandi()
     {
         $this->load->view('v_lupaKataSandi');
+    }
+
+    function resetLink()
+    {
+        // $email = $this->input->post("email");
+        // $result = $this->db->query('SELECT * FROM `user` WHERE emailUser = "'.$email.'"')->result_array();
+        // if (count($result)>0) {
+        //     $tokan = rand(1000,9999);
+        //     $message = "Klink Link di Bawah Ini <br> <a href='".base_url('c_login/reset?tokan=').$tokan."'> Reset Password </a>";
+        //     $this->Email($email,'Reset Password Link', $message);
+        // }
+        // else {
+        //     echo "Email Not Register";
+        // }
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');   
+         
+         if($this->form_validation->run()) {  
+            $email = $this->input->post('email'); 
+            $reset_key = random_string('alnum', 50);
+            if ($this->m_login->resetKey($email, $reset_key)) {
+                $this->load->library('email');
+				$config = array();
+				$config['charset'] = 'utf-8';
+				$config['useragent'] = 'Codeigniter';
+				$config['protocol']= "smtp";
+				$config['mailtype']= "html";
+				$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+				$config['smtp_port']= "465";
+				$config['smtp_timeout']= "5";
+				$config['smtp_user']= "bjhxrene@gmail.com"; // isi dengan email kamu
+				$config['smtp_pass']= "2pmlopelopediudara"; // isi dengan password kamu
+				$config['crlf']="\r\n"; 
+				$config['newline']="\r\n"; 
+				$config['wordwrap'] = TRUE;
+				//memanggil library email dan set konfigurasi untuk pengiriman email
+					
+				$this->email->initialize($config);
+				//konfigurasi pengiriman
+				$this->email->from($config['smtp_user']);
+				$this->email->to($this->input->post('email'));
+				$this->email->subject("Reset your password");
+ 
+				$message = "<p>Anda melakukan permintaan reset password</p>";
+				$message .= "<a href='".site_url('c_login/konfirmasi/'.$reset_key)."'>klik reset password</a>";
+				$this->email->message($message);
+				
+				if($this->email->send())
+				{
+					echo "silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password';
+				}else
+				{
+					echo "Berhasil melakukan registrasi, gagal mengirim verifikasi email";
+				}
+				
+				echo "<br><br><a href='".site_url("c_login/index")."'>Kembali ke Menu Login</a>";
+            }
+            else {
+                die("Email yang anda masukan belum terdaftar");
+            }
+         }
+         else{
+             echo 0;
+             $this->load->view('v_lupaKataSandi');
+         }  
     }
 
     //login siswa dan wali murid

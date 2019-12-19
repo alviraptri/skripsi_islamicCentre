@@ -114,11 +114,11 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="kt-login__signin">
                             <div class="kt-login__head">
 									<h3 class="kt-login__title">Lupa Kata Sandi ?</h3>
-									<div class="kt-login__desc">Masukkan <b>Nomor Induk</b> anda</div>
+									<div class="kt-login__desc">Masukkan <b>Email</b> anda</div>
 								</div>
-								<form class="kt-form" action="<?php echo base_url('c_login/kirim'); ?>" method="post">
+								<form class="kt-form" action="<?php echo base_url('c_login/resetLink'); ?>" method="post">
 									<div class="input-group">
-										<input class="form-control" type="text" placeholder="Nomor Induk" name="uname" autocomplete="off">
+										<input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
 									</div>
 									<div class="kt-login__actions">
                                         <button type="submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Selanjutnya</button>
