@@ -122,7 +122,9 @@
                             <h3 class="modal-title" id="myModalLabel">Edit Catatan</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <form class="form-horizontal form-label-left">
+                        
+                    </div>
+                </div><form class="form-horizontal form-label-left">
                             <div class="modal-body">
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
@@ -146,8 +148,6 @@
                                 <button class="btn btn-info" id="btn_update">Simpan</button>
                             </div>
                         </form>
-                    </div>
-                </div>
             </div>
             <!--END MODAL Edit-->
 

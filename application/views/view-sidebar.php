@@ -269,8 +269,9 @@
           </li>
           <li><a><i class="fa fa-bar-chart"></i> Rekomendasi <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="#">Data Rekomendasi Siswa</a></li>
-              <li><a href="#">Data Rekomendasi Jurusan Kuliah</a></li>
+              <li><a href="<?php echo base_url('c_rekomendasi/index'); ?>">Penjelasan</a></li>
+              <li><a href="<?php echo base_url('c_rekomendasi/kriteria'); ?>">Kriteria</a></li>
+              <li><a href="<?php echo base_url('c_rekomendasi/alternatif'); ?>">Alternatif</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-clipboard"></i> Rapor <span class="fa fa-chevron-down"></span></a>

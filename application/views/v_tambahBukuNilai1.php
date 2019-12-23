@@ -85,16 +85,17 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="item form-group">
+                                        <div class="item form-group"> 
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Jenis Nilai </span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select name="jns" id="jns" class="form-control">
                                                 <option value="">Pilih Jenis Nilai</option>
-                                                <option value="">Tugas</option>
-                                                <option value="">Ulangan Harian</option>
-                                                <option value="">UTS</option>
-                                                <option value="">UAS</option>
+                                                <option value="Tugas">Tugas</option>
+                                                <option value="Praktek">Praktek</option>
+                                                <option value="Ulangan Harian">Ulangan Harian</option>
+                                                <option value="UTS">UTS</option>
+                                                <option value="UAS">UAS</option>
                                             </select>
                                         </div>
                                     </div>

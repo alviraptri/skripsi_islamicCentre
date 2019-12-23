@@ -30,16 +30,6 @@ class c_login extends CI_Controller{
 
     function resetLink()
     {
-        // $email = $this->input->post("email");
-        // $result = $this->db->query('SELECT * FROM `user` WHERE emailUser = "'.$email.'"')->result_array();
-        // if (count($result)>0) {
-        //     $tokan = rand(1000,9999);
-        //     $message = "Klink Link di Bawah Ini <br> <a href='".base_url('c_login/reset?tokan=').$tokan."'> Reset Password </a>";
-        //     $this->Email($email,'Reset Password Link', $message);
-        // }
-        // else {
-        //     echo "Email Not Register";
-        // }
 
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim');   
          
