@@ -21,6 +21,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -49,13 +50,13 @@
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>Ekstrakurikuler</h2>
-                                    
+
                                     <div class="clearfix"></div>
                                 </div>
                                 <ul class="nav navbar-right panel_toolbox">
-                                            <li> <a href="<?php echo base_url('c_admin/tambahEkskul'); ?>"><button type="submit" class="btn btn-primary">Tambah Ekstrakulikuler</button></a>
-                                            </li>
-                                        </ul>
+                                    <li> <a href="<?php echo base_url('c_admin/tambahEkskul'); ?>"><button type="submit" class="btn btn-primary">Tambah Ekstrakulikuler</button></a>
+                                    </li>
+                                </ul>
                                 <div class="x_content">
 
                                     <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanEkskul'; ?>" novalidate>
@@ -82,7 +83,7 @@
                                             </div>
                                         </div>
 
-                                        
+
 
                                         <div class="item form-group">
                                             <!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
@@ -122,32 +123,33 @@
                             <h3 class="modal-title" id="myModalLabel">Edit Catatan</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        
+
                     </div>
-                </div><form class="form-horizontal form-label-left">
-                            <div class="modal-body">
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly hidden>
-                                        <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Catatan</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <textarea name="cttn_edit" id="cttn_edit" cols="30" rows="10" class="form-control"></textarea>
-                                    </div>
-                                </div>
-
+                </div>
+                <form class="form-horizontal form-label-left">
+                    <div class="modal-body">
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly hidden>
+                                <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
                             </div>
+                        </div>
 
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                                <button class="btn btn-info" id="btn_update">Simpan</button>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Catatan</label>
+                            <div class="col-md-6 col-sm-6">
+                                <textarea name="cttn_edit" id="cttn_edit" cols="30" rows="10" class="form-control"></textarea>
                             </div>
-                        </form>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button class="btn btn-info" id="btn_update">Simpan</button>
+                    </div>
+                </form>
             </div>
             <!--END MODAL Edit-->
 

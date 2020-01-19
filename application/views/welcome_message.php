@@ -132,10 +132,10 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="kt-login__form">
 									<form class="kt-form" method="post" action="<?php echo base_url('c_login/login'); ?>">
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="Nomor Induk" name="uname" autocomplete="off">
+											<input class="form-control" type="text" placeholder="Nomor Induk" name="uname" autocomplete="off" required>
 										</div>
 										<div class="form-group">
-											<input class="form-control form-control-last" type="Password" placeholder="Kata Sandi" name="pass">
+											<input class="form-control form-control-last" type="Password" placeholder="Kata Sandi" name="pass" required>
 										</div>
 										<div class="row kt-login__extra">
 											<div class="col kt-align-left">

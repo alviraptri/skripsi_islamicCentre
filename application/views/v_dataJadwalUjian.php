@@ -27,6 +27,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -67,7 +68,7 @@
                                 </div>
                                 <div class="x_content">
                                 
-                                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                                    <table class="table table-striped table-bordered" style="width:100%">
                                     <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required">*</span>
                                             </label>
@@ -132,7 +133,14 @@
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Hari</label>
                                     <div class="col-xs-9">
-                                        <input name="hari_edit" id="hari_edit" class="form-control" type="text" placeholder="hari">
+                                        <select name="hari_edit" id="hari_edit" class="form-control">
+                                            <option value="Senin">Senin</option>
+                                            <option value="Selasa">Selasa</option>
+                                            <option value="Rabu">Rabu</option>
+                                            <option value="Rabu">Kamis</option>
+                                            <option value="Rabu">Jum'at</option>
+                                        </select>
+                                        <!-- <input name="hari_edit" id="hari_edit" class="form-control" type="text" placeholder="hari"> -->
                                     </div>
                                 </div>
 
@@ -152,17 +160,24 @@
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Mata Pelajaran</label>
                                     <div class="col-xs-9">
-                                    <input name="idM_edit" id="idM_edit" class="form-control" type="text" placeholder="ID" hidden>
-                                        <input name="mapel_edit" id="mapel_edit" class="form-control" type="text" placeholder="Mata Pelajaran" required>
+                                        <select name="idM_edit" id="idM_edit" class="form-control">
+                                            <?php
+                                            foreach ($mapel as $m) { ?>
+                                                <option value="<?= $m->idMapel; ?>"> <?= $m->namaMapel; ?> </option>
+                                            <?php }
+                                            ?>
+                                        </select>
+                                    <!-- <input name="idM_edit" id="idM_edit" class="form-control" type="text" placeholder="ID" hidden>
+                                        <input name="mapel_edit" id="mapel_edit" class="form-control" type="text" placeholder="Mata Pelajaran" required> -->
                                     </div>
                                 </div>
 
-                                <div class="item form-group">
+                                <!-- <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Jenis Mata Pelajaran</label>
                                     <div class="col-xs-9">
                                         <input name="jenis_edit" id="jenis_edit" class="form-control" type="text" placeholder="Jenis" readonly>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 

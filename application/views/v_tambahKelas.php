@@ -19,6 +19,7 @@
 
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -58,6 +59,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6">
                         <select name="ketKelas" class="select2_single form-control">
+                          <option value="">Pilih Keterangan</option>
                           <option value="X"> X </option>
                           <option value="XI"> XI </option>
                           <option value="XII"> XII </option>
@@ -69,6 +71,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6">
                         <select name="jurusanKelas" class="select2_single form-control">
+                          <option value="">Pilih Jurusan</option>
                           <option value="IPA"> IPA </option>
                           <option value="IPS"> IPS </option>
                         </select>

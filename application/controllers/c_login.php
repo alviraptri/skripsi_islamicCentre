@@ -101,65 +101,36 @@ class c_login extends CI_Controller{
                 $nama = $list->namaUser;
                 $nip = $list->nomorInduk;
                 $password = $list->passUser;
-                $role = $list->userRole;
+                $role = $list->userRole; //bawa user rolenya 
                 $gambar = $list->gambar;
             };
-            $data_Session = array(
-                'namaUser' => $nama,
-                'nomorInduk' => $nip,
-                'passUser' => $password,
-                'userRole' => $role,
-                'gambar' => $gambar
-            );
-            $this->session->set_userdata($data_Session);
-            if($role == 'Admin'){
-                redirect('c_admin/index');
-            }
-            elseif ($role == 'Guru') {
-                redirect('c_admin/index');
-            }
-            elseif ($role == 'Siswa') {
-                redirect('c_admin/index');
-            }
-            elseif ($role == 'Wali Kelas') {
-                redirect('c_admin/index');
-            }
-            elseif ($role == 'Wali Murid') {
-                redirect('c_admin/index');
-            }
+                $data_Session = array(
+                    'namaUser' => $nama,
+                    'nomorInduk' => $nip,
+                    'passUser' => $password,
+                    'userRole' => $role,
+                    'gambar' => $gambar
+                );
+                $this->session->set_userdata($data_Session);
+                if($role == 'Admin'){
+                    redirect('c_admin/index');
+                }
+                elseif ($role == 'Guru') {
+                    redirect('c_admin/index');
+                }
+                elseif ($role == 'Siswa') {
+                    redirect('c_admin/index');
+                }
+                elseif ($role == 'Wali Kelas') {
+                    redirect('c_admin/index');
+                }
+                elseif ($role == 'Wali Murid') {
+                    redirect('c_admin/index');
+                }
         }
         else{
-            // if(strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0)
-            // {
-            //     echo "<script> alert('Nomor Induk yang anda masukkan salah!');";
-            //     echo "window.location='".site_url('c_login/admin')."';</script>";
-            // }
-            // else if(strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0)
-            // {
-            //     echo "<script> alert('Kata Sandi yang anda masukkan salah!');";
-            //     echo "window.location='".site_url('c_login/admin')."';</script>";
-            // }
-            // else if (strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0 && strcasecmp($nomorInduk, $this->session->nomorInduk)  != 0) {
-            //     echo "<script> alert('Nomor Induk dan Kata Sandi yang anda masukkan salah!');";
-            //     echo "window.location='".site_url('c_login/admin')."';</script>";
-            // }
-            // else 
-            if($nomorInduk == "")
-            {
-                echo "<script> alert('Silahkan isi nomor induk terlebih dahulu!');";
-                echo "window.location='".site_url('c_login/admin')."';</script>";
-            }
-            else if($pass == "")
-            {
-                echo "<script> alert('Silahkan isi kata sandi terlebih dahulu!');";
-                echo "window.location='".site_url('c_login/admin')."';</script>";
-            }
-            else
-            {
-                echo "<script> alert('Silahkan isi nomor induk dan kata sandi terlebih dahulu!');";
-                echo "window.location='".site_url('c_login/admin')."';</script>";
-            }
-            
+            $this->session->set_flashdata('message', 'Nomor Induk dan Password yang anda masukkan tidak cocok');
+            redirect('c_login/admin');
         }
     }
 

@@ -7,11 +7,21 @@ class c_admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('m_login', 'm_admin'));	
+		$this->load->model(array('m_login', 'm_admin', 'm_beranda'));	
 	}
     function index() 
 	{
-		$this->load->view('v_berandaAdmin');
+		$data['jmlhSiswa'] = $this->m_beranda->hitungSiswa();
+		$data['jmlhGuru'] = $this->m_beranda->hitungGuru();
+		$data['jmlhKls'] = $this->m_beranda->hitungKls();
+		$absen = $this->m_beranda->absen()->result();
+		foreach ($absen as $b) {
+			$tanggal = $b->tanggal;
+			$hasil = explode("-", $tanggal);
+			$blnn = $hasil[1];
+			$tgl = $hasil[2];
+		}
+		$this->load->view('v_berandaAdmin', $data);
 	}
 
 	/* Menu:
@@ -122,8 +132,14 @@ class c_admin extends CI_Controller
 	}
 	function tugasGuru()
 	{
-		$data['tgs'] = $this->m_admin->tugasGuru()->result();
+		$data['ta'] = $this->m_admin->thnAjaran()->result();
 		$this->load->view('v_dataTugas', $data);
+	}
+	function getTugas()
+	{
+		$idTA = $this->input->post('idTA', TRUE);
+		$data = $this->m_admin->tugasGuru($idTA)->result();
+		echo json_encode($data);
 	}
 	
 	//wali kelas
@@ -926,16 +942,29 @@ class c_admin extends CI_Controller
 		 );
 		echo json_encode($data);
 	}
+	function mapelAbsen()
+	{
+		$nomorInduk = $this->input->post('nomorInduk');
+		$data = $this->m_admin->absenMapel($nomorInduk)->result();
+		echo json_encode($data);
+	}
 	function getTanggal()
 	{
 		$id = $this->input->post('id');
 		$data = $this->m_admin->getTanggal($id)->result();
 		echo json_encode($data);
 	}
+	function klsAbsen()
+	{
+		$tgl = $this->input->post('tgl');
+		$data = $this->m_admin->klsAbsen($tgl)->result();
+		echo json_encode($data);
+	}
 	function getAbsensi()
 	{
 		$id=$this->input->post('id');
-		$data=$this->m_admin->getAbsensi($id)->result();
+		$tgl=$this->input->post('tgl');
+		$data=$this->m_admin->getAbsensi($id, $tgl)->result();
 		echo json_encode($data);
 	}
 	function tambahAbsensi()
@@ -1037,30 +1066,31 @@ class c_admin extends CI_Controller
 	function jadwalUjian()
 	{
 		$data['ta'] = $this->m_admin->thnAjaran()->result();
+		$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
 		$this->load->view('v_dataJadwalUjian', $data);
 	}
 	function getJadwalUjian()
 	{
-		$idTA = $this->input->post('idTA', TRUE);
-		$jamMulai = $this->m_admin->jamMulai()->result();
-		foreach ($jamMulai as $jm) {
-			$mulai = $jm->jamMulai;
+		$id = $this->input->post('id', TRUE);
+		$jurusan = $this->m_admin->getJurusan($id)->result();
+		foreach ($jurusan as $a) {
+			$jenis = $a->jurusanKelas;
 		}
-		$jamSelesai = $this->m_admin->jamSelesai()->result();
-		foreach ($jamSelesai as $js) {
-			$selesai = $js->jamSelesai;
-		}
-		$where = array(
-			'jadwalUjian.idTahunAjaran' => $idTA,
-			'jadwalUjian.jamMulai' => $mulai,
-			'jadwalUjian.jamSelesai' => $selesai, 
-		);
-		$jadwal = $this->m_admin->getJadwalUjian($where)->result();
-		// $jadwal = $this->m_admin->getJadwalUjian($idTA)->result();
+		// $where = array(
+		// 	'jadwalUjian.idTahunAjaran' => $id,
+		// 	'matapelajaran.jenisMapel' => $jenis, 
+		// );
+
+		// $data = $this->m_admin->getJadwalUjian($where)->result();
+		$ipa = $this->m_admin->getJadwalUjian($jenis)->result();
+		$umum = $this->m_admin->getJadwalUmum()->result();
+		$jadwal = $this->m_admin->getAllJadwal()->result();
 		// $ipa = $this->m_admin->getIPA($idTA)->result();
 		// $ips = $this->m_admin->getIPS($idTA)->result();
 		$data = array(
 			'jadwal' => $jadwal,
+			'ipa' => $ipa,
+			'umum' => $umum,
 		);
 		echo json_encode($data);
 	}

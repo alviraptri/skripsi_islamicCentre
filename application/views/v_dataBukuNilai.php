@@ -27,6 +27,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -117,6 +118,7 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
+                                                <th style="text-align: center;">Kelas</th>
                                                 <th style="text-align: center;">Nama Siswa</th>
                                                 <th style="text-align: center;">Nilai</th>
                                                 <th style="text-align: center;">Predikat</th>
@@ -260,10 +262,12 @@
                         var i;
                         for (i = 0; i < data.length; i++) {
                             html += '<tr>'+
+                            '<td>'+data[i].ketKelas+' '+data[i].jurusanKelas+' '+data[i].nomorKelas+'</td>'+
                             '<td>'+data[i].namaUser+'</td>'+
                             '<td>'+data[i].nilai+'</td>'+
-                            '<td></td>'+
-                            '<td></td>'+
+                            '<td>B</td>'+
+                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idBukuNilai + '">' +
+                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
                             '</tr>';
                         }
                         $('#show_data').html(html);

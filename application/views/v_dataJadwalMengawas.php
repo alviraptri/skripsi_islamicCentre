@@ -27,6 +27,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -134,7 +135,7 @@
                                         <tbody name="show_data" id="show_data">
                                         </tbody>
                                     </table>
-                                    <a href="<?php echo base_url('c_admin/tambahPegawai'); ?>"><button type="submit" class="btn btn-primary">Cetak Kartu</button></a>
+                                    <!-- <a href="<?php echo base_url('c_admin/tambahPegawai'); ?>"><button type="submit" class="btn btn-primary">Cetak Jadwal</button></a> -->
                                 </div>
                             </div>
                         </div>
@@ -167,6 +168,7 @@
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
+                        console.log(data);
                         var html = '';
                         var i;
                         for (i = 0; i < data.jadwal.length; i++) {
@@ -174,22 +176,18 @@
                                 '<td> ' + data.jadwal[i].hari + ' </td>' +
                                 '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                 '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                '<td id = "nama"> </td>' +
-                                '<td id = "datakelas"> </td>' +
+                                '<td id = "nama'+[i]+'"> </td>' +
+                                '<td id = "datakelas'+[i]+'"> </td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);
                         html = '';
                         for (i = 0; i < data.jadwal1.length; i++) {
-                            html += data.jadwal1[i].namaUser
+                            html = data.jadwal1[i].namaUser;
+                            $('#nama'+i).html(html);
+                            html = data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas;
+                            $('#datakelas'+i).html(html);
                         }
-                        $('#nama').html(html);
-
-                        html = '';
-                        for (i = 0; i < data.jadwal1.length; i++) {
-                            html += data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas
-                        }
-                        $('#datakelas').html(html);
                     }
                 });
                 return false;

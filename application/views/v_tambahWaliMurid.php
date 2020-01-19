@@ -18,6 +18,7 @@
     
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
   </head>
 
   <body class="nav-md">
@@ -73,7 +74,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nomor Induk <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="WM00<?php echo $this->session->idSiswa; ?>">
+                          <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="WM00<?php echo $this->session->idSiswa; ?>" readonly>
                         </div>
                       </div>
                       <div class="item form-group">

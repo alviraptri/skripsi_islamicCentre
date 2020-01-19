@@ -26,6 +26,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
   </head>
 
   <body class="nav-md">
@@ -102,7 +103,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Edit Jadwal Ujian</h3>
+                            <h3 class="modal-title" id="myModalLabel">Edit Data Pengembangan Diri</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateNilaiPD'; ?>">

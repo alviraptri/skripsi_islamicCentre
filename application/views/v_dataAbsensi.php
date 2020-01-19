@@ -21,6 +21,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -83,6 +84,15 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <select name="kls" id="kls" required="required" class="form-control">
+                                                <option value="">Pilih Kelas</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
@@ -116,9 +126,9 @@
                         <form class="form-horizontal form-label-left">
                             <div class="modal-body">
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">#</label>
+                                    <!-- <label class="col-form-label col-md-3 col-sm-3 label-align">#</label> -->
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="ID Ket Nilai" readonly>
+                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="ID Ket Nilai" hidden>
                                     </div>
                                 </div>
 
@@ -175,7 +185,7 @@
             $('#guru').change(function() {
                 var nomorInduk = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
+                    url: "<?php echo site_url('c_admin/mapelAbsen'); ?>",
                     method: "POST",
                     data: {
                         nomorInduk: nomorInduk
@@ -187,7 +197,7 @@
                         var i;
                         html += '<option value="">Pilih Mata Pelajaran</option>'
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idJadwal + '">' + data[i].namaMapel + '</option>'
+                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
                         }
                         $('#mapel').html(html);
                     }
@@ -219,25 +229,64 @@
                 return false;
             });
 
-            //view nama siswa
+            //view kelas
             $('#tgl').change(function() {
+                var tgl = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/klsAbsen'); ?>",
+                    method: "POST",
+                    data: {
+                        tgl: tgl
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        html += '<option value="">Pilih Kelas</option>'
+                        for (i = 0; i < data.length; i++) {
+                            html += '<option value="' + data[i].idJadwal + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
+                        }
+                        $('#kls').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //view nama siswa
+            $('#kls').change(function() {
                 var id = $(this).val();
+                var tgl = $("#tgl").val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getAbsensi'); ?>",
                     method: "POST",
                     data: {
-                        id: id
+                        id: id,
+                        tgl: tgl
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
                         console.log(data);
                         var html = '';
+                        var ket = '';
                         for (var i = 0; i < data.length; i++) {
+                            if (data[i].absen == "H") {
+                            ket = 'Hadir';
+                            }
+                            else if (data[i].absen == "A") {
+                                ket= 'Alpa';
+                            }
+                            else if (data[i].absen == "S") {
+                                ket= 'Sakit';
+                            }
+                            else if (data[i].absen == "I") {
+                                ket= 'Izin';
+                            }
                             html += '<tr>' +
                                 '<td> ' + data[i].namaUser + ' </td>' +
                                 '<td> ' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</td>' +
-                                '<td> ' + data[i].absen + ' </td>' +
+                                '<td id="ketAbsen"> ' + ket + ' </td>' +
                                 '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idAbsen + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' +
                                 '</td>' +

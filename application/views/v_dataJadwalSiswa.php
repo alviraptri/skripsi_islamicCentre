@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Jadwal Ujian Siswa | Information Academic Islamic Centre</title>
+    <title>Jadwal Ujian Siswa | Information Academic Islamic Centre</title> 
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +27,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -122,7 +123,7 @@
                                             </h2> -->
                                         </div>
                                         <div class="col-sm-4" id="foto">
-                                            <!-- <center><img src="<?php echo base_url(); ?>assets/inter/images/logo.jpg" alt="" style="width:30%;"></center> -->
+                                            <center><img src="<?php echo base_url(); ?>assets/inter/images/logo.jpg" alt="" style="width:30%;"></center>
 
                                         </div>
                                     </div>
@@ -143,7 +144,11 @@
                                         <tbody name="show_data" id="show_data">
                                         </tbody>
                                     </table>
-                                    <a href="<?php echo base_url('c_admin/tambahPegawai'); ?>"><button type="submit" class="btn btn-primary">Cetak Kartu</button></a>
+                                    <!-- <a href="" target="_blank">
+                                <button data-toggle="tooltip" title="Lihat Rapor" class="btn btn-success btn-xs">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Lihat Rapor
+                                </button>
+                              </a> -->
                                 </div>
                             </div>
                         </div>
@@ -178,6 +183,7 @@
                     success: function(data) {
                         var html = '';
                         var i;
+                        html += '<option value="">Pilih Kelas</option>'
                         for (i = 0; i < data.length; i++) {
                             html += '<option value="' + data[i].idKelas + '">' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</option>'
                         }
@@ -200,6 +206,7 @@
                     success: function(data) {
                         var html = '';
                         var i;
+                        html += '<option value="">Pilih Siswa</option>'
                         for (i = 0; i < data.length; i++) {
                             html += '<option value="' + data[i].nomorInduk + '">' + data[i].namaUser + '</option>'
                         }
@@ -208,6 +215,7 @@
                 });
                 return false;
             });
+            
             //view data info siswa
             $('#siswa').change(function() {
                 var id = $(this).val();
@@ -234,10 +242,33 @@
                 });
                 return false;
             });
-            $('#siswa').change(function() {
+            // $('#siswa').change(function() {
+            //     var id = $(this).val();
+            //     $.ajax({
+            //         url: "<?php echo site_url('c_admin/infoSiswa'); ?>",
+            //         method: "POST",
+            //         data: {
+            //             id: id
+            //         },
+            //         async: true,
+            //         dataType: 'JSON',
+            //         success: function(data) {
+            //             var html = '';
+            //             var i;
+            //             for (i = 0; i < data.length; i++) {
+            //                 html += '<center><img src="<?php echo base_url(); ?>assets/inter/images/' + data[i].gambar + '" alt="" style="width:30%;"></center>'
+            //             }
+            //             $('#foto').html(html);
+            //         }
+            //     });
+            //     return false;
+            // });
+
+            //Jadwal
+            $('#kelas').change(function() {
                 var id = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/infoSiswa'); ?>",
+                    url: "<?php echo site_url('c_admin/getJadwalUjian'); ?>",
                     method: "POST",
                     data: {
                         id: id
@@ -245,53 +276,29 @@
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
-                        var html = '';
-                        var i;
-                        for (i = 0; i < data.length; i++) {
-                            html += '<center><img src="<?php echo base_url(); ?>assets/inter/images/' + data[i].gambar + '" alt="" style="width:30%;"></center>'
-                        }
-                        $('#foto').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //Jadwal
-            $('#tahunAjaran').change(function() {
-                var idTA = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/getJadwalUjian'); ?>",
-                    method: "POST",
-                    data: {
-                        idTA: idTA
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
                         console.log(data);
                         var html = '';
                         var i;
-                        for (i = 0; i < data.jadwal.length; i++) {
-                            var ipa = "";
-                            var ips = "";
-                            if (data.jadwal[i].hari == data.jadwal[i].hari) {
-                                if (data.jadwal[i].jenisMapel == "IPA") {
-                                    ipa = data.jadwal[i].namaMapel;
-                                } else if (data.jadwal[i].jenisMapel == "IPS") {
-                                    ips = data.jadwal[i].namaMapel;
-                                } else {
-                                    ipa = data.jadwal[i].namaMapel;
-                                    ips = data.jadwal[i].namaMapel;
-                                }
-                            }
-                            html += '<tr>' +
-                                '<td> ' + data.jadwal[i].hari + ' </td>' +
-                                '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                '<td>' + ipa + '</td>' +
-                                '<td>'+ ips +'</td>' +
-                                '<td>' + data.jadwal[i].jenisMapel + '</td>' +
+                        if (data.ipa.jenisMapel =='IPA' && data.umum.jenisMapel =="Umum") {
+                            for (i = 0; i < data.umum.length; i++) {
+                                html += '<tr>' +
+                                '<td> ' + data.umu[i].hari + ' </td>' +
+                                '<td> ' + data.umum[i].jamMulai + ' - ' + data.umum[i].jamSelesai + ' </td>' +
+                                '<td>' + data.umum[i].namaMapel + '</td>' +
+                                '<td></td>' +
+                                '<td>' + data.umum[i].jenisMapel + '</td>' +
                                 '</tr>';
                         }
+                        }
+                        // for (i = 0; i < data.ipa.length; i++) {
+                        //         html += '<tr>' +
+                        //         '<td> ' + data.ipa[i].hari + ' </td>' +
+                        //         '<td> ' + data.umum[i].jamMulai + ' - ' + data.umum[i].jamSelesai + ' </td>' +
+                        //         '<td>' + data.ipa[i].namaMapel + '</td>' +
+                        //         '<td></td>' +
+                        //         '<td>' + data.ipa[i].jenisMapel + '</td>' +
+                        //         '</tr>';
+                        // }
                         $('#show_data').html(html);
                     }
                 });

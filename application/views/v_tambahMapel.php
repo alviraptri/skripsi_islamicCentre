@@ -19,6 +19,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -66,6 +67,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6">
                                             <select name="jenisMapel" class="select2_single form-control">
+                                                <option value="">Pilih Jenis</option>
                                                         <option value="IPA">IPA</option>
                                                         <option value="IPS">IPS</option>
                                                         <option value="Umum">UMUM</option>
@@ -78,6 +80,7 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6">
                                                 <select name="tahunAjaran" class="select2_single form-control">
+                                                    <option value="">Pilih Tahun Ajaran</option>
                                                     <?php foreach ($ta as $data) { ?>
                                                         <option value="<?= $data->idTahunAjaran ?>"><?= $data->tahunAjaran ?></option>
                                                     <?php } ?>

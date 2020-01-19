@@ -26,6 +26,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
   </head>
 
   <body class="nav-md">
@@ -59,7 +60,16 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <select name="thnAjaran" id="thnAjaran" class="form-control">
+                      <option value="-">Pilih Tahun Ajaran</option>
+                      <?php
+                      foreach ($ta as $t) {?>
+                        <option value="<?= $t->idTahunAjaran;?>"><?= $t->tahunAjaran;?></option>
+                      <?php }
+                      ?>
+                    </select>
+                    <br>
+                    <table class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
                         <th>Nomor Induk</th>
@@ -68,14 +78,7 @@
                         </tr>
                       </thead>
 
-                      <tbody>
-                      <?php foreach ($tgs as $list) { ?>
-                        <tr>
-                          <td><?php echo $list->nomorInduk ?></td>
-                          <td><?php echo $list->namaUser ?></td>
-                          <td><?php echo $list->namaMapel ?></td>
-                        </tr>
-                      <?php } ?>
+                      <tbody name="show_data" id="show_data">
                       </tbody>
                     </table>
                   </div>
@@ -94,6 +97,38 @@
         <!-- /footer content -->
       </div>
     </div>
+
+    <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+            //Jadwal
+            $('#thnAjaran').change(function() {
+                var idTA = $(this).val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/getTugas'); ?>",
+                    method: "POST",
+                    data: {
+                        idTA: idTA
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        var html = '';
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            html += '<tr>' +
+                                '<td> ' + data[i].nomorInduk + ' </td>' +
+                                '<td> ' + data[i].namaUser + ' </td>' +
+                                '<td> ' + data[i].namaMapel + ' </td>' +
+                                '</tr>';
+                        }
+                        $('#show_data').html(html);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>

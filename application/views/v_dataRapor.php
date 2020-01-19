@@ -27,6 +27,7 @@
 
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -60,7 +61,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  <table class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
                         <th>Nomor Induk</th>

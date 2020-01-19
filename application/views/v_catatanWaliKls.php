@@ -21,6 +21,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -48,7 +49,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>catatan Wali Kelas</h2>
+                                    <h2>Catatan Wali Kelas</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
@@ -232,7 +233,7 @@
                         for (var i = 0; i < data.nama.length; i++) {
                             html += '<tr>' +
                                 '<td> <input type="text" name="idSiswa[]" value="'+data.nama[i].idSiswa+'" hidden> '+ data.nama[i].namaUser + ' </td>' +
-                                '<td id="catatan"></td>'+
+                                '<td id="catatan'+[i]+'"></td>'+
                                 '<td>'+
                                 '<a href="javascript:;" title="Tambah" class="btn btn-info btn-xs item_add" data="' + data.nama[i].idSiswa + '">' +
                                 '<i class="fa fa-plus" aria-hidden="true"></i></a>'+
@@ -244,9 +245,10 @@
                         $('#show_data').html(html);
                         html = '';
                         for (i = 0; i < data.cttn.length; i++) {
-                            html += data.cttn[i].catatan
+                            html = data.cttn[i].catatan
+                            $('#catatan'+i).html(html);
                         }
-                        $('#catatan').html(html);
+                        
                     }
                 });
                 return false;

@@ -19,6 +19,7 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -131,6 +132,7 @@
     </div>
 
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery.priceformat.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -150,6 +152,14 @@
                 //         }
                 //     })
                 // }
+                $(function(){
+                    $('#biaya').priceFormat({
+                        prefix: 'Rp ',
+                        centsSeparator: ',',
+                        thousandsSeparator: '.'
+                    });
+                })
+
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getDataInfo'); ?>",
                     method: "POST",
@@ -172,6 +182,7 @@
 
                     }
                 });
+
                 return false;
             });
 

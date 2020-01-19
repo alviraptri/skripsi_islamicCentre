@@ -49,57 +49,75 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Kriteria</h2>
+                                    <h2>Perbandingan Kriteria</h2>
 
                                     <div class="clearfix"></div>
                                 </div>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li> <a href="#"><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ModalaAdd"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Kriteria</button></a> </li>
-                                </ul>
                                 <div class="x_content">
+                                <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_rekomendasi/simpanPerbandingan'; ?>" novalidate>
                                     <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Nama Kriteria</th>
-                                                <th>Aksi</th>
+                                                <th>Kriteria Pertama</th>
+                                                <th>Perbandingan</th>
+                                                <th>Kriteria Kedua</th>
                                             </tr>
                                         </thead>
 
-
                                         <tbody name="show_data" id="show_data">
-                                            <?php
-                                            foreach ($kriteria as $list) { ?>
-                                                <tr>
-                                                    <td><?php echo $list->jenisKriteria ?></td>
+                                            <?php 
+                                            foreach ($krit as $list) {
+                                                $id[] = $list->idKriteria;
+                                                $jenis[] = $list->jenisKriteria;
+                                            }
+
+                                            $urut = 0;
+                                            for ($i=0; $i <=($jmlh- 2) ; $i++) { 
+                                                for ($j=($i+1); $j <= ($jmlh - 1) ; $j++) { 
+                                                    $urut++; ?>
+                                                    <tr>
                                                     <td>
-                                                        <!-- <a href="<?php echo base_url('c_admin/editSiswa/') . $list->idKriteria; ?>">
-                                                            <button data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs">
-                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                            </button>
-                                                        </a> -->
-                                                        <a href="javascript:;">
-                                                            <button data-toggle="tooltip" title="Edit" class="btn btn-info btn-xs item_edit" data="<?php $list->idKriteria ?>">
-                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                            </button>
-                                                        </a>
-                                                        <a href="<?php echo base_url('c_admin/statusSiswa/') . $list->idKriteria; ?>">
-                                                            <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
-                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                            </button>
-                                                        </a>
+                                                        <input type="text" name="idK1<?php echo $urut?>" value="<?= $id[$i]?>" hidden> <?= $jenis[$i]?>
+                                                        <!-- <input name="pilih<?php echo $urut?>" value="1" checked="" class="hidden" type="radio">
+							                            <label><?php echo $jenis[$i]; ?></label> -->
+                                                    </td>
+                                                    <td>
+                                                        <select name="bobot<?php echo $urut?>" id="bobot" class="form-control">
+                                                            <option value="">-----------------------------------------------------------------</option>
+                                                            <option value="1">1 - Sama pentingnya (Equal importence)</option>
+                                                            <option value="2">2 - Sama hingga sedikit lebih penting</option>
+                                                            <option value="3">3 - Sedikit lebih penting (Slightly more importence)</option>
+                                                            <option value="4">4 - Sedikit lebih hingga jelas lebih penting</option>
+                                                            <option value="5">5 - Jelas lebih penting ( Materially more importence )</option>
+                                                            <option value="6">6 - Jelas hingga sangat jelas lebih penting</option>
+                                                            <option value="7">7 - Sangat jelas lebih penting ( Significantly more importence )</option>
+                                                            <option value="8">8 - Sangat jelas hingga mutlak lebih penting</option>
+                                                            <option value="9">9 - Mutlak lebih penting ( Absolutely more importence )</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="idK2<?php echo $urut?>" value="<?= $id[$j]?>" hidden> <?= $jenis[$j]?>
+                                                        <!-- <input name="pilih<?php echo $urut?>" value="1" checked="" class="hidden" type="radio">
+							                            <label><?php echo $jenis[$j]; ?></label> -->
                                                     </td>
                                                 </tr>
                                             <?php }
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
+                                    <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 offset-md-3">
+                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
+                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li> <a href="<?php echo base_url('c_rekomendasi/perbandinganKriteria'); ?>"><button class="btn btn-warning btn-xs"> Buat Perbandingan <i class="fa fa-angle-double-right" aria-hidden="true"></i> </button></a> </li>
-                    </ul>
                 </div>
             </div>
             <!-- /page content -->

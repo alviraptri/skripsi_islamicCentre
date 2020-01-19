@@ -19,6 +19,7 @@
 
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 </head>
 
 <body class="nav-md">
@@ -54,7 +55,7 @@
                   <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/updateKelas'; ?>" novalidate>
 
                     <div class="item form-group">
-                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Keterangan Kelas <span class="required">*</span>
+                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">ID Kelas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6">
                         <?php foreach ($editKelas as $kelas) { ?>
