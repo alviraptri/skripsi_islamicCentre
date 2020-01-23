@@ -116,12 +116,13 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h3 class="kt-login__title">Halo, <?php echo $this->session->namaUser; ?></h3>
 									<div class="kt-login__desc">Silahkan masukkan <b>kata sandi baru</b> anda</div>
 								</div>
-								<form class="kt-form" action="<?php echo base_url('c_login/kataSandiBaru'); ?>" method="post">
+								<?php echo form_open('c_login/reset_password/token/'.$token);?>
+								<form class="kt-form" method="post">
 									<div class="input-group">
-										<input class="form-control" type="password" pattern="^\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Minimal 8 Karakter' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Kata Sandi Baru" name="passBaru" autocomplete="off">
+										<input class="form-control" type="password" placeholder="Kata Sandi Baru" name="passBaru" autocomplete="off">
                                     </div>
                                     <div class="input-group">
-										<input class="form-control" type="password" pattern="^\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Masukkan Password Yang Sama' : '');" placeholder="Konfirmasi Kata Sandi" name="passConf" autocomplete="off">
+										<input class="form-control" type="password" placeholder="Konfirmasi Kata Sandi" name="passConf" autocomplete="off">
 									</div>
 									<div class="kt-login__actions">
                                         <button type="submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Kirim</button>

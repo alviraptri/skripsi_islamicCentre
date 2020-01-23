@@ -82,7 +82,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Nomor Kelas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6">
-                        <input type="text" id="email" name="noKelas" required="required" class="form-control">
+                        <input type="number" id="email" name="noKelas" required="required" class="form-control" max="3">
                       </div>
                     </div>
                     <div class="ln_solid"></div>

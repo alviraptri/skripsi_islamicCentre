@@ -116,7 +116,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h3 class="kt-login__title">Lupa Kata Sandi ?</h3>
 									<div class="kt-login__desc">Masukkan <b>Email</b> anda</div>
 								</div>
-								<form class="kt-form" action="<?php echo base_url('c_login/resetLink'); ?>" method="post">
+								<form class="kt-form" action="<?php echo base_url('c_login/lupa_password'); ?>" method="post">
 									<div class="input-group">
 										<input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
 									</div>

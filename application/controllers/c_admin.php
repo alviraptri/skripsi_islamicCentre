@@ -61,16 +61,58 @@ class c_admin extends CI_Controller
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
-		$data = array(
-			'nomorInduk' => $noInduk,
-			'userRole' => $userRole,
-			'namaUser' => $nama,
-			'ttlUser' => $tgl,
-			'emailUser' => $email,
-			'noTelp' => $noTelp,
-			'alamatUser' => $alamat,
-			'jenisKelamin' => $jk 
-		);
+		$config['upload_path'] = './assets/inter/images/profil';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+
+		$this->upload->initialize($config);
+		if(!empty($_FILES['filefoto']['name'])){
+			if ($this->upload->do_upload('filefoto')){
+				$gbr = $this->upload->data();
+				$config['image_library']='gd2';
+                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$gambar=$gbr['file_name'];
+ 
+				$data = array(
+					'nomorInduk' => $noInduk,
+					'userRole' => $userRole,
+					'namaUser' => $nama,
+					'ttlUser' => $tgl,
+					'emailUser' => $email,
+					'noTelp' => $noTelp,
+					'alamatUser' => $alamat,
+					'jenisKelamin' => $jk,
+					'gambar' => $gambar,
+				);
+
+				$data_Session = array(
+					'namaUser' => $nama,
+					'nomorInduk' => $noInduk,
+					'userRole' => $userRole,
+					'gambar' => $gambar
+				);
+				$this->session->set_userdata($data_Session);
+			}
+		}
+		else{
+            $data = array(
+				'nomorInduk' => $noInduk,
+				'userRole' => $userRole,
+				'namaUser' => $nama,
+				'ttlUser' => $tgl,
+				'emailUser' => $email,
+				'noTelp' => $noTelp,
+				'alamatUser' => $alamat,
+				'jenisKelamin' => $jk 
+			);
+		}
 		$where = array('nomorInduk' => $noInduk);
 		$this->m_admin->updateData($where, $data, 'user');
 		redirect('c_admin/admin');
@@ -109,16 +151,50 @@ class c_admin extends CI_Controller
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
-		$data = array(
-			'nomorInduk' => $noInduk,
-			'userRole' => $userRole,
-			'namaUser' => $nama,
-			'ttlUser' => $tgl,
-			'emailUser' => $email,
-			'noTelp' => $noTelp,
-			'alamatUser' => $alamat,
-			'jenisKelamin' => $jk 
-		);
+		$config['upload_path'] = './assets/inter/images/profil';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+
+		$this->upload->initialize($config);
+		if(!empty($_FILES['filefoto']['name'])){
+			if ($this->upload->do_upload('filefoto')){
+				$gbr = $this->upload->data();
+				$config['image_library']='gd2';
+                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$gambar=$gbr['file_name'];
+ 
+				$data = array( 
+					'nomorInduk' => $noInduk,
+					'userRole' => $userRole,
+					'namaUser' => $nama,
+					'ttlUser' => $tgl,
+					'emailUser' => $email,
+					'noTelp' => $noTelp,
+					'alamatUser' => $alamat,
+					'jenisKelamin' => $jk,
+					'gambar' => $gambar,
+				);
+			}
+		}
+		else{
+            $data = array(
+				'nomorInduk' => $noInduk,
+				'userRole' => $userRole,
+				'namaUser' => $nama,
+				'ttlUser' => $tgl,
+				'emailUser' => $email,
+				'noTelp' => $noTelp,
+				'alamatUser' => $alamat,
+				'jenisKelamin' => $jk 
+			);
+		}
 		$where = array('nomorInduk' => $noInduk);
 		$this->m_admin->updateData($where, $data, 'user');
 		redirect('c_admin/guru');
@@ -171,24 +247,65 @@ class c_admin extends CI_Controller
 
 		$tgl = date('Y-m-d', strtotime($ttl));
 
-		$dataUser = array(
-			'nomorInduk' => $noInduk,
-			'userRole' => $userRole,
-			'namaUser' => $nama,
-			'ttlUser' => $tgl,
-			'emailUser' => $email,
-			'noTelp' => $noTelp,
-			'alamatUser' => $alamat,
-			'jenisKelamin' => $jk 
-		);
+		$config['upload_path'] = './assets/inter/images/profil';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 
-		$dataWaliKelas = array(
-			'idWaliKelas' => "",
-			'nomorInduk' => $noInduk,
-			'idKelas' => $kelas,
-			'statusWaliKelas' => 1 
-		);
+		$this->upload->initialize($config);
 
+		if(!empty($_FILES['filefoto']['name'])){
+			if ($this->upload->do_upload('filefoto')){
+				$gbr = $this->upload->data();
+				$config['image_library']='gd2';
+                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+				$gambar=$gbr['file_name'];
+ 
+				$dataUser = array(
+					'nomorInduk' => $noInduk,
+					'userRole' => $userRole,
+					'namaUser' => $nama,
+					'ttlUser' => $tgl,
+					'emailUser' => $email,
+					'noTelp' => $noTelp,
+					'alamatUser' => $alamat,
+					'jenisKelamin' => $jk,
+					'gambar' => $gambar, 
+				);
+		
+				$dataWaliKelas = array(
+					'idWaliKelas' => "",
+					'nomorInduk' => $noInduk,
+					'idKelas' => $kelas,
+					'statusWaliKelas' => 1 
+				);
+			}
+		}
+		else{
+            $dataUser = array(
+				'nomorInduk' => $noInduk,
+				'userRole' => $userRole,
+				'namaUser' => $nama,
+				'ttlUser' => $tgl,
+				'emailUser' => $email,
+				'noTelp' => $noTelp,
+				'alamatUser' => $alamat,
+				'jenisKelamin' => $jk 
+			);
+	
+			$dataWaliKelas = array(
+				'idWaliKelas' => "",
+				'nomorInduk' => $noInduk,
+				'idKelas' => $kelas,
+				'statusWaliKelas' => 1 
+			);
+		}
 		$where = array('nomorInduk' => $noInduk);
 		$this->m_admin->updateData($where, $dataUser, 'user');
 		$this->m_admin->updateData($where, $dataWaliKelas, 'walikelas');
@@ -213,7 +330,6 @@ class c_admin extends CI_Controller
 		$jk = $this->input->post('jk');
 		$pass = $this->input->post('pass');
 		$userRole = $this->input->post('role');
-		$photo = $this->input->post('berkas');
 		$kelas = $this->input->post('kelas');
 
 		$tgl = date('Y-m-d', strtotime($ttl));
@@ -222,63 +338,76 @@ class c_admin extends CI_Controller
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 		$config['encrypt_name'] = TRUE;
 
-		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name'])){
-			if ($this->upload->do_upload('filefoto')){
-				$gbr = $this->upload->data();
-				$config['image_library']='gd2';
-                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '50%';
-                $config['width']= 600;
-                $config['height']= 400;
-				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
-				$gambar=$gbr['file_name'];
- 
-				$data = array(
-					'nomorInduk' => $noInduk,
-					'userRole' => $userRole,
-					'namaUser' => $nama,
-					'ttlUser' => $tgl,
-					'emailUser' => $email,
-					'noTelp' => $noTelp,
-					'alamatUser' => $alamat,
-					'jenisKelamin' => $jk,
-					'passUser' => md5($pass),
-					'gambar' => $gambar,
-					'statusUser' => 1 
-				);
-				
-				$this->m_admin->simpanData($data, 'user');
-				echo "Image berhasil diupload";
+		$cekData = array(
+			'emailUser' => $email,
+			'namaUser' => $nama,
+			'userRole' => $userRole, 
+		);
+		$cek = $this->m_admin->cek($cekData, "user")->num_rows();
+		if ($cek < 0) {
+			$this->upload->initialize($config);
+			if(!empty($_FILES['filefoto']['name'])){
+				if ($this->upload->do_upload('filefoto')){
+					$gbr = $this->upload->data();
+					$config['image_library']='gd2';
+					$config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
+					$config['create_thumb']= FALSE;
+					$config['maintain_ratio']= FALSE;
+					$config['quality']= '50%';
+					$config['width']= 600;
+					$config['height']= 400;
+					$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+					$this->load->library('image_lib', $config);
+					$this->image_lib->resize();
+					$gambar=$gbr['file_name'];
+	
+					$data = array(
+						'nomorInduk' => $noInduk,
+						'userRole' => $userRole,
+						'namaUser' => $nama,
+						'ttlUser' => $tgl,
+						'emailUser' => $email,
+						'noTelp' => $noTelp,
+						'alamatUser' => $alamat,
+						'jenisKelamin' => $jk,
+						'passUser' => md5($pass),
+						'gambar' => $gambar,
+						'statusUser' => 1 
+					);
+					
+					$this->m_admin->simpanData($data, 'user');
+					echo "Image berhasil diupload";
+				}
+			}
+			else{
+				echo "Image yang diupload kosong";
+			}
+
+			if($userRole == 'Wali Kelas'){
+					$data = array(
+						'idWaliKelas' => "",
+						'nomorInduk' => $noInduk,
+						'idKelas' => $kelas,
+						'statusWaliKelas' => 1 
+					);
+		
+					$this->m_admin->simpanData($data, 'walikelas');
+			}
+			if($userRole == 'Guru'){
+				redirect('c_admin/guru');
+			}
+			elseif ($userRole == 'Admin') {
+				redirect('c_admin/admin');
+			}
+			elseif ($userRole == 'Wali Kelas') {
+				redirect('c_admin/waliKelas');
 			}
 		}
-		else{
-            echo "Image yang diupload kosong";
-        }
-
-		if($userRole == 'Wali Kelas'){
-			$data = array(
-				'idWaliKelas' => "",
-				'nomorInduk' => $noInduk,
-				'idKelas' => $kelas,
-				'statusWaliKelas' => 1 
-			);
-
-			$this->m_admin->simpanData($data, 'walikelas');
+		else {
+			echo "<script>alert('Data sudah tersimpan');</script>";
+    		$this->load->view('v_tambahPegawai');
 		}
-		if($userRole == 'Guru'){
-			redirect('c_admin/guru');
-		}
-		elseif ($userRole == 'Admin') {
-			redirect('c_admin/admin');
-		}
-		elseif ($userRole == 'Wali Kelas') {
-			redirect('c_admin/waliKelas');
-		}
+		
 	}
 
 	//siswa
@@ -405,16 +534,16 @@ class c_admin extends CI_Controller
 
 		$this->m_admin->simpanData($dataSiswa, 'datasiswa');
 
-		$where = array(
-            'nomorInduk' => $noInduk
-        );
-		$a = $this->m_admin->selectSiswa($where, 'datasiswa')->result();
-		foreach ($a as $data) {
-			$idSiswa = $data->idSiswa;
-		};
-		$data_session = array('idSiswa' => $idSiswa);
-		$this->session->set_userdata($data_session);
-		redirect('c_admin/tambahWaliMurid');
+		// $where = array(
+        //     'nomorInduk' => $noInduk
+        // );
+		// $a = $this->m_admin->selectSiswa($where, 'datasiswa')->result();
+		// foreach ($a as $data) {
+		// 	$idSiswa = $data->idSiswa;
+		// };
+		// $data_session = array('idSiswa' => $idSiswa);
+		// $this->session->set_userdata($data_session);
+		redirect('c_admin/siswa');
 	}
 	function statusSiswa($nomorInduk)
 	{
@@ -674,16 +803,34 @@ class c_admin extends CI_Controller
 		$jurusanKelas = $this->input->post('jurusanKelas');
 		$noKelas = $this->input->post('noKelas');
 
-		$data = array(
-			'idKelas' => "",
-			'ketKelas' => $ketKelas,
-			'jurusanKelas' => $jurusanKelas,
-			'nomorKelas' => $noKelas,
-			'statusKelas' => 1 
-		);
+		$data = $this->db->query("SELECT * FROM kelas");
+		$flag = false;
+		foreach ($data->result() as $k) {
+			$ket = $k->ketKelas;
+			$jr = $k->jurusanKelas;
+			$no = $k->nomorKelas;
 
-		$this->m_admin->simpanData($data, 'kelas');
-		redirect('c_admin/kelas');
+			if ($ket == $ketKelas && $jr == $jurusanKelas && $no == $noKelas){
+				$flag = true;
+				break;
+			}
+		}
+
+		if ($flag == true) {
+			echo "<script>alert('Data sudah ada di dalam database');</script>";
+    		$this->load->view('v_tambahKelas');
+		}
+		else {
+			$data = array(
+				'idKelas' => "",
+				'ketKelas' => $ketKelas,
+				'jurusanKelas' => $jurusanKelas,
+				'nomorKelas' => $noKelas,
+				'statusKelas' => 1 
+			);
+			$this->m_admin->simpanData($data, 'kelas');
+			redirect('c_admin/kelas');
+		}
 	}
 	function kelas()
 	{

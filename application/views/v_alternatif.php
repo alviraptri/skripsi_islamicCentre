@@ -86,7 +86,7 @@
                                                         <a href="<?php echo base_url('c_admin/statusSiswa/') . $list->idAlternatif; ?>">
                                                             <button data-toggle="tooltip" title="Hapus" class="btn btn-danger btn-xs">
                                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                            </button>
+                                                            </button> 
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -98,6 +98,9 @@
                             </div>
                         </div>
                     </div>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li> <a href="<?php echo base_url('c_rekomendasi/lihatSiswa'); ?>"><button class="btn btn-warning btn-xs"> Data Alternatif Siswa <i class="fa fa-angle-double-right" aria-hidden="true"></i> </button></a> </li>
+                    </ul>
                 </div>
             </div>
             <!-- /page content -->

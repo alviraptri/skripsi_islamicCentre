@@ -38,7 +38,10 @@ class m_admin extends CI_Model
     {
         return $this->db->get_where($table, $where);
     }
-
+    function cek($where, $table)
+    {
+        return $this->db->get_where($table, $where);
+    }
     function kodePegawai()
 	{
         $this->db->select('RIGHT(user.nomorInduk,4) as kode',false);
@@ -47,14 +50,14 @@ class m_admin extends CI_Model
 		$this->db->order_by('nomorInduk','DESC');
 		$this->db->limit(1);
 		$query = $this->db->get('user');
-		if($query->num_rows()<>0){
+		if($query->num_rows()>0){
 			$data = $query->row();
 			$kode = intval($data->kode)+1;
 		}
 		else{
 			$kode=1;
 		}
-		$kodeMax = str_pad($kode,4,'0',STR_PAD_LEFT);
+		$kodeMax = str_pad($kode,3,'0',STR_PAD_LEFT);
 		$kodeJadi = "NIP".$kodeMax;
 		return $kodeJadi;
 	}

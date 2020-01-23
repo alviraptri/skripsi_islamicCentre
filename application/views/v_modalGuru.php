@@ -11,21 +11,18 @@
       <div class="modal-body">
         <table width="100%" class="table table-striped dt-responsive nowrap">
           <tr>
-            <th colspan="2"> Informasi Pribadi</th>
-            <td>Nomor Telepon</td>
-            <td><?php echo $noTelp ?></td>
+          <th colspan="2"><center> Informasi Pribadi </center></th>
+            <th><center> Foto Profil </center></th>
           </tr>
           <tr>
             <td>Nama Lengkap</td>
             <td><?php echo $namaUser ?></td>
-            <td>Alamat</td>
-            <td><?php echo $alamatUser ?></td>
+            <td rowspan="3"><center><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $gambar ?>" alt="" style="width: 30%"></center></td>
           </tr>
           <tr>
             <td>Tanggal Lahir</td>
             <?php $tgl = date('d F Y', strtotime($ttlUser)) ?>
             <td><?php echo $tgl ?></td>
-            <th colspan="2"> Foto Profil</th>
           </tr>
           <tr>
             <td>Jenis Kelamin</td>
@@ -36,11 +33,18 @@
               <td><?php echo "Perempuan"; ?></td>
             <?php }
             ?>
-            <td rowspan="2"><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $gambar ?>" alt=""></td>
           </tr>
           <tr>
             <td>Email</td>
             <td><?php echo $emailUser ?></td>
+          </tr>
+          <tr>
+            <td>Nomor Telepon</td>
+            <td><?php echo $noTelp ?></td>
+          </tr>
+          <tr>
+            <td>Alamat</td>
+            <td><?php echo $alamatUser ?></td>
           </tr>
         </table>
       </div>

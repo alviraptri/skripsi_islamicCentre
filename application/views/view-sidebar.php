@@ -272,6 +272,8 @@
               <li><a href="<?php echo base_url('c_rekomendasi/index'); ?>">Penjelasan</a></li>
               <li><a href="<?php echo base_url('c_rekomendasi/kriteria'); ?>">Kriteria</a></li>
               <li><a href="<?php echo base_url('c_rekomendasi/alternatif'); ?>">Alternatif</a></li>
+              <li><a href="<?php echo base_url('c_rekomendasi/lihatSiswa'); ?>">Nama Siswa</a></li>
+              <li><a href="<?php echo base_url('c_rekomendasi/hasilAkhir/').$this->session->userdata('siswa'); ?>">Hasil Akhir</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-clipboard"></i> Rapor <span class="fa fa-chevron-down"></span></a>

@@ -6,7 +6,7 @@ class m_rekomendasi extends CI_Model
         $query = $this->db->query("SELECT * FROM `kriteria`WHERE statusKriteria = 1");
         return $query;
     }
-    function getKriteria($id)
+    function getKriteria($id) 
     {
         $hsl = $this->db->query("SELECT * FROM kriteria WHERE idKriteria='$id'");
         if ($hsl->num_rows() > 0) {
@@ -81,5 +81,56 @@ class m_rekomendasi extends CI_Model
         // return $ir;
         return $query;
     }
-    
+    function namaSiswa()
+    {
+        $query = $this->db->query("SELECT DISTINCT datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, alternatif.idSiswa, 
+        kelas.idKelas, user.nomorInduk, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, user.namaUser FROM datasiswa
+        JOIN alternatif ON alternatif.idSiswa = datasiswa.idSiswa
+        JOIN kelas ON kelas.idKelas = datasiswa.idKelas
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk
+        WHERE alternatif.statusAlternatif = 1");
+        return $query;
+    }
+    function perbandinganAlternatif($id)
+    {
+        $query = $this->db->query("SELECT idAlternatif, namaAlternatif, idSiswa FROM `alternatif` WHERE idSiswa = '".$id."'");
+        return $query;
+    }
+    function getJumlahAlternatif($id)
+    {
+        $query = $this->db->query("SELECT idAlternatif, namaAlternatif, idSiswa FROM `alternatif` WHERE idSiswa = '".$id."'");
+        if($query->num_rows()>0){
+            return $query->num_rows();
+        }
+        else {
+            return 0;
+        }
+    }
+    function getNamaKriteria()
+    {
+        $query = $this->db->query("SELECT jenisKriteria, idKriteria FROM `kriteria` ORDER BY idKriteria");
+        return $query;
+    }
+    function perbandinganAlt()
+    {
+        $query = $this->db->query("SELECT * FROM alternatif ORDER BY idAlternatif");
+        return $query;
+    }
+    function getAlternatifPV($id_alternatif,$id_kriteria)
+    {
+        $query = $this->db->query("SELECT nilaiHA FROM pv_alternatif WHERE idAlternatif = '".$id_alternatif."' AND idKriteria = '".$id_kriteria."'");
+        return $query;
+    }
+    function getKriteriaPV($id_kriteria)
+    {
+        $query = $this->db->query("SELECT nilaiPvKrit FROM pv_kriteria WHERE idKriteria = '".$id_kriteria."'");
+        return $query;
+    }
+    function lihatRanking()
+    {
+        $query = $this->db->query("SELECT * FROM rankingrekomendasi 
+        JOIN alternatif ON alternatif.idAlternatif = rankingrekomendasi.idAlternatif
+        ORDER BY hasilAkhir DESC");
+        return $query;
+    }
 }

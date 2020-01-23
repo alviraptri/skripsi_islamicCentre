@@ -19,6 +19,16 @@
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico"/>
+
+    <style>
+      input[type=number]::-webkit-inner-spin-button, 
+      input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          margin: 0; 
+      }
+    </style>
   </head>
 
   <body class="nav-md">
@@ -42,6 +52,7 @@
             </div>
             <div class="clearfix"></div>
 
+            <div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
             <div class="row">
               <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
@@ -59,7 +70,7 @@
                           <input id="name" class="form-control" name="nomorInduk" required="required" type="text" value="<?= $kodeGuru;?>" readonly>
                         </div>
                       </div>
-                      <div class="item form-group">
+                      <div class="item form-group"> 
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Kata Sandi <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
@@ -91,7 +102,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="noTelp">Nomor Telephone <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6">
-                          <input type="text" id="email2" name="noTelp" data-validate-length-range="11" required="required" class="form-control">
+                          <input type="number" id="email2" name="noTelp" data-validate-length-range="9" required="required" class="form-control">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -148,7 +159,7 @@
                       <div class="form-group">
                         <div class="col-md-6 offset-md-3">
                           <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                          <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                          <a href="<?php echo base_url('c_admin/index'); ?>"><button type="button" class="btn btn-primary">Batal</button></a>
                         </div>
                       </div>
                     </form>
@@ -181,6 +192,9 @@
             }
         });
     });
+</script>
+<script>   
+    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
 </script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>

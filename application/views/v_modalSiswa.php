@@ -11,13 +11,13 @@
       <div class="modal-body">
         <table width="100%" class="table table-striped dt-responsive nowrap">
           <tr>
-            <th colspan="2">Informasi Pribadi</th>
-            <th colspan="2">Foto Profil</th>
+            <th colspan="2"><center>Informasi Pribadi</center></th>
+            <th colspan="2"><center>Foto Profil</center></th>
           </tr>
           <tr>
             <td>Nama Lengkap</td>
             <td><?php echo $namaUser ?></td>
-            <td rowspan="3"><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $gambar ?>" alt=""></td>
+            <td rowspan="3" colspan="2"><center><img src="<?php echo base_url(); ?>assets/inter/images/profil/<?php echo $gambar ?>" alt="" style="width: 30%"></center></td>
           </tr>
           <tr>
             <td>Tanggal Lahir</td>
@@ -37,7 +37,7 @@
           <tr>
             <td>Email</td>
             <td><?php echo $emailUser ?></td>
-            <th colspan="2">Informasi Sekolah</th>
+            <th colspan="2"><center>Informasi Sekolah</center></th>
           </tr>
           <tr>
             <td>Nomor Telepon</td>
