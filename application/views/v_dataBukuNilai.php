@@ -137,6 +137,56 @@
             </div>
             <!-- /page content -->
 
+            <!-- MODAL EDIT -->
+            <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="myModalLabel">Edit Buku Nilai</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <form class="form-horizontal form-label-left">
+                            <div class="modal-body">
+                                <div class="item form-group">
+                                    <!-- <label class="col-form-label col-md-3 col-sm-3 label-align">#</label> -->
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="ID Ket Nilai" hidden>
+                                    </div>
+                                </div> 
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Kelas</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input name="kls_edit" id="kls_edit" class="form-control" type="text" placeholder="Nilai Satu" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Absen</label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <input name="nilai_edit" id="nilai_edit" class="form-control" type="text" placeholder="Nilai Satu">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                                <button class="btn btn-info" id="btn_update">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--END MODAL EDIT-->
+
             <!-- footer content -->
             <footer>
                 <?php include("v-Footer.php") ?>
@@ -149,7 +199,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             //view mapel
-            $('#guru').change(function() {
+            $('#guru').change(function() { 
                 var nomorInduk = $(this).val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getMapel'); ?>",
@@ -248,29 +298,99 @@
             $('#tgl').change(function() {
                 var tgl = $(this).val();
                 var id = $('#kelas').val();
+                var guru = $('#guru').val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getNilaiSiswa'); ?>",
                     method: "POST",
                     data: {
                         tgl: tgl,
-                        id: id
+                        id: id,
+                        guru: guru
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
                         var html = '';
+                        var predikat = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
+                            if (data[i].nilai >= 89) {
+                                predikat = 'A';
+                            }
+                            else if (data[i].nilai >= 77) {
+                                predikat = 'B';
+                            }
+                            else if(data[i].nilai > 89){
+                                predikat = 'B';
+                            }
+                            else if (data[i].nilai >= 65) {
+                                predikat = "C";
+                            }
+                            else if(data[i].nilai < 77){
+                                predikat = "C";
+                            }
+                            else if (data[i].nilai < 65) {
+                                predikat = "D";
+                            }
                             html += '<tr>'+
                             '<td>'+data[i].ketKelas+' '+data[i].jurusanKelas+' '+data[i].nomorKelas+'</td>'+
                             '<td>'+data[i].namaUser+'</td>'+
                             '<td>'+data[i].nilai+'</td>'+
-                            '<td>B</td>'+
+                            '<td>'+ predikat +'</td>'+
                             '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idBukuNilai + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
                             '</tr>';
                         }
                         $('#show_data').html(html);
+                    }
+                });
+                return false;
+            });
+
+            //GET UPDATE
+            $('#show_data').on('click', '.item_edit', function() {
+                var id = $(this).attr('data');
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo base_url('c_admin/editBukuNilai') ?>",
+                    dataType: "JSON",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#ModalaEdit').modal('show');
+                        $('[name="id_edit"]').val(data[0].idBukuNilai);
+                        $('[name="nama_edit"]').val(data[0].namaUser);
+                        $('[name="kls_edit"]').val(data[0].ketKelas + ' ' + data[0].jurusanKelas + ' ' + data[0].nomorKelas);
+                        $('[name="nilai_edit"]').val(data[0].nilai);
+                    }
+                });
+                return false;
+            });
+
+            function selectElement(id, valueToSelect) {
+                let element = document.getElementById(id);
+                element.value = valueToSelect;
+            }
+
+            //Update data
+            $('#btn_update').on('click', function() {
+                var id = $('#id_edit').val();
+                var absen = $('#absen_edit').val();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('c_admin/updateAbsen') ?>",
+                    dataType: "JSON",
+                    data: {
+                        id: id,
+                        absen: absen,
+                    },
+                    success: function(data) {
+                        $('[name="id_edit"]').val("");
+                        $('[name="nama_edit"]').val("");
+                        $('[name="kls_edit"]').val("");
+                        $('#ModalaEdit').modal('hide');
                     }
                 });
                 return false;

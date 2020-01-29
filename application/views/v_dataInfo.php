@@ -66,18 +66,12 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group">
-                                            <label>Nama Siswa</label>
-                                            <select class="form-control" id="siswa" name="siswa" required>
-                                                <option value="">Pilih Siswa</option>
-
-                                            </select>
-                                        </div> -->
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
                                                     <th>Jumlah Biaya</th>
+                                                    <th>Status</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -98,15 +92,15 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Hapus Informasi</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Hapus Barang</h4>
                                 </div>
                                 <form class="form-horizontal">
                                     <div class="modal-body">
 
                                         <input type="hidden" name="kode" id="textkode" value="">
                                         <div class="alert alert-warning">
-                                            <p>Apakah Anda yakin mau menghapus barang ini?</p>
+                                            <p>Apakah Anda yakin mau menghapus informasi ?</p>
                                         </div>
 
                                     </div>
@@ -139,20 +133,7 @@
             //view
             $('#kelas').change(function() {
                 var idKelas = $(this).val();
-                // if(idKelas != '')
-                // {
-                //     $.ajax({
-                //         url:"<?php //echo site_url('c_admin/getSiswa'); 
-                                ?>",
-                //         method:"POST",
-                //         data:{idKelas:idKelas},
-                //         success:function(data)
-                //         {
-                //             $('#siswa').html(data);
-                //         }
-                //     })
-                // }
-                $(function(){
+                $(function() {
                     $('#biaya').priceFormat({
                         prefix: 'Rp ',
                         centsSeparator: ',',
@@ -175,7 +156,8 @@
                             html += '<tr>' +
                                 '<td>' + data[i].namaUser + '</td>' +
                                 '<td><input type="text" name="idSiswa[]" id="biaya" value="' + data[i].idInfo + '" hidden>' + data[i].jumlah + '</td>' +
-                                '<td><a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].idInfo+'">Hapus</a></td>' +
+                                '<td><span class="badge badge-info">Lunas</span></td>' +
+                                '<td><a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="' + data[i].idInfo + '">Hapus</a></td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);
@@ -187,22 +169,24 @@
             });
 
             //GET HAPUS
-        $('#show_data').on('click','.item_hapus',function(){
-            var idInfo=$(this).attr('data');
-            $('#ModalHapus').modal('show');
-            $('[name="kode"]').val(idInfo);
-        });
+            $('#show_data').on('click', '.item_hapus', function() {
+                var idInfo = $(this).attr('data');
+                $('#ModalHapus').modal('show');
+                $('[name="kode"]').val(idInfo);
+            });
 
             //Hapus Barang
-        $('#btn_hapus').on('click',function(){
-            var kode=$('#textkode').val();
-            $.ajax({
-            type : "POST",
-            url  : "<?php echo base_url('c_admin/statusInfo')?>",
-            dataType : "JSON",
-                    data : {kode: kode},
-                    success: function(data){
-                            $('#ModalHapus').modal('hide');
+            $('#btn_hapus').on('click', function() {
+                var kode = $('#textkode').val();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('c_admin/statusInfo') ?>",
+                    dataType: "JSON",
+                    data: {
+                        kode: kode
+                    },
+                    success: function(data) {
+                        $('#ModalHapus').modal('hide');
                     }
                 });
                 return false;

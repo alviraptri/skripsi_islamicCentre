@@ -66,13 +66,43 @@
                         </label>
                         <div class="col-md-6 col-sm-6">
                           <select name="hari" id="#" required="required" class="form-control">
-                              <option value="<?= $edit->hari ?>"><?= $edit->hari ?></option>
+                            <?php
+                            if ($edit->hari == "Senin") {?>
+                              <option value="Senin" selected> Senin</option>
+                              <option value="Selasa">Selasa</option>
+                              <option value="Rabu">Rabu</option>
+                              <option value="Kamis">Kamis</option>
+                              <option value="Jumat">Jumat</option>
+                            <?php }
+                            elseif ($edit->hari == "Selasa") {?>
+                              <option value="Senin"> Senin</option>
+                              <option value="Selasa" selected>Selasa</option>
+                              <option value="Rabu">Rabu</option>
+                              <option value="Kamis">Kamis</option>
+                              <option value="Jumat">Jumat</option>
+                            <?php }
+                            elseif ($edit->hari == "Rabu") { ?>
+                              <option value="Senin"> Senin</option>
+                              <option value="Selasa">Selasa</option>
+                              <option value="Rabu" selected>Rabu</option>
+                              <option value="Kamis">Kamis</option>
+                              <option value="Jumat">Jumat</option>
+                            <?php }
+                            elseif ($edit->hari == "Kamis") { ?>
+                              <option value="Senin"> Senin</option>
+                              <option value="Selasa">Selasa</option>
+                              <option value="Rabu">Rabu</option>
+                              <option value="Kamis" selected>Kamis</option>
+                              <option value="Jumat">Jumat</option>
+                            <?php }
+                            elseif ($edit->hari == "Jumat") {?>
                               <option value="Senin"> Senin</option>
                               <option value="Selasa">Selasa</option>
                               <option value="Rabu">Rabu</option>
                               <option value="Kamis">Kamis</option>
-                              <option value="Jum'at">Jum'at</option>
-                              <option value="Sabtu">Sabtu</option>
+                              <option value="Jumat" selected>Jumat</option>
+                            <?php }
+                            ?>
                           </select>
                         </div>
                       </div>
@@ -97,9 +127,11 @@
                           <select name="mapel" id="#" required="required" class="form-control">
                               <option value="<?= $edit->idMapel ?>"><?= $edit->namaMapel ?></option>
                               <?php 
-                              foreach ($mapel as $list) { ?>
+                              foreach ($mapel as $list) { 
+                                if ($edit->idMapel != $list->idMapel) {?>
                                   <option value="<?php echo $list->idMapel?>"><?php echo $list->namaMapel?> </option>
-                              <?php } ?>
+                              <?php }
+                              } ?>
                           </select>
                         </div>
                       </div>
@@ -110,9 +142,11 @@
                           <select name="guru" id="#" required="required" class="form-control">
                               <option value="<?= $edit->nomorInduk ?>"><?= $edit->namaUser ?></option>
                               <?php 
-                              foreach ($guru as $list) { ?>
+                              foreach ($guru as $list) { 
+                                if ($edit->nomorInduk != $list->nomorInduk) {?>
                                   <option value="<?php echo $list->nomorInduk?>"><?php echo $list->namaUser?> </option>
-                              <?php } ?>
+                              <?php }
+                              } ?>
                           </select>
                         </div>
                       </div>
@@ -123,9 +157,11 @@
                           <select name="kls" id="#" required="required" class="form-control">
                               <option value="<?= $edit->idKelas ?>"><?= $edit->ketKelas ?> <?= $edit->jurusanKelas ?> <?= $edit->nomorKelas ?></option>
                               <?php 
-                              foreach ($kls as $list) { ?>
+                              foreach ($kls as $list) {
+                                if ($edit->idKelas != $list->idKelas) {?>
                                   <option value="<?php echo $list->idKelas?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas?></option>
-                              <?php } ?>
+                              <?php }
+                              } ?>
                           </select>
                         </div>
                       </div>
@@ -136,9 +172,11 @@
                           <select name="ta" id="#" required="required" class="form-control">
                               <option value="<?= $edit->idTahunAjaran ?>"><?= $edit->tahunAjaran ?></option>
                               <?php 
-                              foreach ($ta as $list) { ?>
+                              foreach ($ta as $list) { 
+                                if ($edit->idTahunAjaran != $list->idTahunAjaran) {?>
                                   <option value="<?php echo $list->idTahunAjaran?>"><?php echo $list->tahunAjaran?></option>
-                              <?php } ?>
+                              <?php }
+                              } ?>
                           </select>
                         </div>
                       </div>

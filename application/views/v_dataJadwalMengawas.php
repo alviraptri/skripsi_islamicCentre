@@ -70,40 +70,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Filter: <span class="required"></span>
-                                        </label>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="hari" id="hari" required="required" class="form-control">
-                                                <option value="">Pilih Hari</option>
-                                                <option value="Senin"> Senin</option>
-                                                <option value="Selasa">Selasa</option>
-                                                <option value="Rabu">Rabu</option>
-                                                <option value="Kamis">Kamis</option>
-                                                <option value="Jum'at">Jum'at</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="guru" id="guru" required="required" class="form-control">
-                                                <option value="">Pilih Guru</option>
-                                                <?php
-                                                foreach ($guru as $list) { ?>
-                                                    <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required"></span>
                                         </label>
@@ -117,6 +83,53 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <!-- <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Filter: <span class="required"></span>
+                                        </label>
+                                    </div> -->
+                                    <!-- <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <select name="hari" id="hari" required="required" class="form-control">
+                                                <option value="">Pilih Hari</option>
+                                                <option value="Senin"> Senin</option>
+                                                <option value="Selasa">Selasa</option>
+                                                <option value="Rabu">Rabu</option>
+                                                <option value="Kamis">Kamis</option>
+                                                <option value="Jum'at">Jumat</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <select name="guru" id="guru" required="required" class="form-control">
+                                                <option value="">Pilih Guru</option>
+                                                <?php
+                                                foreach ($guru as $list) { ?>
+                                                    <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <select name="kelas" id="kelas" required="required" class="form-control">
+                                                <option value="">Pilih Kelas</option>
+                                                <?php
+                                                foreach ($kls as $list) { ?>
+                                                    <option value="<?php echo $list->idKelas ?>"><?php echo $list->ketKelas ?> <?php echo $list->jurusanKelas ?> <?php echo $list->nomorKelas ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div> -->
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li> <a href="<?php echo base_url('c_admin/tambahJadwalNgawas'); ?>"><button type="submit" class="btn btn-primary">Tambah Jadwal</button></a>
                                         </li>
@@ -157,13 +170,53 @@
     <script type="text/javascript">
         $(document).ready(function() {
             //Jadwal
-            $('#tahunAjaran').change(function() {
-                var idTA = $(this).val();
+            $('#kelas').change(function() {
+                var idKls = $(this).val();
+                var idTA = $('#tahunAjaran').val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/pengawas'); ?>",
                     method: "POST",
                     data: {
-                        idTA: idTA
+                        idTA: idTA,
+                        idKls: idKls
+                    },
+                    async: true,
+                    dataType: 'JSON',
+                    success: function(data) {
+                        console.log(data);
+                        var html = '';
+                        var i;
+                        for (i = 0; i < data.jadwal.length; i++) {
+                            html += '<tr>' +
+                                '<td> ' + data.jadwal[i].hari + ' </td>' +
+                                '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                '<td id = "nama'+[i]+'"> </td>' +
+                                '<td id = "datakelas'+[i]+'"> </td>' +
+                                '</tr>';
+                        }
+                        $('#show_data').html(html);
+                        html = '';
+                        for (i = 0; i < data.jadwal1.length; i++) {
+                            html = data.jadwal1[i].namaUser;
+                            $('#nama'+i).html(html);
+                            html = data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas;
+                            $('#datakelas'+i).html(html);
+                        }
+                    }
+                });
+                return false;
+            });
+            //filter hari
+            $('#hari').change(function() {
+                var hari = $(this).val();
+                var idTA = $('#tahunAjaran').val();
+                $.ajax({
+                    url: "<?php echo site_url('c_admin/pengawasHari'); ?>",
+                    method: "POST",
+                    data: {
+                        hari: hari,
+                        idTa: idTA
                     },
                     async: true,
                     dataType: 'JSON',

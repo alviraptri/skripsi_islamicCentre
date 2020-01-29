@@ -229,7 +229,7 @@
                 return false;
             });
 
-            //view kelas
+            //view kelas 
             $('#tgl').change(function() {
                 var tgl = $(this).val();
                 $.ajax({

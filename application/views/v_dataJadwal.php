@@ -139,6 +139,10 @@
                     </tbody>
                   </table>
                 </div>
+                <h2>Cetak Jadwal: 
+                  <a href="<?php echo base_url('c_jadwalGuru/index'); ?>" target="_blank"><button type="submit" class="btn btn-secondary">Guru</button></a>
+                  <a href="<?php echo base_url('c_jadwalSiswa/index'); ?>"><button type="submit" class="btn btn-secondary">Siswa</button></a>
+                </h2>
               </div>
             </div>
 

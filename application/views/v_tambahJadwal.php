@@ -62,23 +62,30 @@
                               <option value="Selasa">Selasa</option>
                               <option value="Rabu">Rabu</option>
                               <option value="Kamis">Kamis</option>
-                              <option value="Jum'at">Jum'at</option>
-                              <option value="Sabtu">Sabtu</option>
+                              <option value="Jumat">Jumat</option>
                           </select>
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Mulai <span class="required">*</span>
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam<span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6">
-                          <input type="time" id="email" name="jamMulai" required="required" class="form-control">
+                        <div class="col-md-3 col-sm-3">
+                        <select name="jamMulai" id="mulaiJam" required="required" class="form-control">
+                              <option value="">Jam Mulai</option>
+                              <option value="07:00">07.00</option>
+                              <option value="08:30">08.30</option>
+                              <option value="09:15">09.15</option>
+                              <option value="10:15">10.15</option>
+                              <option value="11:00">11.00</option>
+                              <option value="11:45">11.45</option>
+                              <option value="12:30">12.30</option>
+                              <option value="13:45">13.45</option>
+                          </select>
                         </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Selesai <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6">
-                          <input type="time" id="email" name="jamSelesai" required="required" class="form-control">
+                        <div class="col-md-3 col-sm-3">
+                        <select name="jamSelesai" id="selesaiJam" class="form-control">
+                              <option value="">Jam Selesai</option>
+                          </select>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -138,7 +145,7 @@
                       <div class="form-group">
                         <div class="col-md-6 offset-md-3">
                           <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                          <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                          <a href="<?php echo base_url('c_admin/jadwal'); ?>"><button type="button" class="btn btn-primary">Batal</button></a>
                         </div>
                       </div>
                     </form>
@@ -158,9 +165,48 @@
       </div>
     </div>
 
-    
-
-    
+    <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#mulaiJam').change(function(){
+        var jam = $(this).val();
+        var html = '';
+            if (jam == "07:00") {
+              html += '<option value = "08:30">08.30</option>';
+              html += '<option value = "09:15">09.15</option>';
+            }
+            else if(jam == "08:30"){
+              html += '<option value = "09:15">09.15</option>';
+              html += '<option value = "10:00">10.00</option>';
+            }
+            else if(jam == "09:15"){
+              html += '<option value = "10:00">10.00</option>';
+              html += '<option value = "11:00">11.00</option>';
+              html += '<option value = "11:45">11.45</option>';
+            }
+            else if(jam == "10:15"){
+              html += '<option value = "11:00">11.00</option>';
+              html += '<option value = "11:45">11.45</option>';
+              html += '<option value = "12:30">12.30</option>';
+            }
+            else if(jam == "11:00"){
+              html += '<option value = "11:45">11.45</option>';
+              html += '<option value = "13:15">13.15</option>';
+              html += '<option value = "12:30">12.30</option>';
+            }
+            else if(jam == "11:45"){
+              html += '<option value = "13:15">13.15</option>';
+            }
+            else if(jam == "12:30"){
+              html += '<option value = "13:15">13.15</option>';
+            }
+            else if(jam == "13:45"){
+              html += '<option value = "15:15">15.15</option>';
+            }
+            $('#selesaiJam').html(html);
+      });
+    });
+    </script>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/inter/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

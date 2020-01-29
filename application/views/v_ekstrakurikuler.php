@@ -114,42 +114,55 @@
                 </div>
             </div>
             <!-- /page content -->
-
             <!-- MODAL Edit -->
             <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Edit Catatan</h3>
+                            <h3 class="modal-title" id="myModalLabel">Edit Ekstrakurikuler</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
+                        <form class="form-horizontal form-label-left">
+                            <div class="modal-body">
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly hidden>
+                                        <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Ekstrakurikuler</label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <input name="ekskul_edit" id="ekskul_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Predikat</label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <select name="predikat_edit" id="predikat_edit" class="form-control">
+                                        <option value="Pramuka"> A </option>
+                                        <option value="Paskibra"> B </option>
+                                        <option value="Rohis"> C </option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Catatan</label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <textarea name="cttn_edit" id="cttn_edit" cols="30" rows="10" class="form-control"></textarea>
+                                    </div>
+                                </div>
 
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                                <button class="btn btn-info" id="btn_update">Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <form class="form-horizontal form-label-left">
-                    <div class="modal-body">
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
-                            <div class="col-md-6 col-sm-6">
-                                <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly hidden>
-                                <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
-                            </div>
-                        </div>
-
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Catatan</label>
-                            <div class="col-md-6 col-sm-6">
-                                <textarea name="cttn_edit" id="cttn_edit" cols="30" rows="10" class="form-control"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                        <button class="btn btn-info" id="btn_update">Simpan</button>
-                    </div>
-                </form>
             </div>
             <!--END MODAL Edit-->
 
@@ -210,7 +223,7 @@
                                 '<td> ' + data.eks[i].predikat + ' </td>' +
                                 '<td> ' + data.eks[i].ketEkskul + ' </td>' +
                                 '<td>' +
-                                '<a href="javascript:;" title="Edit" class="btn btn-info btn-xs item_edit" data="' + data.eks[i].idSiswa + '">' +
+                                '<a href="javascript:;" title="Edit" class="btn btn-info btn-xs item_edit" data="' + data.eks[i].idEkskul + '">' +
                                 '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' +
                                 '</td>' +
                                 '</tr>';
@@ -226,7 +239,7 @@
                 var id = $(this).attr('data');
                 $.ajax({
                     type: "GET",
-                    url: "<?php echo base_url('c_admin/getEditSiswa') ?>",
+                    url: "<?php echo base_url('c_admin/getEditEkskul') ?>",
                     dataType: "JSON",
                     data: {
                         id: id
@@ -236,11 +249,17 @@
                         $('#ModalaEdit').modal('show');
                         $('[name="id_edit"]').val(data[0].idSiswa);
                         $('[name="nama_edit"]').val(data[0].namaUser);
-                        $('[name="cttn_edit"]').val(data[0].catatan);
+                        $('[name="ekskul_edit"]').val(data[0].namaEkskul);
+                        selectElement('predikat_edit', data[0].predikat);
+                        $('[name="cttn_edit"]').val(data[0].ketEkskul);
                     }
                 });
                 return false;
             });
+            function selectElement(id, valueToSelect) {
+                let element = document.getElementById(id);
+                element.value = valueToSelect;
+            }
 
             //update data
             $('#btn_update').on('click', function() {
@@ -258,10 +277,11 @@
                         $('[name="nama_edit"]').val("");
                         $('[name="cttn_edit"]').val("");
                         $('#ModalaEdit').modal('hide');
-                    }
+                    } 
                 });
                 return false;
             });
+            
         });
     </script>
 

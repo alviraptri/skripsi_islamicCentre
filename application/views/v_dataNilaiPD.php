@@ -119,9 +119,16 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Sikap</label>
                                     <div class="col-md-6 col-sm-6">
                                         <select name="sikap" id="" class="form-control">
-                                          <option value="<?= $sikap?>"><?= $sikap?></option>
-                                          <option value="Sikap Sosial">Sikap Sosial</option>
+                                        <?php
+                                      if ($sikap == "Sikap Sosial") {?>
+                                        <option value="Sikap Sosial" selected>Sikap Sosial</option>
                                           <option value="Sikap Spiritual">Sikap Spiritual</option>
+                                      <?php }
+                                      else {?>
+                                       <option value="Sikap Sosial">Sikap Sosial</option>
+                                          <option value="Sikap Spiritual" selected>Sikap Spiritual</option>
+                                      <?php }
+                                      ?> 
                                         </select>
                                     </div>
                                 </div>
@@ -130,9 +137,16 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Predikat</label>
                                     <div class="col-md-6 col-sm-6" >
                                     <select name="predikat" id="" class="form-control">
-                                          <option value="<?= $predikat?>"><?= $predikat?></option>
-                                          <option value="A">A</option>
+                                      <?php
+                                      if ($predikat == "A") {?>
+                                        <option value="A" selected>A</option>
                                           <option value="B">B</option>
+                                      <?php }
+                                      else {?>
+                                       <option value="A">A</option>
+                                          <option value="B" selected>B</option>
+                                      <?php }
+                                      ?> 
                                         </select>
                                     </div>
                                 </div>

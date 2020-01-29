@@ -9,7 +9,7 @@ class m_rapor extends CI_Model
         JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
         JOIN kelas ON kelas.idKelas = datasiswa.idKelas 
         JOIN tahunajaran ON tahunajaran.idTahunAjaran = datasiswa.idTahunAjaran 
-        WHERE datasiswa.idSiswa = '".$id."'");
+        WHERE datasiswa.idSiswa = '".$id."'"); 
 
         return $query;
     }
@@ -22,5 +22,15 @@ class m_rapor extends CI_Model
         JOIN user ON user.nomorInduk = walikelas.nomorInduk 
         WHERE datasiswa.idSiswa = '".$id."'");
         return $query;
+    }
+
+    function dataNilai($id)
+    {
+        return $this->db->query("SELECT * FROM `bukunilai` WHERE idSiswa = '".$id."'");
+    }
+
+    function dataBobot()
+    {
+        return $this->db->query("SELECT * FROM `ketnilai` WHERE idTahunAjaran = 1");
     }
 }

@@ -46,7 +46,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Jadwal Mengawas Guru</h3>
+                            <h3>Tambah Jadwal Mengawas Guru</h3>
                         </div>
                     </div>
 
@@ -56,13 +56,12 @@
                         <!-- button -->
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-                                <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanPengawas'; ?>" novalidate>
-                                    <!-- tahun ajaran -->
+                                <div class="x_title">
                                     <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tahun Ajaran <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select name="idTA" id="tahunAjaran" required="required" class="form-control">
+                                            <select name="idTahunAjaran" id="tahunAjaran" required="required" class="form-control">
                                                 <option value="">Pilih Tahun Ajaran</option>
                                                 <?php
                                                 foreach ($ta as $list) { ?>
@@ -71,77 +70,68 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- hari -->
-                                    <div class="item form-group">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <!-- <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Filter: <span class="required"></span>
+                                        </label>
+                                    </div> -->
+                                    <!-- <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select name="hari" id="hari" required="required" class="form-control">
                                                 <option value="">Pilih Hari</option>
+                                                <option value="Senin"> Senin</option>
+                                                <option value="Selasa">Selasa</option>
+                                                <option value="Rabu">Rabu</option>
+                                                <option value="Kamis">Kamis</option>
+                                                <option value="Jum'at">Jumat</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <!-- jam -->
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Jam <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="id" id="jam" required="required" class="form-control">
-                                                <option value="">Pilih Jam</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- mata pelajaran -->
-                                    <div class="item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Mata Pelajaran <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select name="idMapel" id="mapel" required="required" class="form-control">
-                                                <option value="">Pilih Mata Pelajaran</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- guru -->
-                                    <div class="item form-group">
+                                    </div> -->
+                                    <!-- <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select name="nomorInduk" id="guru" required="required" class="form-control">
+                                            <select name="guru" id="guru" required="required" class="form-control">
                                                 <option value="">Pilih Guru</option>
+                                                <?php
+                                                foreach ($guru as $list) { ?>
+                                                    <option value="<?php echo $list->nomorInduk ?>"><?php echo $list->namaUser ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
-                                    </div>
-                                    <!-- kelas -->
-                                    <div class="item form-group">
+                                    </div> -->
+                                    <!-- <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Kelas <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select name="idKelas" id="kelas" required="required" class="form-control">
+                                            <select name="kelas" id="kelas" required="required" class="form-control">
                                                 <option value="">Pilih Kelas</option>
+                                                <?php
+                                                foreach ($kls as $list) { ?>
+                                                    <option value="<?php echo $list->idKelas ?>"><?php echo $list->ketKelas ?> <?php echo $list->jurusanKelas ?> <?php echo $list->nomorKelas ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
-                                    </div>
-                                    <!--   <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center;">Hari</th>
-                                                    <th style="text-align: center;">Jam</th>
-                                                    <th style="text-align: center;">Mata Pelajaran</th>
-                                                    <th style="text-align: center;">Guru</th>
-                                                    <th style="text-align: center;">Kelas</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody name="show_data" id="show_data">
-                                            </tbody>
-                                        </table>-->
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 offset-md-3">
-                                    <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                                    <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                                    </div> -->
+                                    <br>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center;">Hari</th>
+                                                <th style="text-align: center;">Jam</th>
+                                                <th style="text-align: center;">Mata Pelajaran</th>
+                                                <th style="text-align: center;">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody name="show_data" id="show_data">
+                                        </tbody>
+                                    </table>
+                                    <!-- <a href="<?php echo base_url('c_admin/tambahPegawai'); ?>"><button type="submit" class="btn btn-primary">Cetak Jadwal</button></a> -->
                                 </div>
-
-                                </form>
                             </div>
                         </div>
 
@@ -158,136 +148,211 @@
         </div>
     </div>
 
+    <!-- MODAL Edit -->
+    <div class="modal fade bs-example-modal-lg" id="ModalaAdd" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Tambah Pengawas</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <form class="form-horizontal form-label-left" action="<?php echo base_url("c_admin/simpanPengawas") ?>" method="POST">
+
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                                <label>Hari</label>
+                                <div class="kt-input-icon">
+                                    <input type="text" name="id" id="ujianId" class="form-control" hidden>
+                                    <input type="text" name="hari" id="hariId" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="">Jam</label>
+                                <div class="kt-input-icon">
+                                    <input type="text" name="jam" id="jamId" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="">Mata Pelajaran</label>
+                                <div class="kt-input-icon">
+                                    <input type="text" name="mapel" id="mapelId" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-4">
+                                <label>Hari</label>
+                                <div class="kt-input-icon">
+                                    <input type="text" name="id" id="ujianId" class="form-control" hidden>
+                                    <input type="text" name="hari" id="hariId" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <label class="">Jam</label>
+                                <div class="kt-input-icon">
+                                    <input type="text" name="jam" id="jamId" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--END MODAL Edit-->
+
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //view hari
+            //Jadwal
             $('#tahunAjaran').change(function() {
                 var idTA = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/ngawasHari'); ?>",
+                    url: "<?php echo site_url('c_admin/pengawas'); ?>",
                     method: "POST",
                     data: {
-                        idTA: idTA
+                        idTA: idTA,
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
+                        console.log(data);
                         var html = '';
                         var i;
-                        html += '<option value="">Pilih Hari</option>';
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].hari + '">' + data[i].hari + '</option>'
+                        var html_senin = '';
+                        var html_selasa = '';
+                        var html_rabu = '';
+                        var html_kamis = '';
+                        var html_jumat = '';
+                        var span_senin = 0;
+                        var span_selasa = 0;
+                        var span_rabu = 0;
+                        var span_kamis = 0;
+                        var span_jumat = 0;
+                        for (i = 0; i < data.jadwal.length; i++) {
+                            if (data.jadwal[i].hari == "Senin") {
+                                html_senin +=
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                    '</tr>';
+                                span_senin++;
+                            }
+                            if (data.jadwal[i].hari == "Selasa") {
+                                html_selasa +=
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                    '</tr>';
+                                span_selasa++;
+                            }
+                            if (data.jadwal[i].hari == "Rabu") {
+                                html_rabu +=
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                    '</tr>';
+                                span_rabu++;
+                            }
+                            if (data.jadwal[i].hari == "Kamis") {
+                                html_kamis +=
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                    '</tr>';
+                                span_kamis++;
+                            }
+                            if (data.jadwal[i].hari == "Jumat") {
+                                html_jumat +=
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                    '</tr>';
+                                span_jumat++;
+                            }
                         }
-                        $('#hari').html(html);
+                        html_senin = '<tr>' +
+                            '<td rowspan="' + span_senin + '" style="vertical-align : middle;text-align:center;"> Senin </td>' + html_senin;
+                        html_selasa = '<tr>' +
+                            '<td rowspan="' + span_selasa + '" style="vertical-align : middle;text-align:center;"> Selasa </td>' + html_selasa;
+                        html_rabu = '<tr>' +
+                            '<td rowspan="' + span_rabu + '" style="vertical-align : middle;text-align:center;"> Rabu </td>' + html_rabu;
+                        html_kamis = '<tr>' +
+                            '<td rowspan="' + span_kamis + '" style="vertical-align : middle;text-align:center;"> Kamis </td>' + html_kamis;
+                        html_jumat = '<tr>' +
+                            '<td rowspan="' + span_jumat + '" style="vertical-align : middle;text-align:center;"> Jumat </td>' + html_jumat;
+                        $('#show_data').html(html_senin + html_selasa + html_rabu + html_kamis + html_jumat);
                     }
                 });
                 return false;
             });
 
-            //view jam
+            //GET ADD
+            $('#show_data').on('click', '.item_add', function() {
+                var id = $(this).attr('data');
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo base_url('c_admin/getModalUjian') ?>",
+                    dataType: "JSON",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#ModalaAdd').modal('show');
+                        $('[name="id"]').val(data.ujian[0].idJadwalUjian);
+                        $('[name="hari"]').val(data.ujian[0].hari);
+                        $('[name="jam"]').val(data.ujian[0].jamMulai + ' - ' + data.ujian[0].jamSelesai);
+                        $('[name="mapel"]').val(data.ujian[0].namaMapel);
+                    }
+                });
+                return false;
+            });
+
+            //filter hari
             $('#hari').change(function() {
                 var hari = $(this).val();
+                var idTA = $('#tahunAjaran').val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/ngawasJam'); ?>",
+                    url: "<?php echo site_url('c_admin/pengawasHari'); ?>",
                     method: "POST",
                     data: {
-                        hari: hari
+                        hari: hari,
+                        idTa: idTA
                     },
                     async: true,
                     dataType: 'JSON',
                     success: function(data) {
+                        console.log(data);
                         var html = '';
                         var i;
-                        html += '<option value="">Pilih Jam</option>';
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].jamMulai + '">' + data[i].jamMulai + ' - ' + data[i].jamSelesai + '</option>'
+                        for (i = 0; i < data.jadwal.length; i++) {
+                            html += '<tr>' +
+                                '<td> ' + data.jadwal[i].hari + ' </td>' +
+                                '<td> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                '<td> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                '<td id = "nama' + [i] + '"> </td>' +
+                                '<td id = "datakelas' + [i] + '"> </td>' +
+                                '</tr>';
                         }
-                        $('#jam').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view mapel
-            $('#jam').change(function() {
-                var jamMulai = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/ngawasMapel'); ?>",
-                    method: "POST",
-                    data: {
-                        jamMulai: jamMulai
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        html += '<option value="">Pilih Mata Pelajaran</option>';
-                        for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].idJadwalUjian + '">' + data[i].namaMapel + '</option>'
+                        $('#show_data').html(html);
+                        html = '';
+                        for (i = 0; i < data.jadwal1.length; i++) {
+                            html = data.jadwal1[i].namaUser;
+                            $('#nama' + i).html(html);
+                            html = data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas;
+                            $('#datakelas' + i).html(html);
                         }
-                        $('#mapel').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view guru
-            $('#jam').change(function() {
-                var id = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/ngawasGuru'); ?>",
-                    method: "POST",
-                    data: {
-                        id: id
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        html += '<option value="">Pilih Guru</option>';
-                        // if (data.ngawas.idJadwalPengawas == 0) {
-                        //     for (i = 0; i < data.guru.length; i++) {
-                        //         html += '<option value="' + data.guru[i].nomorInduk + '">' + data.guru[i].namaUser + '</option>'
-                        //     }
-                        //     $('#guru').html(html);
-                        // }
-                        for (i = 0; i < data.guru.length; i++) {
-                                html += '<option value="' + data.guru[i].nomorInduk + '">' + data.guru[i].namaUser + '</option>'
-                            }
-                            $('#guru').html(html);
-                    }
-                });
-                return false;
-            });
-
-            //view kelas
-            $('#jam').change(function() {
-                var id = $(this).val();
-                $.ajax({
-                    url: "<?php echo site_url('c_admin/ngawasKelas'); ?>",
-                    method: "POST",
-                    data: {
-                        id: id
-                    },
-                    async: true,
-                    dataType: 'JSON',
-                    success: function(data) {
-                        var html = '';
-                        var i;
-                        html += '<option value="">Pilih Kelas</option>';
-                        // if (data.ngawas.idJadwalPengawas == 0) {
-                        //     for (i = 0; i < data.guru.length; i++) {
-                        //         html += '<option value="' + data.guru[i].nomorInduk + '">' + data.guru[i].namaUser + '</option>'
-                        //     }
-                        //     $('#guru').html(html);
-                        // }
-                        for (i = 0; i < data.kelas.length; i++) {
-                                html += '<option value="' + data.kelas[i].idKelas + '">' + data.kelas[i].ketKelas + ' ' + data.kelas[i].jurusanKelas + ' ' + data.kelas[i].nomorKelas + '</option>'
-                            }
-                            $('#kelas').html(html);
                     }
                 });
                 return false;

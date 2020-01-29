@@ -199,7 +199,7 @@
           <li><a><i class="fa fa-graduation-cap"></i> Siswa <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="<?php echo base_url('c_admin/siswa'); ?>">Data Siswa</a></li>
-              <li><a href="<?php echo base_url('c_admin/waliMurid'); ?>">Data Wali Murid</a></li>
+              <!-- <li><a href="<?php echo base_url('c_admin/waliMurid'); ?>">Data Wali Murid</a></li> -->
               <li><a href="<?php echo base_url('c_admin/tambahSiswa'); ?>">Tambah Siswa</a></li>
             </ul>
           </li>
@@ -247,7 +247,7 @@
           </li>
           <li><a><i class="fa fa-calendar-o"></i> Jadwal Ujian <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="<?php echo base_url('c_admin/jadwalUjianSiswa'); ?>">Jadwal Ujian Siswa</a></li>
+              <!-- <li><a href="<?php echo base_url('c_admin/jadwalUjianSiswa'); ?>">Jadwal Ujian Siswa</a></li> -->
               <li><a href="<?php echo base_url('c_admin/jadwalNgawas'); ?>">Jadwal Mengawas Guru</a></li>
               <li><a href="<?php echo base_url('c_admin/jadwalUjian'); ?>">Data Jadwal Ujian</a></li>
               <li><a href="<?php echo base_url('c_admin/tambahJadwalUjian'); ?>">Tambah Jadwal Ujian</a></li>

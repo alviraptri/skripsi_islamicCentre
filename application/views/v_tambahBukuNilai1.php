@@ -101,6 +101,17 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Semester <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <select name="smt" id="smt" class="form-control">
+                                                <option value="">Pilih Semester</option>
+                                                <option value="1"> 1 (Satu)</option>
+                                                <option value="2">2 (Dua)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal <span class="required"></span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
@@ -118,7 +129,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
-                                                    <th>Absen</th>
+                                                    <th>Nilai</th>
                                                 </tr>
                                             </thead>
 
@@ -271,7 +282,7 @@
                                 '<td> <input type="text" name="nilai[]" id="nilai" class="form-control"></td> '+
                                 '</tr>';
                         }
-                        $('#show_data').html(html);
+                        $('#show_data').html(html); 
                         html = '';
 
                         for (var j = 0; j < data.jadwal.length; j++) {

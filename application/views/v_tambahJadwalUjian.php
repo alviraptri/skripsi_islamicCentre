@@ -70,28 +70,26 @@
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Hari <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6">
-                                                <select name="hari" id="#" required="required" class="form-control">
+                                                <select name="hari" id="hariId" required="required" class="form-control">
                                                     <option value="">Pilih Hari</option>
                                                     <option value="Senin"> Senin</option>
                                                     <option value="Selasa">Selasa</option>
                                                     <option value="Rabu">Rabu</option>
                                                     <option value="Kamis">Kamis</option>
-                                                    <option value="Jum'at">Jum'at</option>
+                                                    <option value="Jumat">Jumat</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Mulai <span class="required">*</span>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam<span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input type="time" id="email" name="jamMulai" required="required" class="form-control">
+                                            <div class="col-md-3 col-sm-3">
+                                                <select name="jamMulai" id="mulaiJam" required="required" class="form-control">
+                                                    <option value="">Jam Mulai</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Jam Selesai <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input type="time" id="email" name="jamSelesai" required="required" class="form-control">
+                                            <div class="col-md-3 col-sm-3" id="selesaiJam">
+                                                <input type="text" class="form-control" readonly>
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -151,7 +149,7 @@
             <footer>
                 <?php include("v-Footer.php") ?>
             </footer>
-            <!-- /footer content -->
+            <!-- /footer content --> 
         </div>
     </div>
 
@@ -172,6 +170,7 @@
                     success: function(data) {
                         var html = '';
                         var i;
+                        html += '<option value="">Pilih Mata Pelajaran</option>'
                         for (i = 0; i < data.length; i++) {
                             html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
                         }
@@ -179,6 +178,40 @@
                     }
                 });
                 return false;
+            });
+
+            //jam
+            $('#hariId').change(function(){
+            var hari = $(this).val();
+            var html = '';
+            html += '<option value = "">Jam Mulai</option>';
+                if (hari == "Jumat") {
+                html += '<option value = "07:00">07.00</option>';
+                html += '<option value = "09:30">09.30</option>';
+                }
+                else{
+                html += '<option value = "07:00">07.00</option>';
+                html += '<option value = "09:30">09.30</option>';
+                html += '<option value = "12:30">12.30</option>';
+                }
+                $('#mulaiJam').html(html);
+            });
+
+            //selesai jam
+            //jam
+            $('#mulaiJam').change(function(){
+            var jam = $(this).val();
+            var html = '';
+                if (jam == "07:00") {
+                    html += '<input type="text" class="form-control" name="jamSelesai" value="09:00" readonly>';
+                }
+                else if(jam == "09:30"){
+                    html += '<input type="text" class="form-control" name="jamSelesai" value="11:30" readonly>';
+                }
+                else if(jam == "12:30"){
+                    html += '<input type="text" class="form-control" name="jamSelesai" value="14:30" readonly>';
+                }
+                $('#selesaiJam').html(html);
             });
         });
     </script>

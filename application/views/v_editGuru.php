@@ -19,7 +19,7 @@
 
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/inter/build/css/custom.min.css" rel="stylesheet">
-  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico"/>
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/internal/media/logos/faviconic.ico" />
 
   <style>
     input[type=number]::-webkit-inner-spin-button,
@@ -130,11 +130,10 @@
                           <select name="role" id="profesi" onchange="ShowHideDiv()" class="select2_single form-control">
                             <?php
                             if ($edit->userRole == "Guru") { ?>
-                              <option value="Guru">Guru</option>
+                              <option value="Admin"> Admin </option>
+                              <option value="Guru" selected> Guru </option>
+                              <option value="Wali Kelas"> Wali Kelas </option>
                             <?php } ?>
-                            <option value="Admin"> Admin </option>
-                            <option value="Guru"> Guru </option>
-                            <option value="Wali Kelas"> Wali Kelas </option>
                           </select>
                         </div>
                       </div>

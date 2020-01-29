@@ -98,8 +98,7 @@
                                         </div>
 
                                         <div class="item form-group">
-                                        <!-- <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Tanggal<span class="required">*</span>
-                                            </label> -->
+                                            
                                             <div class="col-md-6 col-sm-6" id="jadwal">
                                             </div>
                                         </div>
@@ -170,7 +169,7 @@
             $('#guru').change(function() {
                 var nomorInduk = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getMapel'); ?>",
+                    url: "<?php echo site_url('c_admin/getMataPelajaran'); ?>",
                     method: "POST",
                     data: {
                         nomorInduk: nomorInduk
@@ -181,8 +180,8 @@
                         var html = '';
                         var i;
                         html += '<option value="">Pilih Mata Pelajaran</option>'
-                        for (i = 0; i < data.mapelAbsen.length; i++) {
-                            html += '<option value="' + data.mapelAbsen[i].idMapel + '">' + data.mapelAbsen[i].namaMapel + '</option>'
+                        for (i = 0; i < data.length; i++) {
+                            html += '<option value="' + data[i].idMapel + '">' + data[i].namaMapel + '</option>'
                         }
                         $('#mapel').html(html);
                     }
@@ -230,7 +229,7 @@
                         var i;
                         '<option value="">Pilih Mata Pelajaran</option>'
                         for (i = 0; i < data.length; i++) {
-                            html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="' + data[i].idMapel + '">'
+                            html += '<input type="text" id="idMapel" name="idMapel" required="required" class="form-control" value="' + data[i].idMapel + '">'
                         }
                         $('#jadwalMapel').html(html);
                     }
@@ -256,15 +255,15 @@
                         var html = '';
                         for (var i = 0; i < data.nama.length; i++) {
                             html += '<tr>' +
-                                '<td> <input type="text" name="idSiswa[]" value="'+data.nama[i].idSiswa+'" hidden> '+ data.nama[i].namaUser + ' </td>' +
-                                '<td>'+
-                                '<select name="ket[]" id="ket" required="required" class="form-control">'+
-                                '<option value="H">Hadir</option>'+
-                                '<option value="A">Alpa</option>'+
-                                '<option value="I">Izin</option>'+
-                                '<option value="S">Sakit</option>'+
-                                '</select>'+
-                                '</td>'+
+                                '<td> <input type="text" name="idSiswa[]" value="' + data.nama[i].idSiswa + '" hidden> ' + data.nama[i].namaUser + ' </td>' +
+                                '<td>' +
+                                '<select name="ket[]" id="ket" required="required" class="form-control">' +
+                                '<option value="H">Hadir</option>' +
+                                '<option value="A">Alpa</option>' +
+                                '<option value="I">Izin</option>' +
+                                '<option value="S">Sakit</option>' +
+                                '</select>' +
+                                '</td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);

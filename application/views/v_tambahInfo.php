@@ -129,7 +129,7 @@
                         for (i = 0; i < data.length; i++) {
                             html += '<tr>'+
                             '<td>' + data[i].namaUser + '</td>'+
-                            '<td><input type="text" name="idSiswa[]" id="biaya" value="'+data[i].idSiswa+'" hidden><input type="text" name="jumlah[]" id="biaya" class="form-control"></td>'+
+                            '<td><input type="text" name="idSiswa[]" id="biaya" value="'+data[i].idSiswa+'" hidden><input type="text" name="jumlah[]" id="biaya" class="form-control" required="required"></td>'+
                             '</tr>';
                         }
                         $('#siswa').html(html);

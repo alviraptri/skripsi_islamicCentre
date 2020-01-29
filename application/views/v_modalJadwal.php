@@ -32,7 +32,7 @@
             $diff = $akhir - $awal;
             $jam = floor($diff/(60*60));
             $menit = $diff - $jam*(60*60);?>
-            <td><?= floor($menit/60)?> Menit</td>
+            <td><?= $jam ?> Jam <?= floor($menit/60)?> Menit</td>
             <th>Tahun Ajaran</th>
             <td><?= $tahunAjaran?></td>
           </tr>

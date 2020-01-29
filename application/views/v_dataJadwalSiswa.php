@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Jadwal Ujian Siswa | Information Academic Islamic Centre</title> 
+    <title>Jadwal Ujian Siswa | Information Academic Islamic Centre</title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/inter/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -131,14 +131,10 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th style="text-align: center;" rowspan="2">Hari</th>
-                                                <th style="text-align: center;" rowspan="2">Jam</th>
-                                                <th style="text-align: center;" colspan="2">Mata Pelajaran</th>
-                                                <th style="text-align: center;" rowspan="2">Jenis Mata Pelajaran</th>
-                                            </tr>
-                                            <tr>
-                                                <th style="text-align: center;">IPA</th>
-                                                <th style="text-align: center;">IPS</th>
+                                                <th style="text-align: center;">Hari</th>
+                                                <th style="text-align: center;">Jam</th>
+                                                <th style="text-align: center;">Mata Pelajaran</th>
+                                                <th style="text-align: center;">Jenis Mata Pelajaran</th>
                                             </tr>
                                         </thead>
                                         <tbody name="show_data" id="show_data">
@@ -215,7 +211,7 @@
                 });
                 return false;
             });
-            
+
             //view data info siswa
             $('#siswa').change(function() {
                 var id = $(this).val();
@@ -267,11 +263,13 @@
             //Jadwal
             $('#kelas').change(function() {
                 var id = $(this).val();
+                var ta = $('#tahunAjaran').val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getJadwalUjian'); ?>",
                     method: "POST",
                     data: {
-                        id: id
+                        id: id,
+                        ta: ta
                     },
                     async: true,
                     dataType: 'JSON',
@@ -279,26 +277,26 @@
                         console.log(data);
                         var html = '';
                         var i;
-                        if (data.ipa.jenisMapel =='IPA' && data.umum.jenisMapel =="Umum") {
-                            for (i = 0; i < data.umum.length; i++) {
+                        // if (data.ipa.jenisMapel == 'IPA' && data.umum.jenisMapel == "Umum") {
+                        //     for (i = 0; i < data.umum.length; i++) {
+                        //         html += '<tr>' +
+                        //             '<td> ' + data.umu[i].hari + ' </td>' +
+                        //             '<td> ' + data.umum[i].jamMulai + ' - ' + data.umum[i].jamSelesai + ' </td>' +
+                        //             '<td>' + data.umum[i].namaMapel + '</td>' +
+                        //             '<td></td>' +
+                        //             '<td>' + data.umum[i].jenisMapel + '</td>' +
+                        //             '</tr>';
+                        //     }
+                        // }
+                        for (i = 0; i < data.hari.length; i++) {
                                 html += '<tr>' +
-                                '<td> ' + data.umu[i].hari + ' </td>' +
-                                '<td> ' + data.umum[i].jamMulai + ' - ' + data.umum[i].jamSelesai + ' </td>' +
-                                '<td>' + data.umum[i].namaMapel + '</td>' +
+                                '<td> ' + data.hari[i].hari + ' </td>' +
                                 '<td></td>' +
-                                '<td>' + data.umum[i].jenisMapel + '</td>' +
+                                '<td></td>' +
+                                '<td></td>' +
+                                '<td></td>' +
                                 '</tr>';
                         }
-                        }
-                        // for (i = 0; i < data.ipa.length; i++) {
-                        //         html += '<tr>' +
-                        //         '<td> ' + data.ipa[i].hari + ' </td>' +
-                        //         '<td> ' + data.umum[i].jamMulai + ' - ' + data.umum[i].jamSelesai + ' </td>' +
-                        //         '<td>' + data.ipa[i].namaMapel + '</td>' +
-                        //         '<td></td>' +
-                        //         '<td>' + data.ipa[i].jenisMapel + '</td>' +
-                        //         '</tr>';
-                        // }
                         $('#show_data').html(html);
                     }
                 });

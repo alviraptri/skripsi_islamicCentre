@@ -22,7 +22,62 @@ class c_rapor extends CI_Controller
             $nomor = $list->nomorKelas;
             $ta = $list->tahunAjaran;
         }
+        $bobot = $this->m_rapor->dataBobot()->result();
+        foreach ($bobot as $b) {
+            $sklh = $b->bobotSekolah;
+            $guru = $b->bobotGuru;
+        }
+        $tugas = 0;
+        $UH = 0;
+        $praktek = 0;
+        $uts = 0;
+        $uas = 0;
+        $nilai = $this->m_rapor->dataNilai($id)->result();
+        foreach ($nilai as $n) {
+            $semester = $n->semester;
 
+            if ($n->idMapel == 14) {
+                if ($n->jenisNilai == "Tugas") {
+                    $tugas += $n->nilai; 
+                }
+                if($n->jenisNilai == "Ulangan Harian"){
+                    $UH = $n->nilai;
+                }
+                if ($n->jenisNilai == "Praktek") {
+                    $praktek = $n->nilai;
+                }
+                if($n->jenisNilai == "UTS"){
+                    $uts = $n->nilai;
+                }
+                if($n->jenisNilai == "UAS"){
+                    $uas = $n->nilai;
+                }
+            }  
+        }
+        $Nguru = ($tugas+$UH)/5;
+        $totalGuru = $Nguru*($guru/100);
+        $Nsklh = $uts*($sklh/100);
+        $Ntotal = round($totalGuru) + round($Nsklh);
+
+        if ($Ntotal >= 89) {
+            $predikat = 'A';
+        }
+        else if ($Ntotal >= 77) {
+            $predikat = 'B';
+        }
+        else if($Ntotal > 89){
+            $predikat = 'B';
+        }
+        else if ($Ntotal >= 65) {
+            $predikat = "C";
+        }
+        else if($Ntotal < 77){
+            $predikat = "C";
+        }
+        else if ($Ntotal < 65) {
+            $predikat = "D";
+        }
+        
         //header kanan
         $pdf->SetFont('Arial', '', 10); //setting jenis font yang akan digunakan
         $pdf->Cell(35, 5, 'Nama Sekolah', 0, 0, 'L');
@@ -36,7 +91,12 @@ class c_rapor extends CI_Controller
         $pdf->Cell(95, 5, ': JL. CIUJUNG RAYA NO. 4', 0, 0, 'L');
         //header kiri
         $pdf->Cell(35, 5, 'Semester', 0, 0, 'L');
-        $pdf->Cell(95, 5, ': 1 (Satu)', 0, 1, 'L');
+        if ($semester == 1) {
+            $pdf->Cell(95, 5, ': 1 (Satu)', 0, 1, 'L');
+        }
+        else {
+            $pdf->Cell(95, 5, ': 2 (Dua)', 0, 1, 'L');
+        }
 
         //header kanan
         $pdf->Cell(35, 5, 'Nama', 0, 0, 'L');
@@ -46,8 +106,8 @@ class c_rapor extends CI_Controller
         $pdf->Cell(95, 5, ': ' . $ta . '', 0, 1, 'L');
 
         //header kanan
-        $pdf->Cell(35, 5, 'Nomor Induk/NISN', 0, 0, 'L');
-        $pdf->Cell(95, 5, ': ' . $nomorInduk . ' / ', 0, 1, 'L');
+        $pdf->Cell(35, 5, 'Nomor Induk', 0, 0, 'L');
+        $pdf->Cell(95, 5, ': ' . $nomorInduk . '', 0, 1, 'L');
         //garis
         $pdf->Cell(195, 1, '', 'B', 1, 'L');
 
@@ -63,7 +123,7 @@ class c_rapor extends CI_Controller
         //tabel
         $pdf->Cell(10,7,'',0,1);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(40,6,'Predikat',1,0, 'C');
+        $pdf->Cell(40,6,'$predikat',1,0, 'C');
         $pdf->Cell(155,6,'Deskripsi',1,1, 'C');
         $pdf->Cell(40,6,'',1,0, 'C');
         $pdf->Cell(155,6,'',1,1, 'C');
@@ -74,7 +134,7 @@ class c_rapor extends CI_Controller
         //tabel
         $pdf->Cell(10,0,'',0,1);
         $pdf->SetFont('Arial', 'B', 10);
-        $pdf->Cell(40,6,'Predikat',1,0, 'C');
+        $pdf->Cell(40,6,'$predikat',1,0, 'C');
         $pdf->Cell(155,6,'Deskripsi',1,1, 'C');
         $pdf->Cell(40,6,'',1,0, 'C');
         $pdf->Cell(155,6,'',1,1, 'C');
@@ -163,7 +223,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'No','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Mata Pelajaran','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(15,5,'Nilai',1,0,'C',0);
-        $pdf->Cell(20,5,'Predikat',1,0,'C',0);
+        $pdf->Cell(20,5,'$predikat',1,0,'C',0);
         $pdf->Cell(105,5,'Deskripsi',1,1,'C',0);
 
         //baris dua
@@ -186,8 +246,8 @@ class c_rapor extends CI_Controller
         
         $pdf->Cell(10,5,'1','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
-        $pdf->Cell(15,5,'','LBR',0,'C',0);
-        $pdf->Cell(20,5,'','LBR',0,'C',0);
+        $pdf->Cell(15,5,$Ntotal,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$predikat,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
         
         //baris tiga
@@ -501,7 +561,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'No','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Mata Pelajaran','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(15,5,'Nilai',1,0,'C',0);
-        $pdf->Cell(20,5,'Predikat',1,0,'C',0);
+        $pdf->Cell(20,5,'$predikat',1,0,'C',0);
         $pdf->Cell(105,5,'Deskripsi',1,1,'C',0);
 
         //baris dua
@@ -767,10 +827,10 @@ class c_rapor extends CI_Controller
 
         //tabel interval
         $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
-        $pdf->Cell(35, 10, 'Tabel interval predikat berdasarkan KKM', 0, 1, 'L');
+        $pdf->Cell(35, 10, 'Tabel interval $predikat berdasarkan KKM', 0, 1, 'L');
 
         $pdf->Cell(39,5,' ','LTR',0,'L',0);   // empty cell with left,top, and right borders
-        $pdf->Cell(156,5,'Predikat',1,1,'C',0);
+        $pdf->Cell(156,5,'$predikat',1,1,'C',0);
         $pdf->Cell(39,5,'KKM','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(39,5,'D',1,0,'C',0);
         $pdf->Cell(39,5,'C',1,0,'C',0);
@@ -861,7 +921,7 @@ class c_rapor extends CI_Controller
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(10,6,'No',1,0, 'C');
         $pdf->Cell(50,6,'Kegiatan Ekstrakurikuler',1,0, 'C');
-        $pdf->Cell(30,6,'Predikat',1,0, 'C');
+        $pdf->Cell(30,6,'$predikat',1,0, 'C');
         $pdf->Cell(105,6,'Keterangan',1,1, 'C');
         $pdf->SetFont('Arial', '', 10);
 
