@@ -328,7 +328,7 @@ class c_rekomendasi extends CI_Controller
             }
             $nilai[$x] += ($pv_alternatif * $pv_kriteria);
 	        }
-        }
+        } 
 
         // update nilai ranking
         for ($i=0; $i <= ($jA-1); $i++) { 

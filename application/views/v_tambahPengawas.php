@@ -156,7 +156,7 @@
                     <h3 class="modal-title" id="myModalLabel">Tambah Pengawas</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-                <form class="form-horizontal form-label-left" action="<?php echo base_url("c_admin/simpanPengawas") ?>" method="POST">
+                <form class="form-horizontal form-label-left" action="<?php echo base_url("c_admin/pengawasSimpan") ?>" method="POST">
 
                     <div class="modal-body">
                         <div class="form-group row">
@@ -180,18 +180,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="dataKelas">
                             <div class="col-lg-4">
-                                <label>Hari</label>
-                                <div class="kt-input-icon">
-                                    <input type="text" name="id" id="ujianId" class="form-control" hidden>
-                                    <input type="text" name="hari" id="hariId" class="form-control" readonly>
+                                <label>Kelas</label>
+                                <div class="kt-input-icon" id="cKelas">
+                                    
                                 </div>
                             </div>
                             <div class="col-lg-8">
-                                <label class="">Jam</label>
-                                <div class="kt-input-icon">
-                                    <input type="text" name="jam" id="jamId" class="form-control" readonly>
+                                <label class="">Guru</label>
+                                <div class="kt-input-icon" id="pengawas">
+                                    <select name="guru" id="guruId" class="form-control">
+                                        <option value="">Pilih Guru</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -309,11 +310,63 @@
                     },
                     success: function(data) {
                         console.log(data);
+                        html = '';
                         $('#ModalaAdd').modal('show');
                         $('[name="id"]').val(data.ujian[0].idJadwalUjian);
                         $('[name="hari"]').val(data.ujian[0].hari);
                         $('[name="jam"]').val(data.ujian[0].jamMulai + ' - ' + data.ujian[0].jamSelesai);
                         $('[name="mapel"]').val(data.ujian[0].namaMapel);
+                        if (data.ujian[0].jenisMapel == "IPA") {
+                            for (i = 0; i < data.klsIPA.length; i++) {
+                                html += '<input type="text" name="klsId" id="idKls" class="form-control" value="'+data.klsIPA[i].idKelas+'" hidden>'+
+                                '<input type="text" name="namaKls" id="klsNama" class="form-control" value="'+data.klsIPA[i].ketKelas + ' '+ data.klsIPA[i].jurusanKelas + ' '+ data.klsIPA[i].nomorKelas+'" readonly>';
+                                $('#cKelas').html(html);
+                                // html += '<select name="guru" id="guruId" class="form-control">'+
+                                //         '<option value="">Pilih Guru</option>'+
+                                //     '</select>';
+                                //     $('#pengawas').html(html);   
+                                htmlGuru = '';
+                                htmlGuru = '<option value="">Pilih Guru</option>';
+                                for (j = 0; j<data.guru.length; j++) {
+                                    htmlGuru += '<option value="'+data.guru[j].nomorInduk+'">'+data.guru[j].namaUser+'</option>'
+                                    $('#guruId').html(htmlGuru);
+                                }
+                            }
+                        }
+                        else if(data.ujian[0].jenisMapel == "IPS"){
+                            for (i = 0; i < data.klsIPS.length; i++) {
+                                html += '<input type="text" name="klsId" id="idKls" class="form-control" value="'+data.klsIPS[i].idKelas+'" hidden>'+
+                                '<input type="text" name="namaKls" id="klsNama" class="form-control" value="'+data.klsIPS[i].ketKelas + ' '+ data.klsIPS[i].jurusanKelas + ' '+ data.klsIPS[i].nomorKelas+'" readonly>';
+                                $('#cKelas').html(html);
+                                // html += '<select name="guru" id="guruId" class="form-control">'+
+                                //         '<option value="">Pilih Guru</option>'+
+                                //     '</select>';
+                                //     $('#pengawas').html(html);   
+                                htmlGuru = '';
+                                htmlGuru = '<option value="">Pilih Guru</option>';
+                                for (j = 0; j<data.guru.length; j++) {
+                                    htmlGuru += '<option value="'+data.guru[j].nomorInduk+'">'+data.guru[j].namaUser+'</option>'
+                                    $('#guruId').html(htmlGuru);
+                                }
+                            }
+                        }
+                        else{
+                            for (i = 0; i < data.kelas.length; i++) {
+                                html += '<input type="text" name="klsId" id="idKls" class="form-control" value="'+data.kelas[i].idKelas+'" hidden>'+
+                                '<input type="text" name="namaKls" id="klsNama" class="form-control" value="'+data.kelas[i].ketKelas + ' '+ data.kelas[i].jurusanKelas + ' '+ data.kelas[i].nomorKelas+'" readonly>';
+                                $('#cKelas').html(html);
+                                // html += '<select name="guru" id="guruId" class="form-control">'+
+                                //         '<option value="">Pilih Guru</option>'+
+                                //     '</select>';
+                                //     $('#pengawas').html(html);   
+                                htmlGuru = '';
+                                htmlGuru = '<option value="">Pilih Guru</option>';
+                                for (j = 0; j<data.guru.length; j++) {
+                                    htmlGuru += '<option value="'+data.guru[j].nomorInduk+'">'+data.guru[j].namaUser+'</option>'
+                                    $('#guruId').html(htmlGuru);
+                                }
+                            }
+                        }
                     }
                 });
                 return false;

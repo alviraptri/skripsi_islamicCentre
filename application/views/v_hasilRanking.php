@@ -65,8 +65,8 @@
                                                     $namaAlt = $alternatif->namaAlternatif;
                                                     $idAlt[] = $alternatif->idAlternatif;
                                                 // }
-			                                    // for ($i=0; $i <= ($jA-1); $i++) {?> 
-				                                <th><?= $namaAlt?></th>
+			                                    // for ($i=0; $i <= ($jA-1); $i++) {?>
+				                                <th><?= $namaAlt ?></th>
 			                                    <?php }
 			                                    ?>
                                             </tr>
@@ -74,7 +74,7 @@
                                         <tbody name="show_data" id="show_data">
                                         <?php
                                             foreach ($krit as $list) {
-                                                $namaKrit = $list->jenisKriteria;
+                                                $namaKrit[] = $list->jenisKriteria;
                                                 $idKrit[] = $list->idKriteria;
                                             }
                                             foreach ($kriteriaPV as $kritPV) {
@@ -82,7 +82,7 @@
                                             
                                             for ($x=0; $x <= ($jK-1) ; $x++) { ?>
                                                 <tr>
-                                                <td><?= $namaKrit[$x]?></td>
+                                                <td><?= $namaKrit[$x] ?></td>
                                                 <td><?= round($PvKrit[$idKrit[$x]],5) ?></td>
 
                                                 <?php 
@@ -91,8 +91,8 @@
                                                     $PvAlt = $altPV->nilaiHA;
                                                 
                                                 for ($y=0; $y <= ($jA-1); $y++) { ?>
-                                                    <td><?= round($PvAlt($idAlt[$y],$idKrit[$x]),5)?></td>
-                                                <?php } } }?>
+                                                    <td><?= round($PvAlt[$idAlt[$y]],5)?> <?= round($PvAlt[$idKrit[$x]],5)?></td>
+                                                <?php } } } ?>
 
 
                                                 </tr>

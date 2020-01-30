@@ -126,7 +126,7 @@ class m_rekomendasi extends CI_Model
         $query = $this->db->query("SELECT nilaiPvKrit FROM pv_kriteria WHERE idKriteria = '".$id_kriteria."'");
         return $query;
     }
-    function lihatRanking()
+    function lihatRanking() 
     {
         $query = $this->db->query("SELECT * FROM rankingrekomendasi 
         JOIN alternatif ON alternatif.idAlternatif = rankingrekomendasi.idAlternatif

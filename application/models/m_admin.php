@@ -827,11 +827,13 @@ class m_admin extends CI_Model
         ->where('jadwalUjian.idJadwalUjian = "'.$id.'"');
         return $this->db->get();
     }
-    function modalJenis($id)
+    function klsIPA()
     {
-        return $this->db->query('SELECT matapelajaran.jenisMapel, matapelajaran.idMapel, jadwalujian.idMapel FROM jadwalujian
-        JOIN matapelajaran ON matapelajaran.idMapel = jadwalujian.idMapel
-        WHERE idJadwalUjian = "'.$id.'"');
+        return $this->db->query('SELECT * FROM `kelas` WHERE jurusanKelas = "IPA"');
+    }
+    function klsIPS()
+    {
+        return $this->db->query('SELECT * FROM kelas WHERE jurusanKelas = "IPS"');
     }
 }
 

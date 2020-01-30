@@ -1904,15 +1904,24 @@ class c_admin extends CI_Controller
 	{
 		$id = $this->input->get('id');
 		$ujian = $this->m_admin->modalUjian($id)->result();
-		$jenisMapel = $this->m_admin->modalJenis($id)->result();
-		foreach ($jenisMapel as $m) {
-			$jenis = $m->jenisMapel;
-		}
 		$kelas = $this->m_admin->kelas()->result();
+		$klsIPA = $this->m_admin->klsIPA()->result();
+		$klsIPS = $this->m_admin->klsIPS()->result();
+		$guru = $this->m_admin->jadwalGuru()->result();
 		$data = array(
 			'ujian' => $ujian,
+			'kelas' => $kelas,
+			'klsIPA' => $klsIPA,
+			'klsIPS' => $klsIPS,
+			'guru' => $guru
 		);
 		echo json_encode($data);
+	}
+	function pengawasSimpan()
+	{
+		$idJadwalUjian = $this->input->post('id');
+		$kelas = $this->input->post('klsId');
+		$guru = $this->input->post('guru');
 	}
 }
 ?>
