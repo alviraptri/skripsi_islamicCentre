@@ -346,14 +346,17 @@ class c_rekomendasi extends CI_Controller
 		    // exit();
 	        // }
         }
-        $data['rank'] = $this->m_rekomendasi->lihatRanking()->result();
-        $data['alternatifPV']	= $this->m_rekomendasi->getAlternatifPV($id_alternatif,$id_kriteria)->result();
-        $data['kriteriaPV'] = $this->m_rekomendasi->getKriteriaPV($id_kriteria)->result();
+        $rank = $this->m_rekomendasi->lihatRanking()->result();
+        sort($rank);
+        $data['rank'] = $rank;
+        $data['alternatifPV'] = $this->m_rekomendasi->getAlternatifPV_2($id_alternatif,$id_kriteria)->result();
+        $data['kriteriaPV'] = $this->m_rekomendasi->getKriteriaPV_2()->result();
         $data['alt'] = $this->m_rekomendasi->perbandinganAlternatif($idSiswa)->result();
         $data['krit'] = $this->m_rekomendasi->perbandinganKrit()->result();
         $data['jK'] = $this->m_rekomendasi->getJumlahKriteria();
         $data['jA'] = $this->m_rekomendasi->getJumlahAlternatif($idSiswa);
         $data['nilai'] = $nilai;
         $this->load->view("v_hasilRanking", $data);
+        
     }
 }

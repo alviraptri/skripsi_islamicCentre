@@ -78,25 +78,29 @@
                                                 $idKrit[] = $list->idKriteria;
                                             }
                                             foreach ($kriteriaPV as $kritPV) {
-                                                $PvKrit = $kritPV->nilaiPvKrit;
-                                            
+                                                $PvKrit[] = $kritPV->nilaiPvKrit;
+                                            }
+                                            $counter = 1;
+                                            $counter2 = 1;
+                                            foreach ($alternatifPV as $altPV) {
+                                                $PvAlt[$counter] = $altPV->nilaiHA;
+                                                $counter++;
+                                            }
                                             for ($x=0; $x <= ($jK-1) ; $x++) { ?>
                                                 <tr>
                                                 <td><?= $namaKrit[$x] ?></td>
-                                                <td><?= round($PvKrit[$idKrit[$x]],5) ?></td>
+                                                <td><?= round($PvKrit[$x], 5) ?></td>
 
                                                 <?php 
                                                 
-                                                foreach ($alternatifPV as $altPV) {
-                                                    $PvAlt = $altPV->nilaiHA;
                                                 
                                                 for ($y=0; $y <= ($jA-1); $y++) { ?>
-                                                    <td><?= round($PvAlt[$idAlt[$y]],5)?> <?= round($PvAlt[$idKrit[$x]],5)?></td>
-                                                <?php } } } ?>
+                                                    <td><?= round($PvAlt[$counter2],5)?></td>
+                                                <?php $counter2++; } }  ?>
 
 
                                                 </tr>
-                                            <?php }
+                                            <?php //}
                                         ?>
                                         </tbody>
                                         <tfoot>
@@ -124,7 +128,7 @@
                                         <tbody name="show_data" id="show_data">
                                             <tr>
                                             <?php
-                                                $i = 0;
+                                                $i = 1;
                                                 foreach ($rank as $hasil) {
                                                     $nilai = $hasil->hasilAkhir;
                                                     $nama = $hasil->namaAlternatif;

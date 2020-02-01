@@ -26,7 +26,7 @@ class m_rapor extends CI_Model
 
     function dataNilai($id)
     {
-        return $this->db->query("SELECT * FROM `bukunilai` WHERE idSiswa = '".$id."'");
+        return $this->db->query("SELECT * FROM `bukunilai` WHERE idSiswa = '".$id."'"); 
     }
 
     function dataBobot()

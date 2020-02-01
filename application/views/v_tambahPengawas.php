@@ -122,6 +122,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center;">Hari</th>
+                                                <th style="text-align: center;">Tanggal</th>
                                                 <th style="text-align: center;">Jam</th>
                                                 <th style="text-align: center;">Mata Pelajaran</th>
                                                 <th style="text-align: center;">Aksi</th>
@@ -184,15 +185,15 @@
                             <div class="col-lg-4">
                                 <label>Kelas</label>
                                 <div class="kt-input-icon" id="cKelas">
-                                    
+
                                 </div>
                             </div>
                             <div class="col-lg-8">
                                 <label class="">Guru</label>
                                 <div class="kt-input-icon" id="pengawas">
-                                    <select name="guru" id="guruId" class="form-control">
+                                    <!-- <select name="guru" id="guruId" class="form-control">
                                         <option value="">Pilih Guru</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                         </div>
@@ -209,6 +210,15 @@
 
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
+        function formatDate(date) {
+            var d = new Date(date);
+            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            var day = d.getDate();
+            var monthIndex = d.getMonth();
+            var year = d.getFullYear();
+
+            return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
         $(document).ready(function() {
             //Jadwal
             $('#tahunAjaran').change(function() {
@@ -237,49 +247,144 @@
                         var span_jumat = 0;
                         for (i = 0; i < data.jadwal.length; i++) {
                             if (data.jadwal[i].hari == "Senin") {
-                                html_senin +=
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
-                                    '</tr>';
-                                span_senin++;
+                                var flag = false;
+                                for (var j = 0; j < data.cek.length; j++) {
+                                    if (data.cek[j].idJadwalUjian == data.jadwal[i].idJadwalUjian) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag == true) {
+                                    html_senin +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><button class="btn btn-info btn-xs item_add" disabled>' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></button></center></td>' +
+                                        '</tr>';
+                                    span_senin++;
+                                } else {
+                                    html_senin +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                        '</tr>';
+                                    span_senin++;
+                                }
                             }
                             if (data.jadwal[i].hari == "Selasa") {
-                                html_selasa +=
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
-                                    '</tr>';
-                                span_selasa++;
+                                var flag = false;
+                                for (var j = 0; j < data.cek.length; j++) {
+                                    if (data.cek[j].idJadwalUjian == data.jadwal[i].idJadwalUjian) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag == true) {
+                                    html_selasa +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><button class="btn btn-info btn-xs item_add" disabled>' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></button></center></td>' +
+                                        '</tr>';
+                                    span_selasa++;
+                                } else {
+                                    html_selasa +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                        '</tr>';
+                                    span_selasa++;
+                                }
                             }
                             if (data.jadwal[i].hari == "Rabu") {
-                                html_rabu +=
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
-                                    '</tr>';
-                                span_rabu++;
+                                var flag = false;
+                                for (var j = 0; j < data.cek.length; j++) {
+                                    if (data.cek[j].idJadwalUjian == data.jadwal[i].idJadwalUjian) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag == true) {
+                                    html_rabu +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><button class="btn btn-info btn-xs item_add" disabled>' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></button></center></td>' +
+                                        '</tr>';
+                                    span_rabu++;
+                                } else {
+                                    html_rabu +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                        '</tr>';
+                                    span_rabu++;
+                                }
                             }
                             if (data.jadwal[i].hari == "Kamis") {
-                                html_kamis +=
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
-                                    '</tr>';
-                                span_kamis++;
+                                var flag = false;
+                                for (var j = 0; j < data.cek.length; j++) {
+                                    if (data.cek[j].idJadwalUjian == data.jadwal[i].idJadwalUjian) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag == true) {
+                                    html_kamis +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><button class="btn btn-info btn-xs item_add" disabled>' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></button></center></td>' +
+                                        '</tr>';
+                                    span_kamis++;
+                                } else {
+                                    html_kamis +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                        '</tr>';
+                                    span_kamis++;
+                                }
                             }
                             if (data.jadwal[i].hari == "Jumat") {
-                                html_jumat +=
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
-                                    '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
-                                    '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
-                                    '</tr>';
-                                span_jumat++;
+                                var flag = false;
+                                for (var j = 0; j < data.cek.length; j++) {
+                                    if (data.cek[j].idJadwalUjian == data.jadwal[i].idJadwalUjian) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag == true) {
+                                    html_jumat +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><button class="btn btn-info btn-xs item_add" disabled>' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></button></center></td>' +
+                                        '</tr>';
+                                    span_jumat++;
+                                } else {
+                                    html_jumat +=
+                                        '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td><center><a href="javascript:;" class="btn btn-info btn-xs item_add" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></a></center></td>' +
+                                        '</tr>';
+                                    span_jumat++;
+                                }
                             }
                         }
                         html_senin = '<tr>' +
@@ -309,61 +414,65 @@
                         id: id
                     },
                     success: function(data) {
+                        $('#cKelas').empty();
+                        $('#pengawas').empty();
                         console.log(data);
                         html = '';
+
                         $('#ModalaAdd').modal('show');
                         $('[name="id"]').val(data.ujian[0].idJadwalUjian);
                         $('[name="hari"]').val(data.ujian[0].hari);
                         $('[name="jam"]').val(data.ujian[0].jamMulai + ' - ' + data.ujian[0].jamSelesai);
-                        $('[name="mapel"]').val(data.ujian[0].namaMapel);
+                        $('[name="mapel"]').val(data.ujian[0].namaMapel + ' - ' + data.ujian[0].jenisMapel);
                         if (data.ujian[0].jenisMapel == "IPA") {
+                            console.log("MASUK KE IPA");
                             for (i = 0; i < data.klsIPA.length; i++) {
-                                html += '<input type="text" name="klsId" id="idKls" class="form-control" value="'+data.klsIPA[i].idKelas+'" hidden>'+
-                                '<input type="text" name="namaKls" id="klsNama" class="form-control" value="'+data.klsIPA[i].ketKelas + ' '+ data.klsIPA[i].jurusanKelas + ' '+ data.klsIPA[i].nomorKelas+'" readonly>';
-                                $('#cKelas').html(html);
-                                // html += '<select name="guru" id="guruId" class="form-control">'+
-                                //         '<option value="">Pilih Guru</option>'+
-                                //     '</select>';
-                                //     $('#pengawas').html(html);   
+                                html = '<input type="text" name="klsId[]" id="idKls" class="form-control" value="' + data.klsIPA[i].idKelas + '" hidden>' +
+                                    '<input type="text" name="namaKls[]" id="klsNama" class="form-control" value="' + data.klsIPA[i].ketKelas + ' ' + data.klsIPA[i].jurusanKelas + ' ' + data.klsIPA[i].nomorKelas + '" readonly>';
+                                $('#cKelas').append(html);
+                                html = '<select name="guru[]" id="guruId' + i + '" class="form-control">' +
+                                    '<option value="">Pilih Guru</option>' +
+                                    '</select>';
+                                $('#pengawas').append(html);
                                 htmlGuru = '';
                                 htmlGuru = '<option value="">Pilih Guru</option>';
-                                for (j = 0; j<data.guru.length; j++) {
-                                    htmlGuru += '<option value="'+data.guru[j].nomorInduk+'">'+data.guru[j].namaUser+'</option>'
-                                    $('#guruId').html(htmlGuru);
+                                for (j = 0; j < data.guru.length; j++) {
+                                    htmlGuru += '<option value="' + data.guru[j].nomorInduk + '">' + data.guru[j].namaUser + '</option>'
+                                    $('#guruId' + i).html(htmlGuru);
                                 }
                             }
-                        }
-                        else if(data.ujian[0].jenisMapel == "IPS"){
+                        } else if (data.ujian[0].jenisMapel == "IPS") {
+                            console.log("MASUK KE IPS");
                             for (i = 0; i < data.klsIPS.length; i++) {
-                                html += '<input type="text" name="klsId" id="idKls" class="form-control" value="'+data.klsIPS[i].idKelas+'" hidden>'+
-                                '<input type="text" name="namaKls" id="klsNama" class="form-control" value="'+data.klsIPS[i].ketKelas + ' '+ data.klsIPS[i].jurusanKelas + ' '+ data.klsIPS[i].nomorKelas+'" readonly>';
-                                $('#cKelas').html(html);
-                                // html += '<select name="guru" id="guruId" class="form-control">'+
-                                //         '<option value="">Pilih Guru</option>'+
-                                //     '</select>';
-                                //     $('#pengawas').html(html);   
+                                html = '<input type="text" name="klsId[]" id="idKls" class="form-control" value="' + data.klsIPS[i].idKelas + '" hidden>' +
+                                    '<input type="text" name="namaKls" id="klsNama" class="form-control" value="' + data.klsIPS[i].ketKelas + ' ' + data.klsIPS[i].jurusanKelas + ' ' + data.klsIPS[i].nomorKelas + '" readonly>';
+                                $('#cKelas').append(html);
+                                html = '<select name="guru[]" id="guruId' + i + '" class="form-control">' +
+                                    '<option value="">Pilih Guru</option>' +
+                                    '</select>';
+                                $('#pengawas').append(html);
                                 htmlGuru = '';
                                 htmlGuru = '<option value="">Pilih Guru</option>';
-                                for (j = 0; j<data.guru.length; j++) {
-                                    htmlGuru += '<option value="'+data.guru[j].nomorInduk+'">'+data.guru[j].namaUser+'</option>'
-                                    $('#guruId').html(htmlGuru);
+                                for (j = 0; j < data.guru.length; j++) {
+                                    htmlGuru += '<option value="' + data.guru[j].nomorInduk + '">' + data.guru[j].namaUser + '</option>'
+                                    $('#guruId' + i).html(htmlGuru);
                                 }
                             }
-                        }
-                        else{
+                        } else {
                             for (i = 0; i < data.kelas.length; i++) {
-                                html += '<input type="text" name="klsId" id="idKls" class="form-control" value="'+data.kelas[i].idKelas+'" hidden>'+
-                                '<input type="text" name="namaKls" id="klsNama" class="form-control" value="'+data.kelas[i].ketKelas + ' '+ data.kelas[i].jurusanKelas + ' '+ data.kelas[i].nomorKelas+'" readonly>';
-                                $('#cKelas').html(html);
-                                // html += '<select name="guru" id="guruId" class="form-control">'+
-                                //         '<option value="">Pilih Guru</option>'+
-                                //     '</select>';
-                                //     $('#pengawas').html(html);   
-                                htmlGuru = '';
+                                console.log("MASUK KE UMUM");
+                                html = '<input type="text" name="klsId[]" id="idKls" class="form-control" value="' + data.kelas[i].idKelas + '" hidden>' +
+                                    '<input type="text" name="namaKls[]" id="klsNama" class="form-control" value="' + data.kelas[i].ketKelas + ' ' + data.kelas[i].jurusanKelas + ' ' + data.kelas[i].nomorKelas + '" readonly>';
+                                $('#cKelas').append(html);
+                                html = '<select name="guru[]" id="guruId' + i + '" class="form-control">' +
+                                    '<option value="">Pilih Guru</option>' +
+                                    '</select>';
+                                $('#pengawas').append(html);
+
                                 htmlGuru = '<option value="">Pilih Guru</option>';
-                                for (j = 0; j<data.guru.length; j++) {
-                                    htmlGuru += '<option value="'+data.guru[j].nomorInduk+'">'+data.guru[j].namaUser+'</option>'
-                                    $('#guruId').html(htmlGuru);
+                                for (j = 0; j < data.guru.length; j++) {
+                                    htmlGuru += '<option value="' + data.guru[j].nomorInduk + '">' + data.guru[j].namaUser + '</option>'
+                                    $('#guruId' + i).html(htmlGuru);
                                 }
                             }
                         }

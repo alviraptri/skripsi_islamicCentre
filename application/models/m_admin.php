@@ -495,7 +495,7 @@ class m_admin extends CI_Model
     function jadwalUjian($idTA)
 	{
 		$this->db->select('jadwalujian.idJadwalUjian, jadwalujian.idTahunAjaran, jadwalujian.idMapel, jadwalujian.hari, 
-        jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
+        jadwalujian.tanggal, jadwalujian.jamMulai, jadwalujian.jamSelesai, matapelajaran.idMapel, matapelajaran.namaMapel, matapelajaran.jenisMapel')
         ->from('jadwalujian')
         ->join('matapelajaran', 'matapelajaran.idMapel = jadwalujian.idMapel', 'inner')
         ->order_by('jamMulai', 'ASC')
@@ -834,6 +834,14 @@ class m_admin extends CI_Model
     function klsIPS()
     {
         return $this->db->query('SELECT * FROM kelas WHERE jurusanKelas = "IPS"');
+    }
+    function pengawasSimpan($result, $table)
+    {
+        $this->db->insert($table, $result);
+    }
+    function cekPengawas()
+    {
+        return $this->db->query("SELECT * FROM `jadwalpengawas`");
     }
 }
 

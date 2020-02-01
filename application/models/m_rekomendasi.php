@@ -118,19 +118,30 @@ class m_rekomendasi extends CI_Model
     }
     function getAlternatifPV($id_alternatif,$id_kriteria)
     {
-        $query = $this->db->query("SELECT nilaiHA FROM pv_alternatif WHERE idAlternatif = '".$id_alternatif."' AND idKriteria = '".$id_kriteria."'");
+        $query = $this->db->query("SELECT nilaiHA FROM pv_alternatif WHERE idKriteria ='".$id_kriteria."' AND idAlternatif = '".$id_alternatif."'");
         return $query;
     }
     function getKriteriaPV($id_kriteria)
     {
-        $query = $this->db->query("SELECT nilaiPvKrit FROM pv_kriteria WHERE idKriteria = '".$id_kriteria."'");
+        $query = $this->db->query("SELECT nilaiPvKrit FROM pv_kriteria WHERE idKriteria ='".$id_kriteria."'");
+        return $query;
+    }
+
+    function getAlternatifPV_2($id_alternatif,$id_kriteria)
+    {
+        $query = $this->db->query("SELECT nilaiHA FROM pv_alternatif");
+        return $query;
+    }
+    function getKriteriaPV_2()
+    {
+        $query = $this->db->query("SELECT nilaiPvKrit FROM pv_kriteria");
         return $query;
     }
     function lihatRanking() 
     {
         $query = $this->db->query("SELECT * FROM rankingrekomendasi 
         JOIN alternatif ON alternatif.idAlternatif = rankingrekomendasi.idAlternatif
-        ORDER BY hasilAkhir DESC");
+        ORDER BY rankingrekomendasi.idRanking DESC LIMIT 3");
         return $query;
     }
 }

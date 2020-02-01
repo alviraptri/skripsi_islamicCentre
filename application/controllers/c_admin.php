@@ -1461,9 +1461,11 @@ class c_admin extends CI_Controller
 		$idKls = $this->input->post('idKls', TRUE);
 		$jadwal = $this->m_admin->jadwalUjian($idTA)->result();
 		$jadwal1 = $this->m_admin->pengawas($idTA, $idKls)->result();
+		$cek = $this->m_admin->cekPengawas()->result();
 		$data = array(
 			'jadwal' => $jadwal,
 			'jadwal1' => $jadwal1,
+			'cek' => $cek,
 		);
 		echo json_encode($data);
 	}
@@ -1922,6 +1924,18 @@ class c_admin extends CI_Controller
 		$idJadwalUjian = $this->input->post('id');
 		$kelas = $this->input->post('klsId');
 		$guru = $this->input->post('guru');
+
+		for($i=0 ; $i<count($kelas); $i++){
+			$result = array(
+				'idJadwalPengawas' => '',
+				'idJadwalUjian' => $idJadwalUjian,
+				'idKelas' => $kelas[$i],
+				'nomorInduk' => $guru[$i],
+				'statusPengawas' => '1', 
+			);
+			$this->m_admin->pengawasSimpan($result, 'jadwalpengawas');
+		}
+		redirect('c_admin/jadwalNgawas');
 	}
 }
 ?>
