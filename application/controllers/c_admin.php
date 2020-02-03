@@ -1087,6 +1087,11 @@ class c_admin extends CI_Controller
 			redirect('c_admin/jadwal');
 		}
 	}
+	function lihatJadwal()
+	{
+		$data['kls'] = $this->m_admin->kelas()->result();
+		$this->load->view('v_lihatJadwalSiswa', $data);
+	}
 	
 	//informasi spp
 	function tambahInfo()
@@ -1936,6 +1941,13 @@ class c_admin extends CI_Controller
 			$this->m_admin->pengawasSimpan($result, 'jadwalpengawas');
 		}
 		redirect('c_admin/jadwalNgawas');
+	}
+	function lihatJadwalSiswa()
+	{
+		$id = $this->input->post('id');
+		$jadwal = $this->m_admin->jadwalSiswa($id)->result();
+		$data = array('jadwal' => $jadwal, );
+		echo json_encode($data);
 	}
 }
 ?>

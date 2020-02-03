@@ -224,6 +224,7 @@
           <li><a><i class="fa fa-calendar"></i> Jadwal <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="<?php echo base_url('c_admin/jadwal'); ?>">Data Jadwal</a></li>
+              <li><a href="<?php echo base_url('c_admin/lihatJadwal'); ?>">Lihat Jadwal Siswa</a></li>
               <li><a href="<?php echo base_url('c_admin/tambahJadwal'); ?>">Tambah Jadwal</a></li>
             </ul>
           </li>

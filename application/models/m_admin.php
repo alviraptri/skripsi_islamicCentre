@@ -843,6 +843,13 @@ class m_admin extends CI_Model
     {
         return $this->db->query("SELECT * FROM `jadwalpengawas`");
     }
+    function jadwalSiswa($id)
+    {
+        return $this->db->query("SELECT * FROM `jadwal` JOIN kelas ON kelas.idKelas = jadwal.idKelas
+        JOIN matapelajaran ON matapelajaran.idMapel = jadwal.idMapel
+        JOIN user ON user.nomorInduk = jadwal.nomorInduk
+        WHERE kelas.idKelas = '".$id."' ORDER BY jadwal.jamMulai ASC");
+    }
 }
 
 ?>

@@ -167,18 +167,8 @@
                                             <?php }
                                             ?>
                                         </select>
-                                    <!-- <input name="idM_edit" id="idM_edit" class="form-control" type="text" placeholder="ID" hidden>
-                                        <input name="mapel_edit" id="mapel_edit" class="form-control" type="text" placeholder="Mata Pelajaran" required> -->
                                     </div>
                                 </div>
-
-                                <!-- <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Jenis Mata Pelajaran</label>
-                                    <div class="col-xs-9">
-                                        <input name="jenis_edit" id="jenis_edit" class="form-control" type="text" placeholder="Jenis" readonly>
-                                    </div>
-                                </div> -->
-
                             </div>
 
                             <div class="modal-footer">
@@ -228,7 +218,7 @@
                         }
                         $('#show_data').html(html);
                     }
-                });
+                }); 
                 return false;
             });
 
