@@ -193,32 +193,95 @@
     <script type="text/javascript">
         $(document).ready(function() {
             //view data
-            $('#tahunAjaran').change(function(){
+            $('#tahunAjaran').change(function() {
                 var idTA = $(this).val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/pengawas'); ?>",
                     method: "POST",
                     data: {
-                        idTA: idTA
+                        idTA: idTA,
                     },
                     async: true,
                     dataType: 'JSON',
-                    success: function(data){
-                        var html ='';
+                    success: function(data) {
+                        console.log(data);
+                        var html = '';
                         var i;
-                        for(i = 0; i < data.jadwal.length; i++){
-                            html += '<tr>'+
-                            '<td> '+ data.jadwal[i].hari +' </td>'+
-                            '<td> '+ data.jadwal[i].jamMulai+' - '+data.jadwal[i].jamSelesai+' </td>'+
-                            '<td> '+data.jadwal[i].namaMapel+' </td>'+
-                            '<td>'+data.jadwal[i].jenisMapel+'</td>'+
-                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
-                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
-                            '</tr>';
+                        var html_senin = '';
+                        var html_selasa = '';
+                        var html_rabu = '';
+                        var html_kamis = '';
+                        var html_jumat = '';
+                        var span_senin = 0;
+                        var span_selasa = 0;
+                        var span_rabu = 0;
+                        var span_kamis = 0;
+                        var span_jumat = 0;
+                        for (i = 0; i < data.jadwal.length; i++) {
+                            if (data.jadwal[i].hari == "Senin") {
+                                    html_senin +=
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td>'+data.jadwal[i].jenisMapel+'</td>'+
+                                        '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
+                                        '</tr>';
+                                    span_senin++;
+                            }
+                            if (data.jadwal[i].hari == "Selasa") {
+                                    html_selasa +=
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td>'+data.jadwal[i].jenisMapel+'</td>'+
+                                        '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
+                                        '</tr>';
+                                    span_selasa++;
+                            }
+                            if (data.jadwal[i].hari == "Rabu") {
+                                    html_rabu +=
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td>'+data.jadwal[i].jenisMapel+'</td>'+
+                                        '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
+                                        '</tr>';
+                                    span_rabu++;
+                            }
+                            if (data.jadwal[i].hari == "Kamis") {
+                                    html_kamis +=
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td>'+data.jadwal[i].jenisMapel+'</td>'+
+                                        '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
+                                        '</tr>';
+                                    span_kamis++;
+                            }
+                            if (data.jadwal[i].hari == "Jumat") {
+                                    html_jumat +=
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
+                                        '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
+                                        '<td>'+data.jadwal[i].jenisMapel+'</td>'+
+                                        '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data.jadwal[i].idJadwalUjian + '">' +
+                                        '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
+                                        '</tr>';
+                                    span_jumat++;
+                            }
                         }
-                        $('#show_data').html(html);
+                        html_senin = '<tr>' +
+                            '<td rowspan="' + span_senin + '" style="vertical-align : middle;text-align:center;"> Senin </td>' + html_senin;
+                        html_selasa = '<tr>' +
+                            '<td rowspan="' + span_selasa + '" style="vertical-align : middle;text-align:center;"> Selasa </td>' + html_selasa;
+                        html_rabu = '<tr>' +
+                            '<td rowspan="' + span_rabu + '" style="vertical-align : middle;text-align:center;"> Rabu </td>' + html_rabu;
+                        html_kamis = '<tr>' +
+                            '<td rowspan="' + span_kamis + '" style="vertical-align : middle;text-align:center;"> Kamis </td>' + html_kamis;
+                        html_jumat = '<tr>' +
+                            '<td rowspan="' + span_jumat + '" style="vertical-align : middle;text-align:center;"> Jumat </td>' + html_jumat;
+                        $('#show_data').html(html_senin + html_selasa + html_rabu + html_kamis + html_jumat);
                     }
-                }); 
+                });
                 return false;
             });
 

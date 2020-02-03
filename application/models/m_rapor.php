@@ -33,4 +33,12 @@ class m_rapor extends CI_Model
     {
         return $this->db->query("SELECT * FROM `ketnilai` WHERE idTahunAjaran = 1");
     }
+    function getSikapSS($predikatSS)
+    {
+        return $this->db->query("SELECT * FROM `kompetensiNilai` WHERE predikat = '".$predikatSS."' AND sikap = 'Sikap Sosial'");
+    }
+    function getSikapSP($predikatSP)
+    {
+        return $this->db->query("SELECT * FROM `kompetensiNilai` WHERE predikat = '".$predikatSP."' AND sikap = 'Sikap Spiritual'");
+    }
 }

@@ -366,7 +366,7 @@
                                         break;
                                     }
                                 }
-                                if (flag == true) { 
+                                if (flag == true) {
                                     html_jumat +=
                                         '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
