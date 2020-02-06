@@ -229,7 +229,7 @@
                         var i;
                         '<option value="">Pilih Mata Pelajaran</option>'
                         for (i = 0; i < data.length; i++) {
-                            html += '<input type="text" id="idMapel" name="idMapel" required="required" class="form-control" value="' + data[i].idMapel + '">'
+                            html += '<input type="text" id="idMapel" name="idMapel[]" required="required" class="form-control" value="' + data[i].idMapel + '">'
                         }
                         $('#jadwalMapel').html(html);
                     }

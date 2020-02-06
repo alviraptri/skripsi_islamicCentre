@@ -7,20 +7,14 @@ class c_admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('m_login', 'm_admin', 'm_beranda'));	
+		$this->load->model(array('m_login', 'm_admin', 'm_beranda', 'm_rapor'));	
 	}
     function index() 
 	{
 		$data['jmlhSiswa'] = $this->m_beranda->hitungSiswa();
 		$data['jmlhGuru'] = $this->m_beranda->hitungGuru();
 		$data['jmlhKls'] = $this->m_beranda->hitungKls();
-		$absen = $this->m_beranda->absen()->result();
-		foreach ($absen as $b) {
-			$tanggal = $b->tanggal;
-			$hasil = explode("-", $tanggal);
-			$blnn = $hasil[1];
-			$tgl = $hasil[2];
-		}
+		$data['ketKelas'] = $this->m_beranda->getKetKelas()->result();
 		$this->load->view('v_berandaAdmin', $data);
 	}
 
@@ -1896,9 +1890,43 @@ class c_admin extends CI_Controller
 	}
 	function dataRapor()
 	{
-		// $data['kls'] = $this->m_admin->kelas()->result();
 		$data['siswa'] = $this->m_admin->viewRapor()->result();
+		$data['cek'] = $this->m_rapor->cekData()->result();
 		$this->load->view('v_dataRapor', $data);
+	}
+	function infoRapor($id)
+	{
+		$data['siswa'] = $this->m_rapor->dataSiswa($id)->result();
+		$data['bobot'] = $this->m_rapor->dataBobot()->result();
+		$data['nilai'] = $this->m_rapor->dataNilai($id)->result();
+		$this->load->view('v_infoNilai', $data);
+	}
+	function simpanTotalNilai()
+	{
+		$totalNilai = $this->input->post('totalNilai');
+		$siswaId = $this->input->post('siswaId');
+		$cekData = array(
+			'idSiswa' => $siswaId,
+			'totalNilai' => $totalNilai,
+		);
+
+		$cek = $this->m_admin->cek($cekData, "rapor")->num_rows();
+		if ($cek > 0) {
+			echo "<script>alert('Data sudah tersimpan');</script>";
+    		$this->load->view('v_dataRapor');
+		}
+		else {
+			$data = array(
+				'idRapor' => '',
+				'idSiswa' => $siswaId,
+				'totalNilai' => $totalNilai,
+				'statusRapor' => '1'
+			);
+
+			$this->m_admin->simpanData($data, 'rapor');
+			redirect('c_admin/dataRapor');
+		}
+			
 	}
 	function getNamaSiswa()
 	{

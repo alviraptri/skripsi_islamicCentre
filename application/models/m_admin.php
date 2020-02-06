@@ -382,12 +382,14 @@ class m_admin extends CI_Model
 
     function getKelas($idMapel)
     {
-        $this->db->select('jadwal.idJadwal, jadwal.nomorInduk, jadwal.idMapel,jadwal.idKelas ,matapelajaran.idMapel, matapelajaran.namaMapel, kelas.idKelas, kelas.ketKelas, 
+        $this->db->distinct()
+        ->select('jadwal.nomorInduk, jadwal.idMapel,jadwal.idKelas ,matapelajaran.idMapel, matapelajaran.namaMapel, kelas.idKelas, kelas.ketKelas, 
         kelas.jurusanKelas, kelas.nomorKelas')
         ->from('jadwal')
         ->join('matapelajaran', 'matapelajaran.idMapel = jadwal.idMapel', 'inner')
         ->join('kelas', 'kelas.idKelas = jadwal.idKelas', 'inner')
-        ->where('jadwal.idMapel = "'.$idMapel.'"');
+        ->where('jadwal.idMapel = "'.$idMapel.'"')
+        ->order_by('kelas.idKelas', 'ASC');
 
         return $this->db->get();
     }
@@ -409,7 +411,8 @@ class m_admin extends CI_Model
         $this->db->select('datasiswa.idSiswa, datasiswa.idKelas, datasiswa.nomorInduk, user.nomorInduk, user.namaUser')
         ->from('datasiswa')
         ->join('user', 'user.nomorInduk = datasiswa.nomorInduk', 'inner')
-        ->where('datasiswa.idKelas = "'.$idKelas.'"');
+        ->where('datasiswa.idKelas = "'.$idKelas.'"')
+        ->where('datasiswa.statusSiswa = "1"');
         return $this->db->get();
     }
     function simpanAbsen($result, $table)
@@ -643,7 +646,7 @@ class m_admin extends CI_Model
         $query = $this->db->query("SELECT * FROM jadwalpengawas WHERE idJadwalUjian = '".$id."'");
         return $query;
     }
-    function pengawas($idTA, $idKls)
+    function pengawas($idTA, $idKls) 
     {
         $query = $this->db->query("SELECT jadwalujian.idTahunAjaran, jadwalujian.idJadwalUjian, jadwalpengawas.idJadwalUjian, jadwalpengawas.idKelas, 
         jadwalpengawas.nomorInduk, user.nomorInduk, user.namaUser, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, kelas.nomorKelas, 
@@ -796,10 +799,12 @@ class m_admin extends CI_Model
     function viewRapor()
     {
         $query = $this->db->query("SELECT datasiswa.idSiswa, datasiswa.nomorInduk, datasiswa.idKelas, user.nomorInduk, user.namaUser, kelas.idKelas, kelas.nomorKelas, 
-        kelas.jurusanKelas, kelas.ketKelas 
+        kelas.jurusanKelas, kelas.ketKelas, datasiswa.statusSiswa
         FROM datasiswa 
         JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
-        JOIN kelas ON kelas.idKelas = datasiswa.idKelas");
+        JOIN kelas ON kelas.idKelas = datasiswa.idKelas
+        WHERE datasiswa.statusSiswa = 1
+        ORDER BY datasiswa.nomorInduk ASC");
 
         return $query;
     }

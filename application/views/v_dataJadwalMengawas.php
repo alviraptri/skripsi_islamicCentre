@@ -105,7 +105,10 @@
                                         <tbody name="show_data" id="show_data">
                                         </tbody>
                                     </table>
-                                    <!-- <a href="<?php echo base_url('c_admin/tambahPegawai'); ?>"><button type="submit" class="btn btn-primary">Cetak Jadwal</button></a> -->
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li id="printId"> 
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +133,7 @@
             var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
             var day = d.getDate();
             var monthIndex = d.getMonth();
-            var year = d.getFullYear();
+            var year = d.getFullYear(); 
 
             return day + ' ' + monthNames[monthIndex] + ' ' + year;
         }
@@ -232,6 +235,9 @@
                             htmlGuru = data.jadwal1[i].ketKelas + ' ' + data.jadwal1[i].jurusanKelas + ' ' + data.jadwal1[i].nomorKelas;
                             $('#datakelas' + i).html(htmlGuru);
                         }
+
+                        print = '<a href="<?php echo base_url();?>c_jadwalMengawas/index/'+ data.jadwal1[0].idKelas+'" target="_blank"><button type="submit" class="btn btn-secondary">Cetak Jadwal Pengawas</button></a>';
+                        $('#printId').html(print);
                     }
                 });
                 return false;

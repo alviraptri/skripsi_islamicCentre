@@ -41,4 +41,17 @@ class m_rapor extends CI_Model
     {
         return $this->db->query("SELECT * FROM `kompetensiNilai` WHERE predikat = '".$predikatSP."' AND sikap = 'Sikap Spiritual'");
     }
+    function ekstrakurikuler($id)
+    {
+        return $this->db->query("SELECT * FROM `ekskul_siswa` WHERE idSiswa= '".$id."'");
+    }
+    function absensi($id)
+    {
+        return $this->db->query("SELECT * FROM `absensi` WHERE idSiswa = '".$id."'");
+    }
+    function cekData()
+    {
+        $query = $this->db->query("SELECT * FROM `rapor`");
+        return $query;
+    }
 }

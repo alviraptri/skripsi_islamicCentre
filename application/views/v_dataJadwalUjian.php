@@ -85,6 +85,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Hari</th>
+                                                <th>Tanggal</th>
                                                 <th>Jam</th>
                                                 <th>Mata Pelajaran</th>
                                                 <th>Jenis Mata Pelajaran</th>
@@ -96,6 +97,10 @@
 
                                         </tbody>
                                     </table>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li id="printId"> 
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -192,6 +197,15 @@
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            function formatDate(date) {
+            var d = new Date(date);
+            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            var day = d.getDate();
+            var monthIndex = d.getMonth();
+            var year = d.getFullYear(); 
+
+            return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
             //view data
             $('#tahunAjaran').change(function() {
                 var idTA = $(this).val();
@@ -220,6 +234,7 @@
                         for (i = 0; i < data.jadwal.length; i++) {
                             if (data.jadwal[i].hari == "Senin") {
                                     html_senin +=
+                                    '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
                                         '<td>'+data.jadwal[i].jenisMapel+'</td>'+
@@ -230,6 +245,7 @@
                             }
                             if (data.jadwal[i].hari == "Selasa") {
                                     html_selasa +=
+                                    '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
                                         '<td>'+data.jadwal[i].jenisMapel+'</td>'+
@@ -240,6 +256,7 @@
                             }
                             if (data.jadwal[i].hari == "Rabu") {
                                     html_rabu +=
+                                    '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
                                         '<td>'+data.jadwal[i].jenisMapel+'</td>'+
@@ -250,6 +267,7 @@
                             }
                             if (data.jadwal[i].hari == "Kamis") {
                                     html_kamis +=
+                                    '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
                                         '<td>'+data.jadwal[i].jenisMapel+'</td>'+
@@ -260,6 +278,7 @@
                             }
                             if (data.jadwal[i].hari == "Jumat") {
                                     html_jumat +=
+                                    '<td style="vertical-align : middle;"> ' + formatDate(data.jadwal[i].tanggal) + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].jamMulai + ' - ' + data.jadwal[i].jamSelesai + ' </td>' +
                                         '<td style="vertical-align : middle;"> ' + data.jadwal[i].namaMapel + ' </td>' +
                                         '<td>'+data.jadwal[i].jenisMapel+'</td>'+
@@ -280,6 +299,9 @@
                         html_jumat = '<tr>' +
                             '<td rowspan="' + span_jumat + '" style="vertical-align : middle;text-align:center;"> Jumat </td>' + html_jumat;
                         $('#show_data').html(html_senin + html_selasa + html_rabu + html_kamis + html_jumat);
+
+                        print = '<a href="<?php echo base_url();?>c_jadwalUjian/index/'+ data.jadwal[0].idTahunAjaran+'" target="_blank"><button type="submit" class="btn btn-secondary">Cetak Jadwal Ujian</button></a>';
+                        $('#printId').html(print);
                     }
                 });
                 return false;

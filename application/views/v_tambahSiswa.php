@@ -99,14 +99,14 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="textarea">Alamat <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea id="textarea" required="required" name="alamat" class="form-control"></textarea>
+                        <textarea id="textarea" required="required" name="alamat" class="form-control" required></textarea>
                       </div>
                     </div>
                     <div class="item form-group">
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="jk">Jenis Kelamin <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="jk" class="select2_single form-control">
+                        <select name="jk" class="select2_single form-control" required>
                           <option>Pilih Jenis Kelamin</option>
                           <option value="0"> Perempuan </option>
                           <option value="1"> Laki-Laki</option>
@@ -126,7 +126,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Kelas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="kelas" id="kelas" class="select2_single form-control">
+                        <select name="kelas" id="kelas" class="select2_single form-control" required>
                           <option value="">Pilih Kelas</option>
                           <?php foreach ($kls as $data) { ?>
                             <option value="<?php echo $data->idKelas ?>"><?php echo $data->ketKelas ?> <?php echo $data->jurusanKelas ?> <?php echo $data->nomorKelas ?></option>
@@ -138,7 +138,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="tahunAjaran">Tahun Ajaran <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="tahunAjaran" class="select2_single form-control">
+                        <select name="tahunAjaran" class="select2_single form-control" required>
                           <option value="">Pilih Tahun Ajaran</option>
                           <?php foreach ($ta as $data) { ?>
                             <option value="<?= $data->idTahunAjaran ?>"><?= $data->tahunAjaran ?></option>
@@ -150,7 +150,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Foto Profil <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="file" name="filefoto">
+                        <input type="file" name="filefoto" required>
                       </div>
                     </div>
                     <div class="ln_solid"></div>

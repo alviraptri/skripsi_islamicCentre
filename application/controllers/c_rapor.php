@@ -17,7 +17,7 @@ class c_rapor extends CI_Controller
         $nilaiSS = 0;
         $siswa = $this->m_rapor->dataSiswa($id)->result();
         foreach ($siswa as $list) {
-            $nama = $list->namaUser;
+            $nama = $list->namaUser; 
             $nomorInduk = $list->nomorInduk;
             $ket = $list->ketKelas;
             $jurusan = $list->jurusanKelas;
@@ -69,22 +69,22 @@ class c_rapor extends CI_Controller
             $NtotalPai = round($totalGuruPai) + round($NsklhPai);
         }
         if ($NtotalPai >= 89) {
-            $predikat = 'A';
+            $predikatPai = 'A';
         }
         else if ($NtotalPai >= 77) {
-            $predikat = 'B';
+            $predikatPai = 'B';
         }
         else if($NtotalPai > 89){
-            $predikat = 'B';
+            $predikatPai = 'B';
         }
         else if ($NtotalPai >= 65) {
-            $predikat = "C";
+            $predikatPai = "C";
         }
         else if($NtotalPai < 77){
-            $predikat = "C";
+            $predikatPai = "C";
         }
         else if ($NtotalPai < 65) {
-            $predikat = "D";
+            $predikatPai = "D";
         }
         
         $tugasPkn = 0;
@@ -126,22 +126,22 @@ class c_rapor extends CI_Controller
             $NtotalPkn = round($totalGuruPkn) + round($NsklhPkn);
         }
         if ($NtotalPkn >= 89) {
-            $predikat = 'A';
+            $predikatPkn = 'A';
         }
         else if ($NtotalPkn >= 77) {
-            $predikat = 'B';
+            $predikatPkn = 'B';
         }
         else if($NtotalPkn > 89){
-            $predikat = 'B';
+            $predikatPkn = 'B';
         }
         else if ($NtotalPkn >= 65) {
-            $predikat = "C";
+            $predikatPkn = "C";
         }
         else if($NtotalPkn < 77){
-            $predikat = "C";
+            $predikatPkn = "C";
         }
         else if ($NtotalPkn < 65) {
-            $predikat = "D";
+            $predikatPkn = "D";
         }
 
         $tugasBi = 0;
@@ -183,22 +183,22 @@ class c_rapor extends CI_Controller
             $NtotalBi = round($totalGuruBi) + round($NsklhBi);
         }
         if ($NtotalBi >= 89) {
-            $predikat = 'A';
+            $predikatBi = 'A';
         }
         else if ($NtotalBi >= 77) {
-            $predikat = 'B';
+            $predikatBi = 'B';
         }
         else if($NtotalBi > 89){
-            $predikat = 'B';
+            $predikatBi = 'B';
         }
         else if ($NtotalBi >= 65) {
-            $predikat = "C";
+            $predikatBi = "C";
         }
         else if($NtotalBi < 77){
-            $predikat = "C";
+            $predikatBi = "C";
         }
         else if ($NtotalBi < 65) {
-            $predikat = "D";
+            $predikatBi = "D";
         }
 
         $tugasMtk = 0;
@@ -240,22 +240,22 @@ class c_rapor extends CI_Controller
             $NtotalMtk = round($totalGuruMtk) + round($NsklhMtk);
         }
         if ($NtotalMtk >= 89) {
-            $predikat = 'A';
+            $predikatMtk = 'A';
         }
         else if ($NtotalMtk >= 77) {
-            $predikat = 'B';
+            $predikatMtk = 'B';
         }
         else if($NtotalMtk > 89){
-            $predikat = 'B';
+            $predikatMtk = 'B';
         }
         else if ($NtotalMtk >= 65) {
-            $predikat = "C";
+            $predikatMtk = "C";
         }
         else if($NtotalMtk < 77){
-            $predikat = "C";
+            $predikatMtk = "C";
         }
         else if ($NtotalMtk < 65) {
-            $predikat = "D";
+            $predikatMtk = "D";
         }
 
         $tugasSj = 0;
@@ -297,22 +297,22 @@ class c_rapor extends CI_Controller
             $NtotalSj = round($totalGuruSj) + round($NsklhSj);
         }
         if ($NtotalSj >= 89) {
-            $predikat = 'A';
+            $predikatSj = 'A';
         }
         else if ($NtotalSj >= 77) {
-            $predikat = 'B';
+            $predikatSj = 'B';
         }
         else if($NtotalSj > 89){
-            $predikat = 'B';
+            $predikatSj = 'B';
         }
         else if ($NtotalSj >= 65) {
-            $predikat = "C";
+            $predikatSj = "C";
         }
         else if($NtotalSj < 77){
-            $predikat = "C";
+            $predikatSj = "C";
         }
         else if ($NtotalSj < 65) {
-            $predikat = "D";
+            $predikatSj = "D";
         }
 
         $tugasIng = 0;
@@ -354,22 +354,22 @@ class c_rapor extends CI_Controller
             $NtotalIng = round($totalGuruIng) + round($NsklhIng);
         }
         if ($NtotalIng >= 89) {
-            $predikat = 'A';
+            $predikatIng = 'A';
         }
         else if ($NtotalIng >= 77) {
-            $predikat = 'B';
+            $predikatIng = 'B';
         }
         else if($NtotalIng > 89){
-            $predikat = 'B';
+            $predikatIng = 'B';
         }
         else if ($NtotalIng >= 65) {
-            $predikat = "C";
+            $predikatIng = "C";
         }
         else if($NtotalIng < 77){
-            $predikat = "C";
+            $predikatIng = "C";
         }
         else if ($NtotalIng < 65) {
-            $predikat = "D";
+            $predikatIng = "D";
         }
         $nilaiSS = ($NtotalPai+$NtotalPkn+$NtotalBi+$NtotalMtk+$NtotalSj+$NtotalIng)/6;
 
@@ -413,22 +413,22 @@ class c_rapor extends CI_Controller
             $NtotalSb = round($totalGuruSb) + round($NsklhSb);
         }
         if ($NtotalSb >= 89) {
-            $predikat = 'A';
+            $predikatSb = 'A';
         }
         else if ($NtotalSb >= 77) {
-            $predikat = 'B';
+            $predikatSb = 'B';
         }
         else if($NtotalSb > 89){
-            $predikat = 'B';
+            $predikatSb = 'B';
         }
         else if ($NtotalSb >= 65) {
-            $predikat = "C";
+            $predikatSb = "C";
         }
         else if($NtotalSb < 77){
-            $predikat = "C";
+            $predikatSb = "C";
         }
         else if ($NtotalSb < 65) {
-            $predikat = "D";
+            $predikatSb = "D";
         }
 
         $tugasOr = 0;
@@ -471,22 +471,22 @@ class c_rapor extends CI_Controller
             $NtotalOr = round($totalGuruOr) + round($NsklhOr);
         }
         if ($NtotalOr >= 89) {
-            $predikat = 'A';
+            $predikatOr = 'A';
         }
         else if ($NtotalOr >= 77) {
-            $predikat = 'B';
+            $predikatOr = 'B';
         }
         else if($NtotalOr > 89){
-            $predikat = 'B';
+            $predikatOr = 'B';
         }
         else if ($NtotalOr >= 65) {
-            $predikat = "C";
+            $predikatOr = "C";
         }
         else if($NtotalOr < 77){
-            $predikat = "C";
+            $predikatOr = "C";
         }
         else if ($NtotalOr < 65) {
-            $predikat = "D";
+            $predikatOr = "D";
         }
         $tugasPK = 0;
         $UHPK = 0;
@@ -528,22 +528,22 @@ class c_rapor extends CI_Controller
             $NtotalPK = round($totalGuruPK ) + round($NsklhPK );
         }
         if ($NtotalPK >= 89) {
-            $predikat = 'A';
+            $predikatPK = 'A';
         }
         else if ($NtotalPK >= 77) {
-            $predikat = 'B';
+            $predikatPK = 'B';
         }
         else if($NtotalPK > 89){
-            $predikat = 'B';
+            $predikatPK = 'B';
         }
         else if ($NtotalPK >= 65) {
-            $predikat = "C";
+            $predikatPK = "C";
         }
         else if($NtotalPK < 77){
-            $predikat = "C";
+            $predikatPK = "C";
         }
         else if ($NtotalPK < 65) {
-            $predikat = "D";
+            $predikatPK = "D";
         }
         $tugasQurdis = 0;
         $UHQurdis = 0;
@@ -585,22 +585,22 @@ class c_rapor extends CI_Controller
             $NtotalQurdis = round($totalGuruQurdis ) + round($NsklhQurdis );
         }
         if ($NtotalQurdis >= 89) {
-            $predikat = 'A';
+            $predikatQurdis = 'A';
         }
         else if ($NtotalQurdis >= 77) {
-            $predikat = 'B';
+            $predikatQurdis = 'B';
         }
         else if($NtotalQurdis > 89){
-            $predikat = 'B';
+            $predikatQurdis = 'B';
         }
         else if ($NtotalQurdis >= 65) {
-            $predikat = "C";
+            $predikatQurdis = "C";
         }
         else if($NtotalQurdis < 77){
-            $predikat = "C";
+            $predikatQurdis = "C";
         }
         else if ($NtotalQurdis < 65) {
-            $predikat = "D";
+            $predikatQurdis = "D";
         }
         $tugasEC = 0;
         $UHEC = 0;
@@ -645,19 +645,19 @@ class c_rapor extends CI_Controller
             $predikat = 'A';
         }
         else if ($NtotalEC >= 77) {
-            $predikat = 'B';
+            $predikatEC = 'B';
         }
         else if($NtotalEC > 89){
-            $predikat = 'B';
+            $predikatEC = 'B';
         }
         else if ($NtotalEC >= 65) {
-            $predikat = "C";
+            $predikatEC = "C";
         }
         else if($NtotalEC < 77){
-            $predikat = "C";
+            $predikatEC = "C";
         }
         else if ($NtotalEC < 65) {
-            $predikat = "D";
+            $predikatEC = "D";
         }
         $tugasAA = 0;
         $UHAA = 0;
@@ -699,22 +699,22 @@ class c_rapor extends CI_Controller
             $NtotalAA = round($totalGuruAA ) + round($NsklhAA );
         }
         if ($NtotalAA >= 89) {
-            $predikat = 'A';
+            $predikatAA = 'A';
         }
         else if ($NtotalAA >= 77) {
-            $predikat = 'B';
+            $predikatAA = 'B';
         }
         else if($NtotalAA > 89){
-            $predikat = 'B';
+            $predikatAA = 'B';
         }
         else if ($NtotalAA >= 65) {
-            $predikat = "C";
+            $predikatAA = "C";
         }
         else if($NtotalAA < 77){
-            $predikat = "C";
+            $predikatAA = "C";
         }
         else if ($NtotalAA < 65) {
-            $predikat = "D";
+            $predikatAA = "D";
         }
         $tugasTIK = 0;
         $UHTIK = 0;
@@ -756,22 +756,22 @@ class c_rapor extends CI_Controller
             $NtotalTIK = round($totalGuruTIK ) + round($NsklhTIK );
         }
         if ($NtotalTIK >= 89) {
-            $predikat = 'A';
+            $predikatTIK = 'A';
         }
         else if ($NtotalTIK >= 77) {
-            $predikat = 'B';
+            $predikatTIK = 'B';
         }
         else if($NtotalTIK > 89){
-            $predikat = 'B';
+            $predikatTIK = 'B';
         }
         else if ($NtotalTIK >= 65) {
-            $predikat = "C";
+            $predikatTIK = "C";
         }
         else if($NtotalTIK < 77){
-            $predikat = "C";
+            $predikatTIK = "C";
         }
         else if ($NtotalTIK < 65) {
-            $predikat = "D";
+            $predikatTIK = "D";
         }
         $tugasMD = 0;
         $UHMD = 0;
@@ -813,22 +813,22 @@ class c_rapor extends CI_Controller
             $NtotalMD = round($totalGuruMD ) + round($NsklhMD );
         }
         if ($NtotalMD >= 89) {
-            $predikat = 'A';
+            $predikatMD = 'A';
         }
         else if ($NtotalMD >= 77) {
-            $predikat = 'B';
+            $predikatMD = 'B';
         }
         else if($NtotalMD > 89){
-            $predikat = 'B';
+            $predikatMD = 'B';
         }
         else if ($NtotalMD >= 65) {
-            $predikat = "C";
+            $predikatMD = "C";
         }
         else if($NtotalMD < 77){
-            $predikat = "C";
+            $predikatMD = "C";
         }
         else if ($NtotalMD < 65) {
-            $predikat = "D";
+            $predikatMD = "D";
         }
         $nilaiSP = ($NtotalSb+$NtotalOr+$NtotalPK+$NtotalQurdis+$NtotalEC+$NtotalEC+$NtotalAA+$NtotalTIK+$NtotalMD)/8;
         //header kanan
@@ -897,11 +897,20 @@ class c_rapor extends CI_Controller
         $pdf->Cell(40,6,'Predikat',1,0, 'C');
         $pdf->Cell(155,6,'Deskripsi',1,1, 'C');
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(40,20,$predikatSS,1,0, 'C');
+        $pdf->Cell(40,14,$predikatSS,1,0, 'C');
         $sikapSosial = $this->m_rapor->getSikapSS($predikatSS)->result();
         foreach ($sikapSosial as $list) {
-            $pdf->Cell(155,20,$list->deskripsi,1,1, 'L');
+            $start_x=$pdf->GetX(); //initial x (start of column position)
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+
+            $cell_width = 155;  //define cell width
+            $cell_height=7;    //define cell height
+            $pdf->MultiCell($cell_width,$cell_height,$list->deskripsi,1, 'L'); //print one cell value
+            $current_x+=$cell_width;                           //calculate position for next cell
+            $pdf->SetXY($current_x, $current_y);
         }
+        $pdf->Cell(35, 17, '', 0, 1, 'L');
         $pdf->SetFont('Arial', '', 10);
 
         $pdf->SetFont('Arial', 'B', 10);
@@ -930,10 +939,18 @@ class c_rapor extends CI_Controller
         else if ($nilaiSP < 65) {
             $predikatSP = "D";
         }
-        $pdf->Cell(40,20,$predikatSP,1,0, 'C');
+        $pdf->Cell(40,14,$predikatSP,1,0, 'C');
         $sikapSpiritual = $this->m_rapor->getSikapSP($predikatSP)->result();
         foreach ($sikapSpiritual as $list) {
-            $pdf->Cell(155,20,$list->deskripsi,1,1, 'L');
+            $start_x=$pdf->GetX(); //initial x (start of column position)
+            $current_y = $pdf->GetY();
+            $current_x = $pdf->GetX();
+
+            $cell_width = 155;  //define cell width
+            $cell_height=7;    //define cell height
+            $pdf->MultiCell($cell_width,$cell_height,$list->deskripsi,1, 'L'); //print one cell value
+            $current_x+=$cell_width;                           //calculate position for next cell
+            $pdf->SetXY($current_x, $current_y);
         }
         $pdf->SetFont('Arial', '', 10);
 
@@ -1044,7 +1061,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'1','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
         $pdf->Cell(15,5,$NtotalPai,'LBR',0,'C',0);
-        $pdf->Cell(20,5,$predikat,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$predikatPai,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
         
         //baris tiga
@@ -1065,35 +1082,35 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'2','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
         $pdf->Cell(15,5,$NtotalPkn,'LBR',0,'C',0);
-        $pdf->Cell(20,5,$predikat,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$predikatPkn,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
 
         //baris empat
         $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Bahasa Indonesia',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalBi,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatBi,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris lima
         $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Matematika (Umum)',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalMtk,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatMtk,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris enam
         $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Sejarah Indonesia',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalSj,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatSj,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris tujuh
         $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Bahasa Inggris',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalIng,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatIng,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         
@@ -1106,7 +1123,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Seni Budaya',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalSb,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatSb,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris 10
@@ -1127,7 +1144,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'2','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
         $pdf->Cell(15,5,$NtotalOr,'LBR',0,'C',0);
-        $pdf->Cell(20,5,$predikat,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$predikatOr,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
         
         //baris 11
@@ -1149,7 +1166,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'3','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
         $pdf->Cell(15,5,$NtotalPK,'LBR',0,'C',0);
-        $pdf->Cell(20,5,$predikat,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$predikatPK,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
 
         //baris 12
@@ -1171,35 +1188,35 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'4','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
         $pdf->Cell(15,5,$NtotalQurdis,'LBR',0,'C',0);
-        $pdf->Cell(20,5,$predikat,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$predikatQurdis,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
 
         //baris 13
         $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'English Conversation',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalEC,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatEC,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris 14
         $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Aqidah Akhlah',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalAA,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatAA,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris 15
         $pdf->Cell(10,5,'7',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Bimbingan TIK',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalTIK,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatTIK,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris 16
         $pdf->Cell(10,5,'8',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Muhadoroh',1,0,'L',0); 
         $pdf->Cell(15,5,$NtotalMD,1,0,'C',0);
-        $pdf->Cell(20,5,$predikat,1,0,'C',0);
+        $pdf->Cell(20,5,$predikatMD,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris 17
@@ -1248,28 +1265,28 @@ class c_rapor extends CI_Controller
                 $NtotalPm = round($totalGuruPm ) + round($NsklhPm );
             }
             if ($NtotalPm >= 89) {
-                $predikat = 'A';
+                $predikatPm = 'A';
             }
             else if ($NtotalPm >= 77) {
-                $predikat = 'B';
+                $predikatPm = 'B';
             }
             else if($NtotalPm > 89){
-                $predikat = 'B';
+                $predikatPm = 'B';
             }
             else if ($NtotalPm >= 65) {
-                $predikat = "C";
+                $predikatPm = "C";
             }
             else if($NtotalPm < 77){
-                $predikat = "C";
+                $predikatPm = "C";
             }
             else if ($NtotalPm < 65) {
-                $predikat = "D";
+                $predikatPm = "D";
             }
             //baris 18
             $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Matematika (Peminatan)',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalPm,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatPm,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
             
             $tugasBio = 0;
@@ -1312,28 +1329,28 @@ class c_rapor extends CI_Controller
                 $NtotalBio = round($totalGuruBio ) + round($NsklhBio );
             }
             if ($NtotalBio >= 89) {
-                $predikat = 'A';
+                $predikatBio = 'A';
             }
             else if ($NtotalBio >= 77) {
-                $predikat = 'B';
+                $predikatBio = 'B';
             }
             else if($NtotalBio > 89){
-                $predikat = 'B';
+                $predikatBio = 'B';
             }
             else if ($NtotalBio >= 65) {
-                $predikat = "C";
+                $predikatBio = "C";
             }
             else if($NtotalBio < 77){
-                $predikat = "C";
+                $predikatBio = "C";
             }
             else if ($NtotalBio < 65) {
-                $predikat = "D";
+                $predikatBio = "D";
             }
             //baris 19
             $pdf->Cell(10,5,'2',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Biologi',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalBio,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatBio,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasFis = 0;
@@ -1376,28 +1393,28 @@ class c_rapor extends CI_Controller
                 $NtotalFis = round($totalGuruFis ) + round($NsklhFis );
             }
             if ($NtotalFis >= 89) {
-                $predikat = 'A';
+                $predikaFis = 'A';
             }
             else if ($NtotalFis >= 77) {
-                $predikat = 'B';
+                $predikatFis = 'B';
             }
             else if($NtotalFis > 89){
-                $predikat = 'B';
+                $predikatFis = 'B';
             }
             else if ($NtotalFis >= 65) {
-                $predikat = "C";
+                $predikatFis = "C";
             }
             else if($NtotalFis < 77){
-                $predikat = "C";
+                $predikatFis = "C";
             }
             else if ($NtotalFis < 65) {
-                $predikat = "D";
+                $predikatFis = "D";
             }
             //baris 20
             $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Fisika',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalFis,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatFis,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasKim = 0;
@@ -1440,28 +1457,28 @@ class c_rapor extends CI_Controller
                 $NtotalKim = round($totalGuruKim ) + round($NsklhKim );
             }
             if ($NtotalKim >= 89) {
-                $predikat = 'A';
+                $predikatKim = 'A';
             }
             else if ($NtotalKim >= 77) {
-                $predikat = 'B';
+                $predikatKim = 'B';
             }
             else if($NtotalKim > 89){
-                $predikat = 'B';
+                $predikatKim = 'B';
             }
             else if ($NtotalKim >= 65) {
-                $predikat = "C";
+                $predikatKim = "C";
             }
             else if($NtotalKim < 77){
-                $predikat = "C";
+                $predikatKim = "C";
             }
             else if ($NtotalKim < 65) {
-                $predikat = "D";
+                $predikatKim = "D";
             }
             //baris 21
             $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Kimia',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalKim,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatKim,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasArab = 0;
@@ -1504,28 +1521,28 @@ class c_rapor extends CI_Controller
                 $NtotalArab = round($totalGuruArab ) + round($NsklhArab );
             }
             if ($NtotalArab >= 89) {
-                $predikat = 'A';
+                $predikatArab = 'A';
             }
             else if ($NtotalArab >= 77) {
-                $predikat = 'B';
+                $predikatArab = 'B';
             }
             else if($NtotalArab > 89){
-                $predikat = 'B';
+                $predikatArab = 'B';
             }
             else if ($NtotalArab >= 65) {
-                $predikat = "C";
+                $predikatArab = "C";
             }
             else if($NtotalArab < 77){
-                $predikat = "C";
+                $predikatArab = "C";
             }
             else if ($NtotalArab < 65) {
-                $predikat = "D";
+                $predikatArab = "D";
             }
             //baris 22
             $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Bahasa dan Sastra Arab',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalArab,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatArab,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasLM = 0;
@@ -1568,28 +1585,28 @@ class c_rapor extends CI_Controller
                 $NtotalLM = round($totalGuruLM ) + round($NsklhLM );
             }
             if ($NtotalLM >= 89) {
-                $predikat = 'A';
+                $predikatLM = 'A';
             }
             else if ($NtotalLM >= 77) {
-                $predikat = 'B';
+                $predikatLM = 'B';
             }
             else if($NtotalLM > 89){
-                $predikat = 'B';
+                $predikatLM = 'B';
             }
             else if ($NtotalLM >= 65) {
-                $predikat = "C";
+                $predikatLM = "C";
             }
             else if($NtotalLM < 77){
-                $predikat = "C";
+                $predikatLM = "C";
             }
             else if ($NtotalLM < 65) {
-                $predikat = "D";
+                $predikatLM = "D";
             }
             //baris 23
             $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalLM,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatLM,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
         }
         else{
@@ -1633,28 +1650,28 @@ class c_rapor extends CI_Controller
                 $NtotalGeo = round($totalGuruGeo ) + round($NsklhGeo );
             }
             if ($NtotalGeo >= 89) {
-                $predikat = 'A';
+                $predikatGeo = 'A';
             }
             else if ($NtotalGeo >= 77) {
-                $predikat = 'B';
+                $predikatGeo = 'B';
             }
             else if($NtotalGeo > 89){
-                $predikat = 'B';
+                $predikatGeo = 'B';
             }
             else if ($NtotalGeo >= 65) {
-                $predikat = "C";
+                $predikatGeo = "C";
             }
             else if($NtotalGeo < 77){
-                $predikat = "C";
+                $predikatGeo = "C";
             }
             else if ($NtotalGeo < 65) {
-                $predikat = "D";
+                $predikatGeo = "D";
             }
             //baris 18
             $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Geografi',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalGeo,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatGeo,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasSos = 0;
@@ -1697,28 +1714,28 @@ class c_rapor extends CI_Controller
                 $NtotalSos = round($totalGuruSos ) + round($NsklhSos );
             }
             if ($NtotalSos >= 89) {
-                $predikat = 'A';
+                $predikatSos = 'A';
             }
             else if ($NtotalSos >= 77) {
-                $predikat = 'B';
+                $predikatSos = 'B';
             }
             else if($NtotalSos > 89){
-                $predikat = 'B';
+                $predikatSos = 'B';
             }
             else if ($NtotalSos >= 65) {
-                $predikat = "C";
+                $predikatSos = "C";
             }
             else if($NtotalSos < 77){
-                $predikat = "C";
+                $predikatSos = "C";
             }
             else if ($NtotalSos < 65) {
-                $predikat = "D";
+                $predikatSos = "D";
             }
             //baris 19
             $pdf->Cell(10,5,'2',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalSos,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatSos,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasEko = 0;
@@ -1761,28 +1778,28 @@ class c_rapor extends CI_Controller
                 $NtotalEko = round($totalGuruEko ) + round($NsklhEko );
             }
             if ($NtotalEko >= 89) {
-                $predikat = 'A';
+                $predikatEko = 'A';
             }
             else if ($NtotalEko >= 77) {
-                $predikat = 'B';
+                $predikatEko = 'B';
             }
             else if($NtotalEko > 89){
-                $predikat = 'B';
+                $predikatEko = 'B';
             }
             else if ($NtotalEko >= 65) {
-                $predikat = "C";
+                $predikatEko = "C";
             }
             else if($NtotalEko < 77){
-                $predikat = "C";
+                $predikatEko = "C";
             }
             else if ($NtotalEko < 65) {
-                $predikat = "D";
+                $predikatEko = "D";
             }
             //baris 20
             $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Ekonomi',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalEko,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatEko,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasSJPM = 0;
@@ -1825,28 +1842,28 @@ class c_rapor extends CI_Controller
                 $NtotalSJPM = round($totalGuruSJPM ) + round($NsklhSJPM );
             }
             if ($NtotalSJPM >= 89) {
-                $predikat = 'A';
+                $predikatSJPM = 'A';
             }
             else if ($NtotalSJPM >= 77) {
-                $predikat = 'B';
+                $predikatSJPM = 'B';
             }
             else if($NtotalSJPM > 89){
-                $predikat = 'B';
+                $predikatSJPM = 'B';
             }
             else if ($NtotalSJPM >= 65) {
-                $predikat = "C";
+                $predikatSJPM = "C";
             }
             else if($NtotalSJPM < 77){
-                $predikat = "C";
+                $predikatSJPM = "C";
             }
             else if ($NtotalSJPM < 65) {
-                $predikat = "D";
+                $predikatSJPM = "D";
             }
             //baris 21
             $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Sejarah',1,0,'L',0); 
             $pdf->Cell(15,5,$NtotalSJPM,1,0,'C',0);
-            $pdf->Cell(20,5,$predikat,1,0,'C',0);
+            $pdf->Cell(20,5,$predikatSJPM,1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
 
             $tugasArab = 0;
@@ -1889,22 +1906,22 @@ class c_rapor extends CI_Controller
                 $NtotalArab = round($totalGuruArab ) + round($NsklhArab );
             }
             if ($NtotalArab >= 89) {
-                $predikat = 'A';
+                $predikatArab = 'A';
             }
             else if ($NtotalArab >= 77) {
-                $predikat = 'B';
+                $predikatArab = 'B';
             }
             else if($NtotalArab > 89){
-                $predikat = 'B';
+                $predikatArab = 'B';
             }
             else if ($NtotalArab >= 65) {
-                $predikat = "C";
+                $predikatArab = "C";
             }
             else if($NtotalArab < 77){
-                $predikat = "C";
+                $predikatArab = "C";
             }
             else if ($NtotalArab < 65) {
-                $predikat = "D";
+                $predikatArab = "D";
             }
             //baris 22
             $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
@@ -1953,22 +1970,22 @@ class c_rapor extends CI_Controller
                 $NtotalBioLM = round($totalGuruBioLM ) + round($NsklhBioLM );
             }
             if ($NtotalBioLM >= 89) {
-                $predikat = 'A';
+                $predikatBioLM = 'A';
             }
             else if ($NtotalBioLM >= 77) {
-                $predikat = 'B';
+                $predikatBioLM = 'B';
             }
             else if($NtotalBioLM > 89){
-                $predikat = 'B';
+                $predikatBioLM = 'B';
             }
             else if ($NtotalBioLM >= 65) {
-                $predikat = "C";
+                $predikatBioLM = "C";
             }
             else if($NtotalBioLM < 77){
-                $predikat = "C";
+                $predikatBioLM = "C";
             }
             else if ($NtotalBioLM < 65) {
-                $predikat = "D";
+                $predikatBioLM = "D";
             }
             //baris 23
             $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
@@ -2052,12 +2069,30 @@ class c_rapor extends CI_Controller
         $pdf->Cell(10,5,'No','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Mata Pelajaran','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(15,5,'Nilai',1,0,'C',0);
-        $pdf->Cell(20,5,'$predikat',1,0,'C',0);
+        $pdf->Cell(20,5,'Predikat',1,0,'C',0);
         $pdf->Cell(105,5,'Deskripsi',1,1,'C',0);
 
         //baris dua
         $pdf->Cell(195,5,'Kelompok A','LBR',1,'L',0);
         $pdf->SetFont('Arial', '', 10);
+        if ($praktekPai >= 89) {
+            $praktekPaiPred = 'A';
+        }
+        else if ($praktekPai >= 77) {
+            $praktekPaiPred = 'B';
+        }
+        else if($praktekPai > 89){
+            $praktekPaiPred = 'B';
+        }
+        else if ($praktekPai >= 65) {
+            $praktekPaiPred = "C";
+        }
+        else if($praktekPai < 77){
+            $praktekPaiPred = "C";
+        }
+        else if ($praktekPai < 65) {
+            $praktekPaiPred = "D";
+        }
         $pdf->Cell(10,5,'','LTR',0,'C',0);  // cell with left and right borders
         $start_x=$pdf->GetX(); //initial x (start of column position)
         $current_y = $pdf->GetY();
@@ -2075,10 +2110,28 @@ class c_rapor extends CI_Controller
         
         $pdf->Cell(10,5,'1','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
-        $pdf->Cell(15,5,'','LBR',0,'C',0);
-        $pdf->Cell(20,5,'','LBR',0,'C',0);
+        $pdf->Cell(15,5,$praktekPai,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$praktekPaiPred,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
         
+        if ($praktekPkn >= 89) {
+            $praktekPknPred = 'A';
+        }
+        else if ($praktekPkn >= 77) {
+            $praktekPknPred = 'B';
+        }
+        else if($praktekPkn > 89){
+            $praktekPknPred = 'B';
+        }
+        else if ($praktekPkn >= 65) {
+            $praktekPknPred = "C";
+        }
+        else if($praktekPkn < 77){
+            $praktekPknPred = "C";
+        }
+        else if ($praktekPkn < 65) {
+            $praktekPknPred = "D";
+        }
         //baris tiga
         $pdf->Cell(10,5,'','LTR',0,'C',0);  // cell with left and right borders
         $start_x=$pdf->GetX(); //initial x (start of column position)
@@ -2096,36 +2149,108 @@ class c_rapor extends CI_Controller
         
         $pdf->Cell(10,5,'2','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
-        $pdf->Cell(15,5,'','LBR',0,'C',0);
-        $pdf->Cell(20,5,'','LBR',0,'C',0);
+        $pdf->Cell(15,5,$praktekPkn,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$praktekPknPred,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
 
+        if ($praktekBi >= 89) {
+            $praktekBiPred = 'A';
+        }
+        else if ($praktekBi >= 77) {
+            $praktekBiPred = 'B';
+        }
+        else if($praktekBi > 89){
+            $praktekBiPred = 'B';
+        }
+        else if ($praktekBi >= 65) {
+            $praktekBiPred = "C";
+        }
+        else if($praktekBi < 77){
+            $praktekBiPred = "C";
+        }
+        else if ($praktekBi < 65) {
+            $praktekBiPred = "D";
+        }
         //baris empat
         $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Bahasa Indonesia',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekBi,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekBiPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekMtk >= 89) {
+            $praktekMtkPred = 'A';
+        }
+        else if ($praktekMtk >= 77) {
+            $praktekMtkPred = 'B';
+        }
+        else if($praktekMtk > 89){
+            $praktekMtkPred = 'B';
+        }
+        else if ($praktekMtk >= 65) {
+            $praktekMtkPred = "C";
+        }
+        else if($praktekMtk < 77){
+            $praktekMtkPred = "C";
+        }
+        else if ($praktekMtk < 65) {
+            $praktekMtkPred = "D";
+        }
         //baris lima
         $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Matematika (Umum)',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekMtk,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekMtkPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekSj >= 89) {
+            $praktekSjPred = 'A';
+        }
+        else if ($praktekSj >= 77) {
+            $praktekSjPred = 'B';
+        }
+        else if($praktekSj > 89){
+            $praktekSjPred = 'B';
+        }
+        else if ($praktekSj >= 65) {
+            $praktekSjPred = "C";
+        }
+        else if($praktekSj < 77){
+            $praktekSjPred = "C";
+        }
+        else if ($praktekSj < 65) {
+            $praktekSjPred = "D";
+        }
         //baris enam
         $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Sejarah Indonesia',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekSj,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekSjPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekIng >= 89) {
+            $praktekIngPred = 'A';
+        }
+        else if ($praktekIng >= 77) {
+            $praktekIngPred = 'B';
+        }
+        else if($praktekIng > 89){
+            $praktekIngPred = 'B';
+        }
+        else if ($praktekIng >= 65) {
+            $praktekIngPred = "C";
+        }
+        else if($praktekIng < 77){
+            $praktekIngPred = "C";
+        }
+        else if ($praktekIng < 65) {
+            $praktekIngPred = "D";
+        }
         //baris tujuh
         $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Bahasa Inggris',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekIng,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekIngPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris delapan
@@ -2133,13 +2258,49 @@ class c_rapor extends CI_Controller
         $pdf->Cell(195,5,'Kelompok B','LBR',1,'L',0);
         $pdf->SetFont('Arial', '', 10);
 
+        if ($praktekSb >= 89) {
+            $praktekSbPred = 'A';
+        }
+        else if ($praktekSb >= 77) {
+            $praktekSbPred = 'B';
+        }
+        else if($praktekSb > 89){
+            $praktekSbPred = 'B';
+        }
+        else if ($praktekSb >= 65) {
+            $praktekSbPred = "C";
+        }
+        else if($praktekSb < 77){
+            $praktekSbPred = "C";
+        }
+        else if ($praktekSb < 65) {
+            $praktekSbPred = "D";
+        }
         //baris sembilan
         $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Seni Budaya',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekSb,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekSbPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekOr >= 89) {
+            $praktekOrPred = 'A';
+        }
+        else if ($praktekOr >= 77) {
+            $praktekOrPred = 'B';
+        }
+        else if($praktekOr > 89){
+            $praktekOrPred = 'B';
+        }
+        else if ($praktekOr >= 65) {
+            $praktekOrPred = "C";
+        }
+        else if($praktekOr < 77){
+            $praktekOrPred = "C";
+        }
+        else if ($praktekOr < 65) {
+            $praktekOrPred = "D";
+        }
         //baris 10
         $pdf->Cell(10,5,'','LTR',0,'C',0);  // cell with left and right borders
         $start_x=$pdf->GetX(); //initial x (start of column position)
@@ -2157,10 +2318,28 @@ class c_rapor extends CI_Controller
         
         $pdf->Cell(10,5,'2','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
-        $pdf->Cell(15,5,'','LBR',0,'C',0);
-        $pdf->Cell(20,5,'','LBR',0,'C',0);
+        $pdf->Cell(15,5,$praktekOr,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$praktekOrPred,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
         
+        if ($praktekPK >= 89) {
+            $praktekPKPred = 'A';
+        }
+        else if ($praktekPK >= 77) {
+            $praktekPKPred = 'B';
+        }
+        else if($praktekPK > 89){
+            $praktekPKPred = 'B';
+        }
+        else if ($praktekPK >= 65) {
+            $praktekPKPred = "C";
+        }
+        else if($praktekPK < 77){
+            $praktekPKPred = "C";
+        }
+        else if ($praktekPK < 65) {
+            $praktekPKPred = "D";
+        }
         //baris 11
         $pdf->Cell(10,5,'','LTR',0,'C',0);  // cell with left and right borders
         $start_x=$pdf->GetX(); //initial x (start of column position)
@@ -2179,10 +2358,28 @@ class c_rapor extends CI_Controller
         
         $pdf->Cell(10,5,'3','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
-        $pdf->Cell(15,5,'','LBR',0,'C',0);
-        $pdf->Cell(20,5,'','LBR',0,'C',0);
+        $pdf->Cell(15,5,$praktekPK,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$praktekPKPred,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
 
+        if ($praktekQurdis >= 89) {
+            $praktekQurdisPred = 'A';
+        }
+        else if ($praktekQurdis >= 77) {
+            $praktekQurdisPred = 'B';
+        }
+        else if($praktekQurdis > 89){
+            $praktekQurdisPred = 'B';
+        }
+        else if ($praktekQurdis >= 65) {
+            $praktekQurdisPred = "C";
+        }
+        else if($praktekQurdis < 77){
+            $praktekQurdisPred = "C";
+        }
+        else if ($praktekQurdis < 65) {
+            $praktekQurdisPred = "D";
+        }
         //baris 12
         $pdf->Cell(10,5,'','LTR',0,'C',0);  // cell with left and right borders
         $start_x=$pdf->GetX(); //initial x (start of column position)
@@ -2201,36 +2398,108 @@ class c_rapor extends CI_Controller
         
         $pdf->Cell(10,5,'4','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'','LBR',0,'C',0); //ga usah diisi
-        $pdf->Cell(15,5,'','LBR',0,'C',0);
-        $pdf->Cell(20,5,'','LBR',0,'C',0);
+        $pdf->Cell(15,5,$praktekQurdis,'LBR',0,'C',0);
+        $pdf->Cell(20,5,$praktekQurdisPred,'LBR',0,'C',0);
         $pdf->Cell(105,5,'','LBR',1,'L',0);
 
+        if ($praktekEC >= 89) {
+            $praktekECPred = 'A';
+        }
+        else if ($praktekEC >= 77) {
+            $praktekECPred = 'B';
+        }
+        else if($praktekEC > 89){
+            $praktekECPred = 'B';
+        }
+        else if ($praktekEC >= 65) {
+            $praktekECPred = "C";
+        }
+        else if($praktekEC < 77){
+            $praktekECPred = "C";
+        }
+        else if ($praktekEC < 65) {
+            $praktekECPred = "D";
+        }
         //baris 13
         $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'English Conversation',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekEC,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekECPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekAA >= 89) {
+            $praktekAAPred = 'A';
+        }
+        else if ($praktekAA >= 77) {
+            $praktekAAPred = 'B';
+        }
+        else if($praktekAA > 89){
+            $praktekAAPred = 'B';
+        }
+        else if ($praktekAA >= 65) {
+            $praktekAAPred = "C";
+        }
+        else if($praktekAA < 77){
+            $praktekAAPred = "C";
+        }
+        else if ($praktekAA < 65) {
+            $praktekAAPred = "D";
+        }
         //baris 14
         $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Aqidah Akhlah',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekAA,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekAAPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekTIK >= 89) {
+            $praktekTIKPred = 'A';
+        }
+        else if ($praktekTIK >= 77) {
+            $praktekTIKPred = 'B';
+        }
+        else if($praktekTIK > 89){
+            $praktekTIKPred = 'B';
+        }
+        else if ($praktekTIK >= 65) {
+            $praktekTIKPred = "C";
+        }
+        else if($praktekTIK < 77){
+            $praktekTIKPred = "C";
+        }
+        else if ($praktekTIK < 65) {
+            $praktekTIKPred = "D";
+        }
         //baris 15
         $pdf->Cell(10,5,'7',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Bimbingan TIK',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekTIK,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekTIKPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
+        if ($praktekMD >= 89) {
+            $praktekMDPred = 'A';
+        }
+        else if ($praktekMD >= 77) {
+            $praktekMDPred = 'B';
+        }
+        else if($praktekMD > 89){
+            $praktekMDPred = 'B';
+        }
+        else if ($praktekMD >= 65) {
+            $praktekMDPred = "C";
+        }
+        else if($praktekMD < 77){
+            $praktekMDPred = "C";
+        }
+        else if ($praktekMD < 65) {
+            $praktekMDPred = "D";
+        }
         //baris 16
         $pdf->Cell(10,5,'8',1,0,'C',0);  // cell with left and right borders
         $pdf->Cell(45,5,'Muhadoroh',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
+        $pdf->Cell(15,5,$praktekMD,1,0,'C',0);
+        $pdf->Cell(20,5,$praktekMDPred,1,0,'C',0);
         $pdf->Cell(105,5,'',1,1,'L',0);
 
         //baris 17
@@ -2238,90 +2507,315 @@ class c_rapor extends CI_Controller
         $pdf->Cell(195,5,'Kelompok C','LBR',1,'L',0);
         $pdf->SetFont('Arial', '', 10);
 
-        //baris 18
-        $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
-        $pdf->Cell(45,5,'Matematika (Peminatan)',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
-        $pdf->Cell(105,5,'',1,1,'L',0);
-        
-        //baris 19
-        $pdf->Cell(10,5,'2',1,0,'C',0);  // cell with left and right borders
-        $pdf->Cell(45,5,'Biologi',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
-        $pdf->Cell(105,5,'',1,1,'L',0);
+        if ($jurusan == "IPA") {
+            if ($praktekPm >= 89) {
+                $praktekPmPred = 'A';
+            }
+            else if ($praktekPm >= 77) {
+                $praktekPmPred = 'B';
+            }
+            else if($praktekPm > 89){
+                $praktekPmPred = 'B';
+            }
+            else if ($praktekPm >= 65) {
+                $praktekPmPred = "C";
+            }
+            else if($praktekPm < 77){
+                $praktekPmPred = "C";
+            }
+            else if ($praktekPm < 65) {
+                $praktekPmPred = "D";
+            }
+            //baris 18
+            $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Matematika (Peminatan)',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekPm,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekPmPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+            
+            if ($praktekBio >= 89) {
+                $praktekBioPred = 'A';
+            }
+            else if ($praktekBio >= 77) {
+                $praktekBioPred = 'B';
+            }
+            else if($praktekBio > 89){
+                $praktekBioPred = 'B';
+            }
+            else if ($praktekBio >= 65) {
+                $praktekBioPred = "C";
+            }
+            else if($praktekBio < 77){
+                $praktekBioPred = "C";
+            }
+            else if ($praktekBio < 65) {
+                $praktekBioPred = "D";
+            }
+            //baris 19
+            $pdf->Cell(10,5,'2',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Biologi',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekBio,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekBioPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
 
-        //baris 20
-        $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
-        $pdf->Cell(45,5,'Fisika',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
-        $pdf->Cell(105,5,'',1,1,'L',0);
+            if ($praktekFis >= 89) {
+                $praktekFisPred = 'A';
+            }
+            else if ($praktekFis >= 77) {
+                $praktekFisPred = 'B';
+            }
+            else if($praktekFis > 89){
+                $praktekFisPred = 'B';
+            }
+            else if ($praktekFis >= 65) {
+                $praktekFisPred = "C";
+            }
+            else if($praktekFis < 77){
+                $praktekFisPred = "C";
+            }
+            else if ($praktekFis < 65) {
+                $praktekFisPred = "D";
+            }
+            //baris 20
+            $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Fisika',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekFis,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekFisPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
 
-        //baris 21
-        $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
-        $pdf->Cell(45,5,'Kimia',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
-        $pdf->Cell(105,5,'',1,1,'L',0);
+            if ($praktekKim >= 89) {
+                $praktekKimPred = 'A';
+            }
+            else if ($praktekKim >= 77) {
+                $praktekKimPred = 'B';
+            }
+            else if($praktekKim > 89){
+                $praktekKimPred = 'B';
+            }
+            else if ($praktekKim >= 65) {
+                $praktekKimPred = "C";
+            }
+            else if($praktekKim < 77){
+                $praktekKimPred = "C";
+            }
+            else if ($praktekKim < 65) {
+                $praktekKimPred = "D";
+            }
+            //baris 21
+            $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Kimia',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekKim,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekKimPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
 
-        //baris 22
-        $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
-        $pdf->Cell(45,5,'Bahasa dan Sastra Arab',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
-        $pdf->Cell(105,5,'',1,1,'L',0);
+            if ($praktekArab >= 89) {
+                $praktekArabPred = 'A';
+            }
+            else if ($praktekArab >= 77) {
+                $praktekArabPred = 'B';
+            }
+            else if($praktekArab > 89){
+                $praktekArabPred = 'B';
+            }
+            else if ($praktekArab >= 65) {
+                $praktekArabPred = "C";
+            }
+            else if($praktekArab < 77){
+                $praktekArabPred = "C";
+            }
+            else if ($praktekArab < 65) {
+                $praktekArabPred = "D";
+            }
+            //baris 22
+            $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Bahasa dan Sastra Arab',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekArab,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekArabPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
 
-        //baris 23
-        $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
-        $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
-        $pdf->Cell(15,5,'',1,0,'C',0);
-        $pdf->Cell(20,5,'',1,0,'C',0);
-        $pdf->Cell(105,5,'',1,1,'L',0);
-        // //baris 18
-        // $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
-        // $pdf->Cell(45,5,'Geografi',1,0,'L',0); 
-        // $pdf->Cell(15,5,'',1,0,'C',0);
-        // $pdf->Cell(20,5,'',1,0,'C',0);
-        // $pdf->Cell(105,5,'',1,1,'L',0);
-        // //baris 19
-        // $pdf->Cell(10,5,'2',1,0,'C',0);  // cell with left and right borders
-        // $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
-        // $pdf->Cell(15,5,'',1,0,'C',0);
-        // $pdf->Cell(20,5,'',1,0,'C',0);
-        // $pdf->Cell(105,5,'',1,1,'L',0);
-        // //baris 20
-        // $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
-        // $pdf->Cell(45,5,'Ekonomi',1,0,'L',0); 
-        // $pdf->Cell(15,5,'',1,0,'C',0);
-        // $pdf->Cell(20,5,'',1,0,'C',0);
-        // $pdf->Cell(105,5,'',1,1,'L',0);
-        // //baris 21
-        // $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
-        // $pdf->Cell(45,5,'Sejarah',1,0,'L',0); 
-        // $pdf->Cell(15,5,'',1,0,'C',0);
-        // $pdf->Cell(20,5,'',1,0,'C',0);
-        // $pdf->Cell(105,5,'',1,1,'L',0);
-        // //baris 22
-        // $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
-        // $pdf->Cell(45,5,'Bahasa dan Sastra Arab',1,0,'L',0); 
-        // $pdf->Cell(15,5,'',1,0,'C',0);
-        // $pdf->Cell(20,5,'',1,0,'C',0);
-        // $pdf->Cell(105,5,'',1,1,'L',0);
-        // //baris 23
-        // $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
-        // $pdf->Cell(45,5,'Biologi',1,0,'L',0); 
-        // $pdf->Cell(15,5,'',1,0,'C',0);
-        // $pdf->Cell(20,5,'',1,0,'C',0);
-        // $pdf->Cell(105,5,'',1,1,'L',0);
+            if ($praktekLM >= 89) {
+                $praktekLMPred = 'A';
+            }
+            else if ($praktekLM >= 77) {
+                $praktekLMPred = 'B';
+            }
+            else if($praktekLM > 89){
+                $praktekLMPred = 'B';
+            }
+            else if ($praktekLM >= 65) {
+                $praktekLMPred = "C";
+            }
+            else if($praktekLM < 77){
+                $praktekLMPred = "C";
+            }
+            else if ($praktekLM < 65) {
+                $praktekLMPred = "D";
+            }
+            //baris 23
+            $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekLM,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekLMPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+        }
+        else{
+            if ($praktekGeo >= 89) {
+                $praktekGeoPred = 'A';
+            }
+            else if ($praktekGeo >= 77) {
+                $praktekGeoPred = 'B';
+            }
+            else if($praktekGeo > 89){
+                $praktekGeoPred = 'B';
+            }
+            else if ($praktekGeo >= 65) {
+                $praktekGeoPred = "C";
+            }
+            else if($praktekGeo < 77){
+                $praktekGeoPred = "C";
+            }
+            else if ($praktekGeo < 65) {
+                $praktekGeoPred = "D";
+            }
+            //baris 18
+            $pdf->Cell(10,5,'1',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Geografi',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekGeo,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekGeoPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+
+            if ($praktekSos >= 89) {
+                $praktekSosPred = 'A';
+            }
+            else if ($praktekSos >= 77) {
+                $praktekSosPred = 'B';
+            }
+            else if($praktekSos > 89){
+                $praktekSosPred = 'B';
+            }
+            else if ($praktekSos >= 65) {
+                $praktekSosPred = "C";
+            }
+            else if($praktekSos < 77){
+                $praktekSosPred = "C";
+            }
+            else if ($praktekSos < 65) {
+                $praktekSosPred = "D";
+            }
+            //baris 19
+            $pdf->Cell(10,5,'2',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekSos,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekSosPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+
+            if ($praktekEko >= 89) {
+                $praktekEkoPred = 'A';
+            }
+            else if ($praktekEko >= 77) {
+                $praktekEkoPred = 'B';
+            }
+            else if($praktekEko > 89){
+                $praktekEkoPred = 'B';
+            }
+            else if ($praktekEko >= 65) {
+                $praktekEkoPred = "C";
+            }
+            else if($praktekEko < 77){
+                $praktekEkoPred = "C";
+            }
+            else if ($praktekEko < 65) {
+                $praktekEkoPred = "D";
+            }
+            //baris 20
+            $pdf->Cell(10,5,'3',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Ekonomi',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekEko,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekEkoPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+
+            if ($praktekSJPM >= 89) {
+                $praktekSJPMPred = 'A';
+            }
+            else if ($praktekSJPM >= 77) {
+                $praktekSJPMPred = 'B';
+            }
+            else if($praktekSJPM > 89){
+                $praktekSJPMPred = 'B';
+            }
+            else if ($praktekSJPM >= 65) {
+                $praktekSJPMPred = "C";
+            }
+            else if($praktekSJPM < 77){
+                $praktekSJPMPred = "C";
+            }
+            else if ($praktekSJPM < 65) {
+                $praktekSJPMPred = "D";
+            }
+            //baris 21
+            $pdf->Cell(10,5,'4',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Sejarah',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekSJPM,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekSJPMPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+
+            if ($praktekArab >= 89) {
+                $praktekArabPred = 'A';
+            }
+            else if ($praktekArab >= 77) {
+                $praktekArabPred = 'B';
+            }
+            else if($praktekArab > 89){
+                $praktekArabPred = 'B';
+            }
+            else if ($praktekArab >= 65) {
+                $praktekArabPred = "C";
+            }
+            else if($praktekArab < 77){
+                $praktekArabPred = "C";
+            }
+            else if ($praktekArab < 65) {
+                $praktekArabPred = "D";
+            }
+            //baris 22
+            $pdf->Cell(10,5,'5',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Bahasa dan Sastra Arab',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekArab,1,0,'C',0);
+            $pdf->Cell(20,5,$praktekArabPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+
+            if ($praktekBioLM >= 89) {
+                $praktekBioLMPred = 'A';
+            }
+            else if ($praktekBioLM >= 77) {
+                $praktekBioLMPred = 'B';
+            }
+            else if($praktekBioLM > 89){
+                $praktekBioLMPred = 'B';
+            }
+            else if ($praktekBioLM >= 65) {
+                $praktekBioLMPred = "C";
+            }
+            else if($praktekBioLM < 77){
+                $praktekBioLMPred = "C";
+            }
+            else if ($praktekBioLM < 65) {
+                $praktekBioLMPred = "D";
+            }
+            //baris 23
+            $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
+            $pdf->Cell(45,5,'Biologi',1,0,'L',0); 
+            $pdf->Cell(15,5,$praktekBioLM,1,0,'C',0);
+            $pdf->Cell(20,5, $praktekBioLMPred,1,0,'C',0);
+            $pdf->Cell(105,5,'',1,1,'L',0);
+        }
 
         //tabel interval
         $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
-        $pdf->Cell(35, 10, 'Tabel interval $predikat berdasarkan KKM', 0, 1, 'L');
+        $pdf->Cell(35, 10, 'Tabel interval Predikat berdasarkan KKM', 0, 1, 'L');
 
         $pdf->Cell(39,5,' ','LTR',0,'L',0);   // empty cell with left,top, and right borders
-        $pdf->Cell(156,5,'$predikat',1,1,'C',0);
+        $pdf->Cell(156,5,'Predikat',1,1,'C',0);
         $pdf->Cell(39,5,'KKM','LBR',0,'C',0);  // cell with left and right borders
         $pdf->Cell(39,5,'D',1,0,'C',0);
         $pdf->Cell(39,5,'C',1,0,'C',0);
@@ -2412,10 +2906,19 @@ class c_rapor extends CI_Controller
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(10,6,'No',1,0, 'C');
         $pdf->Cell(50,6,'Kegiatan Ekstrakurikuler',1,0, 'C');
-        $pdf->Cell(30,6,'$predikat',1,0, 'C');
+        $pdf->Cell(30,6,'Predikat',1,0, 'C');
         $pdf->Cell(105,6,'Keterangan',1,1, 'C');
         $pdf->SetFont('Arial', '', 10);
+        $ekstra = $this->m_rapor->ekstrakurikuler($id)->result();
+        $no = 1;
+        foreach ($ekstra as $list) {
+            $pdf->Cell(10,6,$no,1,0, 'C');
+            $pdf->Cell(50,6,$list->namaEkskul,1,0, 'C');
+            $pdf->Cell(30,6,$list->predikat,1,0, 'C');
+            $pdf->Cell(105,6,$list->ketEkskul,1,1, 'C');
 
+            $no++;
+        }
         //isi
         $pdf->Cell(35, 5, '', 0, 1, 'L');
         $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
@@ -2434,15 +2937,45 @@ class c_rapor extends CI_Controller
         $pdf->SetFont('Arial', 'B', 10); //setting jenis font yang akan digunakan
         $pdf->Cell(35, 10, 'F. KETIDAKHADIRAN', 0, 1, 'L');
 
+        $absen = $this->m_rapor->absensi($id)->result();
+        $izin = 0;
+        $sakit = 0;
+        $alpa = 0;
+        foreach ($absen as $list) {
+            if($list->absen == 'S'){
+                $sakit++;
+            }
+            if($list->absen == 'I'){
+                $izin++;
+            }
+            if($list->absen == 'A'){
+                $alpa++;
+            }
+        }
         //tabel
         $pdf->Cell(10,0,'',0,1);
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(60,6,'      Sakit',1,0, 'L');
-        $pdf->Cell(35,6,':              Hari     ',1,1, 'L');
+        if ($sakit == 0) {
+            $pdf->Cell(35,6,':     0      Hari     ',1,1, 'L');
+        }
+        else{
+            $pdf->Cell(35,6,':     '.$sakit.'      Hari     ',1,1, 'L');
+        }
         $pdf->Cell(60,6,'      Izin',1,0, 'L');
-        $pdf->Cell(35,6,':              Hari     ',1,1, 'L');
+        if ($izin == 0) {
+            $pdf->Cell(35,6,':     0      Hari     ',1,1, 'L');
+        }
+        else{
+            $pdf->Cell(35,6,':     '.$izin.'      Hari     ',1,1, 'L');
+        }
         $pdf->Cell(60,6,'      Tanpa Keterangan',1,0, 'L');
-        $pdf->Cell(35,6,':              Hari     ',1,1, 'L');
+        if ($alpa == 0) {
+            $pdf->Cell(35,6,':     0      Hari     ',1,1, 'L');
+        }
+        else{
+            $pdf->Cell(35,6,':     '.$alpa.'      Hari     ',1,1, 'L');
+        }
         $pdf->SetFont('Arial', '', 10);
 
         date_default_timezone_set('Asia/Jakarta');// change according timezone
@@ -2454,7 +2987,7 @@ class c_rapor extends CI_Controller
         }
 
         //ttd
-        $pdf->SetY(115);
+        $pdf->SetY(145);
         $pdf->SetFont('Arial', '', 10); //setting jenis font yang akan digunakan
         $pdf->Cell(35, 10, 'Mengetahui', 0, 0, 'L');
         $pdf->Cell(95, 0, '', 0, 0, 'L');
@@ -2463,7 +2996,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(95, 0, '', 0, 0, 'L');
         $pdf->Cell(35, 0, 'Wali Kelas', 0, 1, 'L');
         $pdf->Cell(35, 0, '', 0, 0, 'L');
-        $pdf->SetY(140);
+        $pdf->SetY(180);
         $pdf->Cell(35, 3, '..........................', 0, 0, 'L');
         $pdf->Cell(95, 5, '', 0, 0, 'L');
         $pdf->SetFont('Arial', 'B', 10);
@@ -2474,7 +3007,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(35, 5, 'NIP. '.$niWK, 0, 1, 'L');
 
         //tengah
-        $pdf->SetY(150);
+        $pdf->SetY(170);
         $pdf->SetFont('Arial', '', 10); //setting jenis font yang akan digunakan
         $pdf->Cell(70, 5, '', 0, 0, 'L');
         //header kiri
@@ -2482,7 +3015,7 @@ class c_rapor extends CI_Controller
         $pdf->Cell(70, 0, '', 0, 0, 'L');
         $pdf->Cell(35, 0, 'Kepala Sekolah', 0, 1, 'L');
 
-        $pdf->SetY(175);
+        $pdf->SetY(200);
         $pdf->Cell(70, 5, '', 0, 0, 'L');
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(35, 3, 'Sumardi, S.Pd. , M.MM..', 0, 1, 'L');
