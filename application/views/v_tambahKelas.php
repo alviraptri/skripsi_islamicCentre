@@ -58,7 +58,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Keterangan Kelas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6">
-                        <select name="ketKelas" class="select2_single form-control">
+                        <select name="ketKelas" class="select2_single form-control" required>
                           <option value="">Pilih Keterangan</option>
                           <option value="X"> X </option>
                           <option value="XI"> XI </option>
@@ -70,7 +70,7 @@
                       <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Jurusan Kelas <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6">
-                        <select name="jurusanKelas" class="select2_single form-control">
+                        <select name="jurusanKelas" class="select2_single form-control" required>
                           <option value="">Pilih Jurusan</option>
                           <option value="IPA"> IPA </option>
                           <option value="IPS"> IPS </option>

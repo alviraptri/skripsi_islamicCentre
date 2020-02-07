@@ -116,7 +116,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="jk">Jenis Kelamin <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="jk" class="select2_single form-control">
+                          <select name="jk" class="select2_single form-control" required>
                             <option>Pilih Jenis Kelamin</option>
                             <option value="0"> Perempuan </option>
                             <option value="1"> Laki-Laki</option>
@@ -128,7 +128,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Profesi <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="role" id="profesi" onchange = "ShowHideDiv()" class="select2_single form-control">
+                          <select name="role" id="profesi" onchange = "ShowHideDiv()" class="select2_single form-control" required>
                             <option>Pilih Profesi</option>
                             <option value="Admin"> Admin </option>
                             <option value="Guru"> Guru </option>
@@ -140,7 +140,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Kelas <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="kelas" id="kelas" class="select2_single form-control">
+                          <select name="kelas" id="kelas" class="select2_single form-control" required>
                             <option value="">Pilih Kelas</option>
                           <?php foreach ($kls as $listKelas) {?>
                             <option value="<?php echo $listKelas->idKelas ?>"><?php echo$listKelas->ketKelas ?> <?php echo$listKelas->jurusanKelas ?> <?php echo$listKelas->nomorKelas ?></option>
@@ -152,7 +152,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="userRole">Foto Profil <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" name="filefoto">
+                          <input type="file" name="filefoto" required>
                         </div>
                       </div>
                       <div class="ln_solid"></div>

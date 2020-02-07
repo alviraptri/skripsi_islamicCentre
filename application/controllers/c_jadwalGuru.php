@@ -97,7 +97,7 @@ class c_jadwalGuru extends CI_Controller
 					if ($hasilKelas > 0) {
 						$pdf->Cell(2, 0.7, $hasilKelas, 'LBR', 0, 'C');
 					}
-					else {
+					else { 
 						$pdf->Cell(2, 0.7, '-', 'LBR', 0, 'C');
 					}
 					$totalSemua += $hasilKelas; 

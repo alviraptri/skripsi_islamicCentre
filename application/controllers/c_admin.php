@@ -15,6 +15,13 @@ class c_admin extends CI_Controller
 		$data['jmlhGuru'] = $this->m_beranda->hitungGuru();
 		$data['jmlhKls'] = $this->m_beranda->hitungKls();
 		$data['ketKelas'] = $this->m_beranda->getKetKelas()->result();
+		$data['rapor'] = $this->m_beranda->getRapor();
+		$data['nilai'] = $this->m_beranda->getNilaiRapor()->result();
+		$data['guru'] = $this->m_beranda->getNamaGuru()->result();
+		$data['klsGuru'] = $this->m_beranda->getKlsGuru()->result();
+		$data['kls'] = $this->m_beranda->getKelas()->result();
+		$data['ekskul'] = $this->m_beranda->ekstrakurikuler()->result();
+		$data['kuliah'] = $this->m_beranda->getJurusanKuliah()->result();
 		$this->load->view('v_berandaAdmin', $data);
 	}
 
@@ -1913,7 +1920,9 @@ class c_admin extends CI_Controller
 		$cek = $this->m_admin->cek($cekData, "rapor")->num_rows();
 		if ($cek > 0) {
 			echo "<script>alert('Data sudah tersimpan');</script>";
-    		$this->load->view('v_dataRapor');
+			$data['siswa'] = $this->m_admin->viewRapor()->result();
+			$data['cek'] = $this->m_rapor->cekData()->result();
+    		$this->load->view('v_dataRapor', $data);
 		}
 		else {
 			$data = array(

@@ -987,7 +987,7 @@
                       foreach ($nilai as $n) {
                         $semester = $n->semester;
 
-                        if ($n->idMapel == 28) {
+                        if ($n->idMapel == 29) {
                           if ($n->jenisNilai == "Tugas") {
                             $tugasSosLm += $n->nilai;
                           }

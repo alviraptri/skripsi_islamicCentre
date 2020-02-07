@@ -78,7 +78,17 @@
                           <td><?php echo $listSiswa->namaUser ?></td>
                           <td><?php echo $listSiswa->ketKelas ?> <?php echo $listSiswa->jurusanKelas ?> <?php echo $listSiswa->nomorKelas ?></td>
                           <td>
-                            <?php
+                          <a href="<?php echo base_url('c_admin/infoRapor/') . $listSiswa->idSiswa; ?>">
+                              <button data-toggle="tooltip" title="Informasi Nilai" class="btn btn-primary btn-xs">
+                                <i class="fa fa-info" aria-hidden="true"></i> Lihat Nilai
+                              </button>
+                            </a>
+                            <a href="<?php echo base_url('c_rapor/index/') . $listSiswa->idSiswa; ?>" target="_blank">
+                              <button data-toggle="tooltip" title="Lihat Rapor" class="btn btn-success btn-xs">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Lihat Rapor
+                              </button>
+                            </a>
+                            <!-- <?php
                             foreach ($cek as $c) {
                               if ($listSiswa->idSiswa == $c->idSiswa) {?>
                                 <a href="<?php echo base_url('c_admin/infoRapor/') . $listSiswa->idSiswa; ?>">
@@ -105,7 +115,7 @@
                             </a>
                               <?php }
                             }
-                            ?>
+                            ?> -->
                           
                           </td>
                         </tr>

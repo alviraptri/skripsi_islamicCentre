@@ -45,33 +45,49 @@
 
       <!-- page content -->
       <div class="right_col" role="main">
-        <!-- top tiles -->
+        <!-- top tiles done -->
         <div class="row top_tiles">
-          <div class="animated flipInY col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="animated flipInY col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="tile-stats">
               <div class="icon"><i class="fa fa-graduation-cap"></i></div>
               <div class="count"><?php echo $jmlhSiswa; ?></div>
               <h3>Total Siswa</h3>
             </div>
           </div>
-          <div class="animated flipInY col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="animated flipInY col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="tile-stats">
               <div class="icon"><i class="fa fa-user"></i></div>
               <div class="count"><?php echo $jmlhGuru; ?></div>
               <h3>Total Guru</h3>
             </div>
           </div>
-          <div class="animated flipInY col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="animated flipInY col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="tile-stats">
               <div class="icon"><i class="fa fa-institution"></i></div>
               <div class="count"><?php echo $jmlhKls; ?></div>
               <h3>Total Kelas</h3>
             </div>
           </div>
+          <div class="animated flipInY col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <?php
+            $total = 0;
+            $avg = 0;
+            foreach ($nilai as $n) {
+              $total += $n->totalNilai;
+            }
+            $avg = $total / $rapor;
+            ?>
+            <div class="tile-stats">
+              <div class="icon"><i class="fa fa-bar-chart"></i></div>
+              <div class="count"><?php echo round($avg); ?></div>
+              <h3>Rata-rata Nilai</h3>
+            </div>
+          </div>
         </div>
-        <!-- /top tiles -->
+        <!-- /top tiles done -->
         <br />
 
+        <!-- ranking paralel dan nilai tertinggi -->
         <div class="row">
           <div class="col-md-6 col-sm-6  ">
             <div class="x_panel">
@@ -88,13 +104,14 @@
                     </select></li>
                   <li>&nbsp;</li>
                   <li>
-                    <select class="form-control" id="jurusanId">
-                      <option value=""> Jurusan </option>
-                    </select>
+
                   </li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
+              <select class="form-control" id="jurusanId">
+                <option value=""> Jurusan </option>
+              </select>
               <div class="x_content">
 
                 <table class="table">
@@ -119,16 +136,23 @@
               <div class="x_title">
                 <h2>Nilai Tertinggi</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                  <li></li>
-                  <li></li>
+                  <li><select class="form-control" id="kelasId">
+                      <option value=""> Kelas </option>
+                      <?php
+                      foreach ($ketKelas as $list) { ?>
+                        <option value="<?php echo $list->ketKelas ?>"><?php echo $list->ketKelas ?> </option>
+                      <?php } ?>
+                    </select></li>
+                  <li>&nbsp;</li>
                   <li>
-                    <select class="form-control">
-                      <option value=""> Bahasa Indonesia </option>
-                    </select>
+
                   </li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
+              <select class="form-control" id="mapelId">
+                <option value=""> Mata Pelajaran </option>
+              </select>
               <div class="x_content">
 
                 <table class="table">
@@ -139,32 +163,8 @@
                       <th>Kelas</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Alvira Putri Yudini</td>
-                      <td>X IPA 2</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Debora Margareta</td>
-                      <td>X IPA 1</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Eugenius Rudolf Pranoto</td>
-                      <td>X IPA 1</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>Sanchia Enola</td>
-                      <td>X IPA 1</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>Velita Windasari</td>
-                      <td>X IPA 2</td>
-                    </tr>
+                  <tbody id="nilaiId">
+
                   </tbody>
                 </table>
 
@@ -172,193 +172,80 @@
             </div>
           </div>
         </div>
+        <!-- ranking paralel dan nilai tertinggi -->
+
         <div class="row">
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile fixed_height_320">
               <div class="x_title">
-                <h2>App Versions</h2>
+                <h2>Ranking Kelas</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  <li>
                   </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
+                  <li>
                   </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  <li><select class="form-control" id="klsId" name="kls">
+                      <option value=""> Kelas </option>
+                      <?php
+                      foreach ($kls as $list) { ?>
+                        <option value="<?php echo $list->idKelas ?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas ?></option>
+                      <?php } ?>
+                      </select>
                   </li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <h4>App Usage across versions</h4>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>0.1.5.2</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>123k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
 
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>0.1.5.3</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>53k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>0.1.5.4</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>23k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>0.1.5.5</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>3k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>0.1.5.6</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>1k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Nama</th>
+                        </tr>
+                      </thead>
+                      <tbody id="namaSiswaId">
+                      </tbody>
+                    </table>
 
-              </div>
+                  </div>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel tile fixed_height_320 overflow_hidden">
+            <div class="x_panel tile fixed_height_320">
               <div class="x_title">
-                <h2>Device Usage</h2>
+                <h2>Ranking Terendah</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  <li>
                   </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
+                  <li>
                   </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  <li><select class="form-control" id="klssId" name="kls">
+                      <option value=""> Kelas </option>
+                      <?php
+                      foreach ($kls as $list) { ?>
+                        <option value="<?php echo $list->idKelas ?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas ?></option>
+                      <?php } ?>
+                      </select>
                   </li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <table class="" style="width:100%">
-                  <tr>
-                    <th style="width:37%;">
-                      <p>Top 5</p>
-                    </th>
-                    <th>
-                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                        <p class="">Device</p>
-                      </div>
-                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                        <p class="">Progress</p>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                    </td>
-                    <td>
-                      <table class="tile_info">
+
+                    <table class="table table-striped">
+                      <thead>
                         <tr>
-                          <td>
-                            <p><i class="fa fa-square blue"></i>IOS </p>
-                          </td>
-                          <td>30%</td>
+                          <th>#</th>
+                          <th>Nama</th>
                         </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square green"></i>Android </p>
-                          </td>
-                          <td>10%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square purple"></i>Blackberry </p>
-                          </td>
-                          <td>20%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square aero"></i>Symbian </p>
-                          </td>
-                          <td>15%</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square red"></i>Others </p>
-                          </td>
-                          <td>30%</td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+                      </thead>
+                      <tbody id="namaaSiswaId">
+                      </tbody>
+                    </table>
+
+                  </div>
             </div>
           </div>
 
@@ -366,393 +253,152 @@
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile fixed_height_320">
               <div class="x_title">
-                <h2>Quick Settings</h2>
+                <h2>Total Absensi</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  <li>
                   </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
+                  <li>
                   </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  <li><select class="form-control" id="absenKlsId" name="kls">
+                      <option value=""> Kelas </option>
+                      <?php
+                      foreach ($kls as $list) { ?>
+                        <option value="<?php echo $list->idKelas ?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas ?></option>
+                      <?php } ?>
+                      </select>
                   </li>
                 </ul>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <div class="dashboard-widget-content">
-                  <ul class="quick-list">
-                    <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
-                    </li>
-                    <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
-                    </li>
-                    <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                    <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                    </li>
-                    <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                    <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                    </li>
-                    <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
-                    </li>
-                  </ul>
 
-                  <div class="sidebar-widget">
-                    <h4>Profile Completion</h4>
-                    <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
-                    <div class="goal-wrapper">
-                      <span id="gauge-text" class="gauge-value pull-left">0</span>
-                      <span class="gauge-value pull-left">%</span>
-                      <span id="goal-text" class="goal-value pull-right">100%</span>
-                    </div>
+              <select class="form-control" id="absensiId" name="kls">
+                      <option value=""> Absensi </option>
+                      </select>
+                      <br>
+                      <h1 style="font-size: 100px" id="hslAbsenId"></h1>
+                      <p><center>Siswa</center></p>
+
                   </div>
-                </div>
-              </div>
             </div>
           </div>
 
         </div>
 
-
         <div class="row">
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Recent Activities <small>Sessions</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <div class="dashboard-widget-content">
 
-                  <ul class="list-unstyled timeline widget">
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="x_panel">
+                <div class="x_title">
+                  <h2>Ekstrakurikuler Siswa </h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="dashboard-widget-content">
+
+                    <ul class="list-unstyled timeline widget">
+                      <?php
+                      foreach ($ekskul as $e) {?>
+                      
+                      <li>
+                        <div class="block">
+                          <div class="block_content">
+                            <h2 class="title">
+                                              <?= $e->namaEkskul?>
+                                          </h2>
                           </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
                         </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                      </li>
+                      <?php }
+                      ?>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
 
 
-          <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="row">
-
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Visitors location <small>geo-presentation</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    <h2>Jurusan Kuliah Siswa</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <div class="dashboard-widget-content">
-                      <div class="col-md-4 hidden-small">
-                        <h2 class="line_30">125.7k Views from 60 countries</h2>
 
-                        <table class="countries_list">
-                          <tbody>
-                            <tr>
-                              <td>United States</td>
-                              <td class="fs15 fw700 text-right">33%</td>
-                            </tr>
-                            <tr>
-                              <td>France</td>
-                              <td class="fs15 fw700 text-right">27%</td>
-                            </tr>
-                            <tr>
-                              <td>Germany</td>
-                              <td class="fs15 fw700 text-right">16%</td>
-                            </tr>
-                            <tr>
-                              <td>Spain</td>
-                              <td class="fs15 fw700 text-right">11%</td>
-                            </tr>
-                            <tr>
-                              <td>Britain</td>
-                              <td class="fs15 fw700 text-right">10%</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
-                    </div>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Nama Jurusan dan Universitas</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $num = 1;
+                        foreach ($kuliah as $k) { ?>
+                          <tr>
+                            <th scope="row"><?= $num ?></th>
+                            <td><?= $k->namaAlternatif ?></td>
+                          </tr>
+                        <?php $num++;
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+
                   </div>
                 </div>
               </div>
 
             </div>
+          </div>
+
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="row">
-
-
-              <!-- Start to do list -->
-              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>To Do List <small>Sample tasks</small></h2>
+                    <h2>Rekomendasi</h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                  <li>
+                  </li>
+                  <li>
+                  </li>
+                  <li><select class="form-control" id="idKelas" name="kls">
+                      <option value=""> Kelas </option>
+                      <?php
+                      foreach ($kls as $list) { ?>
+                        <option value="<?php echo $list->idKelas ?>"><?php echo $list->ketKelas?> <?php echo $list->jurusanKelas?> <?php echo $list->nomorKelas ?></option>
+                      <?php } ?>
+                      </select>
+                  </li>
+                </ul>
                     <div class="clearfix"></div>
                   </div>
+                  
                   <div class="x_content">
+                  <select class="form-control" id="namaId" name="kls">
+                      <option value=""> Nama Siswa </option>
+                      </select>
+<br>
+                    <table class="table table-striped">
+                      <tbody id="rekomendasiId">
+                      </tbody>
+                    </table>
 
-                    <div class="">
-                      <ul class="to_do">
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Schedule meeting with new client </p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Create email address for new intern</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Create email address for new intern</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                        </li>
-                        <li>
-                          <p>
-                            <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
-              <!-- End to do list -->
 
-              <!-- start of weather widget -->
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Daily active users <small>Sessions</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="temperature"><b>Monday</b>, 07:30 AM
-                          <span>F</span>
-                          <span><b>C</b></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="weather-icon">
-                          <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="weather-text">
-                          <h2>Texas <br><i>Partly Cloudy Day</i></h2>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="weather-text pull-right">
-                        <h3 class="degrees">23</h3>
-                      </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="row weather-days">
-                      <div class="col-sm-2">
-                        <div class="daily-weather">
-                          <h2 class="day">Mon</h2>
-                          <h3 class="degrees">25</h3>
-                          <canvas id="clear-day" width="32" height="32"></canvas>
-                          <h5>15 <i>km/h</i></h5>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="daily-weather">
-                          <h2 class="day">Tue</h2>
-                          <h3 class="degrees">25</h3>
-                          <canvas height="32" width="32" id="rain"></canvas>
-                          <h5>12 <i>km/h</i></h5>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="daily-weather">
-                          <h2 class="day">Wed</h2>
-                          <h3 class="degrees">27</h3>
-                          <canvas height="32" width="32" id="snow"></canvas>
-                          <h5>14 <i>km/h</i></h5>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="daily-weather">
-                          <h2 class="day">Thu</h2>
-                          <h3 class="degrees">28</h3>
-                          <canvas height="32" width="32" id="sleet"></canvas>
-                          <h5>15 <i>km/h</i></h5>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="daily-weather">
-                          <h2 class="day">Fri</h2>
-                          <h3 class="degrees">28</h3>
-                          <canvas height="32" width="32" id="wind"></canvas>
-                          <h5>11 <i>km/h</i></h5>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="daily-weather">
-                          <h2 class="day">Sat</h2>
-                          <h3 class="degrees">26</h3>
-                          <canvas height="32" width="32" id="cloudy"></canvas>
-                          <h5>10 <i>km/h</i></h5>
-                        </div>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <!-- end of weather widget -->
             </div>
           </div>
         </div>
+
+
+
       </div>
       <!-- /page content -->
 
@@ -783,7 +429,7 @@
             var i;
             html = '<option value=""> Jurusan </option>';
             for (i = 0; i < data.length; i++) {
-              html += '<option value="'+data[i].jurusanKelas+'"> '+data[i].jurusanKelas+' </option>';
+              html += '<option value="' + data[i].jurusanKelas + '"> ' + data[i].jurusanKelas + ' </option>';
             }
             $('#jurusanId').html(html);
           }
@@ -794,11 +440,13 @@
       //view mapel dan kelas dan id jadwal
       $('#jurusanId').change(function() {
         var jurusan = $(this).val();
+        var ket = $('#keteranganId').val();
         $.ajax({
           url: "<?php echo site_url('c_beranda/getNilaiSiswa'); ?>",
           method: "POST",
           data: {
-            jurusan: jurusan
+            jurusan: jurusan,
+            ket: ket
           },
           async: true,
           dataType: 'JSON',
@@ -807,13 +455,237 @@
             var i;
             var number = 1;
             for (i = 0; i < data.length; i++) {
-              html += '<tr>'+
-                      '<td>'+number+'</td>'+
-                      '<td>'+data[i].namaUser+'</td>'+
-                      '<td>'+data[i].ketKelas+' '+data[i].jurusanKelas+' '+data[i].nomorKelas+'</td>'+
-                    '</tr>';
+              html += '<tr>' +
+                '<td>' + number + '</td>' +
+                '<td>' + data[i].namaUser + '</td>' +
+                '<td>' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</td>' +
+                '</tr>';
+              number++;
             }
             $('#rankingId').html(html);
+          }
+        });
+        return false;
+      });
+
+      $('#kelasId').change(function() {
+        var kls = $(this).val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getMapel'); ?>",
+          method: "POST",
+          data: {
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            html = '<option value=""> Mata Pelajaran </option>';
+            for (i = 0; i < data.length; i++) {
+              html += '<option value="' + data[i].idMapel + '"> ' + data[i].namaMapel + ' </option>';
+            }
+            $('#mapelId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#mapelId').change(function() {
+        var mapel = $(this).val();
+        var kls = $('#kelasId').val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getHasilNilai'); ?>",
+          method: "POST",
+          data: {
+            mapel: mapel,
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            var number = 1;
+            for (i = 0; i < data.length; i++) {
+              html += '<tr>' +
+                '<td>' + number + '</td>' +
+                '<td>' + data[i].namaUser + '</td>' +
+                '<td>' + data[i].ketKelas + ' ' + data[i].jurusanKelas + ' ' + data[i].nomorKelas + '</td>' +
+                '</tr>';
+              number++;
+            }
+            $('#nilaiId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#klsId').change(function() {
+        var kls = $(this).val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getNamaSiswa'); ?>",
+          method: "POST",
+          data: {
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            var number = 1;
+            for (i = 0; i < data.length; i++) {
+              html += '<tr>' +
+                '<td>' + number + '</td>' +
+                '<td>' + data[i].namaUser + '</td>' +
+                '</tr>';
+              number++;
+            }
+            $('#namaSiswaId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#klssId').change(function() {
+        var kls = $(this).val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getNilaiTerendah'); ?>",
+          method: "POST",
+          data: {
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            var number = 1;
+            for (i = 0; i < data.length; i++) {
+              html += '<tr>' +
+                '<td>' + number + '</td>' +
+                '<td>' + data[i].namaUser + '</td>' +
+                '</tr>';
+              number++;
+            }
+            $('#namaaSiswaId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#absenKlsId').change(function() {
+        var kls = $(this).val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getJenisAbsen'); ?>",
+          method: "POST",
+          data: {
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            var number = 1;
+            var ket = '';
+            html = '<option value=""> Absensi </option>';
+            for (i = 0; i < data.length; i++) {
+              if (data[i].absen == "H") {
+                ket = "Hadir";
+              }
+              else if (data[i].absen == "A") {
+                ket = "Alpa";
+              }
+              else if (data[i].absen == "S") {
+                ket = "Sakit";
+              }
+              else if (data[i].absen == "I") {
+                ket = "Izin";
+              }
+              html += '<option value="' + data[i].absen + '"> ' + ket + ' </option>';
+            }
+            $('#absensiId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#absensiId').change(function() {
+        var absen = $(this).val();
+        var kls = $('#absenKlsId').val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getJmlhAbsen'); ?>",
+          method: "POST",
+          data: {
+            absen: absen,
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+              html += '<center>'+data.length+'</center>';
+            $('#hslAbsenId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#idKelas').change(function() {
+        var kls = $(this).val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getSiswa'); ?>",
+          method: "POST",
+          data: {
+            kls: kls
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            html = '<option value=""> Nama Siswa </option>';
+            for (i = 0; i < data.length; i++) {
+              html += '<option value="' + data[i].idSiswa + '"> ' + data[i].namaUser + ' </option>';
+            }
+            $('#namaId').html(html);
+          }
+        });
+        return false;
+      });
+
+      //view mapel dan kelas dan id jadwal
+      $('#namaId').change(function() {
+        var id = $(this).val();
+        $.ajax({
+          url: "<?php echo site_url('c_beranda/getRekomendasi'); ?>",
+          method: "POST",
+          data: {
+            id: id
+          },
+          async: true,
+          dataType: 'JSON',
+          success: function(data) {
+            var html = '';
+            var i;
+            var number = 1;
+            for (i = 0; i < data.length; i++) {
+              html += '<tr>' +
+                '<td>' + number + '</td>' +
+                '<td>' + data[i].namaAlternatif + '</td>' +
+                '</tr>';
+              number++;
+            }
+            $('#rekomendasiId').html(html);
           }
         });
         return false;
