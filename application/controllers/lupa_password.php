@@ -62,8 +62,8 @@
    
        $data = array(  
          'title'=> 'Halaman Reset Password | Tutorial reset password CodeIgniter @ https://recodeku.blogspot.com',  
-         'nama'=> $user_info->nama,   
-         'email'=>$user_info->email,   
+         'nama'=> $user_info->namaUser,   
+         'email'=>$user_info->emailUser,   
          'token'=>$this->base64url_encode($token)  
        );  
          
@@ -78,7 +78,7 @@
          $cleanPost = $this->security->xss_clean($post);          
          $hashed = md5($cleanPost['password']);          
          $cleanPost['password'] = $hashed;  
-         $cleanPost['id_user'] = $user_info->id_user;  
+         $cleanPost['id_user'] = $user_info->nomorInduk;  
          unset($cleanPost['passconf']);          
          if(!$this->m_login->updatePassword($cleanPost)){  
            $this->session->set_flashdata('sukses', 'Update password gagal.');  

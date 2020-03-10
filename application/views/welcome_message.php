@@ -21,7 +21,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<base href="../../../../">
 
 		<!--end::Base Path -->
-		<meta charset="utf-8" />
+		<meta charset="utf-8" /> 
 		<title>Information Academic Islamic Centre | Halaman Masuk</title>
 		<meta name="description" content="Login page example">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -141,7 +141,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											<div class="col kt-align-left">
 											</div>
 											<div class="col kt-align-right">
-												<a href="javascript:;" id="kt_login_forgot" class="kt-link">Lupa Kata Sandi ?</a>
+											<a href="<?php echo base_url('c_login/lupaKataSandi'); ?>" class="kt-login__link">Lupa Kata Sandi ?</a>
 											</div>
 										</div>
 										<div class="kt-login__actions">

@@ -215,7 +215,7 @@
             var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
             var day = d.getDate();
             var monthIndex = d.getMonth();
-            var year = d.getFullYear();
+            var year = d.getFullYear(); 
 
             return day + ' ' + monthNames[monthIndex] + ' ' + year;
         }

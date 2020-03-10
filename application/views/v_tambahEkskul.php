@@ -137,7 +137,17 @@
                                             <input type="hidden" name="counter[]" value="0">
                                             <!-- <input name="id" id="id" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly> -->
                                             <label>Ekstrakurikuler</label>
-                                            <input type="text" name="eks0" id="eks" class="form-control">
+                                            <select name="eks0" id="eks" class="form-control">
+                                                <option value="-">Pilih</option>
+                                                <option value="OSIS">OSIS</option>
+                                                <option value="ROHIS">ROHIS</option>
+                                                <option value="Basket">Basket</option>
+                                                <OPtion value="Futsal">Futsal</OPtion>
+                                                <option value="Voli">Voli</option>
+                                                <option value="Tari Saman">Tari Saman</option>
+                                                <option value="Paskibra">Paskibra</option>
+                                                <option value="Pramuka">Pramuka</option>
+                                            </select>
                                         </div>
                                         <div class="col-lg-2">
                                             <label class="">Predikat</label>
@@ -223,23 +233,27 @@
                         console.log(data);
                         var html = '';
                         for (var i = 0; i < data.nama.length; i++) {
-                            if(data.nama[i].status) {
+                            var flag = false;
+                                for (var j = 0; j < data.eks.length; j++) {
+                                    if (data.eks[j].idSiswa == data.nama[i].idSiswa) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                            if (flag == true) {
                                 html += '<tr>' +
                                     '<td> <input type="text" name="id" value="" hidden> ' + data.nama[i].namaUser + ' </td>' +
-                                    '<td></td>' +
-                                    '<td>' +
-                                    '<a href="javascript:;" title="Edit" class="btn btn-info btn-xs item_add" data="' + data.nama[i].idSiswa + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a>' +
-                                    '</td>' +
+                                    '<td>Data Tersimpan</td>' +
+                                    '<td><button class="btn btn-info btn-xs item_add" disabled>' +
+                                        '<i class="fa fa-plus" aria-hidden="true"></i></button></td>' +
                                     '</tr>';
-                            }
-                            else {
+                            } else {
                                 html += '<tr>' +
                                     '<td> <input type="text" name="id" value="" hidden> ' + data.nama[i].namaUser + ' </td>' +
-                                    '<td>No Data</td>' +
+                                    '<td>Tidak Ada Data</td>' +
                                     '<td>' +
-                                    '<a href="javascript:;" title="Edit" class="btn btn-info btn-xs item_add" data="' + data.nama[i].idSiswa + '">' +
-                                    '<i class="fa fa-plus" aria-hidden="true"></i></a>' +
+                                    '<a href="javascript:;" title="Edit" class="item_add" data="' + data.nama[i].idSiswa + '">' +
+                                    '<button type="button" class="btn btn-info btn-xs"><i class="fa fa-plus" aria-hidden="true"></i></button></a>' +
                                     '</td>' +
                                     '</tr>';
                             }
@@ -302,12 +316,21 @@
             cols += '<div class="form-group row">';
             cols += '<div class="col-lg-4">';
             cols += '<input type="hidden" name="counter[]" value="' + counter + '">';
-            // cols += '<input name="id" id="id" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>';
-            cols += '<input type="text" name="eks'+ counter +'" id="eks" class="form-control">';
+            cols += '<select name="eks'+counter+'" id="eks" class="form-control">';
+            cols += '<option value="-">Pilih</option>';
+            cols += '<option value="OSIS">OSIS</option>';
+            cols += '<option value="ROHIS">ROHIS</option>';
+            cols += '<option value="Basket">Basket</option>';
+            cols += '<OPtion value="Futsal">Futsal</OPtion>';
+            cols += '<option value="Voli">Voli</option>';
+            cols += '<option value="Tari Saman">Tari Saman</option>';
+            cols += '<option value="Paskibra">Paskibra</option>';
+            cols += '<option value="Pramuka">Pramuka</option>';
+            cols += '</select>';
             cols += '</div>';
             cols += '<div class="col-lg-2">';
             cols += '<div class="kt-input-icon">';
-            cols += '<select name="predikat'+ counter +'" id="predikat" class="form-control">';
+            cols += '<select name="predikat' + counter + '" id="predikat" class="form-control">';
             cols += '<option value="-">Pilih</option>';
             cols += '<option value="A">A</option>';
             cols += '<option value="B">B</option>';
@@ -317,7 +340,7 @@
             cols += '</div>';
             cols += '<div class="col-lg-6">';
             cols += '<div class="kt-input-icon">';
-            cols += '<input type="text" name="ket'+ counter +'" id="ket" class="form-control">';
+            cols += '<input type="text" name="ket' + counter + '" id="ket" class="form-control">';
             cols += '</div>';
             cols += '</div>';
             cols += '</div>';

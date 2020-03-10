@@ -143,5 +143,5 @@ class m_rekomendasi extends CI_Model
         JOIN alternatif ON alternatif.idAlternatif = rankingrekomendasi.idAlternatif
         ORDER BY rankingrekomendasi.idRanking DESC LIMIT 3");
         return $query;
-    }
+    } 
 }

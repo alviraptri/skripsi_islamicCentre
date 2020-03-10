@@ -363,7 +363,7 @@
                             $('[name="idM_edit"]').val("");
                             $('[name="mapel_edit"]').val("");
                             $('[name="jenis_edit"]').val("");
-                        $('#ModalaEdit').modal('hide');
+                        $('#ModalEdit').modal('hide');
                     }
                 });
                 return false;

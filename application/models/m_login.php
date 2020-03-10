@@ -12,7 +12,7 @@ class m_login extends CI_Model
         return $this->db->get_where($table, $where);
     }
 
-    //lupa kata sandi
+    //lupa kata sandi 
      //Start: method tambahan untuk reset code  
    public function getUserInfo($id)  
    {  

@@ -76,8 +76,8 @@
                           <td><?php echo $list->sikap ?></td>
                           <td><?php echo $list->predikat ?></td>
                           <td><?php echo $list->deskripsi ?></td>
-                          <td><a data-target="#modal_edit<?php echo $list->idKompetensi;?>" data-toggle="modal" title="Edit" class="btn btn-info btn-xs">
-                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                          <td><a data-target="#modal_edit<?php echo $list->idKompetensi;?>" data-toggle="modal" title="Edit" >
+                                  <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                               </a></td>
                         </tr>
                       <?php } ?>
@@ -97,8 +97,8 @@
           $id = $list->idKompetensi;
           $sikap = $list->sikap;
           $predikat = $list->predikat;
-          $deskripsi = $list->deskripsi;
-        } ?>
+          $deskripsi = $list->deskripsi;?>
+        
         <div class="modal fade bs-example-modal-lg" id="modal_edit<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-        
+            <?php } ?>
     <!--END MODAL ADD BARANG-->
 
         <!-- footer content -->

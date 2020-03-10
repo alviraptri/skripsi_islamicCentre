@@ -274,18 +274,9 @@ class m_admin extends CI_Model
         ->where('datasiswa.idKelas = "'.$idKelas.'"');
         return $this->db->get();
     }
-    function simpanMulti($data)
-    {
-            $result = array();
-            for($i = 0; $i <= count($data); $i++) {
-                $result[] = array(
-                    'idInfo' => "",
-                    'idSiswa' => $_POST['idSiswa'][$i],
-                    'jumlah' => $_POST['jumlah'][$i],
-                    'statusInfo' => "1",
-                );
-            }
-            $this->db->insert_batch('informasispp', $result);
+    function simpanMulti($result, $table)
+    { 
+            $this->db->insert($table, $result);
     }
     function getDataInfo($idKelas)
     {
@@ -324,15 +315,19 @@ class m_admin extends CI_Model
         $query = $this->db->query('SELECT DISTINCT tanggal FROM absensi WHERE idMapel = "'.$id.'"');
         return $query;
     }
-    function klsAbsen($tgl)
+    function klsAbsen($tgl, $mapel, $guru)
     {
         $query=$this->db->query("SELECT DISTINCT absensi.idJadwal, absensi.tanggal, jadwal.idJadwal, jadwal.idKelas, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, 
         kelas.ketKelas, kelas.nomorKelas
         FROM jadwal
         JOIN absensi ON absensi.idJadwal = jadwal.idJadwal
         JOIN kelas ON kelas.idKelas = jadwal.idKelas
-        WHERE absensi.tanggal = '".$tgl."'");
+        WHERE absensi.tanggal = '".$tgl."' AND absensi.nomorInduk = '".$guru."' AND absensi.idMapel = '".$mapel."'");
         return $query;
+    }
+    function getNamaCatatan($id)
+    {
+        return $this->db->query("SELECT * FROM `datasiswa` JOIN user ON user.nomorInduk = datasiswa.nomorInduk WHERE idKelas ='".$id."'");
     }
     function getAbsensi($id, $tgl)
     {
@@ -683,10 +678,9 @@ class m_admin extends CI_Model
     }
     function viewCatatan($idKelas)
     {
-        $query = $this->db->query("SELECT catatan_walikelas.idCatatan, catatan_walikelas.idSiswa, catatan_walikelas.catatan, 
-        datasiswa.idSiswa, datasiswa.idKelas 
-        FROM datasiswa 
-        JOIN catatan_walikelas ON catatan_walikelas.idSiswa = datasiswa.idSiswa 
+        $query = $this->db->query("SELECT * FROM `datasiswa` 
+        JOIN catatan_walikelas ON datasiswa.idSiswa = catatan_walikelas.idSiswa 
+        JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
         WHERE datasiswa.idKelas = '".$idKelas."'");
         return $query;
     }
@@ -710,9 +704,7 @@ class m_admin extends CI_Model
     }
     function getEditEkskul($id)
     {
-        return $this->db->query("SELECT ekskul_siswa.idSiswa, ekskul_siswa.namaEkskul, ekskul_siswa.predikat, ekskul_siswa.ketEkskul, 
-        datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, user.namaUser 
-        FROM datasiswa 
+        return $this->db->query("SELECT * FROM datasiswa 
         JOIN ekskul_siswa ON ekskul_siswa.idSiswa = datasiswa.idSiswa 
         JOIN user ON user.nomorInduk = datasiswa.nomorInduk 
         WHERE ekskul_siswa.idEkskul = '".$id."'");
@@ -770,15 +762,6 @@ class m_admin extends CI_Model
     }
     function editBukuNilai($id)
     {
-        // $this->db->select('bukunilai.idSiswa,bukunilai.idKelas, bukunilai.tanggal, bukunilai.nilai, datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, 
-        // user.namaUser, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, datasiswa.idKelas, bukunilai.idBukuNilai')
-        // ->from('datasiswa')
-        // ->join('bukunilai', 'bukunilai.idSiswa = datasiswa.idSiswa')
-        // ->join('user', 'user.nomorInduk = datasiswa.nomorInduk')
-        // ->join('kelas', 'kelas.idKelas = datasiswa.idKelas')
-        // ->where($where);
-
-        // return $this->db->get();
         return $this->db->query('SELECT bukunilai.idSiswa,bukunilai.idKelas, bukunilai.tanggal, bukunilai.nilai, datasiswa.idSiswa, datasiswa.nomorInduk, user.nomorInduk, 
         user.namaUser, kelas.idKelas, kelas.ketKelas, kelas.jurusanKelas, kelas.nomorKelas, datasiswa.idKelas, bukunilai.idBukuNilai 
         FROM datasiswa 

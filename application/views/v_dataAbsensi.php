@@ -180,6 +180,15 @@
 
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
+    function formatDate(date) {
+            var d = new Date(date);
+            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            var day = d.getDate();
+            var monthIndex = d.getMonth();
+            var year = d.getFullYear(); 
+
+            return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
         $(document).ready(function() {
             //view mapel dan kelas dan id jadwal
             $('#guru').change(function() {
@@ -212,7 +221,7 @@
                     url: "<?php echo site_url('c_admin/getTanggal'); ?>",
                     method: "POST",
                     data: {
-                        id: id
+                        id: id 
                     },
                     async: true,
                     dataType: 'JSON',
@@ -221,7 +230,7 @@
                         var i;
                         html += '<option value="">Pilih Tanggal</option>'
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].tanggal + '">' + data[i].tanggal + '</option>'
+                            html += '<option value="' + data[i].tanggal + '">' + formatDate(data[i].tanggal) + '</option>'
                         }
                         $('#tgl').html(html);
                     }
@@ -232,11 +241,15 @@
             //view kelas 
             $('#tgl').change(function() {
                 var tgl = $(this).val();
+                var mapel = $('#mapel').val();
+                var guru = $('#guru').val();
                 $.ajax({
                     url: "<?php echo site_url('c_admin/klsAbsen'); ?>",
                     method: "POST",
                     data: {
-                        tgl: tgl
+                        tgl: tgl,
+                        mapel: mapel,
+                        guru: guru
                     },
                     async: true,
                     dataType: 'JSON',

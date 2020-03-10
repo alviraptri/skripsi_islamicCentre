@@ -135,13 +135,7 @@
                                             <option value="">Pilih Jurusan</option>
                                             <option value="MIPA - UI">MIPA - UI</option>
                                             <option value="TEKNIK - UI">TEKNIK - UI</option>
-                                            <option value="KESEHATAN - UI">KESEHATAN - UI</option>
-                                            <option value="PERTANIAN - UI">PERTANIAN - UI</option>
-                                            <option value="ILMU PENGETAHUAN - UI">ILMU PENGETAHUAN - UI</option>
                                             <option value="SENI - UI">SENI - UI</option>
-                                            <option value="EKONOMI DAN BISNIS - UI">EKONOMI DAN BISNIS - UI</option>
-                                            <option value="ILMU ADMINISTRASI - UI">ILMU ADMINISTRASI - UI</option>
-                                            <option value="ILMU SOSIAL DAN POLITI - UI">ILMU SOSIAL DAN POLITIK - UI</option>
                                         </select>
                                     </div>
                                 </div>

@@ -49,12 +49,12 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Catatan Wali Kelas</h2>
+                                    <h2>Tambah Catatan Wali Kelas</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
 
-                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanAbsen'; ?>" novalidate>
+                                    <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url() . 'c_admin/simpanCatatan'; ?>" novalidate>
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Guru <span class="required">*</span>
                                             </label>
@@ -82,17 +82,12 @@
                                             <div class="col-md-6 col-sm-6" id="jadwal">
                                             </div>
                                         </div>
-                                        <ul class="nav navbar-right panel_toolbox">
-                                        <li> <a href="<?php echo base_url('c_admin/tambahCatatanWK'); ?>"><button type="button" class="btn btn-primary">Tambah Catatan</button></a>
-                                        </li>
-                                    </ul>
                                     <br>
                                         <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Nama Siswa</th>
                                                     <th>Catatan</th>
-                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -100,6 +95,13 @@
 
                                             </tbody>
                                         </table>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 offset-md-3">
+                                                <button id="send" type="submit" class="btn btn-success">Simpan</button>
+                                                <a href="<?php echo base_url('c_admin/index'); ?>"><button type="submit" class="btn btn-primary">Batal</button></a>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -109,42 +111,7 @@
             </div>
             <!-- /page content -->
 
-            <!-- MODAL Edit -->
-            <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Edit Catatan</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <form class="form-horizontal form-label-left">
-                            <div class="modal-body">
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
-                                    <div class="col-md-6 col-sm-6">
-                                    <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly hidden>
-                                        <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
-                                    </div>
-                                </div>
 
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Catatan</label>
-                                    <div class="col-md-6 col-sm-6">
-                                    <textarea name="cttn_edit" id="cttn_edit" cols="30" rows="10" class="form-control"></textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                                <button class="btn btn-info" id="btn_update">Simpan</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--END MODAL Edit-->
 
             <!-- footer content -->
             <footer>
@@ -186,7 +153,7 @@
             $('#kelas').change(function() {
                 var idKelas = $(this).val();
                 $.ajax({
-                    url: "<?php echo site_url('c_admin/getCatatan'); ?>",
+                    url: "<?php echo site_url('c_admin/getNamaCatatan'); ?>",
                     method: "POST",
                     data: {
                         idKelas: idKelas,
@@ -199,14 +166,31 @@
                         for (var i = 0; i < data.length; i++) {
                             html += '<tr>' +
                                 '<td> <input type="text" name="idSiswa[]" value="'+data[i].idSiswa+'" hidden> '+ data[i].namaUser + ' </td>' +
-                                '<td>'+data[i].catatan+'</td>'+
-                                '<td>'+
-                                '<a href="javascript:;" title="Edit" class="btn btn-info btn-xs item_edit" data="' + data[i].idSiswa + '">' +
-                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
-                                '</td>'+
+                                '<td><textarea name="catatan[]"> </textarea></td>'+
                                 '</tr>';
                         }
-                        $('#show_data').html(html);  
+                        $('#show_data').html(html);
+                        
+                    }
+                });
+                return false;
+            });
+
+            //GET ADD
+            $('#show_data').on('click', '.item_add', function() {
+                var id = $(this).attr('data');
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo base_url('c_admin/getAddSiswa') ?>",
+                    dataType: "JSON",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#ModalaAdd').modal('show');
+                        $('[name="id"]').val(data[0].idSiswa);
+                        $('[name="nama"]').val(data[0].namaUser);
                     }
                 });
                 return false;

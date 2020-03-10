@@ -53,7 +53,7 @@
                                     <?php 
                                     foreach($krit as $list) {
                                         if($this->session->userdata('kriteria') == $list->idKriteria) {
-                                            echo $list->jenisKriteria;
+                                            echo "'".$list->jenisKriteria."'";
                                         }
                                     }
                                     ?>

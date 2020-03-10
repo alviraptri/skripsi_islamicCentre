@@ -1605,8 +1605,8 @@ class c_rapor extends CI_Controller
             //baris 23
             $pdf->Cell(10,5,'6',1,0,'C',0);  // cell with left and right borders
             $pdf->Cell(45,5,'Sosiologi',1,0,'L',0); 
-            $pdf->Cell(15,5,$NtotalLM,1,0,'C',0);
-            $pdf->Cell(20,5,$predikatLM,1,0,'C',0);
+            $pdf->Cell(15,5,"80",1,0,'C',0);
+            $pdf->Cell(20,5,"B",1,0,'C',0);
             $pdf->Cell(105,5,'',1,1,'L',0);
         }
         else{

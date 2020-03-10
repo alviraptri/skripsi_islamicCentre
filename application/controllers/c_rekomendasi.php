@@ -48,7 +48,7 @@ class c_rekomendasi extends CI_Controller
             'idSiswa' => $siswa,
             'statusAlternatif' => 1,
         );
-        $this->m_admin->simpanData($data, 'alternatif');
+        $this->m_admin->simpanData($data, 'alternatif'); 
         echo json_encode($data);
     }
     function perbandinganKriteria()
@@ -273,15 +273,27 @@ class c_rekomendasi extends CI_Controller
         $data['eigenvektor'] = $this->getEigenVector($jmlmpb,$jmlmnk,$n);
         $data['consIndex'] = $this->getConsIndex($jmlmpb,$jmlmnk,$n);
         $data['consRatio'] = $this->getConsRatio($jmlmpb,$jmlmnk,$n);
+        if ($this->getConsRatio($jmlmpb,$jmlmnk,$n) > 0.1) {
+            echo "<script>alert('Nilai Consistency Ratio melebihi 10% !!!Mohon input kembali tabel perbandingan...');</script>";
+            $data['alt'] = $this->m_rekomendasi->perbandinganAlternatif($idSiswa)->result();
+            $data['jmlh'] = $this->m_rekomendasi->getJumlahAlternatif($idSiswa);
+            $data['krit'] = $this->m_rekomendasi->getNamaKriteria()->result();
+            $kriteria = (int) $this->session->userdata('kriteria');
+            $this->session->set_userdata('siswa', $idSiswa);
+            $this->session->set_userdata('kriteria', $kriteria+1);
 
-        $data['alt'] = $this->m_rekomendasi->perbandinganAlternatif($idSiswa)->result();
-        $data['jmlh'] = $this->m_rekomendasi->getJumlahAlternatif($idSiswa);
-        $data['matrik'] = $matrik;
-        $data['jmlmpb'] = $jmlmpb;
-        $data['jmlmnk'] = $jmlmnk;
-        $data['matrikb'] = $matrikb;
-        $data['pv'] = $pv;
-        $this->load->view('v_hasilAlternatif', $data);
+            $this->load->view('v_perbandinganAlternatif', $data);
+        }
+        else {
+            $data['alt'] = $this->m_rekomendasi->perbandinganAlternatif($idSiswa)->result();
+            $data['jmlh'] = $this->m_rekomendasi->getJumlahAlternatif($idSiswa);
+            $data['matrik'] = $matrik;
+            $data['jmlmpb'] = $jmlmpb;
+            $data['jmlmnk'] = $jmlmnk;
+            $data['matrikb'] = $matrikb;
+            $data['pv'] = $pv;
+            $this->load->view('v_hasilAlternatif', $data);
+        }
     }
     function minusKriteria() {
         $kriteria = (int) $this->session->userdata('kriteria');

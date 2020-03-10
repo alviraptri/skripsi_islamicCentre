@@ -140,10 +140,10 @@
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Predikat</label>
                                     <div class="col-md-6 col-sm-6">
-                                    <select name="predikat_edit" id="predikat_edit" class="form-control">
-                                        <option value="Pramuka"> A </option>
-                                        <option value="Paskibra"> B </option>
-                                        <option value="Rohis"> C </option>
+                                    <select name="predikat" id="predikatId" class="form-control">
+                                        <option value="A"> A </option>
+                                        <option value="B"> B </option>
+                                        <option value="C"> C </option>
                                     </select>
                                     </div>
                                 </div>
@@ -176,6 +176,10 @@
 
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
+    function selectElement(id, valueToSelect) {
+                let element = document.getElementById(id);
+                element.value = valueToSelect;
+            }
         $(document).ready(function() {
 
             //view kelas
@@ -247,31 +251,30 @@
                     success: function(data) {
                         console.log(data);
                         $('#ModalaEdit').modal('show');
-                        $('[name="id_edit"]').val(data[0].idSiswa);
+                        $('[name="id_edit"]').val(data[0].idEkskul);
                         $('[name="nama_edit"]').val(data[0].namaUser);
                         $('[name="ekskul_edit"]').val(data[0].namaEkskul);
-                        selectElement('predikat_edit', data[0].predikat);
+                        selectElement('predikatId', data[0].predikat);
                         $('[name="cttn_edit"]').val(data[0].ketEkskul);
                     }
                 });
                 return false;
             });
-            function selectElement(id, valueToSelect) {
-                let element = document.getElementById(id);
-                element.value = valueToSelect;
-            }
+            
 
             //update data
             $('#btn_update').on('click', function() {
                 var id = $('#id_edit').val();
                 var cttn = $('#cttn_edit').val();
+                var predikat = $('#predikatId').val();
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('c_admin/updateCatatan') ?>",
+                    url: "<?php echo base_url('c_admin/updateEkskul') ?>",
                     dataType: "JSON",
                     data: {
                         id: id,
                         cttn: cttn,
+                        predikat: predikat
                     },
                     success: function(data) {
                         $('[name="nama_edit"]').val("");

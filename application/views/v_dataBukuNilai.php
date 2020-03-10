@@ -137,66 +137,31 @@
             </div>
             <!-- /page content -->
 
-            <!-- MODAL EDIT -->
-            <div class="modal fade bs-example-modal-lg" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Edit Buku Nilai</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <form class="form-horizontal form-label-left">
-                            <div class="modal-body">
-                                <div class="item form-group">
-                                    <!-- <label class="col-form-label col-md-3 col-sm-3 label-align">#</label> -->
-                                    <div class="col-md-6 col-sm-6">
-                                        <input name="id_edit" id="id_edit" class="form-control" type="text" placeholder="ID Ket Nilai" hidden>
-                                    </div>
-                                </div> 
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Nama</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input name="nama_edit" id="nama_edit" class="form-control" type="text" placeholder="Nama Tahun Ajaran" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Kelas</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input name="kls_edit" id="kls_edit" class="form-control" type="text" placeholder="Nilai Satu" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Absen</label>
-                                    <div class="col-md-6 col-sm-6">
-                                    <input name="nilai_edit" id="nilai_edit" class="form-control" type="text" placeholder="Nilai Satu">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                                <button class="btn btn-info" id="btn_update">Simpan</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--END MODAL EDIT-->
 
             <!-- footer content -->
             <footer>
                 <?php include("v-Footer.php") ?>
             </footer>
-            <!-- /footer content -->
+            <!-- /footer content --> 
         </div>
     </div>
 
     <script type="text/javascript" src="<?php echo base_url() . 'assets/jquery-3.3.1.js' ?>"></script>
     <script type="text/javascript">
+    function formatDate(date) {
+            var d = new Date(date);
+            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            var day = d.getDate();
+            var monthIndex = d.getMonth();
+            var year = d.getFullYear(); 
+
+            return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
+
+        function selectElement(id, valueToSelect) {
+                let element = document.getElementById(id);
+                element.value = valueToSelect;
+            }
         $(document).ready(function() {
             //view mapel
             $('#guru').change(function() { 
@@ -286,7 +251,7 @@
                         var i;
                         html += '<option value="">Pilih Tanggal</option>'
                         for (i = 0; i < data.length; i++) {
-                            html += '<option value="' + data[i].tanggal + '">' + data[i].tanggal +  '</option>'
+                            html += '<option value="' + data[i].tanggal + '">' + formatDate(data[i].tanggal) +  '</option>'
                         }
                         $('#tgl').html(html);
                     }
@@ -337,8 +302,7 @@
                             '<td>'+data[i].namaUser+'</td>'+
                             '<td>'+data[i].nilai+'</td>'+
                             '<td>'+ predikat +'</td>'+
-                            '<td><a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].idBukuNilai + '">' +
-                                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>'+
+                            '<td><a href="<?php echo base_url();?>c_admin/editBukuNilai/'+ data[i].idBukuNilai+'" ><button type="submit" class="btn btn-info btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a></td>'+
                             '</tr>';
                         }
                         $('#show_data').html(html);
@@ -347,54 +311,6 @@
                 return false;
             });
 
-            //GET UPDATE
-            $('#show_data').on('click', '.item_edit', function() {
-                var id = $(this).attr('data');
-                $.ajax({
-                    type: "GET",
-                    url: "<?php echo base_url('c_admin/editBukuNilai') ?>",
-                    dataType: "JSON",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        $('#ModalaEdit').modal('show');
-                        $('[name="id_edit"]').val(data[0].idBukuNilai);
-                        $('[name="nama_edit"]').val(data[0].namaUser);
-                        $('[name="kls_edit"]').val(data[0].ketKelas + ' ' + data[0].jurusanKelas + ' ' + data[0].nomorKelas);
-                        $('[name="nilai_edit"]').val(data[0].nilai);
-                    }
-                });
-                return false;
-            });
-
-            function selectElement(id, valueToSelect) {
-                let element = document.getElementById(id);
-                element.value = valueToSelect;
-            }
-
-            //Update data
-            $('#btn_update').on('click', function() {
-                var id = $('#id_edit').val();
-                var absen = $('#absen_edit').val();
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url('c_admin/updateAbsen') ?>",
-                    dataType: "JSON",
-                    data: {
-                        id: id,
-                        absen: absen,
-                    },
-                    success: function(data) {
-                        $('[name="id_edit"]').val("");
-                        $('[name="nama_edit"]').val("");
-                        $('[name="kls_edit"]').val("");
-                        $('#ModalaEdit').modal('hide');
-                    }
-                });
-                return false;
-            });
         });
     </script>
 

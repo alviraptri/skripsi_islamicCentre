@@ -1,15 +1,15 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class c_admin extends CI_Controller 
+class c_admin extends CI_Controller
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('m_login', 'm_admin', 'm_beranda', 'm_rapor'));	
+		$this->load->model(array('m_login', 'm_admin', 'm_beranda', 'm_rapor'));
 	}
-    function index() 
+	function index()
 	{
 		$data['jmlhSiswa'] = $this->m_beranda->hitungSiswa();
 		$data['jmlhGuru'] = $this->m_beranda->hitungGuru();
@@ -46,7 +46,7 @@ class c_admin extends CI_Controller
 	function editAdmin($idAdmin)
 	{
 		$where = array('nomorInduk' => $idAdmin);
-		$data['editAdmin'] = $this->m_admin->editData($where,'user')->result();
+		$data['editAdmin'] = $this->m_admin->editData($where, 'user')->result();
 		$this->load->view('v_editAdmin', $data);
 	}
 	function updateAdmin()
@@ -66,21 +66,21 @@ class c_admin extends CI_Controller
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 
 		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name'])){
-			if ($this->upload->do_upload('filefoto')){
+		if (!empty($_FILES['filefoto']['name'])) {
+			if ($this->upload->do_upload('filefoto')) {
 				$gbr = $this->upload->data();
-				$config['image_library']='gd2';
-                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '50%';
-                $config['width']= 600;
-                $config['height']= 400;
-				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = './assets/inter/images/profil' . $gbr['file_name'];
+				$config['create_thumb'] = FALSE;
+				$config['maintain_ratio'] = FALSE;
+				$config['quality'] = '50%';
+				$config['width'] = 600;
+				$config['height'] = 400;
+				$config['new_image'] = './assets/inter/images/profil' . $gbr['file_name'];
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
-				$gambar=$gbr['file_name'];
- 
+				$gambar = $gbr['file_name'];
+
 				$data = array(
 					'nomorInduk' => $noInduk,
 					'userRole' => $userRole,
@@ -101,9 +101,8 @@ class c_admin extends CI_Controller
 				);
 				$this->session->set_userdata($data_Session);
 			}
-		}
-		else{
-            $data = array(
+		} else {
+			$data = array(
 				'nomorInduk' => $noInduk,
 				'userRole' => $userRole,
 				'namaUser' => $nama,
@@ -111,7 +110,7 @@ class c_admin extends CI_Controller
 				'emailUser' => $email,
 				'noTelp' => $noTelp,
 				'alamatUser' => $alamat,
-				'jenisKelamin' => $jk 
+				'jenisKelamin' => $jk
 			);
 		}
 		$where = array('nomorInduk' => $noInduk);
@@ -136,7 +135,7 @@ class c_admin extends CI_Controller
 	function editGuru($idGuru)
 	{
 		$where = array('nomorInduk' => $idGuru);
-		$data['editGuru'] = $this->m_admin->editData($where,'user')->result();
+		$data['editGuru'] = $this->m_admin->editData($where, 'user')->result();
 		$this->load->view('v_editGuru', $data);
 	}
 	function updateGuru()
@@ -156,22 +155,22 @@ class c_admin extends CI_Controller
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 
 		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name'])){
-			if ($this->upload->do_upload('filefoto')){
+		if (!empty($_FILES['filefoto']['name'])) {
+			if ($this->upload->do_upload('filefoto')) {
 				$gbr = $this->upload->data();
-				$config['image_library']='gd2';
-                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '50%';
-                $config['width']= 600;
-                $config['height']= 400;
-				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = './assets/inter/images/profil' . $gbr['file_name'];
+				$config['create_thumb'] = FALSE;
+				$config['maintain_ratio'] = FALSE;
+				$config['quality'] = '50%';
+				$config['width'] = 600;
+				$config['height'] = 400;
+				$config['new_image'] = './assets/inter/images/profil' . $gbr['file_name'];
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
-				$gambar=$gbr['file_name'];
- 
-				$data = array( 
+				$gambar = $gbr['file_name'];
+
+				$data = array(
 					'nomorInduk' => $noInduk,
 					'userRole' => $userRole,
 					'namaUser' => $nama,
@@ -183,9 +182,8 @@ class c_admin extends CI_Controller
 					'gambar' => $gambar,
 				);
 			}
-		}
-		else{
-            $data = array(
+		} else {
+			$data = array(
 				'nomorInduk' => $noInduk,
 				'userRole' => $userRole,
 				'namaUser' => $nama,
@@ -193,7 +191,7 @@ class c_admin extends CI_Controller
 				'emailUser' => $email,
 				'noTelp' => $noTelp,
 				'alamatUser' => $alamat,
-				'jenisKelamin' => $jk 
+				'jenisKelamin' => $jk
 			);
 		}
 		$where = array('nomorInduk' => $noInduk);
@@ -218,7 +216,7 @@ class c_admin extends CI_Controller
 		$data = $this->m_admin->tugasGuru($idTA)->result();
 		echo json_encode($data);
 	}
-	
+
 	//wali kelas
 	function waliKelas()
 	{
@@ -231,7 +229,7 @@ class c_admin extends CI_Controller
 	{
 		$where = array('nomorInduk' => $idWaliKelas);
 		$data['kls'] = $this->m_admin->kelas()->result();
-		$data['editWk'] = $this->m_admin->editData($where,'user')->result();
+		$data['editWk'] = $this->m_admin->editData($where, 'user')->result();
 		$this->load->view('v_editWaliKelas', $data);
 	}
 	function updateWaliKelas()
@@ -253,21 +251,21 @@ class c_admin extends CI_Controller
 
 		$this->upload->initialize($config);
 
-		if(!empty($_FILES['filefoto']['name'])){
-			if ($this->upload->do_upload('filefoto')){
+		if (!empty($_FILES['filefoto']['name'])) {
+			if ($this->upload->do_upload('filefoto')) {
 				$gbr = $this->upload->data();
-				$config['image_library']='gd2';
-                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '50%';
-                $config['width']= 600;
-                $config['height']= 400;
-				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = './assets/inter/images/profil' . $gbr['file_name'];
+				$config['create_thumb'] = FALSE;
+				$config['maintain_ratio'] = FALSE;
+				$config['quality'] = '50%';
+				$config['width'] = 600;
+				$config['height'] = 400;
+				$config['new_image'] = './assets/inter/images/profil' . $gbr['file_name'];
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
-				$gambar=$gbr['file_name'];
- 
+				$gambar = $gbr['file_name'];
+
 				$dataUser = array(
 					'nomorInduk' => $noInduk,
 					'userRole' => $userRole,
@@ -277,19 +275,18 @@ class c_admin extends CI_Controller
 					'noTelp' => $noTelp,
 					'alamatUser' => $alamat,
 					'jenisKelamin' => $jk,
-					'gambar' => $gambar, 
+					'gambar' => $gambar,
 				);
-		
+
 				$dataWaliKelas = array(
 					'idWaliKelas' => "",
 					'nomorInduk' => $noInduk,
 					'idKelas' => $kelas,
-					'statusWaliKelas' => 1 
+					'statusWaliKelas' => 1
 				);
 			}
-		}
-		else{
-            $dataUser = array(
+		} else {
+			$dataUser = array(
 				'nomorInduk' => $noInduk,
 				'userRole' => $userRole,
 				'namaUser' => $nama,
@@ -297,14 +294,14 @@ class c_admin extends CI_Controller
 				'emailUser' => $email,
 				'noTelp' => $noTelp,
 				'alamatUser' => $alamat,
-				'jenisKelamin' => $jk 
+				'jenisKelamin' => $jk
 			);
-	
+
 			$dataWaliKelas = array(
 				'idWaliKelas' => "",
 				'nomorInduk' => $noInduk,
 				'idKelas' => $kelas,
-				'statusWaliKelas' => 1 
+				'statusWaliKelas' => 1
 			);
 		}
 		$where = array('nomorInduk' => $noInduk);
@@ -341,32 +338,31 @@ class c_admin extends CI_Controller
 		$cekData = array(
 			'emailUser' => $email,
 			'namaUser' => $nama,
-			'userRole' => $userRole, 
+			'userRole' => $userRole,
 		);
 		$cek = $this->m_admin->cek($cekData, "user")->num_rows();
 		if ($cek > 0) {
 			echo "<script>alert('Data sudah tersimpan');</script>";
-    		$data['kls'] = $this->m_admin->kelas()->result();
+			$data['kls'] = $this->m_admin->kelas()->result();
 			$data['kodeGuru'] = $this->m_admin->kodePegawai();
 			$this->load->view("v_tambahPegawai", $data);
-		}
-		else {
+		} else {
 			$this->upload->initialize($config);
-			if(!empty($_FILES['filefoto']['name'])){
-				if ($this->upload->do_upload('filefoto')){
+			if (!empty($_FILES['filefoto']['name'])) {
+				if ($this->upload->do_upload('filefoto')) {
 					$gbr = $this->upload->data();
-					$config['image_library']='gd2';
-					$config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-					$config['create_thumb']= FALSE;
-					$config['maintain_ratio']= FALSE;
-					$config['quality']= '50%';
-					$config['width']= 600;
-					$config['height']= 400;
-					$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+					$config['image_library'] = 'gd2';
+					$config['source_image'] = './assets/inter/images/profil' . $gbr['file_name'];
+					$config['create_thumb'] = FALSE;
+					$config['maintain_ratio'] = FALSE;
+					$config['quality'] = '50%';
+					$config['width'] = 600;
+					$config['height'] = 400;
+					$config['new_image'] = './assets/inter/images/profil' . $gbr['file_name'];
 					$this->load->library('image_lib', $config);
 					$this->image_lib->resize();
-					$gambar=$gbr['file_name'];
-	
+					$gambar = $gbr['file_name'];
+
 					$data = array(
 						'nomorInduk' => $noInduk,
 						'userRole' => $userRole,
@@ -378,38 +374,34 @@ class c_admin extends CI_Controller
 						'jenisKelamin' => $jk,
 						'passUser' => md5($pass),
 						'gambar' => $gambar,
-						'statusUser' => 1 
+						'statusUser' => 1
 					);
-					
+
 					$this->m_admin->simpanData($data, 'user');
 					echo "Image berhasil diupload";
 				}
-			}
-			else{
+			} else {
 				echo "Image yang diupload kosong";
 			}
 
-			if($userRole == 'Wali Kelas'){
-					$data = array(
-						'idWaliKelas' => "",
-						'nomorInduk' => $noInduk,
-						'idKelas' => $kelas,
-						'statusWaliKelas' => 1 
-					);
-		
-					$this->m_admin->simpanData($data, 'walikelas');
+			if ($userRole == 'Wali Kelas') {
+				$data = array(
+					'idWaliKelas' => "",
+					'nomorInduk' => $noInduk,
+					'idKelas' => $kelas,
+					'statusWaliKelas' => 1
+				);
+
+				$this->m_admin->simpanData($data, 'walikelas');
 			}
-			if($userRole == 'Guru'){
+			if ($userRole == 'Guru') {
 				redirect('c_admin/guru');
-			}
-			elseif ($userRole == 'Admin') {
+			} elseif ($userRole == 'Admin') {
 				redirect('c_admin/admin');
-			}
-			elseif ($userRole == 'Wali Kelas') {
+			} elseif ($userRole == 'Wali Kelas') {
 				redirect('c_admin/waliKelas');
 			}
 		}
-		
 	}
 
 	//siswa
@@ -439,26 +431,26 @@ class c_admin extends CI_Controller
 		$tahunAjaran = $this->input->post('tahunAjaran');
 
 		$tgl = date('Y-m-d', strtotime($ttl));
-		$where = array('nomorInduk' => $noInduk );
+		$where = array('nomorInduk' => $noInduk);
 
 		$config['upload_path'] = './assets/inter/images/profil';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 
 		$this->upload->initialize($config);
-		if(!empty($_FILES['filefoto']['name'])){
-			if ($this->upload->do_upload('filefoto')){
+		if (!empty($_FILES['filefoto']['name'])) {
+			if ($this->upload->do_upload('filefoto')) {
 				$gbr = $this->upload->data();
-				$config['image_library']='gd2';
-                $config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-                $config['create_thumb']= FALSE;
-                $config['maintain_ratio']= FALSE;
-                $config['quality']= '50%';
-                $config['width']= 600;
-                $config['height']= 400;
-				$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+				$config['image_library'] = 'gd2';
+				$config['source_image'] = './assets/inter/images/profil' . $gbr['file_name'];
+				$config['create_thumb'] = FALSE;
+				$config['maintain_ratio'] = FALSE;
+				$config['quality'] = '50%';
+				$config['width'] = 600;
+				$config['height'] = 400;
+				$config['new_image'] = './assets/inter/images/profil' . $gbr['file_name'];
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
-				$gambar=$gbr['file_name'];
+				$gambar = $gbr['file_name'];
 
 				$dataUser = array(
 					'nomorInduk' => $noInduk,
@@ -468,16 +460,15 @@ class c_admin extends CI_Controller
 					'noTelp' => $noTelp,
 					'alamatUser' => $alamat,
 					'jenisKelamin' => $jk,
-					'gambar' => $gambar 
+					'gambar' => $gambar
 				);
-				
+
 				$dataSiswa = array(
 					'idKelas' => $kelas,
 					'idTahunAjaran' => $tahunAjaran
 				);
 			}
-		}
-		else {
+		} else {
 			$dataUser = array(
 				'nomorInduk' => $noInduk,
 				'namaUser' => $nama,
@@ -485,9 +476,9 @@ class c_admin extends CI_Controller
 				'emailUser' => $email,
 				'noTelp' => $noTelp,
 				'alamatUser' => $alamat,
-				'jenisKelamin' => $jk 
+				'jenisKelamin' => $jk
 			);
-			
+
 			$dataSiswa = array(
 				'idKelas' => $kelas,
 				'idTahunAjaran' => $tahunAjaran
@@ -525,38 +516,37 @@ class c_admin extends CI_Controller
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
 
 		$cekEmail = array(
-			'emailUser' => $email 
+			'emailUser' => $email
 		);
 		$cekKelas = array(
-			'idKelas' => $kelas 
+			'idKelas' => $kelas
 		);
 		$emailCek = $this->m_admin->cek($cekEmail, "user")->num_rows();
 		$kelasCek = $this->m_admin->cek($cekKelas, "dataSiswa")->num_rows();
 
-		if($emailCek > 0 && $kelasCek > 0){
+		if ($emailCek > 0 && $kelasCek > 0) {
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$data['kls'] = $this->m_admin->kelas()->result();
 			$data['kodeMurid'] = $this->m_admin->kodeMurid();
 			$data['siswa'] = $this->m_admin->tampilkanDataSiswa()->result();
-    		$this->load->view('v_tambahSiswa', $data);
-		}
-		else {
+			$this->load->view('v_tambahSiswa', $data);
+		} else {
 			$this->upload->initialize($config);
-			if(!empty($_FILES['filefoto']['name'])){
-				if ($this->upload->do_upload('filefoto')){
+			if (!empty($_FILES['filefoto']['name'])) {
+				if ($this->upload->do_upload('filefoto')) {
 					$gbr = $this->upload->data();
-					$config['image_library']='gd2';
-					$config['source_image']='./assets/inter/images/profil'.$gbr['file_name'];
-					$config['create_thumb']= FALSE;
-					$config['maintain_ratio']= FALSE;
-					$config['quality']= '50%';
-					$config['width']= 600;
-					$config['height']= 400;
-					$config['new_image']= './assets/inter/images/profil'.$gbr['file_name'];
+					$config['image_library'] = 'gd2';
+					$config['source_image'] = './assets/inter/images/profil' . $gbr['file_name'];
+					$config['create_thumb'] = FALSE;
+					$config['maintain_ratio'] = FALSE;
+					$config['quality'] = '50%';
+					$config['width'] = 600;
+					$config['height'] = 400;
+					$config['new_image'] = './assets/inter/images/profil' . $gbr['file_name'];
 					$this->load->library('image_lib', $config);
 					$this->image_lib->resize();
-					$gambar=$gbr['file_name'];
+					$gambar = $gbr['file_name'];
 
 					$dataUser = array(
 						'nomorInduk' => $noInduk,
@@ -569,14 +559,13 @@ class c_admin extends CI_Controller
 						'jenisKelamin' => $jk,
 						'passUser' => md5($pass),
 						'gambar' => $gambar,
-						'statusUser' => '1' 
+						'statusUser' => '1'
 					);
 
 					$this->m_admin->simpanData($dataUser, 'user');
 					echo "Image berhasil diupload";
 				}
-			}
-			else{
+			} else {
 				echo "Image yang diupload kosong";
 			}
 
@@ -594,9 +583,9 @@ class c_admin extends CI_Controller
 	}
 	function statusSiswa($nomorInduk)
 	{
-		$dataSiswa = array('statusSiswa' => 0, );
-		$dataUser = array('statusUser' => 0, );
-		$where = array('nomorInduk' => $nomorInduk, );
+		$dataSiswa = array('statusSiswa' => 0,);
+		$dataUser = array('statusUser' => 0,);
+		$where = array('nomorInduk' => $nomorInduk,);
 		$this->m_admin->statusData($where, $dataSiswa, 'dataSiswa');
 		$this->m_admin->statusData($where, $dataUser, 'user');
 
@@ -612,7 +601,7 @@ class c_admin extends CI_Controller
 		$where = array('nomorInduk' => $indukWM);
 		$this->m_admin->statusData($where, $dataWM, 'walimurid');
 		$this->m_admin->statusData($where, $dataUWM, 'user');
-		redirect ('c_admin/siswa');
+		redirect('c_admin/siswa');
 	}
 
 	//wali murid
@@ -648,10 +637,10 @@ class c_admin extends CI_Controller
 			'jenisKelamin' => $jk,
 			'passUser' => md5($pass),
 			'gambar' => $photo,
-			'statusUser' => '1' 
+			'statusUser' => '1'
 		);
 
-		$dataWM= array(
+		$dataWM = array(
 			'idWaliMurid' => "",
 			'nomorInduk' => $noInduk,
 			'keterangan' => $keterangan,
@@ -686,7 +675,7 @@ class c_admin extends CI_Controller
 		$ket = $this->input->post('ket');
 
 		$tgl = date('Y-m-d', strtotime($ttl));
-		$where = array('nomorInduk' => $noInduk );
+		$where = array('nomorInduk' => $noInduk);
 
 		$dataUser = array(
 			'nomorInduk' => $noInduk,
@@ -727,8 +716,7 @@ class c_admin extends CI_Controller
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$this->load->view('v_tambahMapel', $data);
-		}
-		else{
+		} else {
 			$data = array(
 				'idMapel' => '',
 				'idTahunAjaran' => $thnajaran,
@@ -759,7 +747,7 @@ class c_admin extends CI_Controller
 		$mapel = $this->input->post('mapel');
 		$tahunAjaran = $this->input->post('tahunAjaran');
 		$jenisMapel = $this->input->post('jenisMapel');
-		$where = array('idMapel' => $idMapel );
+		$where = array('idMapel' => $idMapel);
 
 		$cekData = array(
 			'idTahunAjaran' => $tahunAjaran,
@@ -774,8 +762,7 @@ class c_admin extends CI_Controller
 			$data['jenis'] = $this->m_admin->jenisMapel()->result();
 			$data['editMapel'] = $this->m_admin->editMapel($idMapel)->result();
 			$this->load->view('v_editMapel', $data);
-		}
-		else {
+		} else {
 			$data = array(
 				'idMapel' => $idMapel,
 				'namaMapel' => $mapel,
@@ -788,11 +775,11 @@ class c_admin extends CI_Controller
 	}
 	function statusMapel($idMapel)
 	{
-		$data = array('statusMapel' => 0, );
-		$where = array('idMapel' => $idMapel, );
+		$data = array('statusMapel' => 0,);
+		$where = array('idMapel' => $idMapel,);
 
 		$this->m_admin->statusData($where, $data, 'matapelajaran');
-		redirect ('c_admin/mapel');
+		redirect('c_admin/mapel');
 	}
 
 	//tahun ajaran
@@ -804,19 +791,18 @@ class c_admin extends CI_Controller
 	{
 		$thnajaran = $this->input->post('thnAjaran');
 
-		$cekData = array('tahunAjaran' => $thnajaran, );
+		$cekData = array('tahunAjaran' => $thnajaran,);
 		$cek = $this->m_admin->cek($cekData, 'tahunAjaran')->num_rows();
 
-		if($cek > 0){
-			
+		if ($cek > 0) {
+
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$this->load->view('v_tambahThnAjaran');
-		}
-		else {
+		} else {
 			$data = array(
 				'idTahunAjaran' => "",
 				'tahunAjaran' => $thnajaran,
-				'statusTahunAjaran' => 1 
+				'statusTahunAjaran' => 1
 			);
 
 			$this->m_admin->simpanData($data, 'tahunajaran');
@@ -830,8 +816,8 @@ class c_admin extends CI_Controller
 	}
 	function statusThnAjaran($idThnAjaran)
 	{
-		$data = array('statusTahunAjaran' => 0, );
-		$where = array('idTahunAjaran' => $idThnAjaran, );
+		$data = array('statusTahunAjaran' => 0,);
+		$where = array('idTahunAjaran' => $idThnAjaran,);
 
 		$this->m_admin->statusData($where, $data, 'tahunajaran');
 		redirect('c_admin/tahunAjaran');
@@ -854,12 +840,12 @@ class c_admin extends CI_Controller
 		$validasiKS = $this->input->post('validasiKS');
 
 		$where = array(
-            'nomorInduk' => $this->session->nomorInduk
+			'nomorInduk' => $this->session->nomorInduk
 		);
-		
+
 		$a = $this->m_login->Select($where, 'user')->result();
 
-		foreach($a as $list){
+		foreach ($a as $list) {
 			//$nip = $list->nomorInduk;
 			$pass = $list->passUser;
 		};
@@ -872,11 +858,9 @@ class c_admin extends CI_Controller
 			$this->m_admin->updateData($where, $data, 'user');
 			$this->session->sess_destroy();
 			redirect('c_login/admin');
-		}
-		elseif ($ksLama == $pass && $ksBaru != $validasiKS) {
+		} elseif ($ksLama == $pass && $ksBaru != $validasiKS) {
 			redirect('c_admin/gantiPass');
-		}
-		else {
+		} else {
 			redirect('c_admin/gantiPass');
 		}
 	}
@@ -901,15 +885,14 @@ class c_admin extends CI_Controller
 		$cek = $this->m_admin->cek($cekData, "kelas")->num_rows();
 		if ($cek > 0) {
 			echo "<script>alert('Data sudah tersimpan');</script>";
-    		$this->load->view('v_tambahKelas');
-		}
-		else {
+			$this->load->view('v_tambahKelas');
+		} else {
 			$data = array(
 				'idKelas' => "",
 				'ketKelas' => $ketKelas,
 				'jurusanKelas' => $jurusanKelas,
 				'nomorKelas' => $noKelas,
-				'statusKelas' => 1 
+				'statusKelas' => 1
 			);
 			$this->m_admin->simpanData($data, 'kelas');
 			redirect('c_admin/kelas');
@@ -922,8 +905,8 @@ class c_admin extends CI_Controller
 	}
 	function statusKelas($idKelas)
 	{
-		$data = array('statusKelas' => 0, );
-		$where = array('idKelas' => $idKelas, );
+		$data = array('statusKelas' => 0,);
+		$where = array('idKelas' => $idKelas,);
 
 		$this->m_admin->statusData($where, $data, 'kelas');
 		redirect('c_admin/kelas');
@@ -941,7 +924,7 @@ class c_admin extends CI_Controller
 		$noKelas = $this->input->post('noKelas');
 
 		$cekData = array(
-			'ketKelas' => $ketKelas, 
+			'ketKelas' => $ketKelas,
 			'jurusanKelas' => $jurusanKelas,
 			'nomorKelas' => $noKelas
 		);
@@ -950,15 +933,14 @@ class c_admin extends CI_Controller
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$data['editKelas'] = $this->m_admin->editKelas($idKelas)->result();
 			$this->load->view('v_editKelas', $data);
-		}
-		else{
-			$where = array('idKelas' => $idKelas, );
+		} else {
+			$where = array('idKelas' => $idKelas,);
 
 			$data = array(
 				'ketKelas' => $ketKelas,
 				'jurusanKelas' => $jurusanKelas,
 				'nomorKelas' => $noKelas,
-				'statusKelas' => 1 
+				'statusKelas' => 1
 			);
 
 			$this->m_admin->updateData($where, $data, 'kelas');
@@ -1002,8 +984,7 @@ class c_admin extends CI_Controller
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
 			$this->load->view('v_tambahJadwal', $data);
-		}
-		else{
+		} else {
 			$data = array(
 				'idJadwal' => "",
 				'idKelas' => $kelas,
@@ -1071,9 +1052,8 @@ class c_admin extends CI_Controller
 			$data['mapel'] = $this->m_admin->tampilkanDataMapel()->result();
 			$data['editJadwal'] = $this->m_admin->editJadwal($idJadwal)->result();
 			$this->load->view('v_editJadwal', $data);
-		}
-		else{
-			$where = array('idJadwal' => $idJadwal, );
+		} else {
+			$where = array('idJadwal' => $idJadwal,);
 			$data = array(
 				'idKelas' => $kelas,
 				'idTahunAjaran' => $ta,
@@ -1093,7 +1073,7 @@ class c_admin extends CI_Controller
 		$data['kls'] = $this->m_admin->kelas()->result();
 		$this->load->view('v_lihatJadwalSiswa', $data);
 	}
-	
+
 	//informasi spp
 	function tambahInfo()
 	{
@@ -1109,24 +1089,40 @@ class c_admin extends CI_Controller
 	function simpanInfo()
 	{
 		$idSiswa = $this->input->post('idSiswa');
-		$jumlah =$this->input->post('jumlah');
+		$jumlah = $this->input->post('jumlah');
+		$flag = false;
 
-		$cekData = array(
-			'idSiswa' => $idSiswa,
-			'jumlah' => $jumlah
-		);
-		$cek = $this->m_admin->cek($cekData, "informasispp")->num_rows();
-		if ($cek > 0) {
-			echo "<script>alert('Data sudah tersimpan');</script>";
-			$data['kls'] = $this->m_admin->kelas()->result();
-		$this->load->view('v_tambahInfo', $data);
+		for ($i = 0; $i < count($idSiswa); $i++) {
+			$cekData = array(
+				'idSiswa' => $idSiswa[$i],
+				'jumlah' => $jumlah[$i]
+			);
+			$cek = $this->m_admin->cek($cekData, "informasispp")->num_rows();
+			if ($cek > 0) {
+				echo "<script>alert('Data sudah tersimpan');</script>";
+				$data['kls'] = $this->m_admin->kelas()->result();
+				$this->load->view('v_tambahInfo', $data);
+			}
+			else {
+				$flag = true;
+			}
 		}
-		else {
+
+
+		if ($flag == true) {
 			$data = array($idSiswa, $jumlah);
-
-			$this->m_admin->simpanMulti($data);
-			redirect('c_admin/info');
+			$result = array();
+			for ($i = 0; $i < count($idSiswa); $i++) {
+				$result = array(
+					'idInfo' => "",
+					'idSiswa' => $idSiswa[$i],
+					'jumlah' => $jumlah[$i],
+					'statusInfo' => "1",
+				);
+				$this->m_admin->simpanMulti($result, 'informasispp');
+			}
 		}
+		redirect('c_admin/info');
 	}
 	function info()
 	{
@@ -1142,8 +1138,8 @@ class c_admin extends CI_Controller
 	function statusInfo()
 	{
 		$idInfo = $this->input->post('kode');
-		$data=$this->m_admin->statusInfo($idInfo);
-	
+		$data = $this->m_admin->statusInfo($idInfo);
+
 		echo json_encode($data);
 	}
 
@@ -1168,13 +1164,11 @@ class c_admin extends CI_Controller
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$this->load->view('v_tambahKetNilai', $data);
-		}
-		elseif ($total > 100) {
+		} elseif ($total > 100) {
 			echo "<script>alert('Bobot lebih dari 100%');</script>";
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$this->load->view('v_tambahKetNilai', $data);
-		}
-		else {
+		} else {
 			$data = array(
 				'idKetNilai' => "",
 				'idTahunAjaran' => $idTA,
@@ -1182,7 +1176,7 @@ class c_admin extends CI_Controller
 				'bobotGuru' => $bobotGuru,
 				'statusKetNilai' => '1'
 			);
-	
+
 			$this->m_admin->simpanData($data, 'ketnilai');
 			redirect('c_admin/ketNilai');
 		}
@@ -1207,32 +1201,40 @@ class c_admin extends CI_Controller
 	}
 	function updateKetNilai()
 	{
-		$id=$this->input->post('id');
-        $sklh=$this->input->post('sklh');
-		$guru=$this->input->post('guru');
+		$id = $this->input->post('id');
+		$sklh = $this->input->post('sklh');
+		$guru = $this->input->post('guru');
 
-		$where = array('idKetNilai' => $id,);
+		$total = $sklh + $guru;
 
-		$data = array(
-			'bobotSekolah' => $sklh,
-			'bobotGuru' => $guru,
-		);
-        $data=$this->m_admin->updateData($where, $data, 'ketnilai');
-        echo json_encode($data);
+		if ($total > 100) {
+			echo "<script>alert('Bobot lebih dari 100');</script>";
+			$data['ta'] = $this->m_admin->thnAjaran()->result();
+			$this->load->view('v_dataKetNilai', $data);
+		} else {
+			$where = array('idKetNilai' => $id,);
+
+			$data = array(
+				'bobotSekolah' => $sklh,
+				'bobotGuru' => $guru,
+			);
+			$data = $this->m_admin->updateData($where, $data, 'ketnilai');
+			echo json_encode($data);
+		}
 	}
 
 	function updateAbsen()
 	{
-		$id=$this->input->post('id');
-        $absen=$this->input->post('absen');
+		$id = $this->input->post('id');
+		$absen = $this->input->post('absen');
 
 		$where = array('idAbsen' => $id,);
 
 		$data = array(
 			'absen' => $absen,
 		);
-        $data=$this->m_admin->updateData($where, $data, 'absensi');
-        echo json_encode($data);
+		$data = $this->m_admin->updateData($where, $data, 'absensi');
+		echo json_encode($data);
 	}
 
 	function getKelas()
@@ -1257,7 +1259,7 @@ class c_admin extends CI_Controller
 		$data = array(
 			'mapelAbsen' => $MA,
 			'mapelNilai' => $MN,
-		 );
+		);
 		echo json_encode($data);
 	}
 	function getMataPelajaran()
@@ -1281,14 +1283,16 @@ class c_admin extends CI_Controller
 	function klsAbsen()
 	{
 		$tgl = $this->input->post('tgl');
-		$data = $this->m_admin->klsAbsen($tgl)->result();
+		$mapel = $this->input->post('mapel');
+		$guru = $this->input->post('guru');
+		$data = $this->m_admin->klsAbsen($tgl, $mapel, $guru)->result();
 		echo json_encode($data);
 	}
 	function getAbsensi()
 	{
-		$id=$this->input->post('id');
-		$tgl=$this->input->post('tgl');
-		$data=$this->m_admin->getAbsensi($id, $tgl)->result();
+		$id = $this->input->post('id');
+		$tgl = $this->input->post('tgl');
+		$data = $this->m_admin->getAbsensi($id, $tgl)->result();
 		echo json_encode($data);
 	}
 	function tambahAbsensi()
@@ -1322,26 +1326,26 @@ class c_admin extends CI_Controller
 
 		//$this->m_admin->simpanAbsen($data);
 
-		for($i=0 ; $i < count($idSiswa); $i++){
-            $result = array(
-                'idAbsen' => "",
+		for ($i = 0; $i < count($idSiswa); $i++) {
+			$result = array(
+				'idAbsen' => "",
 				'idSiswa' => $idSiswa[$i],
 				'idMapel' => $mapel,
 				'idJadwal' => $idJadwal,
 				'nomorInduk' => $guru,
-                'tanggal' => $tanggal,
+				'tanggal' => $tanggal,
 				'absen' => $ket[$i],
-                'statusAbsen' => '1',
+				'statusAbsen' => '1',
 			);
 			$this->m_admin->simpanAbsen($result, 'absensi');
-        }
-		
+		}
+
 		redirect('c_admin/absensi');
 	}
 	function absensi()
 	{
 		$data['guru'] = $this->m_admin->jadwalGuru()->result();
-		$this->load->view('v_dataAbsensi', $data);	
+		$this->load->view('v_dataAbsensi', $data);
 	}
 
 	function getJadwal()
@@ -1391,8 +1395,7 @@ class c_admin extends CI_Controller
 			$data['guru'] = $this->m_admin->jadwalGuru()->result();
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$this->load->view('v_tambahJadwalUjian', $data);
-		}
-		else if($namaMapel != $mapel){
+		} else if ($namaMapel != $mapel) {
 			$data = array(
 				'idJadwalUjian' => "",
 				'idTahunAjaran' => $tahunAjaran,
@@ -1401,11 +1404,10 @@ class c_admin extends CI_Controller
 				'jamMulai' => $jamMulai,
 				'jamSelesai' => $jamSelesai
 			);
-	
+
 			$this->m_admin->simpanData($data, 'jadwalujian');
 			redirect('c_admin/jadwalUjian');
-		}
-		else{
+		} else {
 			$data = array(
 				'idJadwalUjian' => "",
 				'idTahunAjaran' => $tahunAjaran,
@@ -1414,7 +1416,7 @@ class c_admin extends CI_Controller
 				'jamMulai' => $jamMulai,
 				'jamSelesai' => $jamSelesai
 			);
-	
+
 			$this->m_admin->simpanData($data, 'jadwalujian');
 			redirect('c_admin/jadwalUjian');
 		}
@@ -1453,11 +1455,11 @@ class c_admin extends CI_Controller
 	function getUjianJadwal()
 	{
 		$id = $this->input->post('id', TRUE);
-		$ta = $this->input->post('ta'. TRUE);
+		$ta = $this->input->post('ta' . TRUE);
 
 		$hari = $this->m_admin->getHari($ta)->result();
 		$data = array(
-			'hari' => $hari, 
+			'hari' => $hari,
 		);
 		echo json_encode($data);
 	}
@@ -1478,13 +1480,13 @@ class c_admin extends CI_Controller
 	function getdataMapel()
 	{
 		$data = $this->m_admin->getdataMapel()->result();
-		for($i = 0; $i < count($data); $i++) {
+		for ($i = 0; $i < count($data); $i++) {
 			$where = array(
 				'hari' => $data[$i]->hari,
 				'jamMulai' => $data[$i]->jamMulai,
 				'jamSelesai' => $data[$i]->jamSelesai,
 			);
-			$data = (object)array_merge((array)$data[$i], (array)$this->m_admin->dataMapel($where)->result());
+			$data = (object) array_merge((array) $data[$i], (array) $this->m_admin->dataMapel($where)->result());
 		}
 		echo json_encode($data);
 	}
@@ -1496,11 +1498,11 @@ class c_admin extends CI_Controller
 	}
 	function updateJadwalUjian()
 	{
-		$id=$this->input->post('id');
-        $hari=$this->input->post('hari');
-		$jamMulai=$this->input->post('jamMulai');
-		$jamSelesai=$this->input->post('jamSelesai');
-		$mapel=$this->input->post('mapel');
+		$id = $this->input->post('id');
+		$hari = $this->input->post('hari');
+		$jamMulai = $this->input->post('jamMulai');
+		$jamSelesai = $this->input->post('jamSelesai');
+		$mapel = $this->input->post('mapel');
 
 		$where = array('idJadwalUjian' => $id,);
 
@@ -1510,8 +1512,8 @@ class c_admin extends CI_Controller
 			'jamMulai' => $jamMulai,
 			'jamSelesai' => $jamSelesai,
 		);
-        $data=$this->m_admin->updateData($where, $data, 'jadwalUjian');
-        echo json_encode($data);
+		$data = $this->m_admin->updateData($where, $data, 'jadwalUjian');
+		echo json_encode($data);
 	}
 	function jadwalUjianSiswa()
 	{
@@ -1587,13 +1589,11 @@ class c_admin extends CI_Controller
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$this->load->view('v_tambahPengawas', $data);
-		}
-		elseif ($idMapel == $mapel && $nomorInduk == $guru) {
+		} elseif ($idMapel == $mapel && $nomorInduk == $guru) {
 			echo "<script>alert('Guru mengajar mata pelajaran');</script>";
 			$data['ta'] = $this->m_admin->thnAjaran()->result();
 			$this->load->view('v_tambahPengawas', $data);
-		}
-		else {
+		} else {
 			$data = array(
 				'idJadwalPengawas' => "",
 				'idJadwalUjian' => $idMapel,
@@ -1673,7 +1673,7 @@ class c_admin extends CI_Controller
 		$data = array(
 			'predikat' => $predikat,
 			'sikap' => $sikap,
-			'deskripsi' => $deskripsi, 
+			'deskripsi' => $deskripsi,
 		);
 		$where = array('idKompetensi' => $id);
 		$this->m_admin->updateData($where, $data, 'kompetensiNilai');
@@ -1701,6 +1701,18 @@ class c_admin extends CI_Controller
 		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
 		$this->load->view('v_catatanWaliKls', $data);
 	}
+	function tambahCatatanWK()
+	{
+		$where = array('userRole' => 'Wali Kelas', 'statusUser' => '1');
+		$data['dataWk'] = $this->m_admin->tampilkanDataPegawai($where)->result();
+		$this->load->view('v_tambahCatatan', $data);
+	}
+	function getNamaCatatan()
+	{
+		$id = $this->input->post("idKelas");
+		$data = $this->m_admin->getNamaCatatan($id)->result();
+		echo json_encode($data);
+	}
 	function getWKelas()
 	{
 		$nomorInduk = $this->input->post('nomorInduk', TRUE);
@@ -1710,12 +1722,7 @@ class c_admin extends CI_Controller
 	function getCatatan()
 	{
 		$idKelas = $this->input->post('idKelas', TRUE);
-		$nama = $this->m_admin->viewNama($idKelas)->result();
-		$catatan = $this->m_admin->viewCatatan($idKelas)->result();
-		$data = array(
-			'nama' => $nama,
-			'cttn' => $catatan,
-		);
+		$data = $this->m_admin->viewCatatan($idKelas)->result();
 		echo json_encode($data);
 	}
 	function getAddSiswa()
@@ -1738,29 +1745,47 @@ class c_admin extends CI_Controller
 	}
 	function simpanCatatan()
 	{
-		$id=$this->input->post('id');
-        $cttn=$this->input->post('cttn');
+		$idSiswa = $this->input->post('idSiswa');
+		$catatan = $this->input->post('catatan');
 
-		$data = array(
-			'idCatatan' => "",
-			'idSiswa' => $id,
-			'catatan' => $cttn,
-		);
-        $data=$this->m_admin->simpanData($data, 'catatan_walikelas');
-        echo json_encode($data);
+		for ($i = 0; $i < count($idSiswa); $i++) {
+			$result = array(
+				'idCatatan' => "",
+				'idSiswa' => $idSiswa[$i],
+				'catatan' => $catatan[$i],
+			);
+			$this->m_admin->simpanNilai($result, 'catatan_walikelas');
+		}
+
+		redirect('c_admin/catatanWaliKelas');
 	}
 	function updateCatatan()
 	{
-		$id=$this->input->post('id');
-		$cttn=$this->input->post('cttn');
+		$id = $this->input->post('id');
+		$cttn = $this->input->post('cttn');
 
 		$where = array('idSiswa' => $id,);
 
 		$data = array(
 			'catatan' => $cttn,
 		);
-        $data=$this->m_admin->updateData($where, $data, 'catatan_waliKelas');
-        echo json_encode($data);
+		$data = $this->m_admin->updateData($where, $data, 'catatan_waliKelas');
+		echo json_encode($data);
+	}
+	function updateEkskul()
+	{
+		$id = $this->input->post('id');
+		$cttn = $this->input->post('cttn');
+		$predikat = $this->input->post('predikat');
+
+		$where = array('idEkskul' => $id,);
+
+		$data = array(
+			'predikat' => $predikat,
+			'ketEkskul' => $cttn,
+		);
+		$data = $this->m_admin->updateData($where, $data, 'ekskul_siswa');
+		echo json_encode($data);
 	}
 	function ekstrak()
 	{
@@ -1773,11 +1798,11 @@ class c_admin extends CI_Controller
 		$idKelas = $this->input->post('idKelas', TRUE);
 		$nama = $this->m_admin->viewNama($idKelas)->result();
 		$eks = $this->m_admin->viewEkskul($idKelas)->result();
-		for($i = 0 ; $i < count($nama); $i++) {
-			$id = $nama[$i]->idSiswa;
-			$status = $this->m_admin->viewStatus($id)->result();
-			$nama[$i]->status = (object) array_merge((array) $nama[$i],(array) $status);
-		}
+		// for ($i = 0; $i < count($nama); $i++) {
+		// 	$id = $nama[$i]->idSiswa;
+		// 	$status = $this->m_admin->viewStatus($id)->result();
+		// 	$nama[$i]->status = (object) array_merge((array) $nama[$i], (array) $status);
+		// }
 		$data = array(
 			'nama' => $nama,
 			'eks' => $eks,
@@ -1795,19 +1820,17 @@ class c_admin extends CI_Controller
 		$checks = $this->input->post("counter");
 		print_r($checks);
 
-		if($checks != "")
-		{
+		if ($checks != "") {
 			foreach ($checks as $list) {
 				$data = array(
 					'idEkskul' => "",
 					'idSiswa' => $this->input->post('id'),
-					'namaEkskul' => $this->input->post('eks'.$list),
-					'predikat' => $this->input->post('predikat'.$list),
-					'ketEkskul' => $this->input->post('ket'.$list)
-				 );
-				 $this->m_admin->simpanData($data, 'ekskul_siswa');
+					'namaEkskul' => $this->input->post('eks' . $list),
+					'predikat' => $this->input->post('predikat' . $list),
+					'ketEkskul' => $this->input->post('ket' . $list)
+				);
+				$this->m_admin->simpanData($data, 'ekskul_siswa');
 			}
-			
 		}
 
 		redirect('c_admin/tambahEkskul');
@@ -1838,9 +1861,9 @@ class c_admin extends CI_Controller
 
 		$tanggal = date('Y-m-d', strtotime($tgl));
 
-		for($i=0 ; $i < count($siswa); $i++){
-            $result = array(
-                'idBukuNilai' => "", 
+		for ($i = 0; $i < count($siswa); $i++) {
+			$result = array(
+				'idBukuNilai' => "",
 				'nomorInduk' => $guru,
 				'idMapel' => $mapel,
 				'idSiswa' => $siswa[$i],
@@ -1852,8 +1875,8 @@ class c_admin extends CI_Controller
 				'statusBukuNilai' => "1",
 			);
 			$this->m_admin->simpanNilai($result, 'bukunilai');
-        }
-		
+		}
+
 		redirect('c_admin/dataBukuNilai');
 	}
 	function getJnsNilai()
@@ -1881,13 +1904,29 @@ class c_admin extends CI_Controller
 		$data = $this->m_admin->getNilaiSiswa($where)->result();
 		echo json_encode($data);
 	}
-	function editBukuNilai()
+	function editBukuNilai($id)
 	{
-		$id = $this->input->get('id');
-		$where = array('bukunilai.idBukuNilai' => $id, );
-		$data = $this->m_admin->editBukuNilai($id)->result();
-		print_r($data);
-		// echo json_encode($data);
+		$data['edit'] = $this->m_admin->editBukuNilai($id)->result();
+		$this->load->view('v_editBukuNilai', $data);
+	}
+	function updateBukuNilai()
+	{
+		$id = $this->input->post('id');
+		$nilai = $this->input->post('nilai');
+
+		if ($nilai > 100) {
+			echo "<script>alert('Nilai lebih dari 100');</script>";
+			$data['edit'] = $this->m_admin->editBukuNilai($id)->result();
+			$this->load->view('v_editBukuNilai', $data);
+		} else {
+			$where = array('idBukuNilai' => $id,);
+
+			$data = array(
+				'nilai' => $nilai,
+			);
+			$data = $this->m_admin->updateData($where, $data, 'bukunilai');
+			redirect('c_admin/dataBukuNilai');
+		}
 	}
 
 	//rapor
@@ -1922,9 +1961,8 @@ class c_admin extends CI_Controller
 			echo "<script>alert('Data sudah tersimpan');</script>";
 			$data['siswa'] = $this->m_admin->viewRapor()->result();
 			$data['cek'] = $this->m_rapor->cekData()->result();
-    		$this->load->view('v_dataRapor', $data);
-		}
-		else {
+			$this->load->view('v_dataRapor', $data);
+		} else {
 			$data = array(
 				'idRapor' => '',
 				'idSiswa' => $siswaId,
@@ -1935,7 +1973,6 @@ class c_admin extends CI_Controller
 			$this->m_admin->simpanData($data, 'rapor');
 			redirect('c_admin/dataRapor');
 		}
-			
 	}
 	function getNamaSiswa()
 	{
@@ -1967,13 +2004,13 @@ class c_admin extends CI_Controller
 		$kelas = $this->input->post('klsId');
 		$guru = $this->input->post('guru');
 
-		for($i=0 ; $i<count($kelas); $i++){
+		for ($i = 0; $i < count($kelas); $i++) {
 			$result = array(
 				'idJadwalPengawas' => '',
 				'idJadwalUjian' => $idJadwalUjian,
 				'idKelas' => $kelas[$i],
 				'nomorInduk' => $guru[$i],
-				'statusPengawas' => '1', 
+				'statusPengawas' => '1',
 			);
 			$this->m_admin->pengawasSimpan($result, 'jadwalpengawas');
 		}
@@ -1983,8 +2020,7 @@ class c_admin extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		$jadwal = $this->m_admin->jadwalSiswa($id)->result();
-		$data = array('jadwal' => $jadwal, );
+		$data = array('jadwal' => $jadwal,);
 		echo json_encode($data);
 	}
 }
-?>

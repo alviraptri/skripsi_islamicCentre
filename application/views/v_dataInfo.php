@@ -71,8 +71,8 @@
                                                 <tr>
                                                     <th>Nama Siswa</th>
                                                     <th>Jumlah Biaya</th>
-                                                    <th>Status</th>
-                                                    <th>Aksi</th>
+                                                    <!-- <th>Status</th>
+                                                    <th>Aksi</th> -->
                                                 </tr>
                                             </thead>
 
@@ -133,13 +133,13 @@
             //view
             $('#kelas').change(function() {
                 var idKelas = $(this).val();
-                $(function() {
-                    $('#biaya').priceFormat({
-                        prefix: 'Rp ',
-                        centsSeparator: ',',
-                        thousandsSeparator: '.'
-                    });
-                })
+                // $(function() {
+                //     $('#biaya').priceFormat({
+                //         prefix: 'Rp ',
+                //         centsSeparator: ',',
+                //         thousandsSeparator: '.'
+                //     });
+                // });
 
                 $.ajax({
                     url: "<?php echo site_url('c_admin/getDataInfo'); ?>",
@@ -156,8 +156,8 @@
                             html += '<tr>' +
                                 '<td>' + data[i].namaUser + '</td>' +
                                 '<td><input type="text" name="idSiswa[]" id="biaya" value="' + data[i].idInfo + '" hidden>' + data[i].jumlah + '</td>' +
-                                '<td><span class="badge badge-info">Lunas</span></td>' +
-                                '<td><a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="' + data[i].idInfo + '">Hapus</a></td>' +
+                                // '<td><span class="badge badge-info">Lunas</span></td>' +
+                                // '<td><a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="' + data[i].idInfo + '">Hapus</a></td>' +
                                 '</tr>';
                         }
                         $('#show_data').html(html);
